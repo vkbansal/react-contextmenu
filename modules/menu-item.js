@@ -14,27 +14,33 @@ var _classnames = require("classnames");
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _lodashMerge = require("lodash.merge");
+var _objectAssign = require("object-assign");
 
-var _lodashMerge2 = _interopRequireDefault(_lodashMerge);
+var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-var PropTypes = _react2["default"].PropTypes;
+var _flux = require("./flux");
+
+var _flux2 = _interopRequireDefault(_flux);
+
+var _monitor = require("./monitor");
+
+var _monitor2 = _interopRequireDefault(_monitor);
 
 var MenuItem = _react2["default"].createClass({
     displayName: "MenuItem",
     propTypes: {
-        disabled: PropTypes.bool,
-        selected: PropTypes.bool,
-        divider: PropTypes.bool,
-        data: PropTypes.object,
-        onSelect: PropTypes.func,
-        onClick: PropTypes.func
+        data: _react.PropTypes.object,
+        disabled: _react.PropTypes.bool,
+        divider: _react.PropTypes.bool,
+        onClick: _react.PropTypes.func,
+        onSelect: _react.PropTypes.func,
+        selected: _react.PropTypes.bool
     },
     getDefaultProps: function getDefaultProps() {
         return {
             disabled: false,
             selected: false,
-            data: null
+            data: {}
         };
     },
     handleClick: function handleClick(event) {
@@ -42,7 +48,6 @@ var MenuItem = _react2["default"].createClass({
         var disabled = _props.disabled;
         var onSelect = _props.onSelect;
         var onClick = _props.onClick;
-        var currentItem = _props.currentItem;
         var data = _props.data;
 
         if (disabled) {
@@ -50,18 +55,26 @@ var MenuItem = _react2["default"].createClass({
             return;
         }
 
+        (0, _objectAssign2["default"])(data, _monitor2["default"].getItem());
+
         if (typeof onSelect === "function") {
             event.preventDefault();
-            onSelect((0, _lodashMerge2["default"])(currentItem, data));
-            this.props.hideMenu();
+            onSelect(data);
+            this.hideMenu();
             return;
         }
 
         if (typeof onClick === "function") {
-            onClick(event, (0, _lodashMerge2["default"])(currentItem, data));
+            onClick(event, data);
         }
 
-        this.props.hideMenu();
+        this.hideMenu();
+    },
+    hideMenu: function hideMenu() {
+        _flux2["default"].getActions("menu").setParams({
+            isVisible: false,
+            currentItem: {}
+        });
     },
     render: function render() {
         var _props2 = this.props;

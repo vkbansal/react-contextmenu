@@ -10,16 +10,15 @@ var _flux = require("./flux");
 
 var _flux2 = _interopRequireDefault(_flux);
 
-var _flux$getStore = _flux2["default"].getStore("menu");
-
-var state = _flux$getStore.state;
 exports["default"] = {
     getItem: function getItem() {
-        return state.currentItem;
+        return _flux2["default"].getStore("menu").state.currentItem;
     },
     getPosition: function getPosition() {
-        var x = state.x;
-        var y = state.y;
+        var _flux$getStore$state = _flux2["default"].getStore("menu").state;
+
+        var x = _flux$getStore$state.x;
+        var y = _flux$getStore$state.y;
 
         return { x: x, y: y };
     }

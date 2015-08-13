@@ -69,12 +69,6 @@ var MenuContainer = _react2["default"].createClass({
 
         return menuStyles;
     },
-    _hideMenu: function _hideMenu() {
-        this.props.flux.getActions("menu").setParams({
-            isVisible: false,
-            currentItem: {}
-        });
-    },
     _outsideClickHandler: function _outsideClickHandler(event) {
         var localNode = this.localNode,
             source = event.target,
@@ -109,8 +103,6 @@ var MenuContainer = _react2["default"].createClass({
         document.addEventListener("scroll", fn2);
     },
     render: function render() {
-        var _this = this;
-
         var _props = this.props;
         var currentItem = _props.currentItem;
         var isVisible = _props.isVisible;
@@ -127,9 +119,7 @@ var MenuContainer = _react2["default"].createClass({
             _react2["default"].createElement(
                 "ul",
                 { ref: "menu", className: "dropdown-menu" },
-                _react2["default"].Children.map(this.props.children, function (child) {
-                    return _react2["default"].cloneElement(child, { currentItem: currentItem, hideMenu: _this._hideMenu });
-                })
+                this.props.children
             )
         );
     }
