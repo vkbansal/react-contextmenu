@@ -9,6 +9,11 @@ All the changes can be found below. Order used:
 - Fixed
 - Security
 
+## v0.2.1
+
+### Fixed
+- Fixed `hideMenu is not a function` error while scrolling.
+
 ## v0.2.0
 
 ### Added

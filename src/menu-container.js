@@ -69,6 +69,12 @@ const MenuContainer = React.createClass({
 
         this._hideMenu();
     },
+    _hideMenu() {
+        this.props.flux.getActions("menu").setParams({
+            isVisible: false,
+            currentItem: {}
+        });
+    },
     _bindHandlers() {
         let fn = this._outsideClickHandler,
             fn2 = this._hideMenu;
