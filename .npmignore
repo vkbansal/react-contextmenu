@@ -1,0 +1,4 @@
+examples/
+dist/
+CHANGELOG.md
+*.config.js
