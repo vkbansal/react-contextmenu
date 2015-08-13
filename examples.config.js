@@ -6,6 +6,7 @@ module.exports = {
     entry: "./examples/index.js",
     output: {
         filename: "./bundle.js",
+        sourceMapFileName: "./bundle.js.map"
     },
     module: {
         loaders: [
@@ -16,6 +17,7 @@ module.exports = {
             }
         ]
     },
+    devtool: "source-map",
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({

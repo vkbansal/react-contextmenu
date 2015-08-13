@@ -1,48 +1,56 @@
 "use strict";
 
-import React from "react";
+import React, { PropTypes } from "react";
 import classnames from "classnames";
-import _merge from "lodash.merge";
-
-let { PropTypes } = React;
+import assign from "object-assign";
+import flux from "./flux";
+import monitor from "./monitor";
 
 const MenuItem = React.createClass({
     displayName: "MenuItem",
     propTypes: {
-        disabled: PropTypes.bool,
-        selected: PropTypes.bool,
-        divider: PropTypes.bool,
         data: PropTypes.object,
+        disabled: PropTypes.bool,
+        divider: PropTypes.bool,
+        onClick: PropTypes.func,
         onSelect: PropTypes.func,
-        onClick: PropTypes.func
+        selected: PropTypes.bool
     },
     getDefaultProps() {
         return {
             disabled: false,
             selected: false,
-            data: null
+            data: {}
         };
     },
     handleClick(event) {
-        let { disabled, onSelect, onClick, currentItem, data } = this.props;
+        let { disabled, onSelect, onClick, data } = this.props;
 
         if (disabled) {
             event.preventDefault();
             return;
         }
 
+        assign(data, monitor.getItem());
+
         if (typeof onSelect === "function") {
             event.preventDefault();
-            onSelect(_merge(currentItem, data));
-            this.props.hideMenu();
+            onSelect(data);
+            this.hideMenu();
             return;
         }
 
         if (typeof onClick === "function") {
-            onClick(event, _merge(currentItem, data));
+            onClick(event, data);
         }
 
-        this.props.hideMenu();
+        this.hideMenu();
+    },
+    hideMenu() {
+        flux.getActions("menu").setParams({
+            isVisible: false,
+            currentItem: {}
+        });
     },
     render() {
         let { divider, disabled, selected, children } = this.props;

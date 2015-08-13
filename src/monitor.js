@@ -2,14 +2,12 @@
 
 import flux from "./flux";
 
-const { state } = flux.getStore("menu");
-
 export default {
     getItem() {
-        return state.currentItem;
+        return flux.getStore("menu").state.currentItem;
     },
     getPosition() {
-        let { x, y } = state;
+        let { x, y } = flux.getStore("menu").state;
         return {x, y};
     }
 };

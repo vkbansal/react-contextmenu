@@ -3,7 +3,13 @@
   "version": "0.1.0",
   "description": "Context Menu implemented in React",
   "main": "modules/index.js",
-  "keywords": ["react", "reactjs", "react-component", "contextmenu", "rightclick" ],
+  "keywords": [
+    "react",
+    "reactjs",
+    "react-component",
+    "contextmenu",
+    "rightclick"
+  ],
   "scripts": {
     "dist": "./node_modules/.bin/webpack --progress --profile --colors",
     "module": "./node_modules/.bin/babel src --out-dir modules",
@@ -26,7 +32,7 @@
     "flummox": "^3.5.2",
     "invariant": "^2.1.0",
     "lodash.isobject": "^3.0.2",
-    "lodash.merge": "^3.3.2",
+    "object-assign": "^3.0.0",
     "react": "^0.13.3"
   },
   "devDependencies": {

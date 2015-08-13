@@ -54,12 +54,6 @@ const MenuContainer = React.createClass({
 
         return menuStyles;
     },
-    _hideMenu() {
-        this.props.flux.getActions("menu").setParams({
-            isVisible: false,
-            currentItem: {}
-        });
-    },
     _outsideClickHandler(event) {
         let localNode = this.localNode,
             source = event.target,
@@ -102,9 +96,7 @@ const MenuContainer = React.createClass({
         return (
             <div className={classes} style={this.state}>
                 <ul ref="menu" className="dropdown-menu">
-                    {React.Children.map(this.props.children, (child) => {
-                        return React.cloneElement(child, { currentItem, hideMenu: this._hideMenu });
-                    })}
+                    {this.props.children}
                 </ul>
             </div>
         );
