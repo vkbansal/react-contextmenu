@@ -17,3 +17,7 @@ exports.ContextMenuLayer = _interopRequire(_contextmenuLayer);
 var _menuItem = require("./menu-item");
 
 exports.MenuItem = _interopRequire(_menuItem);
+
+var _monitor = require("./monitor");
+
+exports.monitor = _interopRequire(_monitor);
