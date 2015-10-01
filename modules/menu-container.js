@@ -47,8 +47,8 @@ var MenuContainer = _react2["default"].createClass({
     getMenuPosition: function getMenuPosition(x, y) {
         var menu = _react2["default"].findDOMNode(this.refs.menu);
         var screen = window.screen;
-        var scrollX = window.scrollX;
-        var scrollY = window.scrollY;
+        var scrollX = document.documentElement.scrollTop;
+        var scrollY = document.documentElement.scrollLeft;
         var AvailWidth = screen.AvailWidth;
         var AvailHeight = screen.AvailHeight;
         var offsetWidth = menu.offsetWidth;
