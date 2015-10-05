@@ -57,19 +57,22 @@ const MenuContainer = React.createClass({
         return menuStyles;
     },
     _outsideClickHandler(event) {
-        let localNode = this.localNode,
-            source = event.target,
-            found = false;
+        let { isVisible, identifier } = this.props;
+        if(isVisible === identifier) {
+          let localNode = this.localNode,
+              source = event.target,
+              found = false;
 
-        while (source.parentNode) {
-            found = (source === localNode);
+          while (source.parentNode) {
+              found = (source === localNode);
 
-            if (found) { return; }
+              if (found) { return; }
 
-            source = source.parentNode;
+              source = source.parentNode;
+          }
+
+          this._hideMenu();
         }
-
-        this._hideMenu();
     },
     _hideMenu() {
         this.props.flux.getActions("menu").setParams({
