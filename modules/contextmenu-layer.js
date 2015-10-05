@@ -38,7 +38,7 @@ exports["default"] = function (identifier, configure) {
               document.addEventListener("contextmenu", this.handleContextClick);
           },
           componentWillUnmount: function componentWillUnmount() {
-              document.addEventListener("contextmenu", this.handleContextClick);
+              document.removeEventListener("contextmenu", this.handleContextClick);
           },
           handleContextClick: function handleContextClick(event) {
               var target = event.target;
