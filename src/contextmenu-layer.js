@@ -28,30 +28,34 @@ export default function (identifier, configure) {
         return React.createClass({
             displayName: `${displayName}ContextMenuLayer`,
             componentDidMount() {
-                React.findDOMNode(this)
+                document
                     .addEventListener("contextmenu", this.handleContextClick);
             },
             componentWillUnmount() {
-                React.findDOMNode(this)
+                document
                     .removeEventListener("contextmenu", this.handleContextClick);
             },
             handleContextClick(event) {
-                let currentItem = configure(this.props);
+                let target = event.target;
+                let domNode = React.findDOMNode(this);
+                if(target == domNode || domNode.contains(target)) {
+                    let currentItem = configure(this.props);
+    
+                    invariant(
+                        _isObject(currentItem),
+                        "Expected configure to return an object. See %s",
+                        displayName
+                    );
 
-                invariant(
-                    _isObject(currentItem),
-                    "Expected configure to return an object. See %s",
-                    displayName
-                );
-
-                event.preventDefault();
-                const actions = flux.getActions("menu");
-                actions.setParams({
-                    x: event.clientX,
-                    y: event.clientY,
-                    currentItem,
-                    isVisible: typeof identifier === "function" ? identifier(this.props) : identifier
-                });
+                    event.preventDefault();
+                    const actions = flux.getActions("menu");
+                    actions.setParams({
+                        x: event.clientX,
+                        y: event.clientY,
+                        currentItem,
+                        isVisible: typeof identifier === "function" ? identifier(this.props) : identifier
+                    });
+                }
             },
             render() {
                 return (
