@@ -47,8 +47,8 @@ var MenuContainer = _react2["default"].createClass({
     getMenuPosition: function getMenuPosition(x, y) {
         var menu = _react2["default"].findDOMNode(this.refs.menu);
         var screen = window.screen;
-        var scrollX = window.scrollX;
-        var scrollY = window.scrollY;
+        var scrollX = document.documentElement.scrollTop;
+        var scrollY = document.documentElement.scrollLeft;
         var AvailWidth = screen.AvailWidth;
         var AvailHeight = screen.AvailHeight;
         var offsetWidth = menu.offsetWidth;
@@ -70,21 +70,26 @@ var MenuContainer = _react2["default"].createClass({
         return menuStyles;
     },
     _outsideClickHandler: function _outsideClickHandler(event) {
-        var localNode = this.localNode,
-            source = event.target,
-            found = false;
+        var _props = this.props;
+        var isVisible = _props.isVisible;
+        var identifier = _props.identifier;
+        if(isVisible === identifier) {
+          var localNode = this.localNode,
+              source = event.target,
+              found = false;
 
-        while (source.parentNode) {
-            found = source === localNode;
+          while (source.parentNode) {
+              found = source === localNode;
 
-            if (found) {
-                return;
-            }
+              if (found) {
+                  return;
+              }
 
-            source = source.parentNode;
+              source = source.parentNode;
+          }
+
+          this._hideMenu();
         }
-
-        this._hideMenu();
     },
     _hideMenu: function _hideMenu() {
         this.props.flux.getActions("menu").setParams({
