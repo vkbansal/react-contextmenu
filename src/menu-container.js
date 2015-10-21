@@ -1,40 +1,53 @@
 "use strict";
 
-import React from "react";
+import React, { Component } from "react";
+import { findDOMNode } from "react-dom";
 import classnames from "classnames";
+import autobind from "autobind-decorator";
 
-const MenuContainer = React.createClass({
-    displayName: "MenuContainer",
-    getInitialState() {
-        return {
+class MenuContainer extends Component {
+
+    static displayName = "MenuContainer";
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
             position: "fixed",
             left: 0,
             right: 0
         };
-    },
+    }
+    
     componentDidMount() {
-        this.localNode = React.findDOMNode(this.refs.menu);
-    },
+        this.localNode = findDOMNode(this.refs.menu);
+    }
+
     componentWillReceiveProps(nextProps) {
         this._unbindHandlers();
         if (nextProps.isVisible) {
             this.setState(this.getMenuPosition(nextProps.x, nextProps.y));
         }
-    },
+    }
+ 
     shouldComponentUpdate(nextProps) {
         return this.props.isVisible !== nextProps.visible;
-    },
+    }
+
     componentDidUpdate() {
         if (this.props.isVisible) {
             this._bindHandlers();
         }
-    },
+    }
+
     componentWillUnmount() {
         this._unbindHandlers();
         delete this.localNode;
-    },
+    }
+
+    @autobind
     getMenuPosition(x, y) {
-        let menu = React.findDOMNode(this.refs.menu);
+        let menu = findDOMNode(this.refs.menu);
         let scrollX = document.documentElement.scrollTop;
         let scrollY = document.documentElement.scrollLeft;
         let { screen } = window,
@@ -55,7 +68,9 @@ const MenuContainer = React.createClass({
         }
 
         return menuStyles;
-    },
+    }
+
+    @autobind
     _outsideClickHandler(event) {
         let { isVisible, identifier } = this.props;
         if(isVisible === identifier) {
@@ -73,13 +88,17 @@ const MenuContainer = React.createClass({
 
           this._hideMenu();
         }
-    },
+    }
+
+    @autobind
     _hideMenu() {
         this.props.flux.getActions("menu").setParams({
             isVisible: false,
             currentItem: {}
         });
-    },
+    }
+
+    @autobind
     _bindHandlers() {
         let fn = this._outsideClickHandler,
             fn2 = this._hideMenu;
@@ -87,7 +106,9 @@ const MenuContainer = React.createClass({
         document.addEventListener("touchstart", fn);
         window.addEventListener("resize", fn2);
         document.addEventListener("scroll", fn2);
-    },
+    }
+
+    @autobind
     _unbindHandlers() {
         let fn = this._outsideClickHandler,
             fn2 = this._hideMenu;
@@ -95,7 +116,8 @@ const MenuContainer = React.createClass({
         document.removeEventListener("touchstart", fn);
         window.addEventListener("resize", fn2);
         document.addEventListener("scroll", fn2);
-    },
+    }
+
     render() {
         let { currentItem, isVisible, identifier } = this.props;
 
@@ -112,6 +134,6 @@ const MenuContainer = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default MenuContainer;

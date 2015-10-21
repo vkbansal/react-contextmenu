@@ -1,9 +1,12 @@
 "use strict";
 
-import React from "react";
-import flux from "./flux";
+import React, { Component } from "react";
+import { findDOMNode } from "react-dom";
 import invariant from "invariant";
 import _isObject from "lodash.isobject";
+import autobind from "autobind-decorator";
+
+import flux from "./flux";
 
 export default function (identifier, configure) {
     return function (Component) {
@@ -25,22 +28,27 @@ export default function (identifier, configure) {
             displayName
         );
 
-        return React.createClass({
-            displayName: `${displayName}ContextMenuLayer`,
+        return class extends Component {
+
+            static displayName = `${displayName}ContextMenuLayer`;
+
             componentDidMount() {
                 document
                     .addEventListener("contextmenu", this.handleContextClick);
-            },
+            }
+
             componentWillUnmount() {
                 document
                     .removeEventListener("contextmenu", this.handleContextClick);
-            },
+            }
+
+            @autobind
             handleContextClick(event) {
                 let target = event.target;
-                let domNode = React.findDOMNode(this);
+                let domNode = findDOMNode(this);
                 if(target == domNode || domNode.contains(target)) {
                     let currentItem = configure(this.props);
-    
+
                     invariant(
                         _isObject(currentItem),
                         "Expected configure to return an object. See %s",
@@ -56,12 +64,13 @@ export default function (identifier, configure) {
                         isVisible: typeof identifier === "function" ? identifier(this.props) : identifier
                     });
                 }
-            },
+            }
+
             render() {
                 return (
                     <Component {...this.props} identifier={identifier} />
                 );
             }
-        });
+        };
     };
 }
