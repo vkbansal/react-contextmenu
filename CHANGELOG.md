@@ -9,6 +9,15 @@ All the changes can be found below. Order used:
 - Fixed
 - Security
 
+## v0.2.2
+
+### Added
+ - Add compatibility with IE (Still needed for IE11).
+
+### Fixed
+ - Better event handling.
+ - Only hide the currently visible context menu. On touch screens, the menu closes before the event to click is triggered. This only happened when using multiple contex menus.
+
 ## v0.2.1
 
 ### Fixed

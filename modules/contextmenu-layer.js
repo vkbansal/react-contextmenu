@@ -33,37 +33,35 @@ exports["default"] = function (identifier, configure) {
         (0, _invariant2["default"])(typeof configure === "function", "Expected configure to be a function. See %s", displayName);
 
         return _react2["default"].createClass({
-          displayName: displayName + "ContextMenuLayer",
-          componentDidMount: function componentDidMount() {
-              document.addEventListener("contextmenu", this.handleContextClick);
-          },
-          componentWillUnmount: function componentWillUnmount() {
-              document.removeEventListener("contextmenu", this.handleContextClick);
-          },
-          handleContextClick: function handleContextClick(event) {
-              var target = event.target;
-              var domNode = _react2["default"].findDOMNode(this);
+            displayName: displayName + "ContextMenuLayer",
+            componentDidMount: function componentDidMount() {
+                document.addEventListener("contextmenu", this.handleContextClick);
+            },
+            componentWillUnmount: function componentWillUnmount() {
+                document.removeEventListener("contextmenu", this.handleContextClick);
+            },
+            handleContextClick: function handleContextClick(event) {
+                var target = event.target;
+                var domNode = _react2["default"].findDOMNode(this);
+                if (target == domNode || domNode.contains(target)) {
+                    var currentItem = configure(this.props);
 
-              if(target == domNode || domNode.contains(target)) {
-                var currentItem = configure(this.props);
+                    (0, _invariant2["default"])((0, _lodashIsobject2["default"])(currentItem), "Expected configure to return an object. See %s", displayName);
 
-                (0, _invariant2["default"])((0, _lodashIsobject2["default"])(currentItem), "Expected configure to return an object. See %s", displayName);
-
-                event.preventDefault();
-                var actions = _flux2["default"].getActions("menu");
-                actions.setParams({
-                    x: event.clientX,
-                    y: event.clientY,
-                    currentItem: currentItem,
-                    isVisible: typeof identifier === "function" ? identifier(this.props) : identifier
-                });
-              }
-
-          },
-          render: function render() {
-              return _react2["default"].createElement(Component, _extends({}, this.props, { identifier: identifier }));
-          }
-      });
+                    event.preventDefault();
+                    var actions = _flux2["default"].getActions("menu");
+                    actions.setParams({
+                        x: event.clientX,
+                        y: event.clientY,
+                        currentItem: currentItem,
+                        isVisible: typeof identifier === "function" ? identifier(this.props) : identifier
+                    });
+                }
+            },
+            render: function render() {
+                return _react2["default"].createElement(Component, _extends({}, this.props, { identifier: identifier }));
+            }
+        });
     };
 };
 

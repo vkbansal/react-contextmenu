@@ -46,9 +46,9 @@ var MenuContainer = _react2["default"].createClass({
     },
     getMenuPosition: function getMenuPosition(x, y) {
         var menu = _react2["default"].findDOMNode(this.refs.menu);
-        var screen = window.screen;
         var scrollX = document.documentElement.scrollTop;
         var scrollY = document.documentElement.scrollLeft;
+        var screen = window.screen;
         var AvailWidth = screen.AvailWidth;
         var AvailHeight = screen.AvailHeight;
         var offsetWidth = menu.offsetWidth;
@@ -73,22 +73,23 @@ var MenuContainer = _react2["default"].createClass({
         var _props = this.props;
         var isVisible = _props.isVisible;
         var identifier = _props.identifier;
-        if(isVisible === identifier) {
-          var localNode = this.localNode,
-              source = event.target,
-              found = false;
 
-          while (source.parentNode) {
-              found = source === localNode;
+        if (isVisible === identifier) {
+            var localNode = this.localNode,
+                source = event.target,
+                found = false;
 
-              if (found) {
-                  return;
-              }
+            while (source.parentNode) {
+                found = source === localNode;
 
-              source = source.parentNode;
-          }
+                if (found) {
+                    return;
+                }
 
-          this._hideMenu();
+                source = source.parentNode;
+            }
+
+            this._hideMenu();
         }
     },
     _hideMenu: function _hideMenu() {
@@ -114,10 +115,10 @@ var MenuContainer = _react2["default"].createClass({
         document.addEventListener("scroll", fn2);
     },
     render: function render() {
-        var _props = this.props;
-        var currentItem = _props.currentItem;
-        var isVisible = _props.isVisible;
-        var identifier = _props.identifier;
+        var _props2 = this.props;
+        var currentItem = _props2.currentItem;
+        var isVisible = _props2.isVisible;
+        var identifier = _props2.identifier;
 
         var classes = (0, _classnames2["default"])({
             "context-menu": true,
