@@ -1,28 +1,30 @@
 "use strict";
 
-import React, { PropTypes } from "react";
+import React, { Component, PropTypes } from "react";
 import classnames from "classnames";
 import assign from "object-assign";
 import flux from "./flux";
 import monitor from "./monitor";
 
-const MenuItem = React.createClass({
-    displayName: "MenuItem",
-    propTypes: {
+class MenuItem extends Component {
+    
+    static displayName = "MenuItem";
+    
+    static propTypes = {
         data: PropTypes.object,
         disabled: PropTypes.bool,
         divider: PropTypes.bool,
         onClick: PropTypes.func,
         onSelect: PropTypes.func,
         selected: PropTypes.bool
-    },
-    getDefaultProps() {
-        return {
-            disabled: false,
-            selected: false,
-            data: {}
-        };
-    },
+    };
+
+    static defaultProps = {
+        disabled: false,
+        selected: false,
+        data: {}
+    };
+
     handleClick(event) {
         let { disabled, onSelect, onClick, data } = this.props;
 
@@ -45,13 +47,15 @@ const MenuItem = React.createClass({
         }
 
         this.hideMenu();
-    },
+    }
+
     hideMenu() {
         flux.getActions("menu").setParams({
             isVisible: false,
             currentItem: {}
         });
-    },
+    }
+
     render() {
         let { divider, disabled, selected, children } = this.props;
 
@@ -63,12 +67,12 @@ const MenuItem = React.createClass({
 
         return (
             <li className={classes}>
-                <a href="#" onMouseDown={this.handleClick}>
+                <a href="#" onMouseDown={this.handleClick.bind(this)}>
                     {children}
                 </a>
             </li>
         );
     }
-});
+}
 
 export default MenuItem;
