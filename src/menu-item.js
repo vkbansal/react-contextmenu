@@ -7,9 +7,9 @@ import flux from "./flux";
 import monitor from "./monitor";
 
 class MenuItem extends Component {
-    
+
     static displayName = "MenuItem";
-    
+
     static propTypes = {
         data: PropTypes.object,
         disabled: PropTypes.bool,
