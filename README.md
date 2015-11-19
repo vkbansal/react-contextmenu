@@ -15,6 +15,8 @@ You need to setup two things:
 2. The Component on which the `ContextMenu` must be invoked.
 
 ```jsx
+import React from "react";
+import ReactDOM from "react-dom";
 import { ContextMenu, MenuItem, ContextMenuLayer } from "react-contextmenu";
 
 //Component on which context-menu must be triggred
@@ -58,7 +60,7 @@ const MyApp = React.createClass({
     }
 });
 
-React.render(<MyApp myProp={12}/>, document.getElementById("main"));
+ReactDOM.render(<MyApp myProp={12}/>, document.getElementById("main"));
 ```
 
 As you can see that the `ContextMenu` to be showed on any component is dependent on a **unique identifier**.

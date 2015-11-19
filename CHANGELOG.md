@@ -9,6 +9,15 @@ All the changes can be found below. Order used:
 - Fixed
 - Security
 
+## Master
+
+### Added
+- Compatibility for react-0.14
+
+### Fixed
+- Fixed unbind event handlers
+
+
 ## v0.2.2
 
 ### Added
