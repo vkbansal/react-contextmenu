@@ -18,7 +18,7 @@ class MenuContainer extends Component {
             right: 0
         };
     }
-    
+
     componentDidMount() {
         this.localNode = findDOMNode(this.refs.menu);
     }
@@ -29,7 +29,7 @@ class MenuContainer extends Component {
             this.setState(this.getMenuPosition(nextProps.x, nextProps.y));
         }
     }
- 
+
     shouldComponentUpdate(nextProps) {
         return this.props.isVisible !== nextProps.visible;
     }
@@ -114,8 +114,8 @@ class MenuContainer extends Component {
             fn2 = this._hideMenu;
         document.removeEventListener("mousedown", fn);
         document.removeEventListener("touchstart", fn);
-        window.addEventListener("resize", fn2);
-        document.addEventListener("scroll", fn2);
+        window.removeEventListener("resize", fn2);
+        document.removeEventListener("scroll", fn2);
     }
 
     render() {
