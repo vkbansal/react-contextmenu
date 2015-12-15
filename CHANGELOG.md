@@ -9,10 +9,13 @@ All the changes can be found below. Order used:
 - Fixed
 - Security
 
-## Master
+## v0.3.0
 
 ### Added
 - Compatibility for react-0.14
+
+### Changed
+- Updated to babel 6
 
 ### Fixed
 - Fixed unbind event handlers
