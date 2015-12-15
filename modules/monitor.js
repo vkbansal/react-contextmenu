@@ -4,18 +4,18 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
 var _flux = require("./flux");
 
 var _flux2 = _interopRequireDefault(_flux);
 
-exports["default"] = {
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
     getItem: function getItem() {
-        return _flux2["default"].getStore("menu").state.currentItem;
+        return _flux2.default.getStore("menu").state.currentItem;
     },
     getPosition: function getPosition() {
-        var _flux$getStore$state = _flux2["default"].getStore("menu").state;
+        var _flux$getStore$state = _flux2.default.getStore("menu").state;
 
         var x = _flux$getStore$state.x;
         var y = _flux$getStore$state.y;
@@ -23,4 +23,3 @@ exports["default"] = {
         return { x: x, y: y };
     }
 };
-module.exports = exports["default"];

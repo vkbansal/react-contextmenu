@@ -4,20 +4,38 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-function _interopRequire(obj) { return obj && obj.__esModule ? obj["default"] : obj; }
-
 var _contextMenu = require("./context-menu");
 
-exports.ContextMenu = _interopRequire(_contextMenu);
+Object.defineProperty(exports, "ContextMenu", {
+  enumerable: true,
+  get: function get() {
+    return _contextMenu.default;
+  }
+});
 
 var _contextmenuLayer = require("./contextmenu-layer");
 
-exports.ContextMenuLayer = _interopRequire(_contextmenuLayer);
+Object.defineProperty(exports, "ContextMenuLayer", {
+  enumerable: true,
+  get: function get() {
+    return _contextmenuLayer.default;
+  }
+});
 
 var _menuItem = require("./menu-item");
 
-exports.MenuItem = _interopRequire(_menuItem);
+Object.defineProperty(exports, "MenuItem", {
+  enumerable: true,
+  get: function get() {
+    return _menuItem.default;
+  }
+});
 
 var _monitor = require("./monitor");
 
-exports.monitor = _interopRequire(_monitor);
+Object.defineProperty(exports, "monitor", {
+  enumerable: true,
+  get: function get() {
+    return _monitor.default;
+  }
+});

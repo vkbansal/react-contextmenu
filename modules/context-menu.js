@@ -1,26 +1,20 @@
 "use strict";
 
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _class, _temp;
+
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _flummoxComponent = require("flummox/component");
+var _component = require("flummox/component");
 
-var _flummoxComponent2 = _interopRequireDefault(_flummoxComponent);
+var _component2 = _interopRequireDefault(_component);
 
 var _flux = require("./flux");
 
@@ -30,40 +24,38 @@ var _menuContainer = require("./menu-container");
 
 var _menuContainer2 = _interopRequireDefault(_menuContainer);
 
-var ContextMenu = (function (_Component) {
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ContextMenu = (_temp = _class = (function (_Component) {
     _inherits(ContextMenu, _Component);
 
     function ContextMenu() {
         _classCallCheck(this, ContextMenu);
 
-        _get(Object.getPrototypeOf(ContextMenu.prototype), "constructor", this).apply(this, arguments);
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(ContextMenu).apply(this, arguments));
     }
 
     _createClass(ContextMenu, [{
         key: "render",
         value: function render() {
-            return _react2["default"].createElement(
-                _flummoxComponent2["default"],
-                { flux: _flux2["default"], connectToStores: ["menu"] },
-                _react2["default"].createElement(_menuContainer2["default"], this.props)
+            return _react2.default.createElement(
+                _component2.default,
+                { flux: _flux2.default, connectToStores: ["menu"] },
+                _react2.default.createElement(_menuContainer2.default, this.props)
             );
         }
-    }], [{
-        key: "propTypes",
-        value: {
-            identifier: _react.PropTypes.string.isRequired
-        },
-        enumerable: true
-    }, {
-        key: "displayName",
-        value: "ContextMenu",
-        enumerable: true
     }]);
 
     return ContextMenu;
-})(_react.Component);
-
+})(_react.Component), _class.propTypes = {
+    identifier: _react.PropTypes.string.isRequired
+}, _class.displayName = "ContextMenu", _temp);
 ;
 
-exports["default"] = ContextMenu;
-module.exports = exports["default"];
+exports.default = ContextMenu;

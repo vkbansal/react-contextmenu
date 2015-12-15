@@ -1,20 +1,12 @@
 "use strict";
 
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _desc, _value, _class, _class2, _temp;
+
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _createDecoratedClass = (function () { function defineProperties(target, descriptors, initializers) { for (var i = 0; i < descriptors.length; i++) { var descriptor = descriptors[i]; var decorators = descriptor.decorators; var key = descriptor.key; delete descriptor.key; delete descriptor.decorators; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor || descriptor.initializer) descriptor.writable = true; if (decorators) { for (var f = 0; f < decorators.length; f++) { var decorator = decorators[f]; if (typeof decorator === "function") { descriptor = decorator(target, key, descriptor) || descriptor; } else { throw new TypeError("The decorator for method " + descriptor.key + " is of the invalid type " + typeof decorator); } } if (descriptor.initializer !== undefined) { initializers[key] = descriptor; continue; } } Object.defineProperty(target, key, descriptor); } } return function (Constructor, protoProps, staticProps, protoInitializers, staticInitializers) { if (protoProps) defineProperties(Constructor.prototype, protoProps, protoInitializers); if (staticProps) defineProperties(Constructor, staticProps, staticInitializers); return Constructor; }; })();
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _react = require("react");
 
@@ -30,28 +22,63 @@ var _autobindDecorator = require("autobind-decorator");
 
 var _autobindDecorator2 = _interopRequireDefault(_autobindDecorator);
 
-var MenuContainer = (function (_Component) {
-    _inherits(MenuContainer, _Component);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-    _createClass(MenuContainer, null, [{
-        key: "displayName",
-        value: "MenuContainer",
-        enumerable: true
-    }]);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+    var desc = {
+        enumerable: !!descriptor.enumerable,
+        configurable: !!descriptor.configurable
+    };
+
+    if ('value' in descriptor || 'initializer' in descriptor) {
+        desc.writable = true;
+        desc.initializer = descriptor.initializer;
+        desc.value = descriptor.value;
+    } else {
+        desc.get = descriptor.get;
+        desc.set = descriptor.set;
+    }
+
+    desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+        return decorator(target, property, desc) || desc;
+    }, desc);
+
+    if (context && desc.initializer !== void 0) {
+        desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+        desc.initializer = undefined;
+    }
+
+    if (desc.initializer === void 0) {
+        Object['define' + 'Property'](target, property, desc);
+        desc = null;
+    }
+
+    return desc;
+}
+
+var MenuContainer = (_class = (_temp = _class2 = (function (_Component) {
+    _inherits(MenuContainer, _Component);
 
     function MenuContainer(props) {
         _classCallCheck(this, MenuContainer);
 
-        _get(Object.getPrototypeOf(MenuContainer.prototype), "constructor", this).call(this, props);
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MenuContainer).call(this, props));
 
-        this.state = {
+        _this.state = {
             position: "fixed",
             left: 0,
             right: 0
         };
+        return _this;
     }
 
-    _createDecoratedClass(MenuContainer, [{
+    _createClass(MenuContainer, [{
         key: "componentDidMount",
         value: function componentDidMount() {
             this.localNode = (0, _reactDom.findDOMNode)(this.refs.menu);
@@ -84,12 +111,12 @@ var MenuContainer = (function (_Component) {
         }
     }, {
         key: "getMenuPosition",
-        decorators: [_autobindDecorator2["default"]],
         value: function getMenuPosition(x, y) {
             var menu = (0, _reactDom.findDOMNode)(this.refs.menu);
             var scrollX = document.documentElement.scrollTop;
             var scrollY = document.documentElement.scrollLeft;
-            var screen = window.screen;
+            var _window = window;
+            var screen = _window.screen;
             var AvailWidth = screen.AvailWidth;
             var AvailHeight = screen.AvailHeight;
             var offsetWidth = menu.offsetWidth;
@@ -112,7 +139,6 @@ var MenuContainer = (function (_Component) {
         }
     }, {
         key: "_outsideClickHandler",
-        decorators: [_autobindDecorator2["default"]],
         value: function _outsideClickHandler(event) {
             var _props = this.props;
             var isVisible = _props.isVisible;
@@ -138,7 +164,6 @@ var MenuContainer = (function (_Component) {
         }
     }, {
         key: "_hideMenu",
-        decorators: [_autobindDecorator2["default"]],
         value: function _hideMenu() {
             this.props.flux.getActions("menu").setParams({
                 isVisible: false,
@@ -147,7 +172,6 @@ var MenuContainer = (function (_Component) {
         }
     }, {
         key: "_bindHandlers",
-        decorators: [_autobindDecorator2["default"]],
         value: function _bindHandlers() {
             var fn = this._outsideClickHandler,
                 fn2 = this._hideMenu;
@@ -158,7 +182,6 @@ var MenuContainer = (function (_Component) {
         }
     }, {
         key: "_unbindHandlers",
-        decorators: [_autobindDecorator2["default"]],
         value: function _unbindHandlers() {
             var fn = this._outsideClickHandler,
                 fn2 = this._hideMenu;
@@ -175,15 +198,15 @@ var MenuContainer = (function (_Component) {
             var isVisible = _props2.isVisible;
             var identifier = _props2.identifier;
 
-            var classes = (0, _classnames2["default"])({
+            var classes = (0, _classnames2.default)({
                 "context-menu": true,
                 "open": isVisible === identifier
             });
 
-            return _react2["default"].createElement(
+            return _react2.default.createElement(
                 "div",
                 { className: classes, style: this.state },
-                _react2["default"].createElement(
+                _react2.default.createElement(
                     "ul",
                     { ref: "menu", className: "dropdown-menu" },
                     this.props.children
@@ -193,7 +216,5 @@ var MenuContainer = (function (_Component) {
     }]);
 
     return MenuContainer;
-})(_react.Component);
-
-exports["default"] = MenuContainer;
-module.exports = exports["default"];
+})(_react.Component), _class2.displayName = "MenuContainer", _temp), (_applyDecoratedDescriptor(_class.prototype, "getMenuPosition", [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, "getMenuPosition"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_outsideClickHandler", [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, "_outsideClickHandler"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_hideMenu", [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, "_hideMenu"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_bindHandlers", [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, "_bindHandlers"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_unbindHandlers", [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, "_unbindHandlers"), _class.prototype)), _class);
+exports.default = MenuContainer;
