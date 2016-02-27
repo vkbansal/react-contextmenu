@@ -8,6 +8,7 @@ export default {
     },
     getPosition() {
         let { x, y } = flux.getStore("menu").state;
+
         return {x, y};
     }
 };

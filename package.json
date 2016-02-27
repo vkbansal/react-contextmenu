@@ -45,8 +45,6 @@
     "babel-core": "^6.5.2",
     "babel-eslint": "^5.0.0",
     "babel-loader": "^6.2.3",
-    "babel-plugin-transform-decorators": "^6.5.0",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-react-hmre": "^1.1.0",

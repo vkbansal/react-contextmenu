@@ -4,7 +4,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import invariant from "invariant";
 import _isObject from "lodash.isobject";
-import autobind from "autobind-decorator";
 
 import flux from "./flux";
 
@@ -30,21 +29,16 @@ export default function(identifier, configure) {
             displayName
         );
 
-        return class extends Component {
-
-            static displayName = `${displayName}ContextMenuLayer`;
-
+        return React.createClass({
+            displayName: `${displayName}ContextMenuLayer`,
             componentDidMount() {
                 document
                     .addEventListener("contextmenu", this.handleContextClick);
-            }
-
+            },
             componentWillUnmount() {
                 document
                     .removeEventListener("contextmenu", this.handleContextClick);
-            }
-
-            @autobind
+            },
             handleContextClick(event) {
                 let target = event.target,
                     domNode = ReactDOM.findDOMNode(this);
@@ -69,13 +63,12 @@ export default function(identifier, configure) {
                         isVisible: typeof identifier === "function" ? identifier(this.props) : identifier
                     });
                 }
-            }
-
+            },
             render() {
                 return (
-                    <Component {...this.props} identifier={identifier} />
+                    <Component {...this.props} identifier={identifier}/>
                 );
             }
-        };
+        });
     };
 }

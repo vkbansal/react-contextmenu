@@ -3,51 +3,37 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import classnames from "classnames";
-import autobind from "autobind-decorator";
 
-let { Component } = React;
-
-class MenuContainer extends Component {
-
-    static displayName = "MenuContainer";
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
+const MenuContainer = React.createClass({
+    displayName: "MenuContainer",
+    getInitialState() {
+        return {
             position: "fixed",
             left: 0,
             right: 0
         };
-    }
-
+    },
     componentDidMount() {
         this.localNode = ReactDOM.findDOMNode(this.refs.menu);
-    }
-
+    },
     componentWillReceiveProps(nextProps) {
         this._unbindHandlers();
         if (nextProps.isVisible) {
             this.setState(this.getMenuPosition(nextProps.x, nextProps.y));
         }
-    }
-
+    },
     shouldComponentUpdate(nextProps) {
         return this.props.isVisible !== nextProps.visible;
-    }
-
+    },
     componentDidUpdate() {
         if (this.props.isVisible) {
             this._bindHandlers();
         }
-    }
-
+    },
     componentWillUnmount() {
         this._unbindHandlers();
         delete this.localNode;
-    }
-
-    @autobind
+    },
     getMenuPosition(x, y) {
         let menu = ReactDOM.findDOMNode(this.refs.menu),
             scrollX = document.documentElement.scrollTop,
@@ -70,9 +56,7 @@ class MenuContainer extends Component {
         }
 
         return menuStyles;
-    }
-
-    @autobind
+    },
     _outsideClickHandler(event) {
         let { isVisible, identifier } = this.props;
 
@@ -91,17 +75,13 @@ class MenuContainer extends Component {
 
             this._hideMenu();
         }
-    }
-
-    @autobind
+    },
     _hideMenu() {
         this.props.flux.getActions("menu").setParams({
             isVisible: false,
             currentItem: {}
         });
-    }
-
-    @autobind
+    },
     _bindHandlers() {
         let fn = this._outsideClickHandler,
             fn2 = this._hideMenu;
@@ -110,9 +90,7 @@ class MenuContainer extends Component {
         document.addEventListener("touchstart", fn);
         window.addEventListener("resize", fn2);
         document.addEventListener("scroll", fn2);
-    }
-
-    @autobind
+    },
     _unbindHandlers() {
         let fn = this._outsideClickHandler,
             fn2 = this._hideMenu;
@@ -121,8 +99,7 @@ class MenuContainer extends Component {
         document.removeEventListener("touchstart", fn);
         window.removeEventListener("resize", fn2);
         document.removeEventListener("scroll", fn2);
-    }
-
+    },
     render() {
         let { isVisible, identifier } = this.props;
 
@@ -139,6 +116,6 @@ class MenuContainer extends Component {
             </div>
         );
     }
-}
+});
 
 export default MenuContainer;
