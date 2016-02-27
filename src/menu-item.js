@@ -1,10 +1,12 @@
 "use strict";
 
-import React, { Component, PropTypes } from "react";
+import React from "react";
 import classnames from "classnames";
 import assign from "object-assign";
 import flux from "./flux";
 import monitor from "./monitor";
+
+let { PropTypes, Component } = React;
 
 class MenuItem extends Component {
 

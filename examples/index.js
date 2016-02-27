@@ -1,7 +1,7 @@
 "use strict";
 
 import React from "react";
-import { render } from "react-dom";
+import ReactDOM from "react-dom";
 import { Router, Route, Link, IndexRoute } from "react-router";
 import SimpleMenu from "./simple-menu";
 import MultipleTargets from "./multiple-targets";
@@ -46,4 +46,4 @@ const Routes = (
     </Router>
 );
 
-render(Routes, document.getElementById("main"));
+ReactDOM.render(Routes, document.getElementById("main"));

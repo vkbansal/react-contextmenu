@@ -1,9 +1,11 @@
 "use strict";
 
-import React, { Component } from "react";
-import { findDOMNode } from "react-dom";
+import React from "react";
+import ReactDOM from "react-dom";
 import classnames from "classnames";
 import autobind from "autobind-decorator";
+
+let { Component } = React;
 
 class MenuContainer extends Component {
 
@@ -20,7 +22,7 @@ class MenuContainer extends Component {
     }
 
     componentDidMount() {
-        this.localNode = findDOMNode(this.refs.menu);
+        this.localNode = ReactDOM.findDOMNode(this.refs.menu);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -47,10 +49,10 @@ class MenuContainer extends Component {
 
     @autobind
     getMenuPosition(x, y) {
-        let menu = findDOMNode(this.refs.menu);
-        let scrollX = document.documentElement.scrollTop;
-        let scrollY = document.documentElement.scrollLeft;
-        let { screen } = window,
+        let menu = ReactDOM.findDOMNode(this.refs.menu),
+            scrollX = document.documentElement.scrollTop,
+            scrollY = document.documentElement.scrollLeft,
+            { screen } = window,
             { AvailWidth, AvailHeight } = screen,
             { offsetWidth, offsetHeight } = menu,
             menuStyles = {};
@@ -73,20 +75,21 @@ class MenuContainer extends Component {
     @autobind
     _outsideClickHandler(event) {
         let { isVisible, identifier } = this.props;
-        if(isVisible === identifier) {
-          let localNode = this.localNode,
-              source = event.target,
-              found = false;
 
-          while (source.parentNode) {
-              found = (source === localNode);
+        if (isVisible === identifier) {
+            let localNode = this.localNode,
+                source = event.target,
+                found = false;
 
-              if (found) { return; }
+            while (source.parentNode) {
+                found = (source === localNode);
 
-              source = source.parentNode;
-          }
+                if (found) { return; }
 
-          this._hideMenu();
+                source = source.parentNode;
+            }
+
+            this._hideMenu();
         }
     }
 
@@ -102,6 +105,7 @@ class MenuContainer extends Component {
     _bindHandlers() {
         let fn = this._outsideClickHandler,
             fn2 = this._hideMenu;
+
         document.addEventListener("mousedown", fn);
         document.addEventListener("touchstart", fn);
         window.addEventListener("resize", fn2);
@@ -112,6 +116,7 @@ class MenuContainer extends Component {
     _unbindHandlers() {
         let fn = this._outsideClickHandler,
             fn2 = this._hideMenu;
+
         document.removeEventListener("mousedown", fn);
         document.removeEventListener("touchstart", fn);
         window.removeEventListener("resize", fn2);
@@ -119,7 +124,7 @@ class MenuContainer extends Component {
     }
 
     render() {
-        let { currentItem, isVisible, identifier } = this.props;
+        let { isVisible, identifier } = this.props;
 
         const classes = classnames({
             "context-menu": true,
