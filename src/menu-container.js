@@ -48,23 +48,22 @@ class MenuContainer extends Component {
 
     @autobind
     getMenuPosition(x, y) {
-        let menu = findDOMNode(this.refs.menu);
-        let scrollX = document.documentElement.scrollTop;
-        let scrollY = document.documentElement.scrollLeft;
-        let { screen } = window,
-            { availWidth, availHeight } = screen,
+        const menu = findDOMNode(this.refs.menu);
+        const scrollX = document.documentElement.scrollTop;
+        const scrollY = document.documentElement.scrollLeft;
+        const { innerWidth, innerHeight } = window,
             { offsetWidth, offsetHeight } = menu,
             menuStyles = {};
 
         menuStyles.top = y + scrollY;
 
-        if (y + offsetHeight > availHeight) {
+        if (y + offsetHeight > innerHeight) {
             menuStyles.top -= offsetHeight;
         }
 
         menuStyles.left = x + scrollX;
 
-        if (x + offsetWidth > availWidth) {
+        if (x + offsetWidth > innerWidth) {
             menuStyles.left -= offsetWidth;
         }
 
