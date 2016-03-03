@@ -26,7 +26,8 @@ class MenuContainer extends Component {
     componentWillReceiveProps(nextProps) {
         this._unbindHandlers();
         if (nextProps.isVisible) {
-            this.setState(this.getMenuPosition(nextProps.x, nextProps.y));
+            const wrapper = 'requestAnimationFrame' in window ? window.requestAnimationFrame : setTimeout;
+            wrapper(() => this.setState(this.getMenuPosition(nextProps.x, nextProps.y)));
         }
     }
 

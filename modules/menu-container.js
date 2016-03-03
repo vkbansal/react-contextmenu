@@ -83,9 +83,14 @@ var MenuContainer = (_class = (_temp = _class2 = function (_Component) {
     }, {
         key: "componentWillReceiveProps",
         value: function componentWillReceiveProps(nextProps) {
+            var _this2 = this;
+
             this._unbindHandlers();
             if (nextProps.isVisible) {
-                this.setState(this.getMenuPosition(nextProps.x, nextProps.y));
+                var wrapper = 'requestAnimationFrame' in window ? window.requestAnimationFrame : setTimeout;
+                wrapper(function () {
+                    return _this2.setState(_this2.getMenuPosition(nextProps.x, nextProps.y));
+                });
             }
         }
     }, {
