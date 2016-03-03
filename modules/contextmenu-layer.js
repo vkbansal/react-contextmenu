@@ -1,12 +1,14 @@
 "use strict";
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 exports.default = function (identifier, configure) {
     return function (Component) {
@@ -18,16 +20,16 @@ exports.default = function (identifier, configure) {
 
         (0, _invariant2.default)(typeof configure === "function", "Expected configure to be a function. See %s", displayName);
 
-        return _class = (_temp = _class2 = (function (_Component) {
-            _inherits(_class3, _Component);
+        return _class = (_temp = _class2 = function (_Component) {
+            _inherits(_class2, _Component);
 
-            function _class3() {
-                _classCallCheck(this, _class3);
+            function _class2() {
+                _classCallCheck(this, _class2);
 
-                return _possibleConstructorReturn(this, Object.getPrototypeOf(_class3).apply(this, arguments));
+                return _possibleConstructorReturn(this, Object.getPrototypeOf(_class2).apply(this, arguments));
             }
 
-            _createClass(_class3, [{
+            _createClass(_class2, [{
                 key: "componentDidMount",
                 value: function componentDidMount() {
                     document.addEventListener("contextmenu", this.handleContextClick);
@@ -64,8 +66,8 @@ exports.default = function (identifier, configure) {
                 }
             }]);
 
-            return _class3;
-        })(Component), _class2.displayName = displayName + "ContextMenuLayer", _temp), (_applyDecoratedDescriptor(_class.prototype, "handleContextClick", [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, "handleContextClick"), _class.prototype)), _class;
+            return _class2;
+        }(Component), _class2.displayName = displayName + "ContextMenuLayer", _temp), (_applyDecoratedDescriptor(_class.prototype, "handleContextClick", [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, "handleContextClick"), _class.prototype)), _class;
     };
 };
 
@@ -100,18 +102,15 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
-    var desc = {
-        enumerable: !!descriptor.enumerable,
-        configurable: !!descriptor.configurable
-    };
+    var desc = {};
+    Object['ke' + 'ys'](descriptor).forEach(function (key) {
+        desc[key] = descriptor[key];
+    });
+    desc.enumerable = !!desc.enumerable;
+    desc.configurable = !!desc.configurable;
 
-    if ('value' in descriptor || 'initializer' in descriptor) {
+    if ('value' in desc || desc.initializer) {
         desc.writable = true;
-        desc.initializer = descriptor.initializer;
-        desc.value = descriptor.value;
-    } else {
-        desc.get = descriptor.get;
-        desc.set = descriptor.set;
     }
 
     desc = decorators.slice().reverse().reduce(function (desc, decorator) {
@@ -130,5 +129,3 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
 
     return desc;
 }
-
-function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
