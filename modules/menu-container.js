@@ -114,21 +114,21 @@ var MenuContainer = (_class = (_temp = _class2 = function (_Component) {
             var scrollY = document.documentElement.scrollLeft;
             var _window = window;
             var screen = _window.screen;
-            var AvailWidth = screen.AvailWidth;
-            var AvailHeight = screen.AvailHeight;
+            var availWidth = screen.availWidth;
+            var availHeight = screen.availHeight;
             var offsetWidth = menu.offsetWidth;
             var offsetHeight = menu.offsetHeight;
             var menuStyles = {};
 
             menuStyles.top = y + scrollY;
 
-            if (y + offsetHeight > AvailHeight) {
+            if (y + offsetHeight > availHeight) {
                 menuStyles.top -= offsetHeight;
             }
 
             menuStyles.left = x + scrollX;
 
-            if (x + offsetWidth > AvailWidth) {
+            if (x + offsetWidth > availWidth) {
                 menuStyles.left -= offsetWidth;
             }
 

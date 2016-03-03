@@ -51,19 +51,19 @@ class MenuContainer extends Component {
         let scrollX = document.documentElement.scrollTop;
         let scrollY = document.documentElement.scrollLeft;
         let { screen } = window,
-            { AvailWidth, AvailHeight } = screen,
+            { availWidth, availHeight } = screen,
             { offsetWidth, offsetHeight } = menu,
             menuStyles = {};
 
         menuStyles.top = y + scrollY;
 
-        if (y + offsetHeight > AvailHeight) {
+        if (y + offsetHeight > availHeight) {
             menuStyles.top -= offsetHeight;
         }
 
         menuStyles.left = x + scrollX;
 
-        if (x + offsetWidth > AvailWidth) {
+        if (x + offsetWidth > availWidth) {
             menuStyles.left -= offsetWidth;
         }
 
