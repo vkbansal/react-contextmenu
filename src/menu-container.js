@@ -1,57 +1,45 @@
 "use strict";
 
-import React, { Component } from "react";
-import { findDOMNode } from "react-dom";
+import React from "react";
+import ReactDOM from "react-dom";
 import classnames from "classnames";
-import autobind from "autobind-decorator";
 
-class MenuContainer extends Component {
-
-    static displayName = "MenuContainer";
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
+const MenuContainer = React.createClass({
+    displayName: "MenuContainer",
+    getInitialState() {
+        return {
             position: "fixed",
             left: 0,
             right: 0
         };
-    }
-
+    },
     componentDidMount() {
-        this.localNode = findDOMNode(this.refs.menu);
-    }
-
+        this.localNode = ReactDOM.findDOMNode(this.refs.menu);
+    },
     componentWillReceiveProps(nextProps) {
         this._unbindHandlers();
         if (nextProps.isVisible) {
             const wrapper = 'requestAnimationFrame' in window ? window.requestAnimationFrame : setTimeout;
             wrapper(() => this.setState(this.getMenuPosition(nextProps.x, nextProps.y)));
         }
-    }
-
+    },
     shouldComponentUpdate(nextProps) {
         return this.props.isVisible !== nextProps.visible;
-    }
-
+    },
     componentDidUpdate() {
         if (this.props.isVisible) {
             this._bindHandlers();
         }
-    }
-
+    },
     componentWillUnmount() {
         this._unbindHandlers();
         delete this.localNode;
-    }
-
-    @autobind
+    },
     getMenuPosition(x, y) {
-        const menu = findDOMNode(this.refs.menu);
-        const scrollX = document.documentElement.scrollTop;
-        const scrollY = document.documentElement.scrollLeft;
-        const { innerWidth, innerHeight } = window,
+        let menu = findDOMNode(this.refs.menu),
+            scrollX = document.documentElement.scrollTop,
+            scrollY = document.documentElement.scrollLeft,
+            { innerWidth, innerHeight } = window,
             { offsetWidth, offsetHeight } = menu,
             menuStyles = {};
 
@@ -68,58 +56,52 @@ class MenuContainer extends Component {
         }
 
         return menuStyles;
-    }
-
-    @autobind
+    },
     _outsideClickHandler(event) {
         let { isVisible, identifier } = this.props;
-        if(isVisible === identifier) {
-          let localNode = this.localNode,
-              source = event.target,
-              found = false;
 
-          while (source.parentNode) {
-              found = (source === localNode);
+        if (isVisible === identifier) {
+            let localNode = this.localNode,
+                source = event.target,
+                found = false;
 
-              if (found) { return; }
+            while (source.parentNode) {
+                found = (source === localNode);
 
-              source = source.parentNode;
-          }
+                if (found) { return; }
 
-          this._hideMenu();
+                source = source.parentNode;
+            }
+
+            this._hideMenu();
         }
-    }
-
-    @autobind
+    },
     _hideMenu() {
         this.props.flux.getActions("menu").setParams({
             isVisible: false,
             currentItem: {}
         });
-    }
-
-    @autobind
+    },
     _bindHandlers() {
         let fn = this._outsideClickHandler,
             fn2 = this._hideMenu;
+
         document.addEventListener("mousedown", fn);
         document.addEventListener("touchstart", fn);
         window.addEventListener("resize", fn2);
         document.addEventListener("scroll", fn2);
-    }
-
-    @autobind
+    },
     _unbindHandlers() {
         let fn = this._outsideClickHandler,
             fn2 = this._hideMenu;
+
         document.removeEventListener("mousedown", fn);
         document.removeEventListener("touchstart", fn);
         window.removeEventListener("resize", fn2);
         document.removeEventListener("scroll", fn2);
-    }
-
+    },
     render() {
-        let { currentItem, isVisible, identifier } = this.props;
+        let { isVisible, identifier } = this.props;
 
         const classes = classnames({
             "context-menu": true,
@@ -134,6 +116,6 @@ class MenuContainer extends Component {
             </div>
         );
     }
-}
+});
 
 export default MenuContainer;

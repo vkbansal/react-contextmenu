@@ -20,6 +20,7 @@ exports.default = {
         var x = _flux$getStore$state.x;
         var y = _flux$getStore$state.y;
 
+
         return { x: x, y: y };
     }
 };

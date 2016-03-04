@@ -1,45 +1,39 @@
 "use strict";
 
-import React, { Component, PropTypes } from "react";
+import React from "react";
 import classnames from "classnames";
 import assign from "object-assign";
 import flux from "./flux";
 import monitor from "./monitor";
 
-class MenuItem extends Component {
+let { PropTypes } = React;
 
-    static displayName = "MenuItem";
-
-    static propTypes = {
+const MenuItem = React.createClass({
+    displayName: "MenuItem",
+    propTypes: {
         data: PropTypes.object,
         disabled: PropTypes.bool,
         divider: PropTypes.bool,
+        selected: PropTypes.bool,
         onClick: PropTypes.func,
-        onSelect: PropTypes.func,
-        selected: PropTypes.bool
-    };
-
-    static defaultProps = {
+        onSelect: PropTypes.func
+    },
+    defaultProps: {
         disabled: false,
         selected: false,
         data: {}
-    };
-
+    },
     handleClick(event) {
         let { disabled, onSelect, onClick, data } = this.props;
 
-        if (disabled) {
-            event.preventDefault();
-            return;
-        }
+        if (disabled) return event.preventDefault();
 
         assign(data, monitor.getItem());
 
         if (typeof onSelect === "function") {
             event.preventDefault();
             onSelect(data);
-            this.hideMenu();
-            return;
+            return this.hideMenu();
         }
 
         if (typeof onClick === "function") {
@@ -47,15 +41,13 @@ class MenuItem extends Component {
         }
 
         this.hideMenu();
-    }
-
+    },
     hideMenu() {
         flux.getActions("menu").setParams({
             isVisible: false,
             currentItem: {}
         });
-    }
-
+    },
     render() {
         let { divider, disabled, selected, children } = this.props;
 
@@ -67,12 +59,12 @@ class MenuItem extends Component {
 
         return (
             <li className={classes}>
-                <a href="#" onMouseDown={this.handleClick.bind(this)}>
+                <a href="#" onMouseDown={this.handleClick}>
                     {children}
                 </a>
             </li>
         );
     }
-}
+});
 
 export default MenuItem;

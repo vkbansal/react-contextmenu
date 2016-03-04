@@ -1,18 +1,17 @@
 "use strict";
 
-import React, { PropTypes, Component } from "react";
+import React from "react";
 import FluxComponent from "flummox/component";
 import flux from "./flux";
 import ContextMenuContainer from "./menu-container";
 
-class ContextMenu extends Component {
+let { PropTypes } = React;
 
-    static propTypes = {
+const ContextMenu = React.createClass({
+    displayName: "ContextMenu",
+    propTypes: {
         identifier: PropTypes.string.isRequired
-    };
-
-    static displayName = "ContextMenu";
-
+    },
     render() {
         return (
             <FluxComponent flux={flux} connectToStores={["menu"]}>
@@ -20,6 +19,6 @@ class ContextMenu extends Component {
             </FluxComponent>
         );
     }
-};
+});
 
 export default ContextMenu;
