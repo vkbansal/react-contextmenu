@@ -19,7 +19,8 @@ const MenuContainer = React.createClass({
     componentWillReceiveProps(nextProps) {
         this._unbindHandlers();
         if (nextProps.isVisible) {
-            this.setState(this.getMenuPosition(nextProps.x, nextProps.y));
+            const wrapper = 'requestAnimationFrame' in window ? window.requestAnimationFrame : setTimeout;
+            wrapper(() => this.setState(this.getMenuPosition(nextProps.x, nextProps.y)));
         }
     },
     shouldComponentUpdate(nextProps) {
@@ -35,23 +36,22 @@ const MenuContainer = React.createClass({
         delete this.localNode;
     },
     getMenuPosition(x, y) {
-        let menu = ReactDOM.findDOMNode(this.refs.menu),
+        let menu = findDOMNode(this.refs.menu),
             scrollX = document.documentElement.scrollTop,
             scrollY = document.documentElement.scrollLeft,
-            { screen } = window,
-            { AvailWidth, AvailHeight } = screen,
+            { innerWidth, innerHeight } = window,
             { offsetWidth, offsetHeight } = menu,
             menuStyles = {};
 
         menuStyles.top = y + scrollY;
 
-        if (y + offsetHeight > AvailHeight) {
+        if (y + offsetHeight > innerHeight) {
             menuStyles.top -= offsetHeight;
         }
 
         menuStyles.left = x + scrollX;
 
-        if (x + offsetWidth > AvailWidth) {
+        if (x + offsetWidth > innerWidth) {
             menuStyles.left -= offsetWidth;
         }
 
