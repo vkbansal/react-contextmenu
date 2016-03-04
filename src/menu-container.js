@@ -36,7 +36,7 @@ const MenuContainer = React.createClass({
         delete this.localNode;
     },
     getMenuPosition(x, y) {
-        let menu = findDOMNode(this.refs.menu),
+        let menu = ReactDOM.findDOMNode(this.refs.menu),
             scrollX = document.documentElement.scrollTop,
             scrollY = document.documentElement.scrollLeft,
             { innerWidth, innerHeight } = window,
