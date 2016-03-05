@@ -9,7 +9,7 @@ All the changes can be found below. Order used:
 - Fixed
 - Security
 
-## master
+## v0.4.0
 
 ### Changed
 - Replace `webpack-dev-server` with `react-hmre`.
@@ -17,18 +17,19 @@ All the changes can be found below. Order used:
 - Switch to Redux from Flummox.
 
 ### Fixed
- - Menu goes outside when closer to edges
+ - Menu goes outside when closer to edges.
+
 
 ## v0.3.0
 
 ### Added
-- Compatibility for react-0.14
+- Compatibility for react-0.14.
 
 ### Changed
-- Updated to babel 6
+- Updated to babel 6.
 
 ### Fixed
-- Fixed unbind event handlers
+- Fixed unbind event handlers.
 
 
 ## v0.2.2
