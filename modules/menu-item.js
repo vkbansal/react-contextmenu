@@ -16,10 +16,6 @@ var _objectAssign = require("object-assign");
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-var _flux = require("./flux");
-
-var _flux2 = _interopRequireDefault(_flux);
-
 var _monitor = require("./monitor");
 
 var _monitor2 = _interopRequireDefault(_monitor);
@@ -38,6 +34,9 @@ var MenuItem = _react2.default.createClass({
         selected: PropTypes.bool,
         onClick: PropTypes.func,
         onSelect: PropTypes.func
+    },
+    contextTypes: {
+        store: PropTypes.object.isRequired
     },
     defaultProps: {
         disabled: false,
@@ -69,9 +68,12 @@ var MenuItem = _react2.default.createClass({
         this.hideMenu();
     },
     hideMenu: function hideMenu() {
-        _flux2.default.getActions("menu").setParams({
-            isVisible: false,
-            currentItem: {}
+        this.context.store.dispatch({
+            type: "SET_PARAMS",
+            data: {
+                isVisible: false,
+                currentItem: {}
+            }
         });
     },
     render: function render() {

@@ -35,13 +35,14 @@ exports.default = function (identifier, configure) {
 
                     event.preventDefault();
 
-                    var actions = _flux2.default.getActions("menu");
-
-                    actions.setParams({
-                        x: event.clientX,
-                        y: event.clientY,
-                        currentItem: currentItem,
-                        isVisible: typeof identifier === "function" ? identifier(this.props) : identifier
+                    _store2.default.dispatch({
+                        type: "SET_PARAMS",
+                        data: {
+                            x: event.clientX,
+                            y: event.clientY,
+                            currentItem: currentItem,
+                            isVisible: typeof identifier === "function" ? identifier(this.props) : identifier
+                        }
                     });
                 }
             },
@@ -68,9 +69,9 @@ var _lodash = require("lodash.isobject");
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _flux = require("./flux");
+var _store = require("./redux/store");
 
-var _flux2 = _interopRequireDefault(_flux);
+var _store2 = _interopRequireDefault(_store);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

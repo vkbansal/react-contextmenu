@@ -20,6 +20,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var MenuContainer = _react2.default.createClass({
     displayName: "MenuContainer",
+    contextTypes: {
+        store: _react2.default.PropTypes.object.isRequired
+    },
     getInitialState: function getInitialState() {
         return {
             position: "fixed",
@@ -54,7 +57,7 @@ var MenuContainer = _react2.default.createClass({
         delete this.localNode;
     },
     getMenuPosition: function getMenuPosition(x, y) {
-        var menu = findDOMNode(this.refs.menu);
+        var menu = _reactDom2.default.findDOMNode(this.refs.menu);
         var scrollX = document.documentElement.scrollTop;
         var scrollY = document.documentElement.scrollLeft;
         var _window = window;
@@ -103,9 +106,12 @@ var MenuContainer = _react2.default.createClass({
         }
     },
     _hideMenu: function _hideMenu() {
-        this.props.flux.getActions("menu").setParams({
-            isVisible: false,
-            currentItem: {}
+        this.context.store.dispatch({
+            type: "SET_PARAMS",
+            data: {
+                isVisible: false,
+                currentItem: {}
+            }
         });
     },
     _bindHandlers: function _bindHandlers() {

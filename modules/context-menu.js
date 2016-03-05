@@ -4,17 +4,15 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _component = require("flummox/component");
+var _store = require("./redux/store");
 
-var _component2 = _interopRequireDefault(_component);
-
-var _flux = require("./flux");
-
-var _flux2 = _interopRequireDefault(_flux);
+var _store2 = _interopRequireDefault(_store);
 
 var _menuContainer = require("./menu-container");
 
@@ -30,12 +28,28 @@ var ContextMenu = _react2.default.createClass({
     propTypes: {
         identifier: PropTypes.string.isRequired
     },
+    childContextTypes: {
+        store: PropTypes.object
+    },
+    getInitialState: function getInitialState() {
+        return _store2.default.getState();
+    },
+    getChildContext: function getChildContext() {
+        return {
+            store: _store2.default
+        };
+    },
+    componentDidMount: function componentDidMount() {
+        this.unsubscribe = _store2.default.subscribe(this.handleUpdate);
+    },
+    componentWillUnmount: function componentWillUnmount() {
+        if (this.unsubscribe) this.unsubscribe();
+    },
+    handleUpdate: function handleUpdate() {
+        this.setState(this.getInitialState());
+    },
     render: function render() {
-        return _react2.default.createElement(
-            _component2.default,
-            { flux: _flux2.default, connectToStores: ["menu"] },
-            _react2.default.createElement(_menuContainer2.default, this.props)
-        );
+        return _react2.default.createElement(_menuContainer2.default, _extends({}, this.props, this.state));
     }
 });
 

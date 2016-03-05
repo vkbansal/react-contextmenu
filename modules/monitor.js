@@ -4,21 +4,21 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _flux = require("./flux");
+var _store = require("./redux/store");
 
-var _flux2 = _interopRequireDefault(_flux);
+var _store2 = _interopRequireDefault(_store);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
     getItem: function getItem() {
-        return _flux2.default.getStore("menu").state.currentItem;
+        return _store2.default.getState().currentItem;
     },
     getPosition: function getPosition() {
-        var _flux$getStore$state = _flux2.default.getStore("menu").state;
+        var _store$getState = _store2.default.getState();
 
-        var x = _flux$getStore$state.x;
-        var y = _flux$getStore$state.y;
+        var x = _store$getState.x;
+        var y = _store$getState.y;
 
 
         return { x: x, y: y };
