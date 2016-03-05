@@ -31,10 +31,10 @@
   "dependencies": {
     "autobind-decorator": "^1.3.3",
     "classnames": "^2.2.3",
-    "flummox": "^3.6.8",
     "invariant": "^2.2.0",
     "lodash.isobject": "^3.0.2",
-    "object-assign": "^4.0.1"
+    "object-assign": "^4.0.1",
+    "redux": "^3.3.1"
   },
   "peerDependencies": {
     "react": "^0.14.0",

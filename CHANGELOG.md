@@ -9,6 +9,16 @@ All the changes can be found below. Order used:
 - Fixed
 - Security
 
+## master
+
+### Changed
+- Replace `webpack-dev-server` with `react-hmre`.
+- Revert to use `createClass`.
+- Switch to Redux from Flummox.
+
+### Fixed
+ - Menu goes outside when closer to edges
+
 ## v0.3.0
 
 ### Added

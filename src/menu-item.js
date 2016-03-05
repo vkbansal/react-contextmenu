@@ -3,7 +3,6 @@
 import React from "react";
 import classnames from "classnames";
 import assign from "object-assign";
-import flux from "./flux";
 import monitor from "./monitor";
 
 let { PropTypes } = React;
@@ -17,6 +16,9 @@ const MenuItem = React.createClass({
         selected: PropTypes.bool,
         onClick: PropTypes.func,
         onSelect: PropTypes.func
+    },
+    contextTypes: {
+        store: PropTypes.object.isRequired
     },
     defaultProps: {
         disabled: false,
@@ -43,9 +45,12 @@ const MenuItem = React.createClass({
         this.hideMenu();
     },
     hideMenu() {
-        flux.getActions("menu").setParams({
-            isVisible: false,
-            currentItem: {}
+        this.context.store.dispatch({
+            type: "SET_PARAMS",
+            data: {
+                isVisible: false,
+                currentItem: {}
+            }
         });
     },
     render() {

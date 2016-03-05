@@ -1,13 +1,13 @@
 "use strict";
 
-import flux from "./flux";
+import store from "./redux/store";
 
 export default {
     getItem() {
-        return flux.getStore("menu").state.currentItem;
+        return store.getState().currentItem;
     },
     getPosition() {
-        let { x, y } = flux.getStore("menu").state;
+        let { x, y } = store.getState();
 
         return {x, y};
     }

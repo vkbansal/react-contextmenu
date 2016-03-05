@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import invariant from "invariant";
 import _isObject from "lodash.isobject";
 
-import flux from "./flux";
+import store from "./redux/store";
 
 let { Component } = React;
 
@@ -54,13 +54,14 @@ export default function(identifier, configure) {
 
                     event.preventDefault();
 
-                    const actions = flux.getActions("menu");
-
-                    actions.setParams({
-                        x: event.clientX,
-                        y: event.clientY,
-                        currentItem,
-                        isVisible: typeof identifier === "function" ? identifier(this.props) : identifier
+                    store.dispatch({
+                        type: "SET_PARAMS",
+                        data: {
+                            x: event.clientX,
+                            y: event.clientY,
+                            currentItem,
+                            isVisible: typeof identifier === "function" ? identifier(this.props) : identifier
+                        }
                     });
                 }
             },

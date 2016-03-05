@@ -1,8 +1,7 @@
 "use strict";
 
 import React from "react";
-import FluxComponent from "flummox/component";
-import flux from "./flux";
+import store from "./redux/store";
 import ContextMenuContainer from "./menu-container";
 
 let { PropTypes } = React;
@@ -12,11 +11,29 @@ const ContextMenu = React.createClass({
     propTypes: {
         identifier: PropTypes.string.isRequired
     },
+    childContextTypes: {
+        store: PropTypes.object
+    },
+    getInitialState() {
+        return store.getState();
+    },
+    getChildContext() {
+        return {
+            store
+        };
+    },
+    componentDidMount() {
+        this.unsubscribe = store.subscribe(this.handleUpdate);
+    },
+    componentWillUnmount() {
+        if (this.unsubscribe) this.unsubscribe();
+    },
+    handleUpdate() {
+        this.setState(this.getInitialState());
+    },
     render() {
         return (
-            <FluxComponent flux={flux} connectToStores={["menu"]}>
-                <ContextMenuContainer {...this.props}/>
-            </FluxComponent>
+            <ContextMenuContainer {...this.props} {...this.state}/>
         );
     }
 });

@@ -6,6 +6,9 @@ import classnames from "classnames";
 
 const MenuContainer = React.createClass({
     displayName: "MenuContainer",
+    contextTypes: {
+        store: React.PropTypes.object.isRequired
+    },
     getInitialState() {
         return {
             position: "fixed",
@@ -77,9 +80,12 @@ const MenuContainer = React.createClass({
         }
     },
     _hideMenu() {
-        this.props.flux.getActions("menu").setParams({
-            isVisible: false,
-            currentItem: {}
+        this.context.store.dispatch({
+            type: "SET_PARAMS",
+            data: {
+                isVisible: false,
+                currentItem: {}
+            }
         });
     },
     _bindHandlers() {
