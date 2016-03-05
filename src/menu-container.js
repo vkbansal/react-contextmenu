@@ -17,12 +17,13 @@ const MenuContainer = React.createClass({
         };
     },
     componentDidMount() {
-        this.localNode = ReactDOM.findDOMNode(this.refs.menu);
+        this.localNode = ReactDOM.findDOMNode(this.menu);
     },
     componentWillReceiveProps(nextProps) {
         this._unbindHandlers();
         if (nextProps.isVisible) {
-            const wrapper = 'requestAnimationFrame' in window ? window.requestAnimationFrame : setTimeout;
+            const wrapper = window.requestAnimationFrame || setTimeout;
+
             wrapper(() => this.setState(this.getMenuPosition(nextProps.x, nextProps.y)));
         }
     },
@@ -39,7 +40,7 @@ const MenuContainer = React.createClass({
         delete this.localNode;
     },
     getMenuPosition(x, y) {
-        let menu = ReactDOM.findDOMNode(this.refs.menu),
+        let menu = ReactDOM.findDOMNode(this.menu),
             scrollX = document.documentElement.scrollTop,
             scrollY = document.documentElement.scrollLeft,
             { innerWidth, innerHeight } = window,
@@ -116,7 +117,7 @@ const MenuContainer = React.createClass({
 
         return (
             <div className={classes} style={this.state}>
-                <ul ref="menu" className="dropdown-menu">
+                <ul ref={(c) => (this.menu = c)} className="dropdown-menu">
                     {this.props.children}
                 </ul>
             </div>
