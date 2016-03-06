@@ -10,64 +10,48 @@ let { PropTypes } = React;
 const MenuItem = React.createClass({
     displayName: "MenuItem",
     propTypes: {
+        onClick: PropTypes.func.isRequired,
         data: PropTypes.object,
         disabled: PropTypes.bool,
-        divider: PropTypes.bool,
-        selected: PropTypes.bool,
-        onClick: PropTypes.func,
-        onSelect: PropTypes.func
-    },
-    contextTypes: {
-        store: PropTypes.object.isRequired
+        preventClose: PropTypes.bool
     },
     defaultProps: {
         disabled: false,
-        selected: false,
         data: {}
     },
     handleClick(event) {
-        let { disabled, onSelect, onClick, data } = this.props;
+        let { disabled, onClick, data, preventClose } = this.props;
 
-        if (disabled) return event.preventDefault();
+        console.log(typeof onClick);
+
+        event.preventDefault();
+
+        if (disabled) return;
 
         assign(data, monitor.getItem());
-
-        if (typeof onSelect === "function") {
-            event.preventDefault();
-            onSelect(data);
-            return this.hideMenu();
-        }
 
         if (typeof onClick === "function") {
             onClick(event, data);
         }
 
-        this.hideMenu();
-    },
-    hideMenu() {
-        this.context.store.dispatch({
-            type: "SET_PARAMS",
-            data: {
-                isVisible: false,
-                currentItem: {}
-            }
-        });
+        if (preventClose) return;
+
+        monitor.hideMenu();
     },
     render() {
-        let { divider, disabled, selected, children } = this.props;
+        let { disabled, children } = this.props;
 
-        if (divider) {
-            return <li className="divider"/>;
-        }
-
-        const classes = classnames({ disabled, active: selected});
+        const classes = classnames({
+            "react-context-menu-link": true,
+            disabled
+        });
 
         return (
-            <li className={classes}>
-                <a href="#" onMouseDown={this.handleClick}>
+            <div className="react-context-menu-item">
+                <a href="#" classes={classes} onClick={this.handleClick}>
                     {children}
                 </a>
-            </li>
+            </div>
         );
     }
 });
