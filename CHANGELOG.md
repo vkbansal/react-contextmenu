@@ -9,6 +9,23 @@ All the changes can be found below. Order used:
 - Fixed
 - Security
 
+## v1.0.0
+
+### Added
+
+- Ability to use custom styles.
+
+### Changed
+
+- Use `react-bootstap/react-overlays` instead of custom logic to render the menu.
+- Make `configure` of `ContextMenuLayer` optional.
+
+### Removed
+
+- Dependency on bootstrap styling.
+
+
+
 ## v0.4.0
 
 ### Changed
@@ -18,7 +35,6 @@ All the changes can be found below. Order used:
 
 ### Fixed
  - Menu goes outside when closer to edges.
-
 
 ## v0.3.0
 
@@ -30,7 +46,6 @@ All the changes can be found below. Order used:
 
 ### Fixed
 - Fixed unbind event handlers.
-
 
 ## v0.2.2
 
