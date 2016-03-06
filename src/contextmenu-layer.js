@@ -23,11 +23,14 @@ export default function(identifier, configure) {
             displayName
         );
 
-        invariant(
-            typeof configure === "function",
-            "Expected configure to be a function. See %s",
-            displayName
-        );
+        if (configure) {
+            invariant(
+                typeof configure === "function",
+                "Expected configure to be a function. See %s",
+                displayName
+            );
+        }
+
 
         return React.createClass({
             displayName: `${displayName}ContextMenuLayer`,
@@ -44,7 +47,9 @@ export default function(identifier, configure) {
                     domNode = ReactDOM.findDOMNode(this);
 
                 if (target === domNode || domNode.contains(target)) {
-                    let currentItem = configure(this.props);
+                    let currentItem = typeof configure === "function"
+                        ? configure(this.props)
+                        : {};
 
                     invariant(
                         _isObject(currentItem),
