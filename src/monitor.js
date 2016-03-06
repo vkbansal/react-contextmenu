@@ -10,5 +10,14 @@ export default {
         let { x, y } = store.getState();
 
         return {x, y};
+    },
+    hideMenu() {
+        store.dispatch({
+            type: "SET_PARAMS",
+            data: {
+                isVisible: false,
+                currentItem: {}
+            }
+        });
     }
 };
