@@ -15,8 +15,6 @@ const MenuTarget = React.createClass({
     }
 });
 
-export default ContextMenuLayer(MenuTypes.multi, (props) => {
-    return {
-        name: props.name
-    };
-})(MenuTarget);
+export default ContextMenuLayer(MenuTypes.multi, (props) => ({
+    name: props.name
+}))(MenuTarget);

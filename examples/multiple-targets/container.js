@@ -22,13 +22,11 @@ const Container = React.createClass({
     render() {
         return (
             <div className="row">
-                {targets.map((item, i) => {
-                    return (
-                        <div className="col-sm-2 text-center" key={i}>
-                            <Target name={item.name}/>
-                        </div>
-                    );
-                })}
+                {targets.map((item, i) => (
+                    <div className="col-sm-2 text-center" key={i}>
+                        <Target name={item.name}/>
+                    </div>
+                ))}
             </div>
         );
     }

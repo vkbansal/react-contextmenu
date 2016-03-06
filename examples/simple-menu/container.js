@@ -8,13 +8,9 @@ const Container = React.createClass({
     displayName: "Container",
     render() {
         return (
-            <div className="well">
-                right click to see the menu
-            </div>
+            <div className="well">right click to see the menu</div>
         );
     }
 });
 
-export default ContextMenuLayer(MenuTypes.simple, (props) => {
-    return {};
-})(Container);
+export default ContextMenuLayer(MenuTypes.simple, (props) => props)(Container);

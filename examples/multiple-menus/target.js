@@ -14,10 +14,9 @@ const MenuTarget = React.createClass({
     }
 });
 
-export default ContextMenuLayer((props) => {
-    return props.menuType;
-}, (props) => {
-    return {
+export default ContextMenuLayer(
+    (props) => (props.menuType),
+    (props) => ({
         name: props.name
-    };
-})(MenuTarget);
+    })
+)(MenuTarget);
