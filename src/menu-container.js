@@ -1,26 +1,34 @@
 "use strict";
 
 import React from "react";
-import ReactDOM from "react-dom";
-import classnames from "classnames";
+import monitor from "./monitor";
+
+import Modal from "react-overlays/lib/Modal";
+
+const modalStyle = {
+        position: "fixed",
+        zIndex: 1040,
+        top: 0, bottom: 0, left: 0, right: 0
+    },
+    backdropStyle = {
+        ...modalStyle,
+        zIndex: "auto",
+        backgroundColor: "transparent"
+    },
+    menuStyles = {
+        position: "fixed",
+        zIndex: "auto"
+    };
 
 const MenuContainer = React.createClass({
     displayName: "MenuContainer",
-    contextTypes: {
-        store: React.PropTypes.object.isRequired
-    },
     getInitialState() {
         return {
-            position: "fixed",
             left: 0,
-            right: 0
+            top: 0
         };
     },
-    componentDidMount() {
-        this.localNode = ReactDOM.findDOMNode(this.menu);
-    },
     componentWillReceiveProps(nextProps) {
-        this._unbindHandlers();
         if (nextProps.isVisible) {
             const wrapper = window.requestAnimationFrame || setTimeout;
 
@@ -30,30 +38,20 @@ const MenuContainer = React.createClass({
     shouldComponentUpdate(nextProps) {
         return this.props.isVisible !== nextProps.visible;
     },
-    componentDidUpdate() {
-        if (this.props.isVisible) {
-            this._bindHandlers();
-        }
-    },
-    componentWillUnmount() {
-        this._unbindHandlers();
-        delete this.localNode;
-    },
     getMenuPosition(x, y) {
-        let menu = ReactDOM.findDOMNode(this.menu),
-            scrollX = document.documentElement.scrollTop,
+        let scrollX = document.documentElement.scrollTop,
             scrollY = document.documentElement.scrollLeft,
             { innerWidth, innerHeight } = window,
-            { offsetWidth, offsetHeight } = menu,
-            menuStyles = {};
+            { offsetWidth, offsetHeight } = this.menu,
+            menuStyles = {
+                top: y + scrollY,
+                left: x + scrollX
+            };
 
-        menuStyles.top = y + scrollY;
 
         if (y + offsetHeight > innerHeight) {
             menuStyles.top -= offsetHeight;
         }
-
-        menuStyles.left = x + scrollX;
 
         if (x + offsetWidth > innerWidth) {
             menuStyles.left -= offsetWidth;
@@ -61,66 +59,22 @@ const MenuContainer = React.createClass({
 
         return menuStyles;
     },
-    _outsideClickHandler(event) {
-        let { isVisible, identifier } = this.props;
-
-        if (isVisible === identifier) {
-            let localNode = this.localNode,
-                source = event.target,
-                found = false;
-
-            while (source.parentNode) {
-                found = (source === localNode);
-
-                if (found) { return; }
-
-                source = source.parentNode;
-            }
-
-            this._hideMenu();
-        }
-    },
-    _hideMenu() {
-        this.context.store.dispatch({
-            type: "SET_PARAMS",
-            data: {
-                isVisible: false,
-                currentItem: {}
-            }
-        });
-    },
-    _bindHandlers() {
-        let fn = this._outsideClickHandler,
-            fn2 = this._hideMenu;
-
-        document.addEventListener("mousedown", fn);
-        document.addEventListener("touchstart", fn);
-        window.addEventListener("resize", fn2);
-        document.addEventListener("scroll", fn2);
-    },
-    _unbindHandlers() {
-        let fn = this._outsideClickHandler,
-            fn2 = this._hideMenu;
-
-        document.removeEventListener("mousedown", fn);
-        document.removeEventListener("touchstart", fn);
-        window.removeEventListener("resize", fn2);
-        document.removeEventListener("scroll", fn2);
-    },
     render() {
-        let { isVisible, identifier } = this.props;
+        let { isVisible, identifier, children } = this.props;
 
-        const classes = classnames({
-            "context-menu": true,
-            "open": isVisible === identifier
-        });
+        const style = {
+            ...menuStyles,
+            ...this.state
+        };
 
         return (
-            <div className={classes} style={this.state}>
-                <ul ref={(c) => (this.menu = c)} className="dropdown-menu">
-                    {this.props.children}
-                </ul>
-            </div>
+            <Modal style={modalStyle} backdropStyle={backdropStyle}
+                show={isVisible === identifier} onHide={() => monitor.hideMenu()}>
+                <nav ref={(c) => (this.menu = c)} style={style}
+                    className="react-context-menu">
+                    {children}
+                </nav>
+            </Modal>
         );
     }
 });
