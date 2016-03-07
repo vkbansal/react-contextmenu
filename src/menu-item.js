@@ -22,8 +22,6 @@ const MenuItem = React.createClass({
     handleClick(event) {
         let { disabled, onClick, data, preventClose } = this.props;
 
-        console.log(typeof onClick);
-
         event.preventDefault();
 
         if (disabled) return;
