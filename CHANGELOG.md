@@ -9,6 +9,15 @@ All the changes can be found below. Order used:
 - Fixed
 - Security
 
+## v1.0.1
+
+### Changed
+- Internal: use `getBoundingClientRect()` instead of `offsetHeight` and `offsetWidth`.
+- Internal: Update packages and scripts.
+
+### Fixed
+- Fix class names (`.react-context-menu-link`) for links.
+
 ## v1.0.0
 
 ### Added
