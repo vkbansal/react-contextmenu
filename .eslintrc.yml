@@ -1,5 +1,1 @@
-extends: [
-    "vkbansal",
-    "vkbansal/babel",
-    "vkbansal/react"
-]
+extends: ["vkbansal", "vkbansal/react"]
