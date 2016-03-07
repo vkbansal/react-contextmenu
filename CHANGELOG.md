@@ -9,6 +9,15 @@ All the changes can be found below. Order used:
 - Fixed
 - Security
 
+
+## master
+
+### Added
+
+- Added support for nested sub-menus.
+
+
+
 ## v1.0.1
 
 ### Changed
@@ -32,7 +41,6 @@ All the changes can be found below. Order used:
 ### Removed
 
 - Dependency on bootstrap styling.
-
 
 
 ## v0.4.0
