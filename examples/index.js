@@ -6,6 +6,7 @@ import { Router, Route, Link, IndexRoute, hashHistory } from "react-router";
 import SimpleMenu from "./simple-menu";
 import MultipleTargets from "./multiple-targets";
 import MultipleMenus from "./multiple-menus";
+import SubMenus from "./submenus";
 
 const App = React.createClass({
     displayName: "App",
@@ -26,6 +27,9 @@ const App = React.createClass({
                         <li>
                             <Link to="/multiple-menus">Multiple Menus</Link>
                         </li>
+                        <li>
+                            <Link to="/submenus">Sub Menus</Link>
+                        </li>
                     </ul>
                 </div>
                 <div className="col-xs-9" id="main">
@@ -43,6 +47,7 @@ const Routes = (
             <Route path="simple-menu" component={SimpleMenu}/>
             <Route path="multiple-targets" component={MultipleTargets}/>
             <Route path="multiple-menus" component={MultipleMenus}/>
+            <Route path="submenus" component={SubMenus}/>
         </Route>
     </Router>
 );

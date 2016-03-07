@@ -13,8 +13,8 @@
     outline: none;
 }
 
-.react-context-menu-item > a {
-    display: block;
+.react-context-menu-link {
+    display: inline-block;
     width: 100%;
     padding: 3px 20px;
     clear: both;
@@ -27,9 +27,20 @@
     border: 0;
 }
 
-.react-context-menu-item > a:hover {
+.react-context-menu-link.active,
+.react-context-menu-link:hover {
     color: #fff;
     background-color: #0275d8;
     border-color: #0275d8;
     text-decoration: none;
+}
+.react-context-menu-item.submenu > a {
+    padding-right: 27px;
+}
+
+.react-context-menu-item.submenu > a:after {
+    content: "▶";
+    display: inline-block;
+    position: absolute;
+    right: 7px;
 }
