@@ -4,41 +4,50 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = require("react-dom");
+var _monitor = require("./monitor");
 
-var _reactDom2 = _interopRequireDefault(_reactDom);
+var _monitor2 = _interopRequireDefault(_monitor);
 
-var _classnames = require("classnames");
+var _Modal = require("react-overlays/lib/Modal");
 
-var _classnames2 = _interopRequireDefault(_classnames);
+var _Modal2 = _interopRequireDefault(_Modal);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var modalStyle = {
+    position: "fixed",
+    zIndex: 1040,
+    top: 0, bottom: 0, left: 0, right: 0
+},
+    backdropStyle = _extends({}, modalStyle, {
+    zIndex: "auto",
+    backgroundColor: "transparent"
+}),
+    menuStyles = {
+    position: "fixed",
+    zIndex: "auto"
+};
+
 var MenuContainer = _react2.default.createClass({
     displayName: "MenuContainer",
-    contextTypes: {
-        store: _react2.default.PropTypes.object.isRequired
-    },
     getInitialState: function getInitialState() {
         return {
-            position: "fixed",
             left: 0,
-            right: 0
+            top: 0
         };
-    },
-    componentDidMount: function componentDidMount() {
-        this.localNode = _reactDom2.default.findDOMNode(this.refs.menu);
     },
     componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
         var _this = this;
 
-        this._unbindHandlers();
         if (nextProps.isVisible) {
-            var wrapper = 'requestAnimationFrame' in window ? window.requestAnimationFrame : setTimeout;
+            var wrapper = window.requestAnimationFrame || setTimeout;
+
             wrapper(function () {
                 return _this.setState(_this.getMenuPosition(nextProps.x, nextProps.y));
             });
@@ -47,33 +56,23 @@ var MenuContainer = _react2.default.createClass({
     shouldComponentUpdate: function shouldComponentUpdate(nextProps) {
         return this.props.isVisible !== nextProps.visible;
     },
-    componentDidUpdate: function componentDidUpdate() {
-        if (this.props.isVisible) {
-            this._bindHandlers();
-        }
-    },
-    componentWillUnmount: function componentWillUnmount() {
-        this._unbindHandlers();
-        delete this.localNode;
-    },
     getMenuPosition: function getMenuPosition(x, y) {
-        var menu = _reactDom2.default.findDOMNode(this.refs.menu);
         var scrollX = document.documentElement.scrollTop;
         var scrollY = document.documentElement.scrollLeft;
         var _window = window;
         var innerWidth = _window.innerWidth;
         var innerHeight = _window.innerHeight;
-        var offsetWidth = menu.offsetWidth;
-        var offsetHeight = menu.offsetHeight;
-        var menuStyles = {};
-
-        menuStyles.top = y + scrollY;
+        var _menu = this.menu;
+        var offsetWidth = _menu.offsetWidth;
+        var offsetHeight = _menu.offsetHeight;
+        var menuStyles = {
+            top: y + scrollY,
+            left: x + scrollX
+        };
 
         if (y + offsetHeight > innerHeight) {
             menuStyles.top -= offsetHeight;
         }
-
-        menuStyles.left = x + scrollX;
 
         if (x + offsetWidth > innerWidth) {
             menuStyles.left -= offsetWidth;
@@ -81,75 +80,30 @@ var MenuContainer = _react2.default.createClass({
 
         return menuStyles;
     },
-    _outsideClickHandler: function _outsideClickHandler(event) {
+    render: function render() {
+        var _this2 = this;
+
         var _props = this.props;
         var isVisible = _props.isVisible;
         var identifier = _props.identifier;
+        var children = _props.children;
 
 
-        if (isVisible === identifier) {
-            var localNode = this.localNode,
-                source = event.target,
-                found = false;
-
-            while (source.parentNode) {
-                found = source === localNode;
-
-                if (found) {
-                    return;
-                }
-
-                source = source.parentNode;
-            }
-
-            this._hideMenu();
-        }
-    },
-    _hideMenu: function _hideMenu() {
-        this.context.store.dispatch({
-            type: "SET_PARAMS",
-            data: {
-                isVisible: false,
-                currentItem: {}
-            }
-        });
-    },
-    _bindHandlers: function _bindHandlers() {
-        var fn = this._outsideClickHandler,
-            fn2 = this._hideMenu;
-
-        document.addEventListener("mousedown", fn);
-        document.addEventListener("touchstart", fn);
-        window.addEventListener("resize", fn2);
-        document.addEventListener("scroll", fn2);
-    },
-    _unbindHandlers: function _unbindHandlers() {
-        var fn = this._outsideClickHandler,
-            fn2 = this._hideMenu;
-
-        document.removeEventListener("mousedown", fn);
-        document.removeEventListener("touchstart", fn);
-        window.removeEventListener("resize", fn2);
-        document.removeEventListener("scroll", fn2);
-    },
-    render: function render() {
-        var _props2 = this.props;
-        var isVisible = _props2.isVisible;
-        var identifier = _props2.identifier;
-
-
-        var classes = (0, _classnames2.default)({
-            "context-menu": true,
-            "open": isVisible === identifier
-        });
+        var style = _extends({}, menuStyles, this.state);
 
         return _react2.default.createElement(
-            "div",
-            { className: classes, style: this.state },
+            _Modal2.default,
+            { style: modalStyle, backdropStyle: backdropStyle,
+                show: isVisible === identifier, onHide: function onHide() {
+                    return _monitor2.default.hideMenu();
+                } },
             _react2.default.createElement(
-                "ul",
-                { ref: "menu", className: "dropdown-menu" },
-                this.props.children
+                "nav",
+                { ref: function ref(c) {
+                        return _this2.menu = c;
+                    }, style: style,
+                    className: "react-context-menu" },
+                children
             )
         );
     }

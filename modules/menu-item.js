@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
 var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -28,74 +30,56 @@ var PropTypes = _react2.default.PropTypes;
 var MenuItem = _react2.default.createClass({
     displayName: "MenuItem",
     propTypes: {
+        onClick: PropTypes.func.isRequired,
         data: PropTypes.object,
         disabled: PropTypes.bool,
-        divider: PropTypes.bool,
-        selected: PropTypes.bool,
-        onClick: PropTypes.func,
-        onSelect: PropTypes.func
-    },
-    contextTypes: {
-        store: PropTypes.object.isRequired
+        preventClose: PropTypes.bool
     },
     defaultProps: {
         disabled: false,
-        selected: false,
         data: {}
     },
     handleClick: function handleClick(event) {
         var _props = this.props;
         var disabled = _props.disabled;
-        var onSelect = _props.onSelect;
         var onClick = _props.onClick;
         var data = _props.data;
+        var preventClose = _props.preventClose;
 
 
-        if (disabled) return event.preventDefault();
+        console.log(typeof onClick === "undefined" ? "undefined" : _typeof(onClick));
+
+        event.preventDefault();
+
+        if (disabled) return;
 
         (0, _objectAssign2.default)(data, _monitor2.default.getItem());
-
-        if (typeof onSelect === "function") {
-            event.preventDefault();
-            onSelect(data);
-            return this.hideMenu();
-        }
 
         if (typeof onClick === "function") {
             onClick(event, data);
         }
 
-        this.hideMenu();
-    },
-    hideMenu: function hideMenu() {
-        this.context.store.dispatch({
-            type: "SET_PARAMS",
-            data: {
-                isVisible: false,
-                currentItem: {}
-            }
-        });
+        if (preventClose) return;
+
+        _monitor2.default.hideMenu();
     },
     render: function render() {
         var _props2 = this.props;
-        var divider = _props2.divider;
         var disabled = _props2.disabled;
-        var selected = _props2.selected;
         var children = _props2.children;
 
 
-        if (divider) {
-            return _react2.default.createElement("li", { className: "divider" });
-        }
-
-        var classes = (0, _classnames2.default)({ disabled: disabled, active: selected });
+        var classes = (0, _classnames2.default)({
+            "react-context-menu-link": true,
+            disabled: disabled
+        });
 
         return _react2.default.createElement(
-            "li",
-            { className: classes },
+            "div",
+            { className: "react-context-menu-item" },
             _react2.default.createElement(
                 "a",
-                { href: "#", onMouseDown: this.handleClick },
+                { href: "#", classes: classes, onClick: this.handleClick },
                 children
             )
         );

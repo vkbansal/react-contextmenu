@@ -28,16 +28,8 @@ var ContextMenu = _react2.default.createClass({
     propTypes: {
         identifier: PropTypes.string.isRequired
     },
-    childContextTypes: {
-        store: PropTypes.object
-    },
     getInitialState: function getInitialState() {
         return _store2.default.getState();
-    },
-    getChildContext: function getChildContext() {
-        return {
-            store: _store2.default
-        };
     },
     componentDidMount: function componentDidMount() {
         this.unsubscribe = _store2.default.subscribe(this.handleUpdate);

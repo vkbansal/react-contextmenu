@@ -22,5 +22,14 @@ exports.default = {
 
 
         return { x: x, y: y };
+    },
+    hideMenu: function hideMenu() {
+        _store2.default.dispatch({
+            type: "SET_PARAMS",
+            data: {
+                isVisible: false,
+                currentItem: {}
+            }
+        });
     }
 };
