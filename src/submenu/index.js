@@ -3,7 +3,7 @@
 import React from "react";
 import classnames from "classnames";
 
-import MenuWrapper from "./menu";
+import MenuWrapper from "./wrapper";
 
 const menuStyles = {
     position: "relative",
@@ -12,6 +12,16 @@ const menuStyles = {
 
 const SubMenu = React.createClass({
     displayName: "SubMenu",
+    propTypes: {
+        disabled: React.PropTypes.bool,
+        hoverDelay: React.PropTypes.number,
+        title: React.PropTypes.string
+    },
+    getDefaultProps() {
+        return {
+            hoverDelay: 500
+        };
+    },
     getInitialState() {
         return {
             visible: false
@@ -22,10 +32,20 @@ const SubMenu = React.createClass({
     },
     handleClick(e) {
         e.preventDefault();
+    },
+    handleMouseEnter() {
+        if (this.closetimer) clearTimeout(this.closetimer);
 
-        if (this.props.disabled) return;
+        if (this.props.disabled || this.state.visible) return;
 
-        this.setState((state) => ({visible: !state.visible}));
+        this.opentimer = setTimeout(() => this.setState({visible: true}), this.props.hoverDelay);
+    },
+    handleMouseLeave() {
+        if (this.opentimer) clearTimeout(this.opentimer);
+
+        if (!this.state.visible) return;
+
+        this.closetimer = setTimeout(() => this.setState({visible: false}), this.props.hoverDelay);
     },
     render() {
         let { disabled, children, title } = this.props,
@@ -39,7 +59,8 @@ const SubMenu = React.createClass({
             menuClasses = "react-context-menu-item submenu";
 
         return (
-            <div ref={(c) => (this.item = c)} className={menuClasses} style={menuStyles}>
+            <div ref={(c) => (this.item = c)} className={menuClasses} style={menuStyles}
+                onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
                 <a href="#" className={classes} onClick={this.handleClick}>
                     {title}
                 </a>
