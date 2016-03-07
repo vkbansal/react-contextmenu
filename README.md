@@ -80,6 +80,50 @@ The styling can be apllied to using following classes.
 
 See [react-context-menu.css](./examples/react-context-menu.css) for example.
 
+
+## API
+
+The module exports the following:
+
+- `ContextMenu`
+- `ContextMenuLayer`
+- `MenuItem`
+- `SubMenu`
+
+
+
+### ContextMenu(props)
+
+Type: React Component
+
+Base Contextmenu Component.
+
+**props.identifier**
+
+Type: `String`  required
+
+A unique identifier for the menu.
+
+
+
+### ContextMenuLayer(identifier, configure)
+
+Type: `Function`
+
+Return: `Function`
+
+A Higher Order function that returns a function which in turn can be used to create a React Component on which the context menu must be triggered.
+
+**identifier**
+
+Type: `String` required
+
+The unique identifier of the menu to be called.
+
+**Configure**
+
+Type: `Function` optional
+
 ## Credits
 This project is based on the ideas from [react-dnd](https://github.com/gaearon/react-dnd) by [Dan Abramov](https://github.com/gaearon).
 
