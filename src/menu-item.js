@@ -46,7 +46,7 @@ const MenuItem = React.createClass({
 
         return (
             <div className="react-context-menu-item">
-                <a href="#" classes={classes} onClick={this.handleClick}>
+                <a href="#" className={classes} onClick={this.handleClick}>
                     {children}
                 </a>
             </div>
