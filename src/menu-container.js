@@ -42,19 +42,18 @@ const MenuContainer = React.createClass({
         let scrollX = document.documentElement.scrollTop,
             scrollY = document.documentElement.scrollLeft,
             { innerWidth, innerHeight } = window,
-            { offsetWidth, offsetHeight } = this.menu,
+            rect = this.menu.getBoundingClientRect(),
             menuStyles = {
                 top: y + scrollY,
                 left: x + scrollX
             };
 
-
-        if (y + offsetHeight > innerHeight) {
-            menuStyles.top -= offsetHeight;
+        if (y + rect.height > innerHeight) {
+            menuStyles.top -= rect.height;
         }
 
-        if (x + offsetWidth > innerWidth) {
-            menuStyles.left -= offsetWidth;
+        if (x + rect.width > innerWidth) {
+            menuStyles.left -= rect.width;
         }
 
         return menuStyles;
