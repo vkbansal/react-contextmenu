@@ -2,8 +2,8 @@
 
 import React from "react";
 
-const SubMenu = React.createClass({
-    displayName: "SubMenu",
+const SubMenuWrapper = React.createClass({
+    displayName: "SubMenuWrapper",
     getInitialState() {
         return {
             position: {
@@ -75,4 +75,4 @@ const SubMenu = React.createClass({
     }
 });
 
-export default SubMenu;
+export default SubMenuWrapper;
