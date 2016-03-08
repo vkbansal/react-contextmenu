@@ -4,8 +4,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
 var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -47,8 +45,6 @@ var MenuItem = _react2.default.createClass({
         var preventClose = _props.preventClose;
 
 
-        console.log(typeof onClick === "undefined" ? "undefined" : _typeof(onClick));
-
         event.preventDefault();
 
         if (disabled) return;
@@ -79,7 +75,7 @@ var MenuItem = _react2.default.createClass({
             { className: "react-context-menu-item" },
             _react2.default.createElement(
                 "a",
-                { href: "#", classes: classes, onClick: this.handleClick },
+                { href: "#", className: classes, onClick: this.handleClick },
                 children
             )
         );

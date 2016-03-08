@@ -10,13 +10,13 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _store = require("./redux/store");
+var _store = require("../redux/store");
 
 var _store2 = _interopRequireDefault(_store);
 
-var _menuContainer = require("./menu-container");
+var _wrapper = require("./wrapper");
 
-var _menuContainer2 = _interopRequireDefault(_menuContainer);
+var _wrapper2 = _interopRequireDefault(_wrapper);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41,7 +41,7 @@ var ContextMenu = _react2.default.createClass({
         this.setState(this.getInitialState());
     },
     render: function render() {
-        return _react2.default.createElement(_menuContainer2.default, _extends({}, this.props, this.state));
+        return _react2.default.createElement(_wrapper2.default, _extends({}, this.props, this.state));
     }
 });
 

@@ -40,4 +40,13 @@ Object.defineProperty(exports, "monitor", {
   }
 });
 
+var _submenu = require("./submenu");
+
+Object.defineProperty(exports, "SubMenu", {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_submenu).default;
+  }
+});
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

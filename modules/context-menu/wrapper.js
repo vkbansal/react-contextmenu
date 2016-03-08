@@ -10,7 +10,7 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _monitor = require("./monitor");
+var _monitor = require("../monitor");
 
 var _monitor2 = _interopRequireDefault(_monitor);
 
@@ -34,8 +34,8 @@ var modalStyle = {
     zIndex: "auto"
 };
 
-var MenuContainer = _react2.default.createClass({
-    displayName: "MenuContainer",
+var ContextMenuWrapper = _react2.default.createClass({
+    displayName: "ContextMenuWrapper",
     getInitialState: function getInitialState() {
         return {
             left: 0,
@@ -45,7 +45,7 @@ var MenuContainer = _react2.default.createClass({
     componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
         var _this = this;
 
-        if (nextProps.isVisible) {
+        if (nextProps.isVisible === nextProps.identifier) {
             var wrapper = window.requestAnimationFrame || setTimeout;
 
             wrapper(function () {
@@ -62,20 +62,18 @@ var MenuContainer = _react2.default.createClass({
         var _window = window;
         var innerWidth = _window.innerWidth;
         var innerHeight = _window.innerHeight;
-        var _menu = this.menu;
-        var offsetWidth = _menu.offsetWidth;
-        var offsetHeight = _menu.offsetHeight;
+        var rect = this.menu.getBoundingClientRect();
         var menuStyles = {
             top: y + scrollY,
             left: x + scrollX
         };
 
-        if (y + offsetHeight > innerHeight) {
-            menuStyles.top -= offsetHeight;
+        if (y + rect.height > innerHeight) {
+            menuStyles.top -= rect.height;
         }
 
-        if (x + offsetWidth > innerWidth) {
-            menuStyles.left -= offsetWidth;
+        if (x + rect.width > innerWidth) {
+            menuStyles.left -= rect.width;
         }
 
         return menuStyles;
@@ -109,4 +107,4 @@ var MenuContainer = _react2.default.createClass({
     }
 });
 
-exports.default = MenuContainer;
+exports.default = ContextMenuWrapper;
