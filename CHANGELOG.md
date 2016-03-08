@@ -10,13 +10,16 @@ All the changes can be found below. Order used:
 - Security
 
 
-## master
+## v1.1.0
 
 ### Added
 
-- Added support for nested sub-menus.
+- Support for nested sub-menus.
+- More custom styling options.
+- Proper API documentation.
 
-
+### Removed
+- Hard Dependency on `react-dom` inside components.
 
 ## v1.0.1
 
