@@ -70,13 +70,19 @@ As you can see that the `ContextMenu` to be showed on any component is dependent
 
 The `ContextMenuLayer` higher order function takes two parameters. First is the **unique identifier** (same as the one used on the `ContextMenu`) and second is (optional) a function that must return some data that will be passed on to the `onClick` method of the `MenuItem`. This helps in identifying the component on which context click occured.
 
+See [examples](./examples) for more in detail usage.
+
 ##Styling
 
 The styling can be apllied to using following classes.
 
-- `react-context-menu`
-- `react-context-menu-item`
-- `react-context-menu-link`
+- `react-context-menu` : applied to menu root element.
+- `react-context-menu-item` : applied to menu items.
+- `react-context-menu-link` : applied to menu links inside items.
+- `react-context-menu-wrapper` : applied to wrapper around elements in `ContextMenuLayer`.
+- `submenu` : applied to items that are submenus.
+- `disabled` : applied to links (title in submenu) when they are disabled.
+- `active` : applied to title in submenu when submenu is open. 
 
 See [react-context-menu.css](./examples/react-context-menu.css) for example.
 
@@ -91,7 +97,6 @@ The module exports the following:
 - `SubMenu`
 
 
-
 ### ContextMenu(props)
 
 Type: React Component
@@ -103,8 +108,6 @@ Base Contextmenu Component.
 Type: `String`  required
 
 A unique identifier for the menu.
-
-
 
 ### ContextMenuLayer(identifier, configure)
 
@@ -120,16 +123,78 @@ Type: `String` required
 
 The unique identifier of the menu to be called.
 
-**Configure**
+**configure**
 
 Type: `Function` optional
+
+A simple function which takes props as input and returns the data to be passed to contextmenu.
+
+### MenuItem(props)
+
+Type: React Component
+
+A Simple Wrapper around menu items.
+
+**props.data**
+
+Type: `Object` optional
+
+Default: `{}`
+
+The extra data (if required) to be passed to `onClick` event.
+
+**props.disabled**
+
+Type: `Boolean` optional
+
+Default: `false`
+
+If `true`, disables the click event and adds `.disabled` class.
+
+**props.onClick**
+
+Type: `Function` required
+
+The function to be called on click of item. The function will receive two parameters. The first is `event` object and the second is the extra data passed either using `props.data` or configure from `ContextMenuLayer`.
+
+**props.preventClose**
+
+Type: `Boolean` optional
+
+Default: `false`
+
+By default, the context menu is closed as soon as an item is clicked. Set this prop to control this behavior.
+
+### SubMenu(props)
+
+**props.title**
+
+Type: `String` required
+
+The content to be displayed in parent menu.
+
+**props.hoverDelay**
+
+Type: `Number` optional
+
+Default: 500
+
+The time (in ms) after which the menu is to be displayed when hovered upon.
+
+**props.disabled**
+
+Type: `Boolean` optional
+
+Default: `false`
+
+If `true`, disables the menu from opening and adds `.disabled` class.
 
 ## Credits
 This project is based on the ideas from [react-dnd](https://github.com/gaearon/react-dnd) by [Dan Abramov](https://github.com/gaearon).
 
 ## License
 
-[MIT] (./LICENSE.md). Copyright(c) [Vivek Kumar Bansal](http://vkbansal.me/)
+[MIT](./LICENSE.md). Copyright(c) [Vivek Kumar Bansal](http://vkbansal.me/)
 
 [npm-url]: https://npmjs.org/package/react-contextmenu
 [npm-image]: http://img.shields.io/npm/v/react-contextmenu.svg?style=flat-square
