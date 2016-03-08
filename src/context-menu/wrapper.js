@@ -29,7 +29,7 @@ const ContextMenuWrapper = React.createClass({
         };
     },
     componentWillReceiveProps(nextProps) {
-        if (nextProps.isVisible) {
+        if (nextProps.isVisible === nextProps.identifier) {
             const wrapper = window.requestAnimationFrame || setTimeout;
 
             wrapper(() => this.setState(this.getMenuPosition(nextProps.x, nextProps.y)));
