@@ -1,7 +1,7 @@
 "use strict";
 
 import React from "react";
-import monitor from "./monitor";
+import monitor from "../monitor";
 
 import Modal from "react-overlays/lib/Modal";
 
@@ -20,8 +20,8 @@ const modalStyle = {
         zIndex: "auto"
     };
 
-const MenuContainer = React.createClass({
-    displayName: "MenuContainer",
+const ContextMenuWrapper = React.createClass({
+    displayName: "ContextMenuWrapper",
     getInitialState() {
         return {
             left: 0,
@@ -78,4 +78,4 @@ const MenuContainer = React.createClass({
     }
 });
 
-export default MenuContainer;
+export default ContextMenuWrapper;

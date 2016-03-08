@@ -1,8 +1,8 @@
 "use strict";
 
 import React from "react";
-import store from "./redux/store";
-import ContextMenuContainer from "./menu-container";
+import store from "../redux/store";
+import ContextWrapper from "./wrapper";
 
 let { PropTypes } = React;
 
@@ -25,7 +25,7 @@ const ContextMenu = React.createClass({
     },
     render() {
         return (
-            <ContextMenuContainer {...this.props} {...this.state}/>
+            <ContextWrapper {...this.props} {...this.state}/>
         );
     }
 });

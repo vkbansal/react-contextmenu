@@ -13,9 +13,9 @@ const menuStyles = {
 const SubMenu = React.createClass({
     displayName: "SubMenu",
     propTypes: {
+        title: React.PropTypes.string.isRequired,
         disabled: React.PropTypes.bool,
-        hoverDelay: React.PropTypes.number,
-        title: React.PropTypes.string
+        hoverDelay: React.PropTypes.number
     },
     getDefaultProps() {
         return {
