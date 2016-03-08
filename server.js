@@ -10,12 +10,6 @@ config.module.loaders[0].query = {presets: ["react-hmre"]};
 config.entry.unshift("webpack-hot-middleware/client");
 
 config.plugins = [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-        compressor: {
-            warnings: false
-        }
-    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
 ];
