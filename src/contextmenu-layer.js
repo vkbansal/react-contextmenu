@@ -1,7 +1,6 @@
 "use strict";
 
 import React from "react";
-import ReactDOM from "react-dom";
 import invariant from "invariant";
 import _isObject from "lodash.isobject";
 
@@ -34,45 +33,35 @@ export default function(identifier, configure) {
 
         return React.createClass({
             displayName: `${displayName}ContextMenuLayer`,
-            componentDidMount() {
-                document
-                    .addEventListener("contextmenu", this.handleContextClick);
-            },
-            componentWillUnmount() {
-                document
-                    .removeEventListener("contextmenu", this.handleContextClick);
-            },
             handleContextClick(event) {
-                let target = event.target,
-                    domNode = ReactDOM.findDOMNode(this);
+                let currentItem = typeof configure === "function"
+                    ? configure(this.props)
+                    : {};
 
-                if (target === domNode || domNode.contains(target)) {
-                    let currentItem = typeof configure === "function"
-                        ? configure(this.props)
-                        : {};
+                invariant(
+                    _isObject(currentItem),
+                    "Expected configure to return an object. See %s",
+                    displayName
+                );
 
-                    invariant(
-                        _isObject(currentItem),
-                        "Expected configure to return an object. See %s",
-                        displayName
-                    );
+                event.preventDefault();
 
-                    event.preventDefault();
-
-                    store.dispatch({
-                        type: "SET_PARAMS",
-                        data: {
-                            x: event.clientX,
-                            y: event.clientY,
-                            currentItem,
-                            isVisible: typeof identifier === "function" ? identifier(this.props) : identifier
-                        }
-                    });
-                }
+                store.dispatch({
+                    type: "SET_PARAMS",
+                    data: {
+                        x: event.clientX,
+                        y: event.clientY,
+                        currentItem,
+                        isVisible: typeof identifier === "function" ? identifier(this.props) : identifier
+                    }
+                });
             },
             render() {
                 return (
-                    <Component {...this.props} identifier={identifier}/>
+                    <div className="react-context-menu-wrapper"
+                        onContextMenu={this.handleContextClick}>
+                        <Component {...this.props}/>
+                    </div>
                 );
             }
         });
