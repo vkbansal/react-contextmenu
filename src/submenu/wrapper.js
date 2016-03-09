@@ -42,7 +42,7 @@ const SubMenuWrapper = React.createClass({
         if (rect.right > innerWidth) {
             position.left = true;
         } else {
-            position.right = true
+            position.right = true;
         }
 
         return { position };
