@@ -9,6 +9,10 @@ All the changes can be found below. Order used:
 - Fixed
 - Security
 
+## v1.1.1
+
+### Fixed
+- Fixed `getDefaultProps` in `<MenuItem/>`.
 
 ## v1.1.0
 
