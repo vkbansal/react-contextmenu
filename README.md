@@ -1,4 +1,5 @@
 [![NPM version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
 [![Dependency Status][deps-image]][deps-url]
 [![Dev Dependency Status][dev-deps-image]][dev-deps-url]
 [![Code Climate][climate-image]][climate-url]
@@ -82,7 +83,7 @@ The styling can be apllied to using following classes.
 - `react-context-menu-wrapper` : applied to wrapper around elements in `ContextMenuLayer`.
 - `submenu` : applied to items that are submenus.
 - `disabled` : applied to links (title in submenu) when they are disabled.
-- `active` : applied to title in submenu when submenu is open. 
+- `active` : applied to title in submenu when submenu is open.
 
 See [react-context-menu.css](./examples/react-context-menu.css) for example.
 
@@ -198,6 +199,9 @@ This project is based on the ideas from [react-dnd](https://github.com/gaearon/r
 
 [npm-url]: https://npmjs.org/package/react-contextmenu
 [npm-image]: http://img.shields.io/npm/v/react-contextmenu.svg?style=flat-square
+
+[travis-url]: https://travis-ci.org/vkbansal/react-contextmenu
+[travis-image]: http://img.shields.io/travis/vkbansal/react-contextmenu/master.svg?style=flat-square
 
 [deps-url]: https://david-dm.org/vkbansal/react-contextmenu
 [deps-image]: https://img.shields.io/david/vkbansal/react-contextmenu.svg?style=flat-square
