@@ -1,5 +1,4 @@
 examples/
-dist/
 test/
 *.config.js
 server.js
