@@ -33,9 +33,11 @@ var MenuItem = _react2.default.createClass({
         disabled: PropTypes.bool,
         preventClose: PropTypes.bool
     },
-    defaultProps: {
-        disabled: false,
-        data: {}
+    getDefaultProps: function getDefaultProps() {
+        return {
+            disabled: false,
+            data: {}
+        };
     },
     handleClick: function handleClick(event) {
         var _props = this.props;
