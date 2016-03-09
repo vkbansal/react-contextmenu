@@ -15,9 +15,11 @@ const MenuItem = React.createClass({
         disabled: PropTypes.bool,
         preventClose: PropTypes.bool
     },
-    defaultProps: {
-        disabled: false,
-        data: {}
+    getDefaultProps() {
+        return {
+            disabled: false,
+            data: {}
+        };
     },
     handleClick(event) {
         let { disabled, onClick, data, preventClose } = this.props;
