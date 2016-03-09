@@ -6,6 +6,7 @@ import sinon from "sinon";
 import { expect } from "chai";
 
 import MenuItem from "../src/menu-item";
+import monitor from "../src/monitor";
 
 describe("<MenuItem/>", () => {
     it("should have `react-context-menu-item` class", () => {
@@ -54,5 +55,15 @@ describe("<MenuItem/>", () => {
 
         wrapper.find("a").simulate("click");
         expect(onClick.getCall(0).args[1]).to.equal(data);
+    });
+
+    it("`preventClose` should not close the menu", () => {
+        const spy = sinon.spy(monitor, "hideMenu"),
+            wrapper = mount(<MenuItem onClick={() => ({})} preventClose/>);
+
+        wrapper.find("a").simulate("click");
+        expect(spy.called).to.equal(false);
+        expect(spy.callCount).to.equal(0);
+        monitor.hideMenu.restore();
     });
 });
