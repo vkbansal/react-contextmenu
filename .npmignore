@@ -1,4 +1,7 @@
 examples/
 dist/
-CHANGELOG.md
+test/
 *.config.js
+server.js
+.editorconfig
+.eslintrc.yml
