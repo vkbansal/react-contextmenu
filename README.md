@@ -96,6 +96,7 @@ The module exports the following:
 - `ContextMenuLayer`
 - `MenuItem`
 - `SubMenu`
+- `monitor`
 
 
 ### ContextMenu(props)
@@ -134,7 +135,7 @@ A simple function which takes props as input and returns the data to be passed t
 
 Type: React Component
 
-A Simple Wrapper around menu items.
+A Simple Component for menu items.
 
 **props.data**
 
@@ -168,6 +169,10 @@ By default, the context menu is closed as soon as an item is clicked. Set this p
 
 ### SubMenu(props)
 
+Type: React Component
+
+A component for using submenus within the contextmenu.
+
 **props.title**
 
 Type: `String` required
@@ -189,6 +194,34 @@ Type: `Boolean` optional
 Default: `false`
 
 If `true`, disables the menu from opening and adds `.disabled` class.
+
+### monitor
+
+Type: `Object`
+
+A utility object.
+
+**monitor.getItem()**
+
+Type: `Function`
+
+Returns: `Object`
+
+A getter for the data passed to contextmenu, which is set using `configure`.
+
+**monitor.getPosition()**
+
+Type: `Function`
+
+Returns: `Object`
+
+Gives the position of the current or last active contextmenu.
+
+**nonitor.hideMenu()**
+
+Type: `Function`
+
+A utility function to hide the currently active contextmenu programmatically.
 
 ## Credits
 This project is based on the ideas from [react-dnd](https://github.com/gaearon/react-dnd) by [Dan Abramov](https://github.com/gaearon).
