@@ -1,20 +1,25 @@
-require('babel-register')();
+"use strict";
 
-var jsdom = require('jsdom').jsdom;
+require("babel-register")();
 
-var exposedProperties = ['window', 'navigator', 'document'];
 
-global.document = jsdom('');
+let jsdom = require("jsdom").jsdom,
+    chai = require("chai"),
+    chaiEnzyme = require("chai-enzyme");
+
+chai.use(chaiEnzyme());
+
+let exposedProperties = ["window", "navigator", "document"];
+
+global.document = jsdom("");
 global.window = document.defaultView;
 Object.keys(document.defaultView).forEach((property) => {
-  if (typeof global[property] === 'undefined') {
-    exposedProperties.push(property);
-    global[property] = document.defaultView[property];
-  }
+    if (typeof global[property] === "undefined") {
+        exposedProperties.push(property);
+        global[property] = document.defaultView[property];
+    }
 });
 
-global.navigator = {
-  userAgent: 'node.js'
-};
+global.navigator = { userAgent: "node.js" };
 
-documentRef = document;
+global.documentRef = document;

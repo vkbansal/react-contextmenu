@@ -12,19 +12,21 @@ describe("<MenuItem/>", () => {
     it("should have `react-context-menu-item` class", () => {
         const wrapper = shallow(<MenuItem onClick={() => ({})}/>);
 
-        expect(wrapper.hasClass("react-context-menu-item")).to.equal(true);
+        expect(wrapper).to.have.className("react-context-menu-item");
     });
 
     it("<a/> should have `react-context-menu-link` class", () => {
         const wrapper = shallow(<MenuItem onClick={() => ({})}/>);
 
-        expect(wrapper.find("a").hasClass("react-context-menu-link")).to.equal(true);
+        expect(wrapper.find("a")).to.have.className("react-context-menu-link");
+        expect(wrapper.find("a")).to.not.have.className("disabled");
     });
 
     it("<a/> should have `disabled` class when disabled", () => {
         const wrapper = shallow(<MenuItem onClick={() => ({})} disabled/>);
 
-        expect(wrapper.find("a").hasClass("disabled")).to.equal(true);
+        expect(wrapper.find("a")).to.have.className("react-context-menu-link");
+        expect(wrapper.find("a")).to.have.className("disabled");
     });
 
     it("click should be triggered", () => {
