@@ -4,6 +4,9 @@ import React from "react";
 
 const SubMenuWrapper = React.createClass({
     displayName: "SubMenuWrapper",
+    propTypes: {
+        visible: React.PropTypes.bool
+    },
     getInitialState() {
         return {
             position: {
