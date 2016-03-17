@@ -9,6 +9,9 @@ All the changes can be found below. Order used:
 - Fixed
 - Security
 
+## v1.2.0
+- Added `connect` helper to render different items based on which component was (right) clicked.
+
 ## v1.1.1
 
 ### Fixed

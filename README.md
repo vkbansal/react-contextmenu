@@ -97,6 +97,7 @@ The module exports the following:
 - `MenuItem`
 - `SubMenu`
 - `monitor`
+- `connect`
 
 
 ### ContextMenu(props)
@@ -222,6 +223,20 @@ Gives the position of the current or last active contextmenu.
 Type: `Function`
 
 A utility function to hide the currently active contextmenu programmatically.
+
+### connect(Menu)
+
+Type: `Function`
+
+Returns: React Component
+
+A simple wrapper to be used when different items must be rendered based on which component was (right) clicked.
+
+**Menu**
+
+Type: React Component
+
+The `Menu` component that needs to be updated depending on the current selection. The component will receive object from `monitor.getItem()` in its props with `item` as key. All the other props will be simply passed through.
 
 ## Credits
 This project is based on the ideas from [react-dnd](https://github.com/gaearon/react-dnd) by [Dan Abramov](https://github.com/gaearon).
