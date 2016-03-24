@@ -238,6 +238,15 @@ Type: React Component
 
 The `Menu` component that needs to be updated depending on the current selection. The component will receive object from `monitor.getItem()` in its props with `item` as key. All the other props will be simply passed through.
 
+## Customization
+The higher order component created using `ContextMenuLayer` can accept the following props.
+
+**renderTag**
+
+Type: React Element (optional)
+
+The element inside which the Component must be wrapped. By default `div` is used. But this prop can used to customize it.
+
 ## Credits
 This project is based on the ideas from [react-dnd](https://github.com/gaearon/react-dnd) by [Dan Abramov](https://github.com/gaearon).
 

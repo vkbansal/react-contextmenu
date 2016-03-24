@@ -6,8 +6,6 @@ import _isObject from "lodash.isobject";
 
 import store from "./redux/store";
 
-let { Component } = React;
-
 export default function(identifier, configure) {
     return function(Component) {
         const displayName = Component.displayName
@@ -33,6 +31,11 @@ export default function(identifier, configure) {
 
         return React.createClass({
             displayName: `${displayName}ContextMenuLayer`,
+            getDefaultProps() {
+                return {
+                    renderTag: "div"
+                };
+            },
             handleContextClick(event) {
                 let currentItem = typeof configure === "function"
                     ? configure(this.props)
@@ -57,12 +60,10 @@ export default function(identifier, configure) {
                 });
             },
             render() {
-                return (
-                    <div className="react-context-menu-wrapper"
-                        onContextMenu={this.handleContextClick}>
-                        <Component {...this.props}/>
-                    </div>
-                );
+                return React.createElement(this.props.renderTag, {
+                    className: "react-context-menu-wrapper",
+                    onContextMenu: this.handleContextClick
+                }, React.createElement(Component, this.props));
             }
         });
     };
