@@ -15,10 +15,10 @@ npm run examples && cp ./bundle.js ./public/bundle.js
 cd public
 git init
 
-git config user.name "Travis CI"
-git config user.name "vkb0310@gmail.com"
+git config --global user.name "Travis CI"
+git config --global user.name "vkb0310@gmail.com"
 
 git add .
 git commit -m "Deploy to gh-pages"
 
-git push --force --quiet "https://${GITHUB_TOKEN}@$github.com/${GITHUB_REPO}.git" master:gh-pages > /dev/null 2>&1
+git push --force --quiet "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git" master:gh-pages > /dev/null 2>&1

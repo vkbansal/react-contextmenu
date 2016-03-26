@@ -3,3 +3,4 @@ dist/
 modules/
 bundle.js
 bundle.js.map
+public/
