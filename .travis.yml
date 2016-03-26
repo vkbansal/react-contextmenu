@@ -4,3 +4,9 @@ node_js:
   - 5
 after_success:
   - npm run coveralls
+script:
+    - bash ./scripts/deploy.sh
+env:
+  global:
+    - GITHUB_REPO: vkbansal/react-contextmenu
+    - secure:  "NOZfHbc/3/IdxyCu0veVUfN+Qjx4E3WsdafQdrmczXtU5n7ybtI00rmgXez8B/xOpGFc1hIkNle4IDsD42WoziQU7dOYLJ68K0VVglPeIGzepL2t8XLKpMDzf3aYUwRQvbwfi4CaS8Y+oo9t8d7vkQugGTqAvUivAJoc+TuZFiedqTdD0VuVNvuuSj73LQJjnwjwlaF+XyFONuAX7I0FtF55kjib0PoSvU1EUAmxCbNeFco7ZlKfv0XQ4LWtvn4Dt2btBZULdJjoUZUD3gYWMHlHByzjAtwX9GgdW89n976PVRFUHo0/6KcSPdOwZ+xCpOE5j9AoeJlFQjDxDS872KKSthlG1eDH3eh2xyZNM5E3VRe25ChFe9eQkEw89DvDQQeJQTTfpCEFYJ36UtRTRAeeTnoD1rvBCWtyUtwnkQT/glDm7GBPOSwyCCuqgZiukwcJBD+3mGsy8hTjErud3MxlgBzSHTDHPEfrwv4/rXy6xnjmf2xyyY9doERWFwHlI/lSvsDTtNmskBysCNGouuWdA1MF2GgdVYii+uJ4cgaqGoumuBD77ekYpZ2ik8S8ecrUROQiNwUN9DuBh8cXhoHJ6dbAYVH7MmvtLGmFd90MQ4F4UAwqEe/unjfH6KWwU4e6Wzu8Nnm8HYh1UL1ZNXVuyA8igjmQaS5pkM/R7no="
