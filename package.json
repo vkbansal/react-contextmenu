@@ -1,6 +1,6 @@
 {
   "name": "react-contextmenu",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Context Menu implemented in React",
   "main": "modules/index.js",
   "keywords": [
