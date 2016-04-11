@@ -9,6 +9,12 @@ All the changes can be found below. Order used:
 - Fixed
 - Security
 
+## v1.4.0
+
+### Added
+- Added examples for custom wrappers using `renderTag`.
+- Added support for `react v15.0`.
+
 ## v1.3.0
 
 ### Added
