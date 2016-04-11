@@ -218,7 +218,7 @@ Returns: `Object`
 
 Gives the position of the current or last active contextmenu.
 
-**nonitor.hideMenu()**
+**monitor.hideMenu()**
 
 Type: `Function`
 
@@ -246,6 +246,29 @@ The higher order component created using `ContextMenuLayer` can accept the follo
 Type: React Element (optional)
 
 The element inside which the Component must be wrapped. By default `div` is used. But this prop can used to customize it.
+
+```js
+// following examples shows usage of `tr` instead of `div`
+
+import { ContextMenuLayer } from "react-contextmenu";
+import MenuTarget from "./menu-target";
+
+const Item = ContextMenuLayer("identifier")(MenuTarget);
+
+const App = React.createClass({
+    render() {
+        return (
+            <table>
+                <tbody>
+                    {this.props.items.map((item, i) => (
+                        <Item renderTag="tr" key={i} item={item}/>
+                    ))}
+                </tbody>
+            </table>
+        );
+    }
+});
+```
 
 ## Credits
 This project is based on the ideas from [react-dnd](https://github.com/gaearon/react-dnd) by [Dan Abramov](https://github.com/gaearon).
