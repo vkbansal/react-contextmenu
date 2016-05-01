@@ -34,7 +34,8 @@ export default function(identifier, configure) {
             displayName: `${displayName}ContextMenuLayer`,
             getDefaultProps() {
                 return {
-                    renderTag: "div"
+                    renderTag: "div",
+                    attributes: {}
                 };
             },
             handleContextClick(event) {
@@ -62,11 +63,8 @@ export default function(identifier, configure) {
             },
             render: function() {
 
-                var attributes = this.props.attributes;
-                if(attributes == undefined) attributes = {};
-
-                var attributeArray = tagAttributes.toAttributeArray(attributes);
-                var classNames = tagAttributes.getClassNames(attributes);
+                var attributeArray = tagAttributes.toAttributeArray(this.props.attributes);
+                var classNames = tagAttributes.getClassNames(this.props.attributes);
 
                 //Make sure to add the react-context-menu-wrapper information
                 attributeArray["className"] = "react-context-menu-wrapper" + classNames;

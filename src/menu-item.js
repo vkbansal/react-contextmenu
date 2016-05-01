@@ -20,7 +20,8 @@ const MenuItem = React.createClass({
     getDefaultProps() {
         return {
             disabled: false,
-            data: {}
+            data: {},
+            attributes: {}
         };
     },
     handleClick(event) {
@@ -48,11 +49,7 @@ const MenuItem = React.createClass({
             disabled
         });
 
-        var attributes = this.props.attributes;
-        if(attributes == undefined) attributes = {};
-
-        var attributeArray = tagAttributes.toAttributeArray(attributes);
-        var menuItemClassNames = tagAttributes.getClassNames(attributes);
+        var menuItemClassNames = tagAttributes.getClassNames(this.props.attributes);
 
         //Make sure to add the react-context-menu-item information
         menuItemClassNames = "react-context-menu-item" + menuItemClassNames;
