@@ -5,6 +5,7 @@ import invariant from "invariant";
 import _isObject from "lodash.isobject";
 
 import store from "./redux/store";
+import tagAttributes from "./tag-attributes.js";
 
 export default function(identifier, configure) {
     return function(Component) {
@@ -59,35 +60,13 @@ export default function(identifier, configure) {
                     }
                 });
             },
-            toAttributeArray: function(attributes){
-
-                var attributeArray = [];
-                for(var key in attributes){
-                    if(attributes.hasOwnProperty(key)){
-                        attributeArray[key] = attributes[key];
-                    }
-                }
-                return attributeArray;
-            },
-            getClassNames: function(attributes){
-
-                var classNames = "";
-                for(var key in attributes){
-                    if(attributes.hasOwnProperty(key)){
-                        if(key == "className"){
-                            classNames = classNames + " " + attributes[key];
-                        }
-                    }
-                }
-                return classNames;
-            },
             render: function() {
 
                 var attributes = this.props.attributes;
                 if(attributes == undefined) attributes = {};
 
-                var attributeArray = this.toAttributeArray(attributes);
-                var classNames = this.getClassNames(attributes);
+                var attributeArray = tagAttributes.toAttributeArray(attributes);
+                var classNames = tagAttributes.getClassNames(attributes);
 
                 //Make sure to add the react-context-menu-wrapper information
                 attributeArray["className"] = "react-context-menu-wrapper" + classNames;
