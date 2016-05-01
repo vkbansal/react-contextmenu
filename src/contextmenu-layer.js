@@ -63,14 +63,14 @@ export default function(identifier, configure) {
             },
             render: function() {
 
-                var attributeArray = tagAttributes.toAttributeArray(this.props.attributes);
+                var attributes = this.props.attributes;
                 var classNames = tagAttributes.getClassNames(this.props.attributes);
 
                 //Make sure to add the react-context-menu-wrapper information
-                attributeArray["className"] = "react-context-menu-wrapper" + classNames;
-                attributeArray["onContextMenu"] = this.handleContextClick;
+                attributes["className"] = "react-context-menu-wrapper" + classNames;
+                attributes["onContextMenu"] = this.handleContextClick;
 
-                return React.createElement(this.props.renderTag, attributeArray, React.createElement(Component, this.props));
+                return React.createElement(this.props.renderTag, attributes, React.createElement(Component, this.props));
             }
         });
     };
