@@ -59,11 +59,41 @@ export default function(identifier, configure) {
                     }
                 });
             },
-            render() {
-                return React.createElement(this.props.renderTag, {
-                    className: "react-context-menu-wrapper",
-                    onContextMenu: this.handleContextClick
-                }, React.createElement(Component, this.props));
+            toAttributeArray: function(attributes){
+
+                var attributeArray = [];
+                for(var key in attributes){
+                    if(attributes.hasOwnProperty(key)){
+                        attributeArray[key] = attributes[key];
+                    }
+                }
+                return attributeArray;
+            },
+            getClassNames: function(attributes){
+
+                var classNames = "";
+                for(var key in attributes){
+                    if(attributes.hasOwnProperty(key)){
+                        if(key == "className"){
+                            classNames = classNames + " " + attributes[key];
+                        }
+                    }
+                }
+                return classNames;
+            },
+            render: function() {
+
+                var attributes = this.props.attributes;
+                if(attributes == undefined) attributes = {};
+
+                var attributeArray = this.toAttributeArray(attributes);
+                var classNames = this.getClassNames(attributes);
+
+                //Make sure to add the react-context-menu-wrapper information
+                attributeArray["className"] = "react-context-menu-wrapper" + classNames;
+                attributeArray["onContextMenu"] = this.handleContextClick;
+
+                return React.createElement(this.props.renderTag, attributeArray, React.createElement(Component, this.props));
             }
         });
     };
