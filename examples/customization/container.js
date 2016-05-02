@@ -24,7 +24,8 @@ const Container = React.createClass({
             <table className="table table-bordered">
                 <tbody>
                 {targets.map((item, i) => (
-                    <Target renderTag="tr" name={item.name} key={i}/>
+                    <Target renderTag="tr" name={item.name} key={i}
+                        attributes={{className: "my-custom-row-class"}}/>
                 ))}
                 </tbody>
             </table>

@@ -168,6 +168,12 @@ Default: `false`
 
 By default, the context menu is closed as soon as an item is clicked. Set this prop to control this behavior.
 
+**props.attributes**
+
+Type: `Object` optional
+
+The attributes will be passed directly passed to the root element of `MenuItem`. Use this to customize it like adding custom classes, etc.
+
 ### SubMenu(props)
 
 Type: React Component
@@ -246,6 +252,12 @@ The higher order component created using `ContextMenuLayer` can accept the follo
 Type: React Element (optional)
 
 The element inside which the Component must be wrapped. By default `div` is used. But this prop can used to customize it.
+
+**attributes**
+
+Type: `Object` optional
+
+The attributes will be passed directly passed to the root element of component. Use this to customize it like adding custom classes, adding `colspan` etc.
 
 ```js
 // following examples shows usage of `tr` instead of `div`

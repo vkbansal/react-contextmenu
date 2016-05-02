@@ -7,7 +7,7 @@ import SimpleMenu from "./simple-menu";
 import MultipleTargets from "./multiple-targets";
 import MultipleMenus from "./multiple-menus";
 import SubMenus from "./submenus";
-import CustomWrappers from "./custom-wrappers";
+import Customization from "./customization";
 
 const App = React.createClass({
     displayName: "App",
@@ -32,7 +32,7 @@ const App = React.createClass({
                             <Link to="/submenus">Sub Menus</Link>
                         </li>
                         <li>
-                            <Link to="/custom-wrappers">Custom Wrappers</Link>
+                            <Link to="/customization">Customization</Link>
                         </li>
                     </ul>
                 </div>
@@ -52,7 +52,7 @@ const Routes = (
             <Route path="multiple-targets" component={MultipleTargets}/>
             <Route path="multiple-menus" component={MultipleMenus}/>
             <Route path="submenus" component={SubMenus}/>
-            <Route path="custom-wrappers" component={CustomWrappers}/>
+            <Route path="customization" component={Customization}/>
         </Route>
     </Router>
 );

@@ -15,10 +15,20 @@ const Menu = React.createClass({
     render() {
         let { name } = this.props.item;
 
+        const attributes = {
+            className: "my-custom-menu-item-class"
+        };
+
         return (
             <ContextMenu identifier={MenuTypes.multi}>
-                <MenuItem onClick={this.handleClick} data={{item: "item 1"}}>Menu Item 1</MenuItem>
-                <MenuItem onClick={this.handleClick} data={{item: "item 2"}}>Menu Item 2</MenuItem>
+                <MenuItem onClick={this.handleClick} attributes={attributes}
+                    data={{item: "item 1"}}>
+                    Menu Item 1
+                </MenuItem>
+                <MenuItem onClick={this.handleClick} attributes={attributes}
+                    data={{item: "item 2"}}>
+                    Menu Item 2
+                </MenuItem>
                 <MenuItem onClick={this.handleEat}>Eat {name}</MenuItem>
             </ContextMenu>
         );

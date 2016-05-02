@@ -9,6 +9,9 @@ All the changes can be found below. Order used:
 - Fixed
 - Security
 
+## v1.5.0
+- Added `attributes` prop to `MenuItem` and `ContextMenuLayer` for further customization.
+
 ## v1.4.0
 
 ### Added

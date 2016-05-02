@@ -5,8 +5,6 @@ import classnames from "classnames";
 import assign from "object-assign";
 import monitor from "./monitor";
 
-import tagAttributes from "./tag-attributes.js";
-
 let { PropTypes } = React;
 
 const MenuItem = React.createClass({
@@ -42,20 +40,17 @@ const MenuItem = React.createClass({
         monitor.hideMenu();
     },
     render() {
-        let { disabled, children } = this.props;
+        let { disabled, children, attributes: { className = "", ...props } } = this.props,
+            menuItemClassNames = `react-context-menu-item ${className}`;
 
         const classes = classnames({
             "react-context-menu-link": true,
             disabled
         });
 
-        var menuItemClassNames = tagAttributes.getClassNames(this.props.attributes);
-
-        //Make sure to add the react-context-menu-item information
-        menuItemClassNames = "react-context-menu-item" + menuItemClassNames;
 
         return (
-            <div className={menuItemClassNames}>
+            <div className={menuItemClassNames} {...props}>
                 <a href="#" className={classes} onClick={this.handleClick}>
                     {children}
                 </a>
