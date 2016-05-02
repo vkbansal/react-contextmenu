@@ -5,6 +5,8 @@ import classnames from "classnames";
 import assign from "object-assign";
 import monitor from "./monitor";
 
+import tagAttributes from "./tag-attributes.js";
+
 let { PropTypes } = React;
 
 const MenuItem = React.createClass({
@@ -18,7 +20,8 @@ const MenuItem = React.createClass({
     getDefaultProps() {
         return {
             disabled: false,
-            data: {}
+            data: {},
+            attributes: {}
         };
     },
     handleClick(event) {
@@ -46,8 +49,13 @@ const MenuItem = React.createClass({
             disabled
         });
 
+        var menuItemClassNames = tagAttributes.getClassNames(this.props.attributes);
+
+        //Make sure to add the react-context-menu-item information
+        menuItemClassNames = "react-context-menu-item" + menuItemClassNames;
+
         return (
-            <div className="react-context-menu-item">
+            <div className={menuItemClassNames}>
                 <a href="#" className={classes} onClick={this.handleClick}>
                     {children}
                 </a>
