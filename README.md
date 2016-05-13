@@ -41,11 +41,11 @@ const MyContextMenu = React.createClass({
             <MenuItem data={"some_data"} onClick={this.handleClick}>
                 ContextMenu Item 1
             </MenuItem>
-            <MenuItem data={"some_data"} onClick={this.handleClickClick}>
+            <MenuItem data={"some_data"} onClick={this.handleClick}>
                 ContextMenu Item 2
             </MenuItem>
             <MenuItem divider />
-            <MenuItem data={"some_data"} onClick={this.handleClickClick}>
+            <MenuItem data={"some_data"} onClick={this.handleClick}>
                 ContextMenu Item 3
             </MenuItem>
         </ContextMenu>
