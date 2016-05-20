@@ -47,6 +47,11 @@ const SubMenu = React.createClass({
 
         this.closetimer = setTimeout(() => this.setState({visible: false}), this.props.hoverDelay);
     },
+    componentWillUnmount() {
+        if (this.opentimer) clearTimeout(this.opentimer);
+
+        if (this.closetimer) clearTimeout(this.closetimer);
+    },
     render() {
         let { disabled, children, title } = this.props,
             { visible } = this.state;
