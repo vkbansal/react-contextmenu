@@ -32,8 +32,6 @@ export default function(identifier, configure) {
         return React.createClass({
             displayName: `${displayName}ContextMenuLayer`,
             mouseDown: false,
-            mouseX: 0,
-            mouseY: 0,
             getDefaultProps() {
                 return {
                     renderTag: "div",
@@ -83,11 +81,14 @@ export default function(identifier, configure) {
 
                 event.preventDefault();
 
+                xPos = event.clientX || event.originalEvent.touches[0].clientX;
+                yPos = event.clientY || event.originalEvent.touches[0].clientY;
+
                 store.dispatch({
                     type: "SET_PARAMS",
                     data: {
-                        x: event.clientX,
-                        y: event.clientY,
+                        x: xPos,
+                        y: yPos,
                         currentItem,
                         isVisible: typeof identifier === "function" ? identifier(this.props) : identifier
                     }
