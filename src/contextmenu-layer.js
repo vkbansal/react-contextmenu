@@ -61,6 +61,7 @@ export default function(identifier, configure) {
               }, this.props.holdToDisplay);
             },
             handleTouchEnd(event){
+              event.preventDefault();
               this.mouseDown = false;
             },
             handleMouseUp(event){
