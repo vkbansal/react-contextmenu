@@ -19,7 +19,7 @@ const SimpleMenu = React.createClass({
             <div>
                 <h3>Simple Menu</h3>
                 <p>This demo simple usage of a context menu.</p>
-                <Container addLog={this.addLog}/>
+                <Container addLog={this.addLog} holdToDisplay={1000}/>
                 <div>
                 {this.state.logs.map((log, i) => (<p key={i}>{log}</p>))}
                 </div>

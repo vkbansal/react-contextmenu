@@ -31,11 +31,30 @@ export default function(identifier, configure) {
 
         return React.createClass({
             displayName: `${displayName}ContextMenuLayer`,
+            mouseDown: false,
             getDefaultProps() {
                 return {
                     renderTag: "div",
                     attributes: {}
                 };
+            },
+            handleMouseDown(event){
+              console.log(this.props.holdToDisplay)
+              if (this.props.holdToDisplay >= 0 && event.button === 0) {
+                event.persist()
+
+                this.mouseDown = true;
+                setTimeout(() => {
+                  if (this.mouseDown){
+                    this.handleContextClick(event)
+                  }
+                }, this.props.holdToDisplay);
+              }
+            },
+            handleMouseUp(event){
+              if (event.button === 0) {
+                this.mouseDown = false;
+              }
             },
             handleContextClick(event) {
                 let currentItem = typeof configure === "function"
@@ -65,6 +84,8 @@ export default function(identifier, configure) {
 
                 attributes.className = `react-context-menu-wrapper ${className}`;
                 attributes.onContextMenu = this.handleContextClick;
+                attributes.onMouseDown = this.handleMouseDown;
+                attributes.onMouseUp = this.handleMouseUp;
 
                 return React.createElement(
                     renderTag,
