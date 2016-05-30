@@ -52,6 +52,19 @@ export default function(identifier, configure) {
                 }, this.props.holdToDisplay);
               }
             },
+            handleTouchstart(event){
+              event.persist()
+
+              this.mouseDown = true;
+              setTimeout(() => {
+                if (this.mouseDown){
+                  this.handleContextClick(event)
+                }
+              }, this.props.holdToDisplay);
+            },
+            handleTouchEnd(event){
+              this.mouseDown = false;
+            },
             handleMouseUp(event){
               if (event.button === 0) {
                 this.mouseDown = false;
@@ -86,9 +99,9 @@ export default function(identifier, configure) {
                 attributes.className = `react-context-menu-wrapper ${className}`;
                 attributes.onContextMenu = this.handleContextClick;
                 attributes.onMouseDown = this.handleMouseDown;
-                attributes.onTouchStart = this.handleMouseDown;
                 attributes.onMouseUp = this.handleMouseUp;
-                attributes.onTouchEnd = this.handleMouseUp;
+                attributes.onTouchStart = this.handleTouchstart;
+                attributes.onTouchEnd = this.handleTouchEnd;
                 attributes.onMouseOut = this.handleMouseUp;
 
 
