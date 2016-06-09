@@ -1,5 +1,4 @@
 node_modules/
-dist/
 modules/
 bundle.js
 bundle.js.map
