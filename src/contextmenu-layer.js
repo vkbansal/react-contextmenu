@@ -31,11 +31,43 @@ export default function(identifier, configure) {
 
         return React.createClass({
             displayName: `${displayName}ContextMenuLayer`,
+            mouseDown: false,
             getDefaultProps() {
                 return {
                     renderTag: "div",
                     attributes: {}
                 };
+            },
+            handleMouseDown(event){
+              if (this.props.holdToDisplay >= 0 && event.button === 0) {
+                event.persist()
+
+                this.mouseDown = true;
+                setTimeout(() => {
+                  if (this.mouseDown){
+                    this.handleContextClick(event)
+                  }
+                }, this.props.holdToDisplay);
+              }
+            },
+            handleTouchstart(event){
+              event.persist()
+
+              this.mouseDown = true;
+              setTimeout(() => {
+                if (this.mouseDown){
+                  this.handleContextClick(event)
+                }
+              }, this.props.holdToDisplay);
+            },
+            handleTouchEnd(event){
+              event.preventDefault();
+              this.mouseDown = false;
+            },
+            handleMouseUp(event){
+              if (event.button === 0) {
+                this.mouseDown = false;
+              }
             },
             handleContextClick(event) {
                 let currentItem = typeof configure === "function"
@@ -50,11 +82,14 @@ export default function(identifier, configure) {
 
                 event.preventDefault();
 
+                const xPos = event.clientX || event.touches[0].pageX;
+                const yPos = event.clientY || event.touches[0].pageY;
+
                 store.dispatch({
                     type: "SET_PARAMS",
                     data: {
-                        x: event.clientX,
-                        y: event.clientY,
+                        x: xPos,
+                        y: yPos,
                         currentItem,
                         isVisible: typeof identifier === "function" ? identifier(this.props) : identifier
                     }
@@ -65,6 +100,13 @@ export default function(identifier, configure) {
 
                 attributes.className = `react-context-menu-wrapper ${className}`;
                 attributes.onContextMenu = this.handleContextClick;
+                attributes.onMouseDown = this.handleMouseDown;
+                attributes.onMouseUp = this.handleMouseUp;
+                attributes.onTouchStart = this.handleTouchstart;
+                attributes.onTouchEnd = this.handleTouchEnd;
+                attributes.onMouseOut = this.handleMouseUp;
+
+
 
                 return React.createElement(
                     renderTag,
