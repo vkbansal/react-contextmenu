@@ -1,5 +1,4 @@
-"use strict";
-
+/* eslint-disable object-property-newline */
 import store from "./redux/store";
 
 export default {

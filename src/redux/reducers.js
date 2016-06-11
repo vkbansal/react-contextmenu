@@ -1,5 +1,3 @@
-"use strict";
-
 import assign from "object-assign";
 
 const defaultState = {

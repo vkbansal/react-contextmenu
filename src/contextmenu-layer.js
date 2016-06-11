@@ -1,5 +1,3 @@
-"use strict";
-
 import React from "react";
 import invariant from "invariant";
 import _isObject from "lodash.isobject";
@@ -31,43 +29,39 @@ export default function(identifier, configure) {
 
         return React.createClass({
             displayName: `${displayName}ContextMenuLayer`,
-            mouseDown: false,
             getDefaultProps() {
                 return {
                     renderTag: "div",
                     attributes: {}
                 };
             },
-            handleMouseDown(event){
-              if (this.props.holdToDisplay >= 0 && event.button === 0) {
-                event.persist()
+            mouseDown: false,
+            handleMouseDown(event) {
+                if (this.props.holdToDisplay >= 0 && event.button === 0) {
+                    event.persist();
+
+                    this.mouseDown = true;
+                    setTimeout(() => {
+                        if (this.mouseDown) this.handleContextClick(event);
+                    }, this.props.holdToDisplay);
+                }
+            },
+            handleTouchstart(event) {
+                event.persist();
 
                 this.mouseDown = true;
                 setTimeout(() => {
-                  if (this.mouseDown){
-                    this.handleContextClick(event)
-                  }
+                    if (this.mouseDown) this.handleContextClick(event);
                 }, this.props.holdToDisplay);
-              }
             },
-            handleTouchstart(event){
-              event.persist()
-
-              this.mouseDown = true;
-              setTimeout(() => {
-                if (this.mouseDown){
-                  this.handleContextClick(event)
-                }
-              }, this.props.holdToDisplay);
-            },
-            handleTouchEnd(event){
-              event.preventDefault();
-              this.mouseDown = false;
-            },
-            handleMouseUp(event){
-              if (event.button === 0) {
+            handleTouchEnd(event) {
+                event.preventDefault();
                 this.mouseDown = false;
-              }
+            },
+            handleMouseUp(event) {
+                if (event.button === 0) {
+                    this.mouseDown = false;
+                }
             },
             handleContextClick(event) {
                 let currentItem = typeof configure === "function"
@@ -82,8 +76,8 @@ export default function(identifier, configure) {
 
                 event.preventDefault();
 
-                const xPos = event.clientX || event.touches[0].pageX;
-                const yPos = event.clientY || event.touches[0].pageY;
+                const xPos = event.clientX || event.touches[0].pageX,
+                    yPos = event.clientY || event.touches[0].pageY;
 
                 store.dispatch({
                     type: "SET_PARAMS",
@@ -105,8 +99,6 @@ export default function(identifier, configure) {
                 attributes.onTouchStart = this.handleTouchstart;
                 attributes.onTouchEnd = this.handleTouchEnd;
                 attributes.onMouseOut = this.handleMouseUp;
-
-
 
                 return React.createElement(
                     renderTag,

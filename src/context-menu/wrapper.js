@@ -1,5 +1,3 @@
-"use strict";
-
 import React from "react";
 import monitor from "../monitor";
 
@@ -8,7 +6,10 @@ import Modal from "react-overlays/lib/Modal";
 const modalStyle = {
         position: "fixed",
         zIndex: 1040,
-        top: 0, bottom: 0, left: 0, right: 0
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0
     },
     backdropStyle = {
         ...modalStyle,
@@ -20,7 +21,7 @@ const modalStyle = {
         zIndex: "auto"
     };
 
-const ContextMenuWrapper = React.createClass({
+let ContextMenuWrapper = React.createClass({
     displayName: "ContextMenuWrapper",
     getInitialState() {
         return {

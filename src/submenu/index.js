@@ -1,5 +1,3 @@
-"use strict";
-
 import React from "react";
 import classnames from "classnames";
 
@@ -10,7 +8,7 @@ const menuStyles = {
     zIndex: "auto"
 };
 
-const SubMenu = React.createClass({
+let SubMenu = React.createClass({
     displayName: "SubMenu",
     propTypes: {
         title: React.PropTypes.string.isRequired,
@@ -30,6 +28,11 @@ const SubMenu = React.createClass({
     shouldComponentUpdate(nextProps, nextState) {
         return this.state.isVisible !== nextState.visible;
     },
+    componentWillUnmount() {
+        if (this.opentimer) clearTimeout(this.opentimer);
+
+        if (this.closetimer) clearTimeout(this.closetimer);
+    },
     handleClick(e) {
         e.preventDefault();
     },
@@ -46,11 +49,6 @@ const SubMenu = React.createClass({
         if (!this.state.visible) return;
 
         this.closetimer = setTimeout(() => this.setState({visible: false}), this.props.hoverDelay);
-    },
-    componentWillUnmount() {
-        if (this.opentimer) clearTimeout(this.opentimer);
-
-        if (this.closetimer) clearTimeout(this.closetimer);
     },
     render() {
         let { disabled, children, title } = this.props,
