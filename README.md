@@ -20,7 +20,7 @@ You need to setup two things:
 1. The `ContextMenu`
 2. The Component on which the `ContextMenu` must be invoked.
 
-```jsx
+```js
 import React from "react";
 import ReactDOM from "react-dom";
 import { ContextMenu, MenuItem, ContextMenuLayer } from "react-contextmenu";
