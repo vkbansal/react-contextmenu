@@ -9,7 +9,18 @@ All the changes can be found below. Order used:
 - Fixed
 - Security
 
+## v1.6.0
+
+### Added
+- Added touch support (#17)
+
+### Fixed
+- Fix: error while unmounting the component (#16)
+- Fix: when context menu is showing, right click shows the browser's context menu (#14)
+
 ## v1.5.0
+
+### Added
 - Added `attributes` prop to `MenuItem` and `ContextMenuLayer` for further customization.
 
 ## v1.4.0
