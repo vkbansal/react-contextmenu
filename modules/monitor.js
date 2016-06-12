@@ -32,4 +32,4 @@ exports.default = {
             }
         });
     }
-};
+}; /* eslint-disable object-property-newline */

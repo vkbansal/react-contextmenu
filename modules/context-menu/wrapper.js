@@ -23,7 +23,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var modalStyle = {
     position: "fixed",
     zIndex: 1040,
-    top: 0, bottom: 0, left: 0, right: 0
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
 },
     backdropStyle = _extends({}, modalStyle, {
     zIndex: "auto",
@@ -49,12 +52,19 @@ var ContextMenuWrapper = _react2.default.createClass({
             var wrapper = window.requestAnimationFrame || setTimeout;
 
             wrapper(function () {
-                return _this.setState(_this.getMenuPosition(nextProps.x, nextProps.y));
+                _this.setState(_this.getMenuPosition(nextProps.x, nextProps.y));
+                _this.menu.parentNode.addEventListener("contextmenu", _this.hideMenu);
             });
+        } else {
+            this.menu.parentNode.removeEventListener("contextmenu", this.hideMenu);
         }
     },
     shouldComponentUpdate: function shouldComponentUpdate(nextProps) {
         return this.props.isVisible !== nextProps.visible;
+    },
+    hideMenu: function hideMenu(e) {
+        e.preventDefault();
+        _monitor2.default.hideMenu();
     },
     getMenuPosition: function getMenuPosition(x, y) {
         var scrollX = document.documentElement.scrollTop;

@@ -43,6 +43,11 @@ var SubMenu = _react2.default.createClass({
     shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
         return this.state.isVisible !== nextState.visible;
     },
+    componentWillUnmount: function componentWillUnmount() {
+        if (this.opentimer) clearTimeout(this.opentimer);
+
+        if (this.closetimer) clearTimeout(this.closetimer);
+    },
     handleClick: function handleClick(e) {
         e.preventDefault();
     },
@@ -67,11 +72,6 @@ var SubMenu = _react2.default.createClass({
         this.closetimer = setTimeout(function () {
             return _this2.setState({ visible: false });
         }, this.props.hoverDelay);
-    },
-    componentWillUnmount: function componentWillUnmount() {
-        if (this.opentimer) clearTimeout(this.opentimer);
-
-        if (this.closetimer) clearTimeout(this.closetimer);
     },
     render: function render() {
         var _this3 = this;

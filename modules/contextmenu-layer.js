@@ -18,13 +18,14 @@ exports.default = function (identifier, configure) {
 
         return _react2.default.createClass({
             displayName: displayName + "ContextMenuLayer",
-            mouseDown: false,
             getDefaultProps: function getDefaultProps() {
                 return {
                     renderTag: "div",
                     attributes: {}
                 };
             },
+
+            mouseDown: false,
             handleMouseDown: function handleMouseDown(event) {
                 var _this = this;
 
@@ -33,9 +34,7 @@ exports.default = function (identifier, configure) {
 
                     this.mouseDown = true;
                     setTimeout(function () {
-                        if (_this.mouseDown) {
-                            _this.handleContextClick(event);
-                        }
+                        if (_this.mouseDown) _this.handleContextClick(event);
                     }, this.props.holdToDisplay);
                 }
             },
@@ -46,9 +45,7 @@ exports.default = function (identifier, configure) {
 
                 this.mouseDown = true;
                 setTimeout(function () {
-                    if (_this2.mouseDown) {
-                        _this2.handleContextClick(event);
-                    }
+                    if (_this2.mouseDown) _this2.handleContextClick(event);
                 }, this.props.holdToDisplay);
             },
             handleTouchEnd: function handleTouchEnd(event) {
@@ -67,8 +64,8 @@ exports.default = function (identifier, configure) {
 
                 event.preventDefault();
 
-                var xPos = event.clientX || event.touches[0].pageX;
-                var yPos = event.clientY || event.touches[0].pageY;
+                var xPos = event.clientX || event.touches[0].pageX,
+                    yPos = event.clientY || event.touches[0].pageY;
 
                 _store2.default.dispatch({
                     type: "SET_PARAMS",
