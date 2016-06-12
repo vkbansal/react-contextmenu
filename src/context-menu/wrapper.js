@@ -33,11 +33,20 @@ let ContextMenuWrapper = React.createClass({
         if (nextProps.isVisible === nextProps.identifier) {
             const wrapper = window.requestAnimationFrame || setTimeout;
 
-            wrapper(() => this.setState(this.getMenuPosition(nextProps.x, nextProps.y)));
+            wrapper(() => {
+                this.setState(this.getMenuPosition(nextProps.x, nextProps.y));
+                this.menu.parentNode.addEventListener("contextmenu", this.hideMenu);
+            });
+        } else {
+            this.menu.parentNode.removeEventListener("contextmenu", this.hideMenu);
         }
     },
     shouldComponentUpdate(nextProps) {
         return this.props.isVisible !== nextProps.visible;
+    },
+    hideMenu(e) {
+        e.preventDefault();
+        monitor.hideMenu();
     },
     getMenuPosition(x, y) {
         let scrollX = document.documentElement.scrollTop,
