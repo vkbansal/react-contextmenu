@@ -37,8 +37,6 @@ let ContextMenuWrapper = React.createClass({
                 this.setState(this.getMenuPosition(nextProps.x, nextProps.y));
                 this.menu.parentNode.addEventListener("contextmenu", this.hideMenu);
             });
-        } else {
-            this.menu.parentNode.removeEventListener("contextmenu", this.hideMenu);
         }
     },
     shouldComponentUpdate(nextProps) {
@@ -46,6 +44,7 @@ let ContextMenuWrapper = React.createClass({
     },
     hideMenu(e) {
         e.preventDefault();
+        this.menu.parentNode.removeEventListener("contextmenu", this.hideMenu);
         monitor.hideMenu();
     },
     getMenuPosition(x, y) {
