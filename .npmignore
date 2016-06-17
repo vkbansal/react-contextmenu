@@ -1,6 +1,10 @@
 examples/
+reports/
+scripts/
 test/
-*.config.js
-server.js
 .editorconfig
 .eslintrc.yml
+.travis.yml
+ISSUE_TEMPLATE.md
+server.js
+*.config.js
