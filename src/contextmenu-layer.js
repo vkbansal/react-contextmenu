@@ -76,8 +76,8 @@ export default function(identifier, configure) {
 
                 event.preventDefault();
 
-                const xPos = event.clientX || event.touches[0].pageX,
-                    yPos = event.clientY || event.touches[0].pageY;
+                const xPos = event.clientX || (event.touches && event.touches[0].pageX),
+                    yPos = event.clientY || (event.touches && event.touches[0].pageY);
 
                 store.dispatch({
                     type: "SET_PARAMS",
