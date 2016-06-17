@@ -9,6 +9,11 @@ All the changes can be found below. Order used:
 - Fixed
 - Security
 
+## v1.6.1
+
+### Fixed
+- fixed `cannot read parentNode of undefined` (#19)
+
 ## v1.6.0
 
 ### Added
