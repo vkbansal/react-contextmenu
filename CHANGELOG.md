@@ -9,6 +9,11 @@ All the changes can be found below. Order used:
 - Fixed
 - Security
 
+## v1.6.2
+
+### Fixed
+- Context menu doesn't show during test in PhantomJS (#20)
+
 ## v1.6.1
 
 ### Fixed
