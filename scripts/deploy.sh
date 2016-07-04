@@ -1,4 +1,9 @@
 #!/bin/bash
+#
+if ([ "$TRAVIS_BRANCH" != "master" ] && [ -z "$TRAVIS_TAG" ]) ||  [ "$TRAVIS_PULL_REQUEST" == "true" ]
+then
+	exit
+fi
 
 set -o errexit
 
