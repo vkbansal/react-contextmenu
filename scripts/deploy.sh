@@ -21,7 +21,7 @@ cd public
 git init
 
 git config --global user.name "Travis CI"
-git config --global user.name "vkb0310@gmail.com"
+git config --global user.email "vkb0310@gmail.com"
 
 git add .
 git commit -m "Deploy to gh-pages"
