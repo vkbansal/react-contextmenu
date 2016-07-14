@@ -47,12 +47,14 @@ export default function(identifier, configure) {
                 }
             },
             handleTouchstart(event) {
-                event.persist();
+                if (this.props.holdToDisplay >= 0) {
+                    event.persist();
 
-                this.mouseDown = true;
-                setTimeout(() => {
-                    if (this.mouseDown) this.handleContextClick(event);
-                }, this.props.holdToDisplay);
+                    this.mouseDown = true;
+                    setTimeout(() => {
+                        if (this.mouseDown) this.handleContextClick(event);
+                    }, this.props.holdToDisplay);
+                }
             },
             handleTouchEnd(event) {
                 event.preventDefault();
