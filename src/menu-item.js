@@ -26,8 +26,10 @@ const MenuItem = React.createClass({
         event.preventDefault();
 
         if (disabled) return;
+        
+        
 
-        assign(data, monitor.getItem());
+        assign({}, data, monitor.getItem());
 
         if (typeof onClick === "function") {
             onClick(event, data);
