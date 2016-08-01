@@ -28,11 +28,11 @@ const MenuItem = React.createClass({
         if (disabled) return;
         
         
-
-        assign({}, data, monitor.getItem());
+        var newData = {}
+        assign(newData, data, monitor.getItem());
 
         if (typeof onClick === "function") {
-            onClick(event, data);
+            onClick(event, newData);
         }
 
         if (preventClose) return;
