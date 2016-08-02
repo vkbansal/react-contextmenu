@@ -37,18 +37,20 @@ const MyComponent = ContextMenuLayer("some_unique_identifier")(
 //The context-menu to be triggered
 const MyContextMenu = React.createClass({
     render() {
-        <ContextMenu identifier="some_unique_identifier" currentItem={this.currentItem}>
-            <MenuItem data={"some_data"} onClick={this.handleClick}>
-                ContextMenu Item 1
-            </MenuItem>
-            <MenuItem data={"some_data"} onClick={this.handleClick}>
-                ContextMenu Item 2
-            </MenuItem>
-            <MenuItem divider />
-            <MenuItem data={"some_data"} onClick={this.handleClick}>
-                ContextMenu Item 3
-            </MenuItem>
-        </ContextMenu>
+        return (
+            <ContextMenu identifier="some_unique_identifier" currentItem={this.currentItem}>
+                <MenuItem data={"some_data"} onClick={this.handleClick}>
+                    ContextMenu Item 1
+                </MenuItem>
+                <MenuItem data={"some_data"} onClick={this.handleClick}>
+                    ContextMenu Item 2
+                </MenuItem>
+                <MenuItem divider />
+                <MenuItem data={"some_data"} onClick={this.handleClick}>
+                    ContextMenu Item 3
+                </MenuItem>
+            </ContextMenu>
+        );
     },
     handleClick(e, data) {
         console.log(data);
@@ -57,10 +59,12 @@ const MyContextMenu = React.createClass({
 
 const MyApp = React.createClass({
     render() {
-        <div>
-            <MyComponent {...this.props}/>
-            <MyContextMenu />
-        </div>
+        return (
+            <div>
+                <MyComponent {...this.props}/>
+                <MyContextMenu />
+            </div>
+        );
     }
 });
 
