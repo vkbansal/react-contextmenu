@@ -29,7 +29,7 @@ import { ContextMenu, MenuItem, ContextMenuLayer } from "react-contextmenu";
 const MyComponent = ContextMenuLayer("some_unique_identifier")(
     React.createClass({
         render() {
-            <div className="well"></div>
+           return <div className="well"></div>;
         }
     })
 );
