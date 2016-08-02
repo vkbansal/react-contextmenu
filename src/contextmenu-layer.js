@@ -77,6 +77,7 @@ export default function(identifier, configure) {
                 );
 
                 event.preventDefault();
+                event.stopPropagation();
 
                 const xPos = event.clientX || (event.touches && event.touches[0].pageX),
                     yPos = event.clientY || (event.touches && event.touches[0].pageY);
