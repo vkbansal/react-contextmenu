@@ -9,6 +9,15 @@ All the changes can be found below. Order used:
 - Fixed
 - Security
 
+## v1.6.3
+
+### Fixed
+- Correct position of the menu when out of viewport (#31)
+- Fix failing tests
+
+### Changed
+- Update dev packages
+
 ## v1.6.2
 
 ### Fixed
