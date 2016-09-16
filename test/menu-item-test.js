@@ -56,7 +56,7 @@ describe("<MenuItem/>", () => {
             wrapper = mount(<MenuItem onClick={onClick} data={data}/>);
 
         wrapper.find("a").simulate("click");
-        expect(onClick.getCall(0).args[1]).to.equal(data);
+        expect(onClick.getCall(0).args[1]).to.eql(data);
     });
 
     it("`preventClose` should not close the menu", () => {
