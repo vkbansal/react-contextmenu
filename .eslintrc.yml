@@ -1,1 +1,7 @@
-extends: ["vkbansal", "vkbansal/react"]
+parser: babel-eslint
+extends:
+    - vkbansal
+    - vkbansal/react
+rules:
+    no-invalid-this: 0
+    object-property-newline: 0
