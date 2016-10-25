@@ -1,4 +1,4 @@
-.react-context-menu {
+.react-contextmenu {
     min-width: 160px;
     padding: 5px 0;
     margin: 2px 0 0;
@@ -6,14 +6,20 @@
     color: #373a3c;
     text-align: left;
     background-color: #fff;
-    -webkit-background-clip: padding-box;
     background-clip: padding-box;
     border: 1px solid rgba(0,0,0,.15);
     border-radius: .25rem;
     outline: none;
+    opacity: 0;
+    pointer-events: none;
 }
 
-.react-context-menu-link {
+.react-contextmenu.react-contextmenu--visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.react-contextmenu-link {
     display: inline-block;
     width: 100%;
     padding: 3px 20px;
@@ -27,20 +33,25 @@
     border: 0;
 }
 
-.react-context-menu-link.active,
-.react-context-menu-link:hover {
+.react-contextmenu-link.active,
+.react-contextmenu-link:hover {
     color: #fff;
     background-color: #0275d8;
     border-color: #0275d8;
     text-decoration: none;
 }
-.react-context-menu-item.submenu > a {
+.react-contextmenu-item.submenu > a {
     padding-right: 27px;
 }
 
-.react-context-menu-item.submenu > a:after {
+.react-contextmenu-item.submenu > a:after {
     content: "▶";
     display: inline-block;
     position: absolute;
     right: 7px;
+}
+
+.example-multiple-targets::after {
+    content: attr(data-count);
+    display: block;
 }
