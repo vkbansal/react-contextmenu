@@ -1,5 +1,6 @@
 import React, { PropTypes, Component} from 'react';
 import cx from 'classnames';
+import assign from 'object-assign';
 
 import { hideMenu } from './actions';
 import { callIfExists, cssClasses, store } from './helpers';
@@ -26,7 +27,7 @@ export default class MenuItem extends Component {
         callIfExists(
             this.props.onClick,
             event,
-            Object.assign({}, this.props.data, store.data),
+            assign({}, this.props.data, store.data),
             store.target
         );
 

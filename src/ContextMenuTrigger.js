@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
+import assign from 'object-assign';
 
 import { showMenu, hideMenu } from './actions';
 import { callIfExists, cssClasses } from './helpers';
@@ -68,7 +69,7 @@ export default class ContextMenuTrigger extends Component {
 
     render() {
         const { renderTag, attributes, children } = this.props;
-        const newAttrs = Object.assign({}, attributes, {
+        const newAttrs = assign({}, attributes, {
             className: cx(cssClasses.menuWrapper, attributes.className),
             onContextMenu: this.handleContextClick,
             onMouseDown: this.handleMouseDown,
