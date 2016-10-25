@@ -1,6 +1,7 @@
 /* eslint-disable */
 
-var webpack = require("webpack");
+const webpack = require('webpack');
+const path  = require('path');
 
 module.exports = {
     entry: ["./examples/index.js"],
@@ -9,6 +10,9 @@ module.exports = {
         sourceMapFileName: "bundle.js.map",
         path: process.cwd(),
         publicPath: "/"
+    },
+    resolve: {
+        root: path.resolve(__dirname)
     },
     module: {
         loaders: [
