@@ -4,9 +4,11 @@
 [![Dev Dependency Status][dev-deps-image]][dev-deps-url]
 [![Code Climate][climate-image]][climate-url]
 
-# React ContextMenu
+# React Contextmenu
 
 ContextMenu in React.
+
+
 
 ## Installation
 
@@ -14,82 +16,72 @@ ContextMenu in React.
 npm install --save react-contextmenu
 ```
 
+
+
 ## Usage
 
 You need to setup two things:
 1. The `ContextMenu`
-2. The Component on which the `ContextMenu` must be invoked.
+2. The `ContextMenuTrigger` 
 
-```js
+```jsx
 import React from "react";
 import ReactDOM from "react-dom";
-import { ContextMenu, MenuItem, ContextMenuLayer } from "react-contextmenu";
+import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 
-//Component on which context-menu must be triggred
-const MyComponent = ContextMenuLayer("some_unique_identifier")(
-    React.createClass({
-        render() {
-           return <div className="well"></div>;
-        }
-    })
-);
+function handleClick(e, data) {
+  console.log(data);
+}
 
-//The context-menu to be triggered
-const MyContextMenu = React.createClass({
-    render() {
-        return (
-            <ContextMenu identifier="some_unique_identifier" currentItem={this.currentItem}>
-                <MenuItem data={"some_data"} onClick={this.handleClick}>
-                    ContextMenu Item 1
-                </MenuItem>
-                <MenuItem data={"some_data"} onClick={this.handleClick}>
-                    ContextMenu Item 2
-                </MenuItem>
-                <MenuItem divider />
-                <MenuItem data={"some_data"} onClick={this.handleClick}>
-                    ContextMenu Item 3
-                </MenuItem>
-            </ContextMenu>
-        );
-    },
-    handleClick(e, data) {
-        console.log(data);
-    }
-});
+function MyApp() {
+  return (
+    <div>
 
-const MyApp = React.createClass({
-    render() {
-        return (
-            <div>
-                <MyComponent {...this.props}/>
-                <MyContextMenu />
-            </div>
-        );
-    }
-});
+      <ContextMenuTrigger id="some_unique_identifier">
+        <div className="well">Right click to see the menu</div>
+      </ContextMenuTrigger>
+
+      <ContextMenu id="some_unique_identifier">
+        <MenuItem data={"some_data"} onClick={this.handleClick}>
+          ContextMenu Item 1
+        </MenuItem>
+        <MenuItem data={"some_data"} onClick={this.handleClick}>
+          ContextMenu Item 2
+        </MenuItem>
+        <MenuItem divider />
+        <MenuItem data={"some_data"} onClick={this.handleClick}>
+   	      ContextMenu Item 3
+        </MenuItem>
+      </ContextMenu>
+
+    </div>
+  );
+}
 
 ReactDOM.render(<MyApp myProp={12}/>, document.getElementById("main"));
 ```
 
-As you can see that the `ContextMenu` to be showed on any component is dependent on a **unique identifier**.
-
-The `ContextMenuLayer` higher order function takes two parameters. First is the **unique identifier** (same as the one used on the `ContextMenu`) and second is (optional) a function that must return some data that will be passed on to the `onClick` method of the `MenuItem`. This helps in identifying the component on which context click occured.
+As you can see that the `ContextMenu` to be showed on any component is dependent on a **unique id**.
 
 See [examples](./examples) for more in detail usage.
+
+
 
 ##Styling
 
 The styling can be apllied to using following classes.
 
-- `react-context-menu` : applied to menu root element.
-- `react-context-menu-item` : applied to menu items.
-- `react-context-menu-link` : applied to menu links inside items.
-- `react-context-menu-wrapper` : applied to wrapper around elements in `ContextMenuLayer`.
-- `submenu` : applied to items that are submenus.
-- `disabled` : applied to links (title in submenu) when they are disabled.
-- `active` : applied to title in submenu when submenu is open.
+- `react-contextmenu` : applied to menu root element.
+- `react-contextmenu--visible` : applied to menu root element when visible.
+- `react-contextmenu-item` : applied to menu items.
+- `react-contextmenu-link` : applied to menu links inside items.
+- `react-contextmenu-link--disabled` : applied to links (title in submenu) when they are disabled.
+- `react-contextmenu-link--active` : applied to title in submenu when submenu is open.
+- `react-contextmenu-wrapper` : applied to wrapper around elements in `ContextMenuTrigger`.
+- `react-contextmenu-submenu` : applied to items that are submenus.
 
 See [react-context-menu.css](./examples/react-context-menu.css) for example.
+
 
 
 ## API
@@ -97,11 +89,11 @@ See [react-context-menu.css](./examples/react-context-menu.css) for example.
 The module exports the following:
 
 - `ContextMenu`
-- `ContextMenuLayer`
+- `ContextMenuTrigger`
 - `MenuItem`
 - `SubMenu`
-- `monitor`
-- `connect`
+
+
 
 
 ### ContextMenu(props)
@@ -110,31 +102,53 @@ Type: React Component
 
 Base Contextmenu Component.
 
-**props.identifier**
+**props.id**
 
 Type: `String`  required
 
 A unique identifier for the menu.
 
-### ContextMenuLayer(identifier, configure)
 
-Type: `Function`
 
-Return: `Function`
+### ContextMenuTrigger(props)
 
-A Higher Order function that returns a function which in turn can be used to create a React Component on which the context menu must be triggered.
+Type: React Component
 
-**identifier**
+Contextmenu Trigger Component
 
-Type: `String` required
+**props.id**
+
+Type: `String` (required)
 
 The unique identifier of the menu to be called.
 
-**configure**
+**props.attributes**
 
-Type: `Function` optional
+Type: `Object` (optional)
 
-A simple function which takes props as input and returns the data to be passed to contextmenu.
+The attributes will be passed directly passed to the root element of component. Use this to customize it like adding custom classes, adding `colspan` etc.
+
+**props.collect**
+
+Type: `Function` (optional)
+
+A simple function which takes `props` as input and returns the data to be passed to contextmenu.
+
+**props.holdToDisplay**
+
+Type: `Number` (optional)
+
+Default: `1000`
+
+This is applicable only for touch screens. The time (in ms) for which, user has to hold down his/her finger before the menu is shown.
+
+**props.renderTag**
+
+Type: `String` or React Element (optional)
+
+The element inside which the Component must be wrapped. By default `div` is used. But this prop can used to customize it.
+
+
 
 ### MenuItem(props)
 
@@ -142,9 +156,15 @@ Type: React Component
 
 A Simple Component for menu items.
 
+**props.onClick**
+
+Type: `Function` (required)
+
+The function to be called on click of item. The function will receive three parameters. The first is `event` object and the second is the extra data passed either using `props.data` or configure from `ContextMenuTrigger`.
+
 **props.data**
 
-Type: `Object` optional
+Type: `Object` (optional)
 
 Default: `{}`
 
@@ -152,21 +172,15 @@ The extra data (if required) to be passed to `onClick` event.
 
 **props.disabled**
 
-Type: `Boolean` optional
+Type: `Boolean` (optional)
 
 Default: `false`
 
 If `true`, disables the click event and adds `.disabled` class.
 
-**props.onClick**
-
-Type: `Function` required
-
-The function to be called on click of item. The function will receive two parameters. The first is `event` object and the second is the extra data passed either using `props.data` or configure from `ContextMenuLayer`.
-
 **props.preventClose**
 
-Type: `Boolean` optional
+Type: `Boolean` (optional)
 
 Default: `false`
 
@@ -174,9 +188,11 @@ By default, the context menu is closed as soon as an item is clicked. Set this p
 
 **props.attributes**
 
-Type: `Object` optional
+Type: `Object` (optional)
 
 The attributes will be passed directly passed to the root element of `MenuItem`. Use this to customize it like adding custom classes, etc.
+
+
 
 ### SubMenu(props)
 
@@ -186,108 +202,33 @@ A component for using submenus within the contextmenu.
 
 **props.title**
 
-Type: `String` required
+Type: `String` (required)
 
 The content to be displayed in parent menu.
 
-**props.hoverDelay**
-
-Type: `Number` optional
-
-Default: 500
-
-The time (in ms) after which the menu is to be displayed when hovered upon.
-
 **props.disabled**
 
-Type: `Boolean` optional
+Type: `Boolean` (optional)
 
 Default: `false`
 
 If `true`, disables the menu from opening and adds `.disabled` class.
 
-### monitor
+**props.hoverDelay**
 
-Type: `Object`
+Type: `Number` (optional)
 
-A utility object.
+Default: `500`
 
-**monitor.getItem()**
+The time (in ms) after which the menu is to be displayed when hovered upon.
 
-Type: `Function`
 
-Returns: `Object`
 
-A getter for the data passed to contextmenu, which is set using `configure`.
+## Contributors
 
-**monitor.getPosition()**
+[All Contributors](./graphs/contributors)
 
-Type: `Function`
 
-Returns: `Object`
-
-Gives the position of the current or last active contextmenu.
-
-**monitor.hideMenu()**
-
-Type: `Function`
-
-A utility function to hide the currently active contextmenu programmatically.
-
-### connect(Menu)
-
-Type: `Function`
-
-Returns: React Component
-
-A simple wrapper to be used when different items must be rendered based on which component was (right) clicked.
-
-**Menu**
-
-Type: React Component
-
-The `Menu` component that needs to be updated depending on the current selection. The component will receive object from `monitor.getItem()` in its props with `item` as key. All the other props will be simply passed through.
-
-## Customization
-The higher order component created using `ContextMenuLayer` can accept the following props.
-
-**renderTag**
-
-Type: React Element (optional)
-
-The element inside which the Component must be wrapped. By default `div` is used. But this prop can used to customize it.
-
-**attributes**
-
-Type: `Object` optional
-
-The attributes will be passed directly passed to the root element of component. Use this to customize it like adding custom classes, adding `colspan` etc.
-
-```js
-// following examples shows usage of `tr` instead of `div`
-
-import { ContextMenuLayer } from "react-contextmenu";
-import MenuTarget from "./menu-target";
-
-const Item = ContextMenuLayer("identifier")(MenuTarget);
-
-const App = React.createClass({
-    render() {
-        return (
-            <table>
-                <tbody>
-                    {this.props.items.map((item, i) => (
-                        <Item renderTag="tr" key={i} item={item}/>
-                    ))}
-                </tbody>
-            </table>
-        );
-    }
-});
-```
-
-## Credits
-This project is based on the ideas from [react-dnd](https://github.com/gaearon/react-dnd) by [Dan Abramov](https://github.com/gaearon).
 
 ## License
 
