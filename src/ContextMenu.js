@@ -1,10 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import listener from './globalEventListener';
 import { hideMenu } from './actions';
 import { cssClasses, callIfExists } from './helpers';
 
 export default class ContextMenu extends Component {
+    static propTypes = {
+        id: PropTypes.string.isRequired
+    };
+
     constructor(props) {
         super(props);
 

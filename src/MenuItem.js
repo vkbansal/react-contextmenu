@@ -7,10 +7,11 @@ import { callIfExists, cssClasses, store } from './helpers';
 
 export default class MenuItem extends Component {
     static propTypes = {
-        onClick: PropTypes.func.isRequired,
+        attributes: PropTypes.object,
         data: PropTypes.object,
         disabled: PropTypes.bool,
-        preventClose: PropTypes.bool
+        preventClose: PropTypes.bool,
+        onClick: PropTypes.func
     };
 
     static defaultProps = {

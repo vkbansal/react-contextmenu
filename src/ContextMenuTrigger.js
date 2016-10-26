@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import assign from 'object-assign';
 
@@ -6,10 +6,20 @@ import { showMenu, hideMenu } from './actions';
 import { callIfExists, cssClasses } from './helpers';
 
 export default class ContextMenuTrigger extends Component {
-    static defaultProps = {
-        renderTag: 'div',
-        attributes: {}
+    static propTypes = {
+        id: PropTypes.string.isRequired,
+        attributes: PropTypes.object,
+        collect: PropTypes.func,
+        holdToDisplay: PropTypes.number,
+        renderTag: PropTypes.node
     };
+
+    static defaultProps = {
+        attributes: {},
+        holdToDisplay: 1000,
+        renderTag: 'div'
+    };
+
 
     mouseDown = false;
 

@@ -1,10 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 
 import { cssClasses, hasOwnProp } from './helpers';
 
 export default class SubMenu extends Component {
+    static propTypes = {
+        title: PropTypes.node.isRequired,
+        disabled: PropTypes.bool,
+        hoverDelay: PropTypes.number
+    };
+
     static defaultProps = {
+        disabled: false,
         hoverDelay: 500
     };
 
