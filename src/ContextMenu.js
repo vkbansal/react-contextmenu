@@ -6,7 +6,9 @@ import { cssClasses, callIfExists } from './helpers';
 
 export default class ContextMenu extends Component {
     static propTypes = {
-        id: PropTypes.string.isRequired
+        id: PropTypes.string.isRequired,
+        onHide: PropTypes.func,
+        onShow: PropTypes.func
     };
 
     constructor(props) {

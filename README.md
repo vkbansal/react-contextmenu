@@ -108,6 +108,18 @@ Type: `String`  required
 
 A unique identifier for the menu.
 
+**props.onHide**
+
+Type: `Function` (optional)
+
+Callback called when the menu is hidden.
+
+**props.onShow**
+
+Type: `Function` (optional)
+
+Callback called when the menu is shown.
+
 
 
 ### ContextMenuTrigger(props)
