@@ -9,14 +9,46 @@ All the changes can be found below. Order used:
 - Fixed
 - Security
 
-## v1.6.3
 
-### Fixed
-- Correct position of the menu when out of viewport (#31)
-- Fix failing tests
+
+## v2.0.0-alpha.1
+
+This is a ground up rewrite with much simpler API.
+
+### Added
+
+-   Added the ability to access the element on which the right-click occured in `onClick` handler of `MenuItem`.
+-   Hide contextmenu on window resize.
+-   Right-click when menu is already open, opens the menu at new location.
+-   Added support for `onShow` and `onHide` callbacks on `ContextMenu`.
+-   Added class `react-contextmenu--visible` for when menu root element is visible
 
 ### Changed
-- Update dev packages
+
+-   `ContextMenuLayer` higher order function is replaced with `ContextMenuTrigger` component.
+-   Changed the classnames:
+    -   `react-context-menu` => `react-contextmenu`
+    -   `react-context-menu-item` => `react-contextmenu-item`
+    -   `react-context-menu-link` => `react-contextmenu-link`
+    -   `react-context-menu-wrapper`  => `react-contextmenu-wrapper`
+    -   `submenu` => `react-contextmenu-submenu`
+    -   `disabled`  => `react-contextmenu-link--disabled`
+    -   `active` => `react-contextmenu-link--active`
+
+### Removed
+
+-   Dropped support for IE < 11
+
+## v1.6.3
+
+### Changed
+
+-   Update dev packages
+
+### Fixed
+
+- Correct position of the menu when out of viewport (#31)
+- Fix failing tests
 
 ## v1.6.2
 
@@ -109,7 +141,7 @@ All the changes can be found below. Order used:
 - Switch to Redux from Flummox.
 
 ### Fixed
- - Menu goes outside when closer to edges.
+- Menu goes outside when closer to edges.
 
 ## v0.3.0
 
@@ -125,11 +157,11 @@ All the changes can be found below. Order used:
 ## v0.2.2
 
 ### Added
- - Add compatibility with IE (Still needed for IE11).
+- Add compatibility with IE (Still needed for IE11).
 
 ### Fixed
- - Better event handling.
- - Only hide the currently visible context menu. On touch screens, the menu closes before the event to click is triggered. This only happened when using multiple contex menus.
+- Better event handling.
+- Only hide the currently visible context menu. On touch screens, the menu closes before the event to click is triggered. This only happened when using multiple contex menus.
 
 ## v0.2.1
 
