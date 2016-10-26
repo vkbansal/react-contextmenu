@@ -246,6 +246,10 @@ The time (in ms) after which the menu is to be displayed when hovered upon.
 
 
 
+## Changelog
+
+For Chanelog, see [releases](./releases/)
+
 ## License
 
 [MIT](./LICENSE.md). Copyright(c) [Vivek Kumar Bansal](http://vkbansal.me/)
