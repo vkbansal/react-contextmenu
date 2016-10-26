@@ -18,7 +18,7 @@
     "start": "node server.js",
     "dist": "webpack --progress --profile --colors",
     "module": "babel src --out-dir modules",
-    "build": "npm run test && npm run clean && npm run dist && npm run module",
+    "build": "npm run clean && npm run dist && npm run module",
     "examples": "webpack --config examples.config.js --progress --profile --colors",
     "watch": "./node_modules/.bin/webpack --config examples.config.js --progress --profile --colors --watch",
     "prepublish": "npm run build"
