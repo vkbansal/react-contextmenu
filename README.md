@@ -160,7 +160,11 @@ A Simple Component for menu items.
 
 Type: `Function` (required)
 
-The function to be called on click of item. The function will receive three parameters. The first is `event` object and the second is the extra data passed either using `props.data` or configure from `ContextMenuTrigger`.
+The function to be called on click of item. The function will receive three parameters.
+
+-   The first is `event` object.
+-   The second is the merged data passed using `props.data` and `collect` from `ContextMenuTrigger`.
+-   The third is the `element` on which right-click occured.
 
 **props.data**
 
