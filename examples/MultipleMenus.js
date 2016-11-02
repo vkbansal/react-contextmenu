@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import ContextMenuLayer from 'src/ContextMenuTrigger';
+import ContextMenuTrigger from 'src/ContextMenuTrigger';
 import ContextMenu from 'src/ContextMenu';
 import MenuItem from 'src/MenuItem';
 
@@ -27,14 +27,14 @@ export default class MultipleMenus extends Component {
                 <p>This demo shows usage of multiple menus on multiple targets.</p>
                 <div className='row'>
                     <div className='col-sm-6 text-center'>
-                        <ContextMenuLayer id={MENU_1} holdToDisplay={1000}>
+                        <ContextMenuTrigger id={MENU_1} holdToDisplay={1000}>
                             <div className='well'>right click to see the menu</div>
-                        </ContextMenuLayer>
+                        </ContextMenuTrigger>
                     </div>
                     <div className='col-sm-6 text-center'>
-                        <ContextMenuLayer id={MENU_2} holdToDisplay={1000}>
+                        <ContextMenuTrigger id={MENU_2} holdToDisplay={1000}>
                             <div className='well'>right click to see the menu</div>
-                        </ContextMenuLayer>
+                        </ContextMenuTrigger>
                     </div>
                 </div>
                 <div>

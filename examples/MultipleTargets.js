@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import ContextMenuLayer from 'src/ContextMenuTrigger';
+import ContextMenuTrigger from 'src/ContextMenuTrigger';
 import ContextMenu from 'src/ContextMenu';
 import MenuItem from 'src/MenuItem';
 
@@ -68,11 +68,11 @@ export default class MultipleTargets extends Component {
                 <div className='row'>
                     {targets.map((item, i) => (
                         <div key={i} className='col-sm-2 text-center'>
-                            <ContextMenuLayer id={MENU_TYPE} name={item.name}
+                            <ContextMenuTrigger id={MENU_TYPE} name={item.name}
                                 holdToDisplay={1000}
                                 collect={collect} attributes={attributes}>
                                 {item.name}
-                            </ContextMenuLayer>
+                            </ContextMenuTrigger>
                         </div>
                     ))}
                 </div>

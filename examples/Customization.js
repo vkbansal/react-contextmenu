@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import ContextMenuLayer from 'src/ContextMenuTrigger';
+import ContextMenuTrigger from 'src/ContextMenuTrigger';
 import ContextMenu from 'src/ContextMenu';
 import MenuItem from 'src/MenuItem';
 
@@ -45,11 +45,11 @@ export default class Customization extends Component {
                 <table className='table table-bordered'>
                     <tbody>
                         {targets.map((item, i) => (
-                            <ContextMenuLayer renderTag='tr' name={item.name}
+                            <ContextMenuTrigger renderTag='tr' name={item.name}
                                 id={MENU_TYPE} holdToDisplay={1000} key={i}
                                 collect={collect}>
                                 <td>{item.name}</td>
-                            </ContextMenuLayer>
+                            </ContextMenuTrigger>
                         ))}
                     </tbody>
                 </table>

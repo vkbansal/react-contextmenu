@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import ContextMenuLayer from 'src/ContextMenuTrigger';
+import ContextMenuTrigger from 'src/ContextMenuTrigger';
 import ContextMenu from 'src/ContextMenu';
 import MenuItem from 'src/MenuItem';
 
@@ -24,9 +24,9 @@ export default class SimpleMenu extends Component {
             <div>
                 <h3>Simple Menu</h3>
                 <p>This demo simple usage of a context menu.</p>
-                <ContextMenuLayer id={MENU_TYPE} holdToDisplay={1000}>
+                <ContextMenuTrigger id={MENU_TYPE} holdToDisplay={1000}>
                     <div className='well'>right click to see the menu</div>
-                </ContextMenuLayer>
+                </ContextMenuTrigger>
                 <div>
                     {this.state.logs.map((log, i) => (<p key={i}>{log}</p>))}
                 </div>
