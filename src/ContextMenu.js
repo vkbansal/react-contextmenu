@@ -57,7 +57,8 @@ export default class ContextMenu extends Component {
         const { x, y } = e.detail.position;
 
         this.setState({isVisible: true, x, y});
-        document.addEventListener('click', this.handleOutsideClick);
+        document.addEventListener('mousedown', this.handleOutsideClick);
+        document.addEventListener('ontouchstart', this.handleOutsideClick);
         document.addEventListener('scroll', this.handleHide);
         document.addEventListener('contextmenu', this.handleHide);
         window.addEventListener('resize', this.handleHide);
@@ -65,7 +66,8 @@ export default class ContextMenu extends Component {
     }
 
     handleHide = (e) => {
-        document.removeEventListener('click', this.handleOutsideClick);
+        document.removeEventListener('mousedown', this.handleOutsideClick);
+        document.removeEventListener('ontouchstart', this.handleOutsideClick);
         document.removeEventListener('scroll', this.handleHide);
         document.removeEventListener('contextmenu', this.handleHide);
         window.removeEventListener('resize', this.handleHide);
