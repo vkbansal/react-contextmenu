@@ -66,7 +66,8 @@ export default class ContextMenu extends Component {
     }
 
     handleHide = (e) => {
-        document.removeEventListener('click', this.handleOutsideClick);
+        document.removeEventListener('mousedown', this.handleOutsideClick);
+        document.removeEventListener('ontouchstart', this.handleOutsideClick);
         document.removeEventListener('scroll', this.handleHide);
         document.removeEventListener('contextmenu', this.handleHide);
         window.removeEventListener('resize', this.handleHide);
