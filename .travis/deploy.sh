@@ -15,7 +15,7 @@ mkdir public
 
 # copy required files
 cp ./examples/index.html ./public/index.html
-cp ./examples/react-context-menu.css ./public/react-context-menu.css
+cp ./examples/react-context-menu.css ./public/react-contextmenu.css
 npm run examples && cp ./bundle.js ./public/bundle.js
 
 
