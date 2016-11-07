@@ -4,7 +4,7 @@ node_js:
 after_success:
   - npm run coveralls
 script:
-    - bash ./scripts/deploy.sh
+    - bash ./.travis/deploy.sh
 env:
   global:
     - GITHUB_REPO: vkbansal/react-contextmenu

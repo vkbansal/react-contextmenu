@@ -1,0 +1,4 @@
+settings:
+    import/resolver:
+        webpack:
+           config: examples.config.js
