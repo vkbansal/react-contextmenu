@@ -78,9 +78,9 @@ export default class ContextMenuTrigger extends Component {
     }
 
     render() {
-        const { renderTag, attributes, children } = this.props;
+        const { renderTag, attributes, children, className } = this.props;
         const newAttrs = assign({}, attributes, {
-            className: cx(cssClasses.menuWrapper, attributes.className),
+            className: cx(className, cssClasses.menuWrapper, attributes.className),
             onContextMenu: this.handleContextClick,
             onMouseDown: this.handleMouseDown,
             onMouseUp: this.handleMouseUp,
