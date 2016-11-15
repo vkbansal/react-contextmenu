@@ -21,22 +21,20 @@ export default class ContextMenuTrigger extends Component {
     };
 
 
-    mouseDown = false;
-
     handleMouseDown = (event) => {
         if (this.props.holdToDisplay >= 0 && event.button === 0) {
             event.persist();
 
-            this.mouseDown = true;
-            setTimeout(() => {
-                if (this.mouseDown) this.handleContextClick(event);
-            }, this.props.holdToDisplay);
+            this.mouseDownTimeoutId = setTimeout(
+                () => this.handleContextClick(event),
+                this.props.holdToDisplay
+            );
         }
     }
 
     handleMouseUp = (event) => {
         if (event.button === 0) {
-            this.mouseDown = false;
+            clearTimeout(this.mouseDownTimeoutId)
         }
     }
 
@@ -44,16 +42,16 @@ export default class ContextMenuTrigger extends Component {
         if (this.props.holdToDisplay >= 0) {
             event.persist();
 
-            this.mouseDown = true;
-            setTimeout(() => {
-                if (this.mouseDown) this.handleContextClick(event);
-            }, this.props.holdToDisplay);
+            this.touchstartTimeoutId = setTimeout(
+                () => this.handleContextClick(event),
+                this.props.holdToDisplay
+            );
         }
     }
 
     handleTouchEnd = (event) => {
         event.preventDefault();
-        this.mouseDown = false;
+        clearTimeout(this.touchstartTimeoutId)
     }
 
     handleContextClick = (event) => {
