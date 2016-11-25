@@ -80,7 +80,7 @@ The styling can be apllied to using following classes.
 - `react-contextmenu-wrapper` : applied to wrapper around elements in `ContextMenuTrigger`.
 - `react-contextmenu-submenu` : applied to items that are submenus.
 
-> Note: This package does note include any styling by default. You can use [react-context-menu.css](./examples/react-context-menu.css) from examples for quick setup.
+> Note: This package does note include any styling by default. You can use [react-context-menu.css](./examples/react-contextmenu.css) from examples for quick setup.
 
 
 ## API
