@@ -80,7 +80,7 @@ The styling can be apllied to using following classes.
 - `react-contextmenu-wrapper` : applied to wrapper around elements in `ContextMenuTrigger`.
 - `react-contextmenu-submenu` : applied to items that are submenus.
 
-> Note: This package does note include any styling by default. You can use [react-context-menu.css](./examples/react-contextmenu.css) from examples for quick setup.
+> Note: This package does note include any styling by default. You can use [react-contextmenu.css](./examples/react-contextmenu.css) from examples for quick setup.
 
 
 ## API
@@ -237,17 +237,13 @@ Default: `500`
 
 The time (in ms) after which the menu is to be displayed when hovered upon.
 
-
-
 ## Contributors
 
-[All Contributors](./graphs/contributors)
-
-
+[All Contributors](https://github.com/vkbansal/react-contextmenu/graphs/contributors)
 
 ## Changelog
 
-For Chanelog, see [releases](./releases/)
+For Changelog, see [releases](https://github.com/vkbansal/react-contextmenu/releases)
 
 ## License
 
