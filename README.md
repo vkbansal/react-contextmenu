@@ -153,6 +153,8 @@ Default: `1000`
 
 This is applicable only for touch screens. The time (in ms) for which, user has to hold down his/her finger before the menu is shown.
 
+> Note: To disable the long press trigger on left-click just set a negative holdToDisplay value such as `-1`
+
 **props.renderTag**
 
 Type: `String` or React Element (optional)
