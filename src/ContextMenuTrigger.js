@@ -34,7 +34,7 @@ export default class ContextMenuTrigger extends Component {
 
     handleMouseUp = (event) => {
         if (event.button === 0) {
-            clearTimeout(this.mouseDownTimeoutId)
+            clearTimeout(this.mouseDownTimeoutId);
         }
     }
 
@@ -51,7 +51,7 @@ export default class ContextMenuTrigger extends Component {
 
     handleTouchEnd = (event) => {
         event.preventDefault();
-        clearTimeout(this.touchstartTimeoutId)
+        clearTimeout(this.touchstartTimeoutId);
     }
 
     handleContextClick = (event) => {
