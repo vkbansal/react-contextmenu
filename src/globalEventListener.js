@@ -1,12 +1,14 @@
 import { MENU_SHOW, MENU_HIDE } from './actions';
-import { uniqueId, hasOwnProp } from './helpers';
+import { uniqueId, hasOwnProp, canUseDOM } from './helpers';
 
 class GlobalEventListener {
     constructor() {
         this.callbacks = {};
 
-        window.addEventListener(MENU_SHOW, this.handleShowEvent);
-        window.addEventListener(MENU_HIDE, this.handleHideEvent);
+        if (canUseDOM) {
+            window.addEventListener(MENU_SHOW, this.handleShowEvent);
+            window.addEventListener(MENU_HIDE, this.handleHideEvent);
+        }
     }
 
     handleShowEvent = (event) => {
