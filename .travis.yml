@@ -4,6 +4,7 @@ node_js:
 after_success:
   - npm run coveralls
 script:
+    - npm run eslint
     - bash ./.travis/deploy.sh
 env:
   global:
