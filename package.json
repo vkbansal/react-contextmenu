@@ -1,6 +1,6 @@
 {
   "name": "react-contextmenu",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0-beta.2",
   "description": "Context Menu implemented in React",
   "main": "modules/index.js",
   "keywords": [
@@ -11,7 +11,7 @@
     "rightclick"
   ],
   "scripts": {
-	"eslint": "eslint ./src",
+    "eslint": "eslint ./src",
     "coveralls": "cat ./reports/coverage/lcov.info | coveralls",
     "test": "istanbul cover --dir reports/coverage node_modules/mocha/bin/_mocha test/.setup.js test/**/*-test.js -- --reporter dot",
     "unit-test": "mocha test/.setup.js test/**/*-test.js",
