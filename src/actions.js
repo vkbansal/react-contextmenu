@@ -15,7 +15,7 @@ export function dispatchGlobalEvent(eventName, opts, target = window) {
         event = new window.CustomEvent(eventName, { detail: opts });
     } else {
         event = document.createEvent('Event');
-        event.initEvent(eventName, false, true, opts);
+        event.initCustomEvent(eventName, false, true, opts);
     }
 
     if (target) {
