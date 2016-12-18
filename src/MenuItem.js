@@ -47,7 +47,7 @@ export default class MenuItem extends Component {
 
         return (
             <div {...attributes} className={menuItemClassNames}>
-                <a href='#' className={linkClasses} onClick={this.handleClick}>
+                <a href='#' className={linkClasses} onTouchEnd={this.handleClick} onClick={this.handleClick}>
                     {children}
                 </a>
             </div>
