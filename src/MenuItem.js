@@ -39,17 +39,14 @@ export default class MenuItem extends Component {
 
     render() {
         const { disabled, children, attributes } = this.props;
-        const menuItemClassNames = cx(cssClasses.menuItem, attributes && attributes.className);
-
-        const linkClasses = cx(cssClasses.menuLink, {
-            [cssClasses.menuLinkDisabled]: disabled
+        const menuItemClassNames = cx(cssClasses.menuItem, attributes && attributes.className, {
+            [cssClasses.menuItemDisabled]: disabled
         });
 
         return (
-            <div {...attributes} className={menuItemClassNames} onTouchEnd={this.handleClick} onClick={this.handleClick}>
-                <a href='#' className={linkClasses}>
-                    {children}
-                </a>
+            <div {...attributes} className={menuItemClassNames}
+                onTouchEnd={this.handleClick} onClick={this.handleClick}>
+                {children}
             </div>
         );
     }

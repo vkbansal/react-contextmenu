@@ -134,7 +134,7 @@ export default class SubMenu extends Component {
     render() {
         const { children, disabled, title } = this.props;
         const { visible } = this.state;
-        const menuItemProps = {
+        const menuProps = {
             ref: this.menuRef,
             onMouseEnter: this.handleMouseEnter,
             onMouseLeave: this.handleMouseLeave,
@@ -143,11 +143,10 @@ export default class SubMenu extends Component {
                 position: 'relative'
             }
         };
-        const menuLinkProps = {
-            href: '#',
-            className: cx(cssClasses.menuLink, {
-                [cssClasses.menuLinkDisabled]: disabled,
-                [cssClasses.menuLinkActive]: visible
+        const menuItemProps = {
+            className: cx(cssClasses.menuItem, {
+                [cssClasses.menuItemDisabled]: disabled,
+                [cssClasses.menuItemActive]: visible
             }),
             onClick: this.handleClick
         };
@@ -162,10 +161,10 @@ export default class SubMenu extends Component {
         };
 
         return (
-            <nav {...menuItemProps}>
-                <a {...menuLinkProps}>
+            <nav {...menuProps}>
+                <div {...menuItemProps}>
                     {title}
-                </a>
+                </div>
                 <nav {...subMenuProps}>
                     {children}
                 </nav>

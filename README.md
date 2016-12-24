@@ -21,7 +21,7 @@ npm install --save react-contextmenu
 
 You need to setup two things:
 1. The `ContextMenu`
-2. The `ContextMenuTrigger` 
+2. The `ContextMenuTrigger`
 
 ```jsx
 import React from "react";
@@ -73,9 +73,8 @@ The styling can be apllied to using following classes.
 - `react-contextmenu` : applied to menu root element.
 - `react-contextmenu--visible` : applied to menu root element when visible.
 - `react-contextmenu-item` : applied to menu items.
-- `react-contextmenu-link` : applied to menu links inside items.
-- `react-contextmenu-link--disabled` : applied to links (title in submenu) when they are disabled.
-- `react-contextmenu-link--active` : applied to title in submenu when submenu is open.
+- `react-contextmenu-item--active` : applied to menu items and title in submenu when submenu is open.
+- `react-contextmenu-item--disabled` : applied to menu items and title in submenu when they are disabled.
 - `react-contextmenu-wrapper` : applied to wrapper around elements in `ContextMenuTrigger`.
 - `react-contextmenu-submenu` : applied to items that are submenus.
 

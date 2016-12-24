@@ -19,11 +19,9 @@
     pointer-events: auto;
 }
 
-.react-contextmenu-link {
-    display: inline-block;
-    width: 100%;
+.react-contextmenu-item {
+    width: 200px;
     padding: 3px 20px;
-    clear: both;
     font-weight: 400;
     line-height: 1.5;
     color: #373a3c;
@@ -31,20 +29,25 @@
     white-space: nowrap;
     background: 0 0;
     border: 0;
+	cursor: pointer;
 }
 
-.react-contextmenu-link.active,
-.react-contextmenu-link:hover {
+.react-contextmenu-item.react-contextmenu-item--active,
+.react-contextmenu-item:hover {
     color: #fff;
     background-color: #0275d8;
     border-color: #0275d8;
     text-decoration: none;
 }
-.react-contextmenu-item.submenu > a {
-    padding-right: 27px;
+
+.react-contextmenu-item.react-contextmenu-submenu {
+	padding: 0;
 }
 
-.react-contextmenu-item.submenu > a:after {
+.react-contextmenu-item.react-contextmenu-submenu > .react-contextmenu-item {
+}
+
+.react-contextmenu-item.react-contextmenu-submenu > .react-contextmenu-item:after {
     content: "▶";
     display: inline-block;
     position: absolute;
