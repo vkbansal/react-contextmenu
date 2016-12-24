@@ -7,7 +7,8 @@ export default class SubMenu extends Component {
     static propTypes = {
         title: PropTypes.node.isRequired,
         disabled: PropTypes.bool,
-        hoverDelay: PropTypes.number
+        hoverDelay: PropTypes.number,
+        rtl: PropTypes.bool
     };
 
     static defaultProps = {
@@ -32,7 +33,9 @@ export default class SubMenu extends Component {
             const wrapper = window.requestAnimationFrame || setTimeout;
 
             wrapper(() => {
-                const styles = this.getMenuPosition();
+                const styles = this.props.rtl
+                                ? this.getRTLMenuPosition()
+                                : this.getMenuPosition();
 
                 this.subMenu.style.removeProperty('top');
                 this.subMenu.style.removeProperty('bottom');
@@ -92,6 +95,26 @@ export default class SubMenu extends Component {
         }
 
         if (rect.right < innerWidth) {
+            position.left = '100%';
+        } else {
+            position.right = '100%';
+        }
+
+        return position;
+    }
+
+    getRTLMenuPosition = () => {
+        const { innerHeight } = window;
+        const rect = this.subMenu.getBoundingClientRect();
+        const position = {};
+
+        if (rect.bottom > innerHeight) {
+            position.bottom = 0;
+        } else {
+            position.top = 0;
+        }
+
+        if (rect.left < 0) {
             position.left = '100%';
         } else {
             position.right = '100%';

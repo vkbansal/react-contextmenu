@@ -7,6 +7,7 @@ import MultipleTargets from './MultipleTargets';
 import MultipleMenus from './MultipleMenus';
 import SubMenus from './SubMenus';
 import Customization from './Customization';
+import RTLSubMenu from './RTLSubMenu';
 
 function App({ children }) {
     return (
@@ -29,6 +30,9 @@ function App({ children }) {
                     <li>
                         <Link to='/customization'>Customization</Link>
                     </li>
+                    <li>
+                        <Link to='/rtl-submenus'>Right-to-Left</Link>
+                    </li>
                 </ul>
             </div>
             <div className='col-xs-9' id='main'>
@@ -47,6 +51,7 @@ const Routes = (
             <Route path='multiple-menus' component={MultipleMenus}/>
             <Route path='submenus' component={SubMenus}/>
             <Route path='customization' component={Customization}/>
+            <Route path='rtl-submenus' component={RTLSubMenu}/>
         </Route>
     </Router>
 );
