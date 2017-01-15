@@ -6,6 +6,7 @@ import { cssClasses, hasOwnProp } from './helpers';
 export default class SubMenu extends Component {
     static propTypes = {
         title: PropTypes.node.isRequired,
+        className: PropTypes.string,
         disabled: PropTypes.bool,
         hoverDelay: PropTypes.number,
         rtl: PropTypes.bool
@@ -157,7 +158,7 @@ export default class SubMenu extends Component {
                 top: 0,
                 left: '100%'
             },
-            className: cssClasses.menu
+            className: cx(cssClasses.menu, this.props.className)
         };
 
         return (

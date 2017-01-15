@@ -117,6 +117,12 @@ Type: `Function` (optional)
 
 Callback called when the menu is shown.
 
+**props.className**
+
+Type: `String` (optional)
+
+Custom `className` applied to root element of the context-menu.
+
 
 
 ### ContextMenuTrigger(props)
@@ -236,6 +242,12 @@ Type: `Number` (optional)
 Default: `500`
 
 The time (in ms) after which the menu is to be displayed when hovered upon.
+
+**props.className**
+
+Type: `String` (optional)
+
+Custom `className` applied to root element of the context-menu.
 
 ## Contributors
 

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import cx from 'classnames';
 
 import listener from './globalEventListener';
 import { hideMenu } from './actions';
@@ -7,6 +8,7 @@ import { cssClasses, callIfExists } from './helpers';
 export default class ContextMenu extends Component {
     static propTypes = {
         id: PropTypes.string.isRequired,
+        className: PropTypes.string,
         onHide: PropTypes.func,
         onShow: PropTypes.func
     };
@@ -126,12 +128,12 @@ export default class ContextMenu extends Component {
     }
 
     render() {
-        const { children } = this.props;
+        const { children, className } = this.props;
         const { top, left } = this.state;
         const style = {position: 'fixed', top, left, opacity: 0, pointerEvents: 'none'};
 
         return (
-            <nav ref={this.menuRef} style={style} className={cssClasses.menu}
+            <nav ref={this.menuRef} style={style} className={cx(cssClasses.menu, className)}
                 onContextMenu={this.handleHide}>
                 {children}
             </nav>
