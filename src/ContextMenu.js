@@ -37,10 +37,14 @@ export default class ContextMenu extends Component {
                 wrapper(() => {
                     this.menu.style.top = `${top}px`;
                     this.menu.style.left = `${left}px`;
+                    this.menu.style.opacity = 1;
+                    this.menu.style.pointerEvents = 'auto';
                     this.menu.classList.add(cssClasses.menuVisible);
                 });
             });
         } else {
+            this.menu.style.opacity = 0;
+            this.menu.style.pointerEvents = 'none';
             this.menu.classList.remove(cssClasses.menuVisible);
         }
     }
@@ -124,7 +128,7 @@ export default class ContextMenu extends Component {
     render() {
         const { children } = this.props;
         const { top, left } = this.state;
-        const style = {position: 'fixed', top, left};
+        const style = {position: 'fixed', top, left, opacity: 0, pointerEvents: 'none'};
 
         return (
             <nav ref={this.menuRef} style={style} className={cssClasses.menu}
