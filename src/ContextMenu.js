@@ -96,12 +96,11 @@ export default class ContextMenu extends Component {
     }
 
     getMenuPosition = (x, y) => {
-        const {scrollTop: scrollX, scrollLeft: scrollY} = document.documentElement;
         const { innerWidth, innerHeight } = window;
         const rect = this.menu.getBoundingClientRect();
         const menuStyles = {
-            top: y + scrollY,
-            left: x + scrollX
+            top: y,
+            left: x
         };
 
         if (y + rect.height > innerHeight) {
