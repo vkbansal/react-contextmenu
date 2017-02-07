@@ -84,18 +84,21 @@
     "presets": [
       "react"
     ],
-    "plugins": [
-        "transform-class-properties"
-    ],
     "env": {
       "es6": {
         "presets": [
           "es2016"
+        ],
+        "plugins": [
+          "transform-class-properties"
         ]
       },
       "es5": {
         "presets": [
           "es2015"
+        ],
+        "plugins": [
+          "transform-class-properties"
         ]
       }
     }
