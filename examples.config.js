@@ -7,25 +7,40 @@ module.exports = {
     entry: ["./examples/index.js"],
     output: {
         filename: "bundle.js",
-        sourceMapFileName: "bundle.js.map",
         path: process.cwd(),
         publicPath: "/"
     },
     resolve: {
-        root: path.resolve(__dirname)
+        modules: [
+            path.resolve(__dirname),
+            'node_modules'
+        ]
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
-                loader: "babel",
-                exclude: /node_modules/
+                loader: "babel-loader",
+                options: {
+                    presets: [
+                        'react',
+                        ['es2015', {
+                            modules: false
+                        }]
+                    ],
+                    plugins: [
+                        'transform-class-properties'
+                    ]
+                },
+                include: [
+                    path.resolve(__dirname, './src'),
+                    path.resolve(__dirname, './examples')
+                ]
             }
         ]
     },
     devtool: "source-map",
     plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compressor: {
                 warnings: false
