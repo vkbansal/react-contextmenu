@@ -45,13 +45,13 @@ function App({ children }) {
 const Routes = (
     <Router history={hashHistory}>
         <Route path='/' component={App}>
-            <IndexRoute component={SimpleMenu}/>
-            <Route path='simple-menu' component={SimpleMenu}/>
-            <Route path='multiple-targets' component={MultipleTargets}/>
-            <Route path='multiple-menus' component={MultipleMenus}/>
-            <Route path='submenus' component={SubMenus}/>
-            <Route path='customization' component={Customization}/>
-            <Route path='rtl-submenus' component={RTLSubMenu}/>
+            <IndexRoute component={SimpleMenu} />
+            <Route path='simple-menu' component={SimpleMenu} />
+            <Route path='multiple-targets' component={MultipleTargets} />
+            <Route path='multiple-menus' component={MultipleMenus} />
+            <Route path='submenus' component={SubMenus} />
+            <Route path='customization' component={Customization} />
+            <Route path='rtl-submenus' component={RTLSubMenu} />
         </Route>
     </Router>
 );
