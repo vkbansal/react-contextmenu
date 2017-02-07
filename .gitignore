@@ -2,4 +2,7 @@ node_modules/
 public/
 dist/
 modules/
+es6/
 .vscode
+bundle.js
+*.log
