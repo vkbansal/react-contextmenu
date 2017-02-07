@@ -10,12 +10,14 @@ export default class ContextMenuTrigger extends Component {
         id: PropTypes.string.isRequired,
         attributes: PropTypes.object,
         collect: PropTypes.func,
+        disable: PropTypes.bool,
         holdToDisplay: PropTypes.number,
         renderTag: PropTypes.node
     };
 
     static defaultProps = {
         attributes: {},
+        disable: false,
         holdToDisplay: 1000,
         renderTag: 'div'
     };
@@ -55,6 +57,8 @@ export default class ContextMenuTrigger extends Component {
     }
 
     handleContextClick = (event) => {
+        if (this.props.disable) return;
+
         event.preventDefault();
         event.stopPropagation();
 

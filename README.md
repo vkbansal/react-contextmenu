@@ -149,6 +149,12 @@ Type: `Function` (optional)
 
 A simple function which takes `props` as input and returns the data to be passed to contextmenu.
 
+**props.disable**
+
+Type: `Boolean` (optional, default: false)
+
+Prop to ignore right clicks and display the default browser context menu.
+
 **props.holdToDisplay**
 
 Type: `Number` (optional)
