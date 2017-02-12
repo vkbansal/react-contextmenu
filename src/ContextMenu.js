@@ -10,10 +10,10 @@ export default class ContextMenu extends Component {
     static propTypes = {
         id: PropTypes.string.isRequired,
         className: PropTypes.string,
+        hideOnLeave: PropTypes.bool,
         onHide: PropTypes.func,
         onShow: PropTypes.func,
-        onMouseLeave: PropTypes.func,
-        hideOnLeave: PropTypes.bool
+        onMouseLeave: PropTypes.func
     };
 
     constructor(props) {
