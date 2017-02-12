@@ -1,15 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
+import assign from 'object-assign';
 
 import listener from './globalEventListener';
 import { hideMenu } from './actions';
-import { cssClasses, callIfExists } from './helpers';
+import { cssClasses, callIfExists, store } from './helpers';
 
 export default class ContextMenu extends Component {
     static propTypes = {
         id: PropTypes.string.isRequired,
         className: PropTypes.string,
+        hideOnLeave: PropTypes.bool,
         onHide: PropTypes.func,
+        onMouseLeave: PropTypes.func,
         onShow: PropTypes.func
     };
 
@@ -103,6 +106,19 @@ export default class ContextMenu extends Component {
         if (!this.menu.contains(e.target)) hideMenu();
     }
 
+    handleMouseLeave = (event) => {
+        event.preventDefault();
+
+        callIfExists(
+            this.props.onMouseLeave,
+            event,
+            assign({}, this.props.data, store.data),
+            store.target
+        );
+
+        if (this.props.hideOnLeave) hideMenu();
+    }
+
     getMenuPosition = (x, y) => {
         const { innerWidth, innerHeight } = window;
         const rect = this.menu.getBoundingClientRect();
@@ -141,7 +157,7 @@ export default class ContextMenu extends Component {
 
         return (
             <nav ref={this.menuRef} style={style} className={cx(cssClasses.menu, className)}
-                onContextMenu={this.handleHide}>
+                onContextMenu={this.handleHide} onMouseLeave={this.handleMouseLeave}>
                 {children}
             </nav>
         );

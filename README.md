@@ -105,6 +105,12 @@ Type: `String`  required
 
 A unique identifier for the menu.
 
+**props.hideOnLeave**
+
+Type: `Boolean` (optional)
+
+Hides the context menu on mouse leave.
+
 **props.onHide**
 
 Type: `Function` (optional)
