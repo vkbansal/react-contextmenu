@@ -73,6 +73,7 @@ export default class ContextMenu extends Component {
         document.removeEventListener('ontouchstart', this.handleOutsideClick);
         document.removeEventListener('scroll', this.handleHide);
         document.removeEventListener('contextmenu', this.handleHide);
+        document.removeEventListener('keyup', this.handleEscape);
         window.removeEventListener('resize', this.handleHide);
     }
 
