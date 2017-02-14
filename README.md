@@ -111,6 +111,12 @@ Type: `Boolean` (optional)
 
 Hides the context menu on mouse leave.
 
+**props.onMouseLeave**
+
+Type: `Function` (optional)
+
+Callback called when the mouse leaves the menu or submenu areas.
+
 **props.onHide**
 
 Type: `Function` (optional)
