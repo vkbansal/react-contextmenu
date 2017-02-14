@@ -64,6 +64,7 @@ export default class ContextMenu extends Component {
         document.addEventListener('ontouchstart', this.handleOutsideClick);
         document.addEventListener('scroll', this.handleHide);
         document.addEventListener('contextmenu', this.handleHide);
+        document.addEventListener('keyup', this.handleEscape);
         window.addEventListener('resize', this.handleHide);
     }
 
@@ -72,6 +73,7 @@ export default class ContextMenu extends Component {
         document.removeEventListener('ontouchstart', this.handleOutsideClick);
         document.removeEventListener('scroll', this.handleHide);
         document.removeEventListener('contextmenu', this.handleHide);
+        document.removeEventListener('keyup', this.handleEscape);
         window.removeEventListener('resize', this.handleHide);
     }
 
@@ -89,6 +91,12 @@ export default class ContextMenu extends Component {
         this.unregisterHandlers();
         this.setState({isVisible: false});
         callIfExists(this.props.onHide, e);
+    }
+
+    handleEscape = (e) => {
+        if (e.key === 'Escape') {
+            if (!this.menu.contains(e.target)) hideMenu();
+        }
     }
 
     handleOutsideClick = (e) => {
