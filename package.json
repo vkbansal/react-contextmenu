@@ -1,6 +1,6 @@
 {
   "name": "react-contextmenu",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Context Menu implemented in React",
   "main": "modules/index.js",
   "module": "es6/index.js",
@@ -86,7 +86,12 @@
     "env": {
       "es6": {
         "presets": [
-          ["es2015", {"modules": false}]
+          [
+            "es2015",
+            {
+              "modules": false
+            }
+          ]
         ],
         "plugins": [
           "transform-class-properties"
