@@ -11,6 +11,7 @@ export default class ContextMenu extends Component {
         id: PropTypes.string.isRequired,
         className: PropTypes.string,
         hideOnLeave: PropTypes.bool,
+        onEscape: PropTypes.func,
         onHide: PropTypes.func,
         onMouseLeave: PropTypes.func,
         onShow: PropTypes.func
@@ -98,7 +99,10 @@ export default class ContextMenu extends Component {
 
     handleEscape = (e) => {
         if (e.key === 'Escape') {
-            if (!this.menu.contains(e.target)) hideMenu();
+            if (!this.menu.contains(e.target)) {
+                hideMenu();
+                callIfExists(this.props.onEscape);
+            }
         }
     }
 
