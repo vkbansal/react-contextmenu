@@ -38,22 +38,6 @@
             "plugins": [
                 "transform-class-properties"
             ]
-        },
-        "examples": {
-            "presets": [
-                "react-hmre",
-                [
-                    "env",
-                    {
-                        "targets": {
-                            "node": "current"
-                        }
-                    }
-                ]
-            ],
-            "plugins": [
-                "transform-class-properties"
-            ]
         }
     }
 }

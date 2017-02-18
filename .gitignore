@@ -7,3 +7,4 @@ coverage/
 .vscode
 bundle.js
 *.log
+*.js.map
