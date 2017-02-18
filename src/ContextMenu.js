@@ -81,7 +81,7 @@ export default class ContextMenu extends Component {
     }
 
     handleShow = (e) => {
-        if (e.detail.id !== this.props.id) return;
+        if (e.detail.id !== this.props.id || this.state.isVisible) return;
 
         const { x, y } = e.detail.position;
 
@@ -91,9 +91,11 @@ export default class ContextMenu extends Component {
     }
 
     handleHide = (e) => {
-        this.unregisterHandlers();
-        this.setState({isVisible: false});
-        callIfExists(this.props.onHide, e);
+        if (this.state.isVisible) {
+            this.unregisterHandlers();
+            this.setState({isVisible: false});
+            callIfExists(this.props.onHide, e);
+        }
     }
 
     handleEscape = (e) => {
