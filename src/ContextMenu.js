@@ -44,13 +44,11 @@ export default class ContextMenu extends Component {
                     this.menu.style.left = `${left}px`;
                     this.menu.style.opacity = 1;
                     this.menu.style.pointerEvents = 'auto';
-                    this.menu.classList.add(cssClasses.menuVisible);
                 });
             });
         } else {
             this.menu.style.opacity = 0;
             this.menu.style.pointerEvents = 'none';
-            this.menu.classList.remove(cssClasses.menuVisible);
         }
     }
 
@@ -121,7 +119,7 @@ export default class ContextMenu extends Component {
         if (this.props.hideOnLeave) hideMenu();
     }
 
-    getMenuPosition = (x, y) => {
+    getMenuPosition = (x = 0, y = 0) => {
         const { innerWidth, innerHeight } = window;
         const rect = this.menu.getBoundingClientRect();
         const menuStyles = {
@@ -154,11 +152,14 @@ export default class ContextMenu extends Component {
 
     render() {
         const { children, className } = this.props;
-        const { top, left } = this.state;
-        const style = {position: 'fixed', top, left, opacity: 0, pointerEvents: 'none'};
+        const { isVisible } = this.state;
+        const style = {position: 'fixed', opacity: 0, pointerEvents: 'none'};
+        const menuClassnames = cx(cssClasses.menu, className, {
+            [cssClasses.menuVisible]: isVisible
+        });
 
         return (
-            <nav ref={this.menuRef} style={style} className={cx(cssClasses.menu, className)}
+            <nav ref={this.menuRef} style={style} className={menuClassnames}
                 onContextMenu={this.handleHide} onMouseLeave={this.handleMouseLeave}>
                 {children}
             </nav>
