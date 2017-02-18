@@ -1,7 +1,8 @@
 examples/
-reports/
+coverage/
 scripts/
-test/
+tests/
+.travis/
 .editorconfig
 .eslintrc.yml
 .travis.yml

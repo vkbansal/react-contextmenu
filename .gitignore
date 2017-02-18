@@ -3,6 +3,7 @@ public/
 dist/
 modules/
 es6/
+coverage/
 .vscode
 bundle.js
 *.log

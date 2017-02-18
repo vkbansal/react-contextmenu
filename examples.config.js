@@ -7,7 +7,7 @@ module.exports = {
     entry: ["./examples/index.js"],
     output: {
         filename: "bundle.js",
-        path: process.cwd(),
+        path: path.resolve(__dirname, "./examples"),
         publicPath: "/"
     },
     resolve: {
@@ -21,17 +21,6 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: "babel-loader",
-                options: {
-                    presets: [
-                        'react',
-                        ['es2015', {
-                            modules: false
-                        }]
-                    ],
-                    plugins: [
-                        'transform-class-properties'
-                    ]
-                },
                 include: [
                     path.resolve(__dirname, './src'),
                     path.resolve(__dirname, './examples')
