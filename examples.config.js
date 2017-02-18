@@ -3,12 +3,15 @@
 const webpack = require('webpack');
 const path  = require('path');
 
-module.exports = {
+const PROD = process.env.NODE_ENV === 'production';
+
+const config = {
     entry: ["./examples/index.js"],
     output: {
         filename: "bundle.js",
         path: path.resolve(__dirname, "./examples"),
-        publicPath: "/"
+        publicPath: "/",
+        sourceMapFilename: "bundle.js.map"
     },
     resolve: {
         modules: [
@@ -28,17 +31,24 @@ module.exports = {
             }
         ]
     },
-    devtool: "source-map",
     plugins: [
         new webpack.optimize.UglifyJsPlugin({
             compressor: {
-                warnings: false
-            }
-        }),
-        new webpack.DefinePlugin({
-            "process.env": {
-                "NODE_ENV": JSON.stringify("production")
-            }
+                warnings: false,
+            },
+            sourceMap: !PROD
         })
     ]
 };
+
+!PROD && (config.devtool = "source-map");
+
+PROD && config.plugins.push(
+    new webpack.DefinePlugin({
+        "process.env": {
+            "NODE_ENV": JSON.stringify("production")
+        }
+    })
+);
+
+module.exports = config;
