@@ -4,7 +4,6 @@ var express = require("express"),
     webpack = require("webpack"),
     config = require("./examples.config");
 
-config.module.rules[0].options.presets.splice(1, 0, ['react-hmre']);
 config.entry.unshift("webpack-hot-middleware/client");
 
 config.plugins = [

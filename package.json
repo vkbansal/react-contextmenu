@@ -17,7 +17,7 @@
     "jest": "jest --no-cache --verbose --coverage",
     "jest:dev": "jest --watchAll --no-cache --verbose --coverage",
     "clean": "rimraf -rf ./dist && rimraf -rf ./modules && rimraf ./es6",
-    "start": "node server.js",
+    "start": "BABEL_ENV=examples node server.js",
     "dist": "webpack --progress --profile --colors",
     "modules": "BABEL_ENV=es5 babel src --out-dir modules",
     "modules:es6": "BABEL_ENV=es6 babel src --out-dir es6",
