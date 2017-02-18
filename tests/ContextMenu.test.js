@@ -72,4 +72,35 @@ describe('ContextMenu tests', () => {
         expect(component.state()).toEqual(Object.assign({isVisible: false}, data.position));
         component.unmount();
     });
+
+    test('menu should close on "outside" click', () => {
+        const data = {position: {x: 50, y: 50}, id: 'CORRECT_ID'};
+        const component = mount(
+            <ContextMenu id={data.id} />
+        );
+        const outsideClick = new window.MouseEvent('mousedown', {target: document});
+
+        showMenu(data);
+        expect(component.state()).toEqual(Object.assign({isVisible: true}, data.position));
+        component.simulate('mousedown');
+        expect(component.state()).toEqual(Object.assign({isVisible: true}, data.position));
+        document.dispatchEvent(outsideClick);
+        expect(component.state()).toEqual(Object.assign({isVisible: false}, data.position));
+        component.unmount();
+    });
+
+    test('hideOnLeave and onMouseLeave options', () => {
+        const data = {position: {x: 50, y: 50}, id: 'CORRECT_ID'};
+        const onMouseLeave = jest.fn();
+        const component = mount(
+            <ContextMenu id={data.id} hideOnLeave onMouseLeave={onMouseLeave} />
+        );
+
+        showMenu(data);
+        expect(component.state()).toEqual(Object.assign({isVisible: true}, data.position));
+        component.simulate('mouseleave');
+        expect(component.state()).toEqual(Object.assign({isVisible: false}, data.position));
+        expect(onMouseLeave).toHaveBeenCalled();
+        component.unmount();
+    });
 });
