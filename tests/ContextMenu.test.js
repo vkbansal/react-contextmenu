@@ -61,8 +61,9 @@ describe('ContextMenu tests', () => {
 
     test('menu should close on "Escape"', () => {
         const data = {position: {x: 50, y: 50}, id: 'CORRECT_ID'};
+        const onHide = jest.fn();
         const component = mount(
-            <ContextMenu id={data.id} />
+            <ContextMenu id={data.id} onHide={onHide} />
         );
         const escape = new window.KeyboardEvent('keyup', {keyCode: 27});
 
@@ -70,13 +71,15 @@ describe('ContextMenu tests', () => {
         expect(component.state()).toEqual(Object.assign({isVisible: true}, data.position));
         document.dispatchEvent(escape);
         expect(component.state()).toEqual(Object.assign({isVisible: false}, data.position));
+        expect(onHide).toHaveBeenCalled();
         component.unmount();
     });
 
     test('menu should close on "outside" click', () => {
         const data = {position: {x: 50, y: 50}, id: 'CORRECT_ID'};
+        const onHide = jest.fn();
         const component = mount(
-            <ContextMenu id={data.id} />
+            <ContextMenu id={data.id} onHide={onHide} />
         );
         const outsideClick = new window.MouseEvent('mousedown', {target: document});
 
@@ -86,6 +89,7 @@ describe('ContextMenu tests', () => {
         expect(component.state()).toEqual(Object.assign({isVisible: true}, data.position));
         document.dispatchEvent(outsideClick);
         expect(component.state()).toEqual(Object.assign({isVisible: false}, data.position));
+        expect(onHide).toHaveBeenCalled();
         component.unmount();
     });
 
