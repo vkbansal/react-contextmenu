@@ -31,17 +31,18 @@ const config = {
             }
         ]
     },
-    plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            compressor: {
-                warnings: false,
-            },
-            sourceMap: !PROD
-        })
-    ]
+    plugins: []
 };
 
 !PROD && (config.devtool = "source-map");
+
+PROD && config.plugins.push(
+     new webpack.optimize.UglifyJsPlugin({
+        compressor: {
+            warnings: false,
+        }
+    })
+);
 
 PROD && config.plugins.push(
     new webpack.DefinePlugin({
