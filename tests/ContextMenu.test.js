@@ -1,6 +1,5 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import TestUtils from 'react-addons-test-utils';
 
 import ContextMenu from '../src/ContextMenu';
 import { showMenu, hideMenu } from '../src/actions';
@@ -57,6 +56,20 @@ describe('ContextMenu tests', () => {
         expect(component.state()).toEqual(Object.assign({isVisible: false}, data.position));
         expect(onShow).toHaveBeenCalledTimes(1);
         expect(onHide).toHaveBeenCalledTimes(1);
+        component.unmount();
+    });
+
+    test('menu should close on "Escape"', () => {
+        const data = {position: {x: 50, y: 50}, id: 'CORRECT_ID'};
+        const component = mount(
+            <ContextMenu id={data.id} />
+        );
+        const escape = new window.KeyboardEvent('keyup', {keyCode: 27});
+
+        showMenu(data);
+        expect(component.state()).toEqual(Object.assign({isVisible: true}, data.position));
+        document.dispatchEvent(escape);
+        expect(component.state()).toEqual(Object.assign({isVisible: false}, data.position));
         component.unmount();
     });
 });
