@@ -1,0 +1,6 @@
+---
+    env:
+        jest: true
+    rules:
+        prefer-arrow-callback: 0
+        no-mixed-requires: 0
