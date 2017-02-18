@@ -99,8 +99,8 @@ export default class ContextMenu extends Component {
     }
 
     handleEscape = (e) => {
-        if (e.key === 'Escape') {
-            if (!this.menu.contains(e.target)) hideMenu();
+        if (e.keyCode === '27' && !this.menu.contains(e.target)) {
+            hideMenu();
         }
     }
 
