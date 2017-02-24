@@ -17,6 +17,7 @@ export const cssClasses = {
     menuItem: 'react-contextmenu-item',
     menuItemActive: 'react-contextmenu-item--active',
     menuItemDisabled: 'react-contextmenu-item--disabled',
+    menuItemDivider: 'react-contextmenu-item--divider',
     subMenu: 'react-contextmenu-submenu'
 };
 
