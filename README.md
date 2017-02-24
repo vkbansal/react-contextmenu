@@ -75,6 +75,7 @@ The styling can be apllied to using following classes.
 - `react-contextmenu-item` : applied to menu items.
 - `react-contextmenu-item--active` : applied to menu items and title in submenu when submenu is open.
 - `react-contextmenu-item--disabled` : applied to menu items and title in submenu when they are disabled.
+- `react-contextmenu-item--divider` : applied to menu items with the `divider` prop.
 - `react-contextmenu-wrapper` : applied to wrapper around elements in `ContextMenuTrigger`.
 - `react-contextmenu-submenu` : applied to items that are submenus.
 

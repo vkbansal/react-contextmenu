@@ -38,9 +38,10 @@ export default class MenuItem extends Component {
     }
 
     render() {
-        const { disabled, children, attributes } = this.props;
+        const { disabled, divider, children, attributes } = this.props;
         const menuItemClassNames = cx(cssClasses.menuItem, attributes && attributes.className, {
-            [cssClasses.menuItemDisabled]: disabled
+            [cssClasses.menuItemDisabled]: disabled,
+            [cssClasses.menuItemDivider]: divider
         });
 
         return (

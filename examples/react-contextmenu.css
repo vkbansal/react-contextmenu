@@ -40,6 +40,17 @@
     text-decoration: none;
 }
 
+.react-contextmenu-item--divider {
+    margin-bottom: 3px;
+    padding: 2px 0;
+    border-bottom: 1px solid rgba(0,0,0,.15);
+    cursor: inherit;
+}
+.react-contextmenu-item--divider:hover {
+    background-color: transparent;
+    border-color: rgba(0,0,0,.15);
+}
+
 .react-contextmenu-item.react-contextmenu-submenu {
 	padding: 0;
 }
