@@ -6,6 +6,7 @@ import SimpleMenu from './SimpleMenu';
 import MultipleTargets from './MultipleTargets';
 import MultipleMenus from './MultipleMenus';
 import SubMenus from './SubMenus';
+import DynamicMenu from './DynamicMenu';
 import Customization from './Customization';
 import RTLSubMenu from './RTLSubMenu';
 
@@ -26,6 +27,9 @@ function App({ children }) {
                     </li>
                     <li>
                         <Link to='/submenus'>Sub Menus</Link>
+                    </li>
+                    <li>
+                        <Link to='/dynamic-menu'>Dynamic Menu</Link>
                     </li>
                     <li>
                         <Link to='/customization'>Customization</Link>
@@ -50,6 +54,7 @@ const Routes = (
             <Route path='multiple-targets' component={MultipleTargets} />
             <Route path='multiple-menus' component={MultipleMenus} />
             <Route path='submenus' component={SubMenus} />
+            <Route path='dynamic-menu' component={DynamicMenu} />
             <Route path='customization' component={Customization} />
             <Route path='rtl-submenus' component={RTLSubMenu} />
         </Route>
