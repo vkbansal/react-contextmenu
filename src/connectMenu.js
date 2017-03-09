@@ -25,9 +25,7 @@ export default function (menuId) {
             }
 
             componentWillUnmount() {
-                if (this.listenId) {
-                    listener.unregister(this.listenId);
-                }
+                if (this.listenId) listener.unregister(this.listenId);
             }
 
             handleShow(e) {
@@ -38,9 +36,7 @@ export default function (menuId) {
 
                     for (const key in data) {
                         // exclude props the ContextMenuTrigger is expecting itself
-                        if (!excludedProps.includes(key)) {
-                            filteredData[key] = data[key];
-                        }
+                        if (!excludedProps.includes(key)) filteredData[key] = data[key];
                     }
                     this.setState({ context: filteredData });
                 }

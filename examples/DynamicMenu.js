@@ -26,14 +26,15 @@ function collect(props) {
 }
 
 const ConnectedMenu = connectMenu(MENU_TYPE)(({ context }) => {
-    if (!context)
-        return null;
+    if (!context) return null;
+
+    const handleItemClick = context.onItemClick;
 
     return (
         <ContextMenu id={MENU_TYPE}>
-            <MenuItem onClick={context.handleClick} data={{action: 'Added'}}>Add 1 {context.name}</MenuItem>
+            <MenuItem onClick={handleItemClick} data={{action: 'Added'}}>Add 1 {context.name}</MenuItem>
             {context.allowRemoval
-                ? <MenuItem onClick={context.handleClick} data={{action: 'Removed'}}>Remove 1 {context.name}</MenuItem>
+                ? <MenuItem onClick={handleItemClick} data={{action: 'Removed'}}>Remove 1 {context.name}</MenuItem>
                 : <MenuItem disabled>Removal disabled</MenuItem>}
         </ContextMenu>
     );
@@ -84,7 +85,7 @@ export default class DynamicMenuExample extends Component {
                         <div key={i} className='col-sm-2 text-center'>
                             <ContextMenuTrigger
                                 id={MENU_TYPE} holdToDisplay={1000}
-                                name={item.name} handleClick={this.handleClick}
+                                name={item.name} onItemClick={this.handleClick}
                                 allowRemoval={i % 2 === 0}
                                 collect={collect} attributes={attributes}>
                                 {item.name}
