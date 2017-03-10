@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import ContextMenuTrigger from 'src/ContextMenuTrigger';
 import ContextMenu from 'src/ContextMenu';
@@ -25,30 +25,42 @@ function collect(props) {
     return props;
 }
 
-const ConnectedMenu = connectMenu(MENU_TYPE)(({ context }) => {
-    if (!context) return null;
+class DynamicMenu extends Component {
+    static propTypes = {
+        trigger: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            onItemClick: PropTypes.func.isRequired,
+            allowRemoval: PropTypes.bool
+        })
+    };
 
-    const handleItemClick = context.onItemClick;
+    render() {
+        const { trigger } = this.props;
+        const handleItemClick = trigger ? trigger.onItemClick : null;
 
-    return (
-        <ContextMenu id={MENU_TYPE}>
-            <MenuItem onClick={handleItemClick} data={{action: 'Added'}}>Add 1 {context.name}</MenuItem>
-            {context.allowRemoval
-                ? <MenuItem onClick={handleItemClick} data={{action: 'Removed'}}>Remove 1 {context.name}</MenuItem>
-                : <MenuItem disabled>Removal disabled</MenuItem>}
-        </ContextMenu>
-    );
-});
+        return (
+            <ContextMenu id={MENU_TYPE}>
+                {trigger && <MenuItem onClick={handleItemClick} data={{action: 'Added'}}>Add 1 {trigger.name}</MenuItem>}
+                {trigger && (
+                    trigger.allowRemoval
+                        ? <MenuItem onClick={handleItemClick} data={{action: 'Removed'}}>Remove 1 {trigger.name}</MenuItem>
+                        : <MenuItem disabled>Removal disabled</MenuItem>
+                )}
+            </ContextMenu>
+        );
+    }
+};
+
+const ConnectedMenu = connectMenu(MENU_TYPE)(DynamicMenu);
 
 export default class DynamicMenuExample extends Component {
     constructor(props) {
         super(props);
 
         this.state = { logs: [] };
-        this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(e, data, target) {
+    handleClick = (e, data, target) => {
         const count = parseInt(target.getAttribute('data-count'), 10);
 
         if (data.action === 'Added') {
