@@ -31,7 +31,7 @@ const DynamicMenu = (props) => {
 
     return (
         <ContextMenu id={id}>
-            {trigger && <MenuItem onClick={handleItemClick} data={{action: 'Added'}}>Add 1 {trigger.name}</MenuItem>}
+            {trigger && <MenuItem onClick={handleItemClick} data={{action: 'Added'}}>{`Add 1 ${trigger.name}`}</MenuItem>}
             {trigger && (
                 trigger.allowRemoval
                     ? <MenuItem onClick={handleItemClick} data={{action: 'Removed'}}>{`Remove 1 ${trigger.name}`}</MenuItem>
