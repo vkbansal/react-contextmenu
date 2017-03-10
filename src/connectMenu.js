@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import ContextMenuTrigger from './ContextMenuTrigger';
 import listener from './globalEventListener';
@@ -12,7 +12,7 @@ export default function (menuId) {
     // <Child/> is presumably a wrapper of <ContextMenu/>
     return function (Child) {
         // return wrapper for <Child/> that forwards the ContextMenuTrigger's additional props
-        return class ConnectMenu extends React.Component {
+        return class ConnectMenu extends Component {
             constructor(props) {
                 super(props);
                 this.state = { trigger: null };
@@ -49,7 +49,7 @@ export default function (menuId) {
             }
 
             render() {
-                return <Child {...this.props} trigger={this.state.trigger} />;
+                return <Child {...this.props} id={menuId} trigger={this.state.trigger} />;
             }
         };
     };

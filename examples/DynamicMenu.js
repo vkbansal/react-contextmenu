@@ -25,30 +25,29 @@ function collect(props) {
     return props;
 }
 
-class DynamicMenu extends Component {
-    static propTypes = {
-        trigger: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            onItemClick: PropTypes.func.isRequired,
-            allowRemoval: PropTypes.bool
-        })
-    };
+const DynamicMenu = (props) => {
+    const { id, trigger } = props;
+    const handleItemClick = trigger ? trigger.onItemClick : null;
 
-    render() {
-        const { trigger } = this.props;
-        const handleItemClick = trigger ? trigger.onItemClick : null;
+    return (
+        <ContextMenu id={id}>
+            {trigger && <MenuItem onClick={handleItemClick} data={{action: 'Added'}}>Add 1 {trigger.name}</MenuItem>}
+            {trigger && (
+                trigger.allowRemoval
+                    ? <MenuItem onClick={handleItemClick} data={{action: 'Removed'}}>{`Remove 1 ${trigger.name}`}</MenuItem>
+                    : <MenuItem disabled>{'Removal disabled'}</MenuItem>
+            )}
+        </ContextMenu>
+    );
+};
 
-        return (
-            <ContextMenu id={MENU_TYPE}>
-                {trigger && <MenuItem onClick={handleItemClick} data={{action: 'Added'}}>Add 1 {trigger.name}</MenuItem>}
-                {trigger && (
-                    trigger.allowRemoval
-                        ? <MenuItem onClick={handleItemClick} data={{action: 'Removed'}}>Remove 1 {trigger.name}</MenuItem>
-                        : <MenuItem disabled>Removal disabled</MenuItem>
-                )}
-            </ContextMenu>
-        );
-    }
+DynamicMenu.propTypes = {
+    id: PropTypes.string.isRequired,
+    trigger: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        onItemClick: PropTypes.func.isRequired,
+        allowRemoval: PropTypes.bool
+    })
 };
 
 const ConnectedMenu = connectMenu(MENU_TYPE)(DynamicMenu);
