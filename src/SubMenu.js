@@ -89,11 +89,17 @@ export default class SubMenu extends Component {
         const rect = this.subMenu.getBoundingClientRect();
         const position = {};
 
-        if (rect.bottom > innerHeight) position.bottom = 0;
-        else position.top = 0;
+        if (rect.bottom > innerHeight) {
+            position.bottom = 0;
+        } else {
+            position.top = 0;
+        }
 
-        if (rect.right < innerWidth) position.left = '100%';
-        else position.right = '100%';
+        if (rect.right < innerWidth) {
+            position.left = '100%';
+        } else {
+            position.right = '100%';
+        }
 
         return position;
     }
@@ -103,11 +109,17 @@ export default class SubMenu extends Component {
         const rect = this.subMenu.getBoundingClientRect();
         const position = {};
 
-        if (rect.bottom > innerHeight) position.bottom = 0;
-        else position.top = 0;
+        if (rect.bottom > innerHeight) {
+            position.bottom = 0;
+        } else {
+            position.top = 0;
+        }
 
-        if (rect.left < 0) position.left = '100%';
-        else position.right = '100%';
+        if (rect.left < 0) {
+            position.left = '100%';
+        } else {
+            position.right = '100%';
+        }
 
         return position;
     }

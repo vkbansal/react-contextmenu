@@ -51,7 +51,9 @@ export default class ContextMenu extends Component {
     }
 
     componentWillUnmount() {
-        if (this.listenId) listener.unregister(this.listenId);
+        if (this.listenId) {
+            listener.unregister(this.listenId);
+        }
 
         this.unregisterHandlers();
     }
@@ -93,7 +95,9 @@ export default class ContextMenu extends Component {
     }
 
     handleEscape = (e) => {
-        if (e.keyCode === 27) hideMenu();
+        if (e.keyCode === 27) {
+            hideMenu();
+        }
     }
 
     handleOutsideClick = (e) => {
@@ -121,13 +125,21 @@ export default class ContextMenu extends Component {
             left: x
         };
 
-        if (y + rect.height > innerHeight) menuStyles.top -= rect.height;
+        if (y + rect.height > innerHeight) {
+            menuStyles.top -= rect.height;
+        }
 
-        if (x + rect.width > innerWidth) menuStyles.left -= rect.width;
+        if (x + rect.width > innerWidth) {
+            menuStyles.left -= rect.width;
+        }
 
-        if (menuStyles.top < 0) menuStyles.top = (rect.height < innerHeight) ? (innerHeight - rect.height) / 2 : 0;
+        if (menuStyles.top < 0) {
+            menuStyles.top = (rect.height < innerHeight) ? (innerHeight - rect.height) / 2 : 0;
+        }
 
-        if (menuStyles.left < 0) menuStyles.left = (rect.width < innerWidth) ? (innerWidth - rect.width) / 2 : 0;
+        if (menuStyles.left < 0) {
+            menuStyles.left = (rect.width < innerWidth) ? (innerWidth - rect.width) / 2 : 0;
+        }
 
         return menuStyles;
     }
