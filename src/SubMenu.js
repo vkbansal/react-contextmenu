@@ -34,9 +34,7 @@ export default class SubMenu extends Component {
             const wrapper = window.requestAnimationFrame || setTimeout;
 
             wrapper(() => {
-                const styles = this.props.rtl
-                                ? this.getRTLMenuPosition()
-                                : this.getMenuPosition();
+                const styles = this.props.rtl ? this.getRTLMenuPosition() : this.getMenuPosition();
 
                 this.subMenu.style.removeProperty('top');
                 this.subMenu.style.removeProperty('bottom');
@@ -64,25 +62,25 @@ export default class SubMenu extends Component {
         if (this.closetimer) clearTimeout(this.closetimer);
     }
 
-    handleClick = (e) => {
+    handleClick = e => {
         e.preventDefault();
-    }
+    };
 
     handleMouseEnter = () => {
         if (this.closetimer) clearTimeout(this.closetimer);
 
         if (this.props.disabled || this.state.visible) return;
 
-        this.opentimer = setTimeout(() => this.setState({visible: true}), this.props.hoverDelay);
-    }
+        this.opentimer = setTimeout(() => this.setState({ visible: true }), this.props.hoverDelay);
+    };
 
     handleMouseLeave = () => {
         if (this.opentimer) clearTimeout(this.opentimer);
 
         if (!this.state.visible) return;
 
-        this.closetimer = setTimeout(() => this.setState({visible: false}), this.props.hoverDelay);
-    }
+        this.closetimer = setTimeout(() => this.setState({ visible: false }), this.props.hoverDelay);
+    };
 
     getMenuPosition = () => {
         const { innerWidth, innerHeight } = window;
@@ -102,7 +100,7 @@ export default class SubMenu extends Component {
         }
 
         return position;
-    }
+    };
 
     getRTLMenuPosition = () => {
         const { innerHeight } = window;
@@ -122,15 +120,15 @@ export default class SubMenu extends Component {
         }
 
         return position;
-    }
+    };
 
-    menuRef = (c) => {
+    menuRef = c => {
         this.menu = c;
-    }
+    };
 
-    subMenuRef = (c) => {
+    subMenuRef = c => {
         this.subMenu = c;
-    }
+    };
 
     render() {
         const { children, disabled, title } = this.props;

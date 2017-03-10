@@ -1,5 +1,5 @@
 export function callIfExists(func, ...args) {
-    return (typeof func === 'function') && func(...args);
+    return typeof func === 'function' && func(...args);
 }
 
 export function hasOwnProp(obj, prop) {
@@ -23,6 +23,4 @@ export const cssClasses = {
 
 export const store = {};
 
-export const canUseDOM = Boolean(
-  typeof window !== 'undefined' && window.document && window.document.createElement
-);
+export const canUseDOM = Boolean(typeof window !== 'undefined' && window.document && window.document.createElement);
