@@ -40,6 +40,13 @@
     text-decoration: none;
 }
 
+.react-contextmenu-item.react-contextmenu-item--disabled,
+.react-contextmenu-item.react-contextmenu-item--disabled:hover {
+    color: #878a8c;
+    background-color: transparent;
+    border-color: rgba(0,0,0,.15);
+}
+
 .react-contextmenu-item--divider {
     margin-bottom: 3px;
     padding: 2px 0;
