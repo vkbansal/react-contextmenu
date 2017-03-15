@@ -12,7 +12,10 @@ export default class ContextMenuTrigger extends Component {
         collect: PropTypes.func,
         disable: PropTypes.bool,
         holdToDisplay: PropTypes.number,
-        renderTag: PropTypes.node
+        renderTag: PropTypes.oneOfType([
+            PropTypes.node,
+            PropTypes.func
+        ])
     };
 
     static defaultProps = {
