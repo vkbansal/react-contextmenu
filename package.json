@@ -58,6 +58,7 @@
     "babel-preset-stage-2": "^6.22.0",
     "babel-register": "^6.22.0",
     "coveralls": "^2.11.16",
+    "cross-env": "^3.2.4",
     "enzyme": "^2.7.1",
     "enzyme-to-json": "^1.4.5",
     "eslint": "^3.14.1",
