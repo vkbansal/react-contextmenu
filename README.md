@@ -66,7 +66,7 @@ See [examples](./examples) for more in detail usage.
 
 
 
-##Styling
+## Styling
 
 The styling can be apllied to using following classes.
 
