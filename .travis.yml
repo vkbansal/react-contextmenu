@@ -1,12 +1,12 @@
 language: node_js
 node_js:
-  - 6
+- 6
 after_success:
-  - npm run coveralls
+- npm run coveralls
 script:
-    - npm test
-    - bash ./.travis/deploy.sh
+- npm test
+- bash ./.travis/deploy.sh
 env:
   global:
-    - GITHUB_REPO: vkbansal/react-contextmenu
-    - secure:  "qJiEWuE8BuFx5Rzx7ZBvQ1bHGChkZjkDQo13szIA3GMRojB72aPGDDj2f4jKaik0THEdIFz2nryjVHlsWoG2DToUiFUneEue5S0Si7ZToF55ntFAZmyporvYHhS4+LE4/lFYkcnDBr2Sc62FG4ILRkRf+QN0hhM9hw0uHjF810XSZRLBKG3COb/qM9psJr0eS4V5YaUngp4e3pmeanygspOUoB2dwfqp8d7jIPNCMYw8Doyw8kUzJyT6WgxgSGgyf62nK/gFu+ZkzGYzI7kMHMQh8Qn7usdKoMqiE1CqrzhOQLvZnnQTeBLzyz06IxiDKW8srf17phsECx0K+BfmZh1vzOrkbjBqynhFkuuSX5FjPGAuBHEhOB7+NVSyKXYStcORxhSWirJp1OlMF89zrD07uOH1vIS/mU4cL4hTzr5a8W8ckrYcTaaTQzjxZNqcXJqFL2vxb3JN3lTP0oHV8shhN6k1wpe869nRJUy/uSHSHP+O7b9meEuu+nnZs6/LyERzXyIH8h4/FLQGSAqKOTTilwaN7QUd8/bix0WMAj41AMUWRHlHI09uU0T4K3Q9WS7rc74I+GZMDcRlzWS+fLR/8vJshl12CIq+R/zciP2TUKnEAyl6/pJ/7akwIH4w3Vi6p2LA3M4Ih8QvuVWn5fwNtSFGNYszIVmRgvTIYfo="
+  - GITHUB_REPO: vkbansal/react-contextmenu
+  - secure: 2VdcEEo4la14Mv8ydJHZGlh+ySICMBgUL4j/wbhVOnsQpxOX/l8UxLFSNKbrLz+l+vZ0C0gCaG3DeJDR9ceno/op83iH4faYxw+qB0TEpYUjMMJsHxLtE4VH9QozEHFcHEpFVmydqk6w4PVLfyb/aHDSHitQ9m1Gs+KSqcu7hG2CqFLcYN3iaSQhkHiBUrWW5vYvjqIe0jq66sBulkbTHzbn4P9FwvtSNROJVdz+5N5pb3pyDI9NpHaN2U91oDarmiy4DjGd8uWJGKLpFw5HECh7BR7vRfu7s7zam7S5dJ0jZ1bvqHgOhp/0G/c7xL1OLgR25aiFvFbUCAsOX1DXzJdttJTvs3hmAqHpYbCc+KBTOvVKYo1m9Ex9BnltHxw8CdRVd31ZarXX8CANLRfSOp7h2XPKDnNQClnfthPWpP63s7LMbP8QKM6hxJNN/jkdyFZss3tqAZwOeeZKzGq68Gk92xOw9IYiX/owT6m4sPUDdjFcE47yUnRanvnLKMdciQZnd3s9RO0zt87bsuQ4uKk6M/G4W/PJhZysx5iV+yiSHLUpxYz8YTL+ixWr5NrGLW8vNztFfcGQfNVtKoJaCl2EifL/67ninPNrvEIYwN8E1CsG6Iz+u3fRnAMRvNMAsgyFzm7lLpRggib9Vv7294epBqKwfBRUJOaJoPYLImc=
