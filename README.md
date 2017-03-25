@@ -8,14 +8,38 @@
 
 ContextMenu in React. Live Examples can be found [here](//vkbansal.github.io/react-contextmenu/)
 
+## Table of contents
+
+ - [Installation](#installation)
+ - [Browser Support](#browser-support)
+ - [Usage](#usage)
+ - [Styling](#styling)
+ - [API](#api)
+ - [FAQs](#faqs)
+ - [Contributors](#contributors)
+ - [Changelog](#changelog)
+ - [License](#license)
 
 ## Installation
+
+Using npm
 
 ```
 npm install --save react-contextmenu
 ```
 
+Using yarn
 
+```
+yarn add react-contextmenu
+```
+
+## Browser Support
+- IE 11 and Edge >= 12
+- FireFox >= 38
+- Chrome >= 47
+- Opera >= 34
+- Safari >= 8
 
 ## Usage
 
@@ -64,8 +88,6 @@ As you can see that the `ContextMenu` to be showed on any component is dependent
 
 See [examples](./examples) for more in detail usage.
 
-
-
 ## Styling
 
 The styling can be apllied to using following classes.
@@ -81,7 +103,6 @@ The styling can be apllied to using following classes.
 
 > Note: This package does note include any styling by default. You can use [react-contextmenu.css](./examples/react-contextmenu.css) from examples for quick setup.
 
-
 ## API
 
 The module exports the following:
@@ -91,16 +112,10 @@ The module exports the following:
 - `MenuItem`
 - `SubMenu`
 
-
-
-
-### ContextMenu(props)
-
-Type: React Component
-
+### <ContextMenu />
 Base Contextmenu Component.
 
-### Prop Types
+#### PropTypes
 
 | Property     | Type     | Required? | Description                                                      |
 |--------------|----------|-----------|------------------------------------------------------------------|
@@ -111,13 +126,11 @@ Base Contextmenu Component.
 | onShow       | Function |           | Callback called when the menu is shown.                          |
 | className    | String   |           | Custom `className` applied to root element of the context-menu.  |
 
-
-
-### ContextMenuTrigger(props)
-
-Type: React Component
+### <ContextMenuTrigger />
 
 Contextmenu Trigger Component
+
+#### PropTypes
 
 | Property      | Type                    | Required? | Default | Description                                                                                                                                                                                                                                     |
 |---------------|-------------------------|-----------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -128,13 +141,11 @@ Contextmenu Trigger Component
 | holdToDisplay | Number                  |           | `1000`  | This is applicable only for touch screens. The time (in ms) for which, user has to hold down his/her finger before the menu is shown.  Note: To disable the long press trigger on left-click just set a negative holdToDisplay value such as `-1` |
 | renderTag     | String or React Element |           |         | The element inside which the Component must be wrapped. By default `div` is used. But this prop can used to customize it.                                                                                                                         |
 
-
-
-### MenuItem(props)
-
-Type: React Component
+### <MenuItem />
 
 A Simple Component for menu items.
+
+#### PropTypes
 
 | Property     | Type     | Required? | Default | Description                                                                                                                                                                                                                                                                |
 |--------------|----------|-----------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -144,13 +155,11 @@ A Simple Component for menu items.
 | preventClose | Boolean  |           | false   | By default, the context menu is closed as soon as an item is clicked. Set this prop to control this behavior.                                                                                                                                                              |
 | attributes   | Object   |           |         | The attributes will be passed directly passed to the root element of `MenuItem`. Use this to customize it like adding custom classes, etc.                                                                                                                                 |
 
-
-
-### SubMenu(props)
-
-Type: React Component
+### <SubMenu />
 
 A component for using submenus within the contextmenu.
+
+#### PropTypes
 
 | Property   | Type    | Required? | Default | Description                                                                 |
 |------------|---------|-----------|---------|-----------------------------------------------------------------------------|
@@ -159,7 +168,7 @@ A component for using submenus within the contextmenu.
 | hoverDelay | Number  |           | `500`   | The time (in ms) after which the menu is to be displayed when hovered upon. |
 | classNames | String  |           |         | Custom `className` applied to root element of the context-menu.             |
 
-## FAQ
+## FAQs
 
 **Manually opening the context menu**
 
