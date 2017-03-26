@@ -20,7 +20,6 @@
 }
 
 .react-contextmenu-item {
-    width: 200px;
     padding: 3px 20px;
     font-weight: 400;
     line-height: 1.5;
@@ -35,8 +34,8 @@
 .react-contextmenu-item.react-contextmenu-item--active,
 .react-contextmenu-item:hover {
     color: #fff;
-    background-color: #0275d8;
-    border-color: #0275d8;
+    background-color: #20a0ff;
+    border-color: #20a0ff;
     text-decoration: none;
 }
 
