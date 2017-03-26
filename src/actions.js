@@ -25,9 +25,9 @@ export function dispatchGlobalEvent(eventName, opts, target = window) {
 }
 
 export function showMenu(opts = {}, target) {
-    dispatchGlobalEvent(MENU_SHOW, assign({}, opts, {type: MENU_SHOW}), target);
+    dispatchGlobalEvent(MENU_SHOW, assign({}, opts, { type: MENU_SHOW }), target);
 }
 
 export function hideMenu(opts = {}, target) {
-    dispatchGlobalEvent(MENU_HIDE, assign({}, opts, {type: MENU_HIDE}), target);
+    dispatchGlobalEvent(MENU_HIDE, assign({}, opts, { type: MENU_HIDE }), target);
 }

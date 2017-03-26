@@ -9,11 +9,22 @@ import { cssClasses, callIfExists, store } from './helpers';
 export default class ContextMenu extends Component {
     static propTypes = {
         id: PropTypes.string.isRequired,
+        children: PropTypes.node.isRequired,
+        data: PropTypes.object,
         className: PropTypes.string,
         hideOnLeave: PropTypes.bool,
         onHide: PropTypes.func,
         onMouseLeave: PropTypes.func,
         onShow: PropTypes.func
+    };
+
+    static defaultProps = {
+        className: '',
+        data: {},
+        hideOnLeave() { return null; },
+        onHide() { return null; },
+        onMouseLeave() { return null; },
+        onShow() { return null; }
     };
 
     constructor(props) {
@@ -33,9 +44,9 @@ export default class ContextMenu extends Component {
     componentDidUpdate() {
         if (this.state.isVisible) {
             window.requestAnimationFrame(() => {
-                const {x, y} = this.state;
+                const { x, y } = this.state;
 
-                const {top, left} = this.getMenuPosition(x, y);
+                const { top, left } = this.getMenuPosition(x, y);
 
                 window.requestAnimationFrame(() => {
                     this.menu.style.top = `${top}px`;
@@ -58,7 +69,7 @@ export default class ContextMenu extends Component {
         this.unregisterHandlers();
     }
 
-    registerHandlers = () => {
+    registerHandlers = () => { // eslint-disable-line react/sort-comp
         document.addEventListener('mousedown', this.handleOutsideClick);
         document.addEventListener('ontouchstart', this.handleOutsideClick);
         document.addEventListener('scroll', this.handleHide);
@@ -81,7 +92,7 @@ export default class ContextMenu extends Component {
 
         const { x, y } = e.detail.position;
 
-        this.setState({isVisible: true, x, y});
+        this.setState({ isVisible: true, x, y });
         this.registerHandlers();
         callIfExists(this.props.onShow, e);
     }
@@ -89,7 +100,7 @@ export default class ContextMenu extends Component {
     handleHide = (e) => {
         if (this.state.isVisible) {
             this.unregisterHandlers();
-            this.setState({isVisible: false});
+            this.setState({ isVisible: false });
             callIfExists(this.props.onHide, e);
         }
     }
@@ -134,11 +145,11 @@ export default class ContextMenu extends Component {
         }
 
         if (menuStyles.top < 0) {
-            menuStyles.top = (rect.height < innerHeight) ? (innerHeight - rect.height) / 2 : 0;
+            menuStyles.top = rect.height < innerHeight ? (innerHeight - rect.height) / 2 : 0;
         }
 
         if (menuStyles.left < 0) {
-            menuStyles.left = (rect.width < innerWidth) ? (innerWidth - rect.width) / 2 : 0;
+            menuStyles.left = rect.width < innerWidth ? (innerWidth - rect.width) / 2 : 0;
         }
 
         return menuStyles;
@@ -151,7 +162,7 @@ export default class ContextMenu extends Component {
     render() {
         const { children, className } = this.props;
         const { isVisible } = this.state;
-        const style = {position: 'fixed', opacity: 0, pointerEvents: 'none'};
+        const style = { position: 'fixed', opacity: 0, pointerEvents: 'none' };
         const menuClassnames = cx(cssClasses.menu, className, {
             [cssClasses.menuVisible]: isVisible
         });

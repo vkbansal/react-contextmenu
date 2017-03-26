@@ -8,6 +8,7 @@ import { callIfExists, cssClasses } from './helpers';
 export default class ContextMenuTrigger extends Component {
     static propTypes = {
         id: PropTypes.string.isRequired,
+        children: PropTypes.node.isRequired,
         attributes: PropTypes.object,
         collect: PropTypes.func,
         disable: PropTypes.bool,
@@ -20,6 +21,7 @@ export default class ContextMenuTrigger extends Component {
 
     static defaultProps = {
         attributes: {},
+        collect() { return null; },
         disable: false,
         holdToDisplay: 1000,
         renderTag: 'div'
@@ -71,7 +73,7 @@ export default class ContextMenuTrigger extends Component {
         hideMenu();
 
         showMenu({
-            position: {x, y},
+            position: { x, y },
             target: this.elem,
             id: this.props.id,
             data: callIfExists(this.props.collect, this.props)

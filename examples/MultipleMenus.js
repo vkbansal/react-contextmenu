@@ -15,7 +15,7 @@ export default class MultipleMenus extends Component {
     }
 
     handleClick = (e, data) => {
-        this.setState(({logs}) => ({
+        this.setState(({ logs }) => ({
             logs: [`Clicked on menu ${data.menu} item ${data.item}`, ...logs]
         }));
     }
@@ -38,15 +38,15 @@ export default class MultipleMenus extends Component {
                     </div>
                 </div>
                 <div>
-                    {this.state.logs.map((log, i) => (<p key={i}>{log}</p>))}
+                    {this.state.logs.map((log, i) => <p key={i}>{log}</p>)}
                 </div>
                 <ContextMenu id={MENU_1}>
-                    <MenuItem onClick={this.handleClick} data={{menu: 1, item: 1}}>Menu 1 Item 1</MenuItem>
-                    <MenuItem onClick={this.handleClick} data={{menu: 1, item: 2}}>Menu 1 Item 2</MenuItem>
+                    <MenuItem onClick={this.handleClick} data={{ menu: 1, item: 1 }}>Menu 1 Item 1</MenuItem>
+                    <MenuItem onClick={this.handleClick} data={{ menu: 1, item: 2 }}>Menu 1 Item 2</MenuItem>
                 </ContextMenu>
                 <ContextMenu id={MENU_2}>
-                    <MenuItem onClick={this.handleClick} data={{menu: 2, item: 1}}>Menu 2 Item 1</MenuItem>
-                    <MenuItem onClick={this.handleClick} data={{menu: 2, item: 2}}>Menu 2 Item 2</MenuItem>
+                    <MenuItem onClick={this.handleClick} data={{ menu: 2, item: 1 }}>Menu 2 Item 1</MenuItem>
+                    <MenuItem onClick={this.handleClick} data={{ menu: 2, item: 2 }}>Menu 2 Item 2</MenuItem>
                 </ContextMenu>
             </div>
         );

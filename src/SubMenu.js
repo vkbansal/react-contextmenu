@@ -5,6 +5,7 @@ import { cssClasses, hasOwnProp } from './helpers';
 
 export default class SubMenu extends Component {
     static propTypes = {
+        children: PropTypes.node.isRequired,
         title: PropTypes.node.isRequired,
         className: PropTypes.string,
         disabled: PropTypes.bool,
@@ -14,7 +15,9 @@ export default class SubMenu extends Component {
 
     static defaultProps = {
         disabled: false,
-        hoverDelay: 500
+        hoverDelay: 500,
+        className: '',
+        rtl: false
     };
 
     constructor(props) {
@@ -64,26 +67,6 @@ export default class SubMenu extends Component {
         if (this.closetimer) clearTimeout(this.closetimer);
     }
 
-    handleClick = (e) => {
-        e.preventDefault();
-    }
-
-    handleMouseEnter = () => {
-        if (this.closetimer) clearTimeout(this.closetimer);
-
-        if (this.props.disabled || this.state.visible) return;
-
-        this.opentimer = setTimeout(() => this.setState({visible: true}), this.props.hoverDelay);
-    }
-
-    handleMouseLeave = () => {
-        if (this.opentimer) clearTimeout(this.opentimer);
-
-        if (!this.state.visible) return;
-
-        this.closetimer = setTimeout(() => this.setState({visible: false}), this.props.hoverDelay);
-    }
-
     getMenuPosition = () => {
         const { innerWidth, innerHeight } = window;
         const rect = this.subMenu.getBoundingClientRect();
@@ -122,6 +105,26 @@ export default class SubMenu extends Component {
         }
 
         return position;
+    }
+
+    handleClick = (e) => {
+        e.preventDefault();
+    }
+
+    handleMouseEnter = () => {
+        if (this.closetimer) clearTimeout(this.closetimer);
+
+        if (this.props.disabled || this.state.visible) return;
+
+        this.opentimer = setTimeout(() => this.setState({ visible: true }), this.props.hoverDelay);
+    }
+
+    handleMouseLeave = () => {
+        if (this.opentimer) clearTimeout(this.opentimer);
+
+        if (!this.state.visible) return;
+
+        this.closetimer = setTimeout(() => this.setState({ visible: false }), this.props.hoverDelay);
     }
 
     menuRef = (c) => {

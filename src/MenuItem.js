@@ -1,4 +1,4 @@
-import React, { PropTypes, Component} from 'react';
+import React, { PropTypes, Component } from 'react';
 import cx from 'classnames';
 import assign from 'object-assign';
 
@@ -7,9 +7,11 @@ import { callIfExists, cssClasses, store } from './helpers';
 
 export default class MenuItem extends Component {
     static propTypes = {
+        children: PropTypes.node,
         attributes: PropTypes.object,
         data: PropTypes.object,
         disabled: PropTypes.bool,
+        divider: PropTypes.bool,
         preventClose: PropTypes.bool,
         onClick: PropTypes.func
     };
@@ -17,7 +19,11 @@ export default class MenuItem extends Component {
     static defaultProps = {
         disabled: false,
         data: {},
-        attributes: {}
+        divider: false,
+        attributes: {},
+        preventClose: false,
+        onClick() { return null; },
+        children: null
     };
 
     handleClick = (event) => {

@@ -2,6 +2,7 @@ parser: babel-eslint
 extends:
     - vkbansal
     - vkbansal/react
+env:
+    browser: true
 rules:
-    no-invalid-this: 0
-    object-property-newline: 0
+    react/no-array-index-key: 0

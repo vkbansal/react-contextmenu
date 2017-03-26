@@ -31,10 +31,10 @@ const DynamicMenu = (props) => {
 
     return (
         <ContextMenu id={id}>
-            {trigger && <MenuItem onClick={handleItemClick} data={{action: 'Added'}}>{`Add 1 ${trigger.name}`}</MenuItem>}
+            {trigger && <MenuItem onClick={handleItemClick} data={{ action: 'Added' }}>{`Add 1 ${trigger.name}`}</MenuItem>}
             {trigger && (
                 trigger.allowRemoval
-                    ? <MenuItem onClick={handleItemClick} data={{action: 'Removed'}}>{`Remove 1 ${trigger.name}`}</MenuItem>
+                    ? <MenuItem onClick={handleItemClick} data={{ action: 'Removed' }}>{`Remove 1 ${trigger.name}`}</MenuItem>
                     : <MenuItem disabled>{'Removal disabled'}</MenuItem>
             )}
         </ContextMenu>
@@ -47,7 +47,7 @@ DynamicMenu.propTypes = {
         name: PropTypes.string.isRequired,
         onItemClick: PropTypes.func.isRequired,
         allowRemoval: PropTypes.bool
-    })
+    }).isRequired
 };
 
 const ConnectedMenu = connectMenu(MENU_TYPE)(DynamicMenu);
@@ -65,18 +65,18 @@ export default class DynamicMenuExample extends Component {
         if (data.action === 'Added') {
             target.setAttribute('data-count', count + 1);
 
-            return this.setState(({logs}) => ({
+            return this.setState(({ logs }) => ({
                 logs: [`${data.action} 1 ${data.name}`, ...logs]
             }));
         }
         if (data.action === 'Removed' && count > 0) {
             target.setAttribute('data-count', count - 1);
 
-            return this.setState(({logs}) => ({
+            return this.setState(({ logs }) => ({
                 logs: [`${data.action} 1 ${data.name}`, ...logs]
             }));
         }
-        this.setState(({logs}) => ({
+        return this.setState(({ logs }) => ({
             logs: [` ${data.name} cannot be ${data.action.toLowerCase()}`, ...logs]
         }));
     }
@@ -105,7 +105,7 @@ export default class DynamicMenuExample extends Component {
                     ))}
                 </div>
                 <div>
-                    {this.state.logs.map((log, i) => (<p key={i}>{log}</p>))}
+                    {this.state.logs.map((log, i) => <p key={i}>{log}</p>)}
                 </div>
                 <ConnectedMenu />
             </div>

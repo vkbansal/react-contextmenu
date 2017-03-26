@@ -14,7 +14,7 @@ export default class SimpleMenu extends Component {
     }
 
     handleClick = (e, data) => {
-        this.setState(({logs}) => ({
+        this.setState(({ logs }) => ({
             logs: [`Clicked on menu ${data.item}`, ...logs]
         }));
     }
@@ -28,13 +28,13 @@ export default class SimpleMenu extends Component {
                     <div className='well'>right click to see the menu</div>
                 </ContextMenuTrigger>
                 <div>
-                    {this.state.logs.map((log, i) => (<p key={i}>{log}</p>))}
+                    {this.state.logs.map((log, i) => <p key={i}>{log}</p>)}
                 </div>
                 <ContextMenu id={MENU_TYPE}>
-                    <MenuItem onClick={this.handleClick} data={{item: 'item 1'}}>Menu Item 1</MenuItem>
-                    <MenuItem onClick={this.handleClick} data={{item: 'item 2'}}>Menu Item 2</MenuItem>
+                    <MenuItem onClick={this.handleClick} data={{ item: 'item 1' }}>Menu Item 1</MenuItem>
+                    <MenuItem onClick={this.handleClick} data={{ item: 'item 2' }}>Menu Item 2</MenuItem>
                     <MenuItem divider />
-                    <MenuItem onClick={this.handleClick} data={{item: 'item 3'}}>Menu Item 3</MenuItem>
+                    <MenuItem onClick={this.handleClick} data={{ item: 'item 3' }}>Menu Item 3</MenuItem>
                 </ContextMenu>
             </div>
         );

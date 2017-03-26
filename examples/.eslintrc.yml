@@ -2,3 +2,5 @@ settings:
     import/resolver:
         webpack:
            config: examples.config.js
+rules:
+    import/no-extraneous-dependencies: off

@@ -37,7 +37,7 @@ export default class MultipleTargets extends Component {
         if (data.action === 'Added') {
             target.setAttribute('data-count', count + 1);
 
-            return this.setState(({logs}) => ({
+            return this.setState(({ logs }) => ({
                 logs: [`${data.action} 1 ${data.name}`, ...logs]
             }));
         }
@@ -45,12 +45,12 @@ export default class MultipleTargets extends Component {
         if (data.action === 'Removed' && count > 0) {
             target.setAttribute('data-count', count - 1);
 
-            return this.setState(({logs}) => ({
+            return this.setState(({ logs }) => ({
                 logs: [`${data.action} 1 ${data.name}`, ...logs]
             }));
         }
 
-        this.setState(({logs}) => ({
+        return this.setState(({ logs }) => ({
             logs: [` ${data.name} cannot be ${data.action.toLowerCase()}`, ...logs]
         }));
     }
@@ -68,7 +68,8 @@ export default class MultipleTargets extends Component {
                 <div className='row'>
                     {targets.map((item, i) => (
                         <div key={i} className='col-sm-2 text-center'>
-                            <ContextMenuTrigger id={MENU_TYPE} name={item.name}
+                            <ContextMenuTrigger
+                                id={MENU_TYPE} name={item.name}
                                 holdToDisplay={1000}
                                 collect={collect} attributes={attributes}>
                                 {item.name}
@@ -77,11 +78,11 @@ export default class MultipleTargets extends Component {
                     ))}
                 </div>
                 <div>
-                    {this.state.logs.map((log, i) => (<p key={i}>{log}</p>))}
+                    {this.state.logs.map((log, i) => <p key={i}>{log}</p>)}
                 </div>
                 <ContextMenu id={MENU_TYPE}>
-                    <MenuItem onClick={this.handleClick} data={{action: 'Added'}}>Add 1 count</MenuItem>
-                    <MenuItem onClick={this.handleClick} data={{action: 'Removed'}}>Remove 1 count</MenuItem>
+                    <MenuItem onClick={this.handleClick} data={{ action: 'Added' }}>Add 1 count</MenuItem>
+                    <MenuItem onClick={this.handleClick} data={{ action: 'Removed' }}>Remove 1 count</MenuItem>
                 </ContextMenu>
             </div>
         );
