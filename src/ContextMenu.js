@@ -21,7 +21,7 @@ export default class ContextMenu extends Component {
     static defaultProps = {
         className: '',
         data: {},
-        hideOnLeave() { return null; },
+        hideOnLeave: false,
         onHide() { return null; },
         onMouseLeave() { return null; },
         onShow() { return null; }
