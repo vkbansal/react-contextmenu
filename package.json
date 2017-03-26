@@ -26,7 +26,8 @@
     "dist": "webpack --progress --profile --colors",
     "build": "npm run clean && npm run test && npm run dist && npm run modules && npm run modules:es6",
     "build:examples": "npm run clean:examples && NODE_ENV=production npm run webpack:examples",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "precommit": "lint-staged"
   },
   "author": "Vivek Kumar Bansal <contact@vkbansal.me>",
   "license": "MIT",
@@ -69,8 +70,11 @@
     "eslint-plugin-standard": "^2.0.1",
     "history": "^4.4.1",
     "http-server": "^0.9.0",
+    "husky": "^0.13.2",
     "jest": "^18.1.0",
     "jsdom": "^9.11.0",
+    "lint-staged": "^3.3.1",
+    "prettier": "^0.22.0",
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
@@ -90,6 +94,12 @@
     ],
     "collectCoverageFrom": [
       "**/src/**/*.js"
+    ]
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --single-quote --tab-width 4 --print-width 120 --trailing-comma none --jsx-bracket-same-line --write",
+      "git add"
     ]
   }
 }

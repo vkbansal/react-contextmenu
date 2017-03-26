@@ -25,41 +25,34 @@ export default class ContextMenuTrigger extends Component {
         renderTag: 'div'
     };
 
-
-    handleMouseDown = (event) => {
+    handleMouseDown = event => {
         if (this.props.holdToDisplay >= 0 && event.button === 0) {
             event.persist();
 
-            this.mouseDownTimeoutId = setTimeout(
-                () => this.handleContextClick(event),
-                this.props.holdToDisplay
-            );
+            this.mouseDownTimeoutId = setTimeout(() => this.handleContextClick(event), this.props.holdToDisplay);
         }
-    }
+    };
 
-    handleMouseUp = (event) => {
+    handleMouseUp = event => {
         if (event.button === 0) {
             clearTimeout(this.mouseDownTimeoutId);
         }
-    }
+    };
 
-    handleTouchstart = (event) => {
+    handleTouchstart = event => {
         if (this.props.holdToDisplay >= 0) {
             event.persist();
 
-            this.touchstartTimeoutId = setTimeout(
-                () => this.handleContextClick(event),
-                this.props.holdToDisplay
-            );
+            this.touchstartTimeoutId = setTimeout(() => this.handleContextClick(event), this.props.holdToDisplay);
         }
-    }
+    };
 
-    handleTouchEnd = (event) => {
+    handleTouchEnd = event => {
         event.preventDefault();
         clearTimeout(this.touchstartTimeoutId);
-    }
+    };
 
-    handleContextClick = (event) => {
+    handleContextClick = event => {
         if (this.props.disable) return;
 
         event.preventDefault();
@@ -71,16 +64,16 @@ export default class ContextMenuTrigger extends Component {
         hideMenu();
 
         showMenu({
-            position: {x, y},
+            position: { x, y },
             target: this.elem,
             id: this.props.id,
             data: callIfExists(this.props.collect, this.props)
         });
-    }
+    };
 
-    elemRef = (c) => {
+    elemRef = c => {
         this.elem = c;
-    }
+    };
 
     render() {
         const { renderTag, attributes, children } = this.props;

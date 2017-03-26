@@ -33,9 +33,9 @@ export default class ContextMenu extends Component {
     componentDidUpdate() {
         if (this.state.isVisible) {
             window.requestAnimationFrame(() => {
-                const {x, y} = this.state;
+                const { x, y } = this.state;
 
-                const {top, left} = this.getMenuPosition(x, y);
+                const { top, left } = this.getMenuPosition(x, y);
 
                 window.requestAnimationFrame(() => {
                     this.menu.style.top = `${top}px`;
@@ -65,7 +65,7 @@ export default class ContextMenu extends Component {
         document.addEventListener('contextmenu', this.handleHide);
         document.addEventListener('keyup', this.handleEscape);
         window.addEventListener('resize', this.handleHide);
-    }
+    };
 
     unregisterHandlers = () => {
         document.removeEventListener('mousedown', this.handleOutsideClick);
@@ -74,48 +74,43 @@ export default class ContextMenu extends Component {
         document.removeEventListener('contextmenu', this.handleHide);
         document.removeEventListener('keyup', this.handleEscape);
         window.removeEventListener('resize', this.handleHide);
-    }
+    };
 
-    handleShow = (e) => {
+    handleShow = e => {
         if (e.detail.id !== this.props.id || this.state.isVisible) return;
 
         const { x, y } = e.detail.position;
 
-        this.setState({isVisible: true, x, y});
+        this.setState({ isVisible: true, x, y });
         this.registerHandlers();
         callIfExists(this.props.onShow, e);
-    }
+    };
 
-    handleHide = (e) => {
+    handleHide = e => {
         if (this.state.isVisible) {
             this.unregisterHandlers();
-            this.setState({isVisible: false});
+            this.setState({ isVisible: false });
             callIfExists(this.props.onHide, e);
         }
-    }
+    };
 
-    handleEscape = (e) => {
+    handleEscape = e => {
         if (e.keyCode === 27) {
             hideMenu();
         }
-    }
+    };
 
-    handleOutsideClick = (e) => {
+    handleOutsideClick = e => {
         if (!this.menu.contains(e.target)) hideMenu();
-    }
+    };
 
-    handleMouseLeave = (event) => {
+    handleMouseLeave = event => {
         event.preventDefault();
 
-        callIfExists(
-            this.props.onMouseLeave,
-            event,
-            assign({}, this.props.data, store.data),
-            store.target
-        );
+        callIfExists(this.props.onMouseLeave, event, assign({}, this.props.data, store.data), store.target);
 
         if (this.props.hideOnLeave) hideMenu();
-    }
+    };
 
     getMenuPosition = (x = 0, y = 0) => {
         const { innerWidth, innerHeight } = window;
@@ -134,31 +129,35 @@ export default class ContextMenu extends Component {
         }
 
         if (menuStyles.top < 0) {
-            menuStyles.top = (rect.height < innerHeight) ? (innerHeight - rect.height) / 2 : 0;
+            menuStyles.top = rect.height < innerHeight ? (innerHeight - rect.height) / 2 : 0;
         }
 
         if (menuStyles.left < 0) {
-            menuStyles.left = (rect.width < innerWidth) ? (innerWidth - rect.width) / 2 : 0;
+            menuStyles.left = rect.width < innerWidth ? (innerWidth - rect.width) / 2 : 0;
         }
 
         return menuStyles;
-    }
+    };
 
-    menuRef = (c) => {
+    menuRef = c => {
         this.menu = c;
-    }
+    };
 
     render() {
         const { children, className } = this.props;
         const { isVisible } = this.state;
-        const style = {position: 'fixed', opacity: 0, pointerEvents: 'none'};
+        const style = { position: 'fixed', opacity: 0, pointerEvents: 'none' };
         const menuClassnames = cx(cssClasses.menu, className, {
             [cssClasses.menuVisible]: isVisible
         });
 
         return (
-            <nav ref={this.menuRef} style={style} className={menuClassnames}
-                onContextMenu={this.handleHide} onMouseLeave={this.handleMouseLeave}>
+            <nav
+                ref={this.menuRef}
+                style={style}
+                className={menuClassnames}
+                onContextMenu={this.handleHide}
+                onMouseLeave={this.handleMouseLeave}>
                 {children}
             </nav>
         );

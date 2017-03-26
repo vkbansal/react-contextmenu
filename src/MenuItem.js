@@ -1,4 +1,4 @@
-import React, { PropTypes, Component} from 'react';
+import React, { PropTypes, Component } from 'react';
 import cx from 'classnames';
 import assign from 'object-assign';
 
@@ -20,22 +20,17 @@ export default class MenuItem extends Component {
         attributes: {}
     };
 
-    handleClick = (event) => {
+    handleClick = event => {
         event.preventDefault();
 
         if (this.props.disabled) return;
 
-        callIfExists(
-            this.props.onClick,
-            event,
-            assign({}, this.props.data, store.data),
-            store.target
-        );
+        callIfExists(this.props.onClick, event, assign({}, this.props.data, store.data), store.target);
 
         if (this.props.preventClose) return;
 
         hideMenu();
-    }
+    };
 
     render() {
         const { disabled, divider, children, attributes } = this.props;
@@ -45,8 +40,11 @@ export default class MenuItem extends Component {
         });
 
         return (
-            <div {...attributes} className={menuItemClassNames}
-                onTouchEnd={this.handleClick} onClick={this.handleClick}>
+            <div
+                {...attributes}
+                className={menuItemClassNames}
+                onTouchEnd={this.handleClick}
+                onClick={this.handleClick}>
                 {children}
             </div>
         );
