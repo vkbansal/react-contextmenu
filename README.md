@@ -112,7 +112,7 @@ The module exports the following:
 - `MenuItem`
 - `SubMenu`
 
-### <ContextMenu />
+### `<ContextMenu />`
 Base Contextmenu Component.
 
 #### PropTypes
@@ -126,7 +126,7 @@ Base Contextmenu Component.
 | onShow       | Function |           | Callback called when the menu is shown.                          |
 | className    | String   |           | Custom `className` applied to root element of the context-menu.  |
 
-### <ContextMenuTrigger />
+### `<ContextMenuTrigger />`
 
 Contextmenu Trigger Component
 
@@ -141,7 +141,7 @@ Contextmenu Trigger Component
 | holdToDisplay | Number                  |           | `1000`  | This is applicable only for touch screens. The time (in ms) for which, user has to hold down his/her finger before the menu is shown.  Note: To disable the long press trigger on left-click just set a negative holdToDisplay value such as `-1` |
 | renderTag     | String or React Element |           |         | The element inside which the Component must be wrapped. By default `div` is used. But this prop can used to customize it.                                                                                                                         |
 
-### <MenuItem />
+### `<MenuItem />`
 
 A Simple Component for menu items.
 
@@ -155,7 +155,7 @@ A Simple Component for menu items.
 | preventClose | Boolean  |           | false   | By default, the context menu is closed as soon as an item is clicked. Set this prop to control this behavior.                                                                                                                                                              |
 | attributes   | Object   |           |         | The attributes will be passed directly passed to the root element of `MenuItem`. Use this to customize it like adding custom classes, etc.                                                                                                                                 |
 
-### <SubMenu />
+### `<SubMenu />`
 
 A component for using submenus within the contextmenu.
 
