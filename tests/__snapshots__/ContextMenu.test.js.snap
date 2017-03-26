@@ -1,6 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`ContextMenu tests does not shows when event with incorrect "id" is triggered 1`] = `
 <ContextMenu
-  id="CORRECT_ID">
+  id="CORRECT_ID"
+>
   <nav
     className="react-contextmenu"
     onContextMenu={[Function]}
@@ -11,13 +14,15 @@ exports[`ContextMenu tests does not shows when event with incorrect "id" is trig
         "pointerEvents": "none",
         "position": "fixed",
       }
-    } />
+    }
+  />
 </ContextMenu>
 `;
 
 exports[`ContextMenu tests does not shows when event with incorrect "id" is triggered 2`] = `
 <ContextMenu
-  id="CORRECT_ID">
+  id="CORRECT_ID"
+>
   <nav
     className="react-contextmenu"
     onContextMenu={[Function]}
@@ -28,13 +33,15 @@ exports[`ContextMenu tests does not shows when event with incorrect "id" is trig
         "pointerEvents": "none",
         "position": "fixed",
       }
-    } />
+    }
+  />
 </ContextMenu>
 `;
 
 exports[`ContextMenu tests shows when event with correct "id" is triggered 1`] = `
 <ContextMenu
-  id="CORRECT_ID">
+  id="CORRECT_ID"
+>
   <nav
     className="react-contextmenu"
     onContextMenu={[Function]}
@@ -45,13 +52,15 @@ exports[`ContextMenu tests shows when event with correct "id" is triggered 1`] =
         "pointerEvents": "none",
         "position": "fixed",
       }
-    } />
+    }
+  />
 </ContextMenu>
 `;
 
 exports[`ContextMenu tests shows when event with correct "id" is triggered 2`] = `
 <ContextMenu
-  id="CORRECT_ID">
+  id="CORRECT_ID"
+>
   <nav
     className="react-contextmenu react-contextmenu--visible"
     onContextMenu={[Function]}
@@ -62,6 +71,7 @@ exports[`ContextMenu tests shows when event with correct "id" is triggered 2`] =
         "pointerEvents": "none",
         "position": "fixed",
       }
-    } />
+    }
+  />
 </ContextMenu>
 `;
