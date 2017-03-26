@@ -165,11 +165,11 @@ export default class SubMenu extends Component {
         };
 
         return (
-            <nav {...menuProps}>
+            <nav {...menuProps} role='menuitem' tabIndex='-1' aria-haspopup='true'>
                 <div {...menuItemProps}>
                     {title}
                 </div>
-                <nav {...subMenuProps}>
+                <nav {...subMenuProps} role='menu' tabIndex='-1'>
                     {children}
                 </nav>
             </nav>

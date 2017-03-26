@@ -6,7 +6,7 @@
 
 # React Contextmenu
 
-ContextMenu in React. Live Examples can be found [here](//vkbansal.github.io/react-contextmenu/)
+ContextMenu in React with accessibility support. Live Examples can be found [here](//vkbansal.github.io/react-contextmenu/)
 
 ## Table of contents
 

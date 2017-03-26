@@ -51,9 +51,12 @@ export default class MenuItem extends Component {
         });
 
         return (
-            <div {...attributes} className={menuItemClassNames}
+            <div
+                {...attributes} className={menuItemClassNames}
+                role='menuitem' tabIndex='-1' aria-disabled={disabled ? 'true' : 'false'}
+                aria-orientation={divider ? 'horizontal' : 'undefined'}
                 onTouchEnd={this.handleClick} onClick={this.handleClick}>
-                {children}
+                {divider ? null : children}
             </div>
         );
     }
