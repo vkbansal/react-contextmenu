@@ -91,9 +91,9 @@ export default class DynamicMenuExample extends Component {
             <div>
                 <h3>Dynamic Menu</h3>
                 <p>This demo shows usage of dynamically created menu on multiple targets.</p>
-                <div className='row'>
+                <div className='pure-g'>
                     {targets.map((item, i) => (
-                        <div key={i} className='col-sm-2 text-center'>
+                        <div key={i} className='pure-u-1-6'>
                             <ContextMenuTrigger
                                 id={MENU_TYPE} holdToDisplay={1000}
                                 name={item.name} onItemClick={this.handleClick}

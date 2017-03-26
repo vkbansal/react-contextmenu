@@ -23,7 +23,24 @@ const config = {
         rules: [
             {
                 test: /\.js$/,
-                loader: "babel-loader",
+                use: [{
+                    loader: 'babel-loader',
+                    options: {
+                         presets: [
+                            'react',
+                            ['env', {
+                                modules: false,
+                                targets: {
+                                    browsers: 'IE >= 11, Edge >= 12, FireFox >= 38, Chrome >= 47, Opera >= 34, Safari >= 8'
+                                }
+                            }],
+                            'babili'
+                        ],
+                        plugins: [
+                            'transform-class-properties'
+                        ]
+                    }
+                }],
                 include: [
                     path.resolve(__dirname, './src'),
                     path.resolve(__dirname, './examples')

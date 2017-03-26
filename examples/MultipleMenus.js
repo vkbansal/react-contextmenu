@@ -25,13 +25,13 @@ export default class MultipleMenus extends Component {
             <div>
                 <h3>Multiple Menus</h3>
                 <p>This demo shows usage of multiple menus on multiple targets.</p>
-                <div className='row'>
-                    <div className='col-sm-6 text-center'>
+                <div className='pure-g'>
+                    <div className='pure-u-1-2'>
                         <ContextMenuTrigger id={MENU_1} holdToDisplay={1000}>
                             <div className='well'>right click to see the menu</div>
                         </ContextMenuTrigger>
                     </div>
-                    <div className='col-sm-6 text-center'>
+                    <div className='pure-u-1-2'>
                         <ContextMenuTrigger id={MENU_2} holdToDisplay={1000}>
                             <div className='well'>right click to see the menu</div>
                         </ContextMenuTrigger>

@@ -43,15 +43,22 @@ export default class Customization extends Component {
                 <h3>Custom Wrappers</h3>
                 <p>
                     This demo shows usage of customization.
-                    Instead of using <code>div</code>s by default, we are using <code>tr</code>s
+                    Instead of using <code>div</code>(s) by default, we are using <code>tr</code>(s)
                 </p>
-                <table className='table table-bordered'>
+                <table className='pure-table pure-table-bordered'>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Fruit</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         {targets.map((item, i) => (
                             <ContextMenuTrigger
                                 renderTag='tr' name={item.name}
                                 id={MENU_TYPE} holdToDisplay={1000} key={i}
                                 collect={collect}>
+                                <td>{i + 1}</td>
                                 <td>{item.name}</td>
                             </ContextMenuTrigger>
                         ))}
