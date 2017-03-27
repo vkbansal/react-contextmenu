@@ -98,7 +98,7 @@ export default class ContextMenu extends Component {
     }
 
     handleHide = (e) => {
-        if (this.state.isVisible) {
+        if (this.state.isVisible && (!e.detail || !e.detail.id || e.detail.id === this.props.id)) {
             this.unregisterHandlers();
             this.setState({ isVisible: false });
             callIfExists(this.props.onHide, e);
