@@ -43,12 +43,14 @@ export default class ContextMenu extends Component {
 
     componentDidUpdate() {
         if (this.state.isVisible) {
-            window.requestAnimationFrame(() => {
+            const wrapper = window.requestAnimationFrame || setTimeout;
+
+            wrapper(() => {
                 const { x, y } = this.state;
 
                 const { top, left } = this.getMenuPosition(x, y);
 
-                window.requestAnimationFrame(() => {
+                wrapper(() => {
                     this.menu.style.top = `${top}px`;
                     this.menu.style.left = `${left}px`;
                     this.menu.style.opacity = 1;
