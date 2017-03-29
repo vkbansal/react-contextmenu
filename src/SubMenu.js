@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 
-import { cssClasses, hasOwnProp } from './helpers';
+import { cssClasses, hasOwnProp, callIfExists } from './helpers';
 
 export default class SubMenu extends Component {
     static propTypes = {
@@ -9,11 +9,13 @@ export default class SubMenu extends Component {
         title: PropTypes.node.isRequired,
         className: PropTypes.string,
         disabled: PropTypes.bool,
+        active: PropTypes.bool,
         hoverDelay: PropTypes.number,
         rtl: PropTypes.bool
     };
 
     static defaultProps = {
+        active: false,
         disabled: false,
         hoverDelay: 500,
         className: '',
@@ -24,15 +26,35 @@ export default class SubMenu extends Component {
         super(props);
 
         this.state = {
-            visible: false
+            visible: false,
+            selected: null,
+            lock: false
         };
+    }
+
+    componentWillReceiveProps(nextProps, nextState) {
+        this.childrenCount = React.Children.count(nextProps.children);
+
+        // if (!nextState.isVisible) {
+        //     this.setState({
+        //         selected: null,
+        //         lock: false
+        //     });
+        // }
     }
 
     shouldComponentUpdate(nextProps, nextState) {
         return this.state.isVisible !== nextState.visible;
     }
 
+
     componentDidUpdate() {
+        if (this.props.active) {
+            this.registerHandlers();
+        } else {
+            this.unregisterHandlers();
+        }
+
         if (this.state.visible) {
             const wrapper = window.requestAnimationFrame || setTimeout;
 
@@ -53,6 +75,7 @@ export default class SubMenu extends Component {
                 this.subMenu.classList.add(cssClasses.menuVisible);
             });
         } else {
+            this.unregisterHandlers();
             this.subMenu.classList.remove(cssClasses.menuVisible);
             this.subMenu.style.removeProperty('bottom');
             this.subMenu.style.removeProperty('right');
@@ -65,6 +88,16 @@ export default class SubMenu extends Component {
         if (this.opentimer) clearTimeout(this.opentimer);
 
         if (this.closetimer) clearTimeout(this.closetimer);
+    }
+
+    registerHandlers = () => { // eslint-disable-line react/sort-comp
+        callIfExists(this.props.handleLock, true);
+        document.addEventListener('keyup', this.handleKeyUp);
+    }
+
+    unregisterHandlers = () => {
+        callIfExists(this.props.handleLock, false);
+        document.removeEventListener('keyup', this.handleKeyUp);
     }
 
     getMenuPosition = () => {
@@ -127,6 +160,41 @@ export default class SubMenu extends Component {
         this.closetimer = setTimeout(() => this.setState({ visible: false }), this.props.hoverDelay);
     }
 
+    handleKeyUp(e) {
+        switch (e.keyCode) {
+            case 37: // left
+                if (this.state.visible) this.setState({ visible: false });
+                break;
+            case 38: // up
+                if (this.state.visible && !this.lock) {
+                    this.setState(state => ({
+                        selected: typeof state.selected !== 'number'
+                                    ? this.childrenCount - 1
+                                    : state.selected <= 0
+                                        ? this.childrenCount - 1
+                                        : state.selected - 1
+                    }));
+                }
+                break;
+            case 39: // right
+                if (!this.state.visible) this.setState({ visible: true });
+                break;
+            case 40: // down
+                if (this.state.visible && !this.lock) {
+                    this.setState(state => ({
+                        selected: typeof state.selected !== 'number'
+                                    ? 0
+                                    : state.selected >= this.childrenCount - 1
+                                        ? 0
+                                        : state.selected + 1
+                    }));
+                }
+                break;
+            default:
+                console.log(e.keyCode);
+        }
+    }
+
     menuRef = (c) => {
         this.menu = c;
     }
@@ -136,7 +204,7 @@ export default class SubMenu extends Component {
     }
 
     render() {
-        const { children, disabled, title } = this.props;
+        const { children, disabled, title, active } = this.props;
         const { visible } = this.state;
         const menuProps = {
             ref: this.menuRef,
@@ -150,7 +218,7 @@ export default class SubMenu extends Component {
         const menuItemProps = {
             className: cx(cssClasses.menuItem, {
                 [cssClasses.menuItemDisabled]: disabled,
-                [cssClasses.menuItemActive]: visible
+                [cssClasses.menuItemActive]: active || visible
             }),
             onClick: this.handleClick
         };
@@ -170,7 +238,16 @@ export default class SubMenu extends Component {
                     {title}
                 </div>
                 <nav {...subMenuProps} role='menu' tabIndex='-1'>
-                    {children}
+                    {React.Children.map(
+                        children,
+                        (ChildNode, index) => React.cloneElement(
+                            ChildNode,
+                            {
+                                active: index === this.state.selected,
+                                handleLock: this.handleLock
+                            }
+                        )
+                    )}
                 </nav>
             </nav>
         );

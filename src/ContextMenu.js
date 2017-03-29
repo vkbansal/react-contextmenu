@@ -33,12 +33,27 @@ export default class ContextMenu extends Component {
         this.state = {
             x: 0,
             y: 0,
-            isVisible: false
+            isVisible: false,
+            selected: null,
+            lock: false
         };
+
+        this.childrenCount = React.Children.count(this.props.children);
     }
 
     componentDidMount() {
         this.listenId = listener.register(this.handleShow, this.handleHide);
+    }
+
+    componentWillReceiveProps(nextProps, nextState) {
+        this.childrenCount = React.Children.count(nextProps.children);
+
+        // if (!nextState.isVisible) {
+        //     this.setState({
+        //         selected: null,
+        //         lock: false
+        //     });
+        // }
     }
 
     componentDidUpdate() {
@@ -108,10 +123,42 @@ export default class ContextMenu extends Component {
     }
 
     handleEscape = (e) => {
-        if (e.keyCode === 27) {
-            hideMenu();
+        switch (e.keyCode) {
+            case 27: // escape
+                hideMenu();
+                break;
+            case 37: // left
+                break;
+            case 38: // up
+                if (this.state.isVisible && !this.lock) {
+                    this.setState(state => ({
+                        selected: typeof state.selected !== 'number'
+                                    ? this.childrenCount - 1
+                                    : state.selected <= 0
+                                        ? this.childrenCount - 1
+                                        : state.selected - 1
+                    }));
+                }
+                break;
+            case 39: // right
+                break;
+            case 40: // down
+                if (this.state.isVisible && !this.lock) {
+                    this.setState(state => ({
+                        selected: typeof state.selected !== 'number'
+                                    ? 0
+                                    : state.selected >= this.childrenCount - 1
+                                        ? 0
+                                        : state.selected + 1
+                    }));
+                }
+                break;
+            default:
+                console.log(e.keyCode);
         }
     }
+
+    handleLock = lock => this.lock = lock;
 
     handleOutsideClick = (e) => {
         if (!this.menu.contains(e.target)) hideMenu();
@@ -173,7 +220,16 @@ export default class ContextMenu extends Component {
             <nav
                 role='menu' tabIndex='-1' ref={this.menuRef} style={style} className={menuClassnames}
                 onContextMenu={this.handleHide} onMouseLeave={this.handleMouseLeave}>
-                {children}
+                {React.Children.map(
+                    children,
+                    (ChildNode, index) => React.cloneElement(
+                        ChildNode,
+                        {
+                            active: index === this.state.selected,
+                            handleLock: this.handleLock
+                        }
+                    )
+                )}
             </nav>
         );
     }
