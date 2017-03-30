@@ -4,7 +4,7 @@ import assign from 'object-assign';
 
 import listener from './globalEventListener';
 import { hideMenu } from './actions';
-import { cssClasses, callIfExists, store } from './helpers';
+import { cssClasses, callIfExists, store, getChildrenCount } from './helpers';
 
 export default class ContextMenu extends Component {
     static propTypes = {
@@ -33,31 +33,23 @@ export default class ContextMenu extends Component {
         this.state = {
             x: 0,
             y: 0,
-            isVisible: false,
-            selected: null,
-            lock: false
+            visible: false,
+            selected: -1
         };
 
-        this.childrenCount = React.Children.count(this.props.children);
+        this.childrenCount = getChildrenCount(this.props.children);
     }
 
     componentDidMount() {
         this.listenId = listener.register(this.handleShow, this.handleHide);
     }
 
-    componentWillReceiveProps(nextProps, nextState) {
-        this.childrenCount = React.Children.count(nextProps.children);
-
-        // if (!nextState.isVisible) {
-        //     this.setState({
-        //         selected: null,
-        //         lock: false
-        //     });
-        // }
+    componentWillReceiveProps(nextProps) {
+        this.childrenCount = getChildrenCount(nextProps.children);
     }
 
     componentDidUpdate() {
-        if (this.state.isVisible) {
+        if (this.state.visible) {
             const wrapper = window.requestAnimationFrame || setTimeout;
 
             wrapper(() => {
@@ -105,19 +97,19 @@ export default class ContextMenu extends Component {
     }
 
     handleShow = (e) => {
-        if (e.detail.id !== this.props.id || this.state.isVisible) return;
+        if (e.detail.id !== this.props.id || this.state.visible) return;
 
         const { x, y } = e.detail.position;
 
-        this.setState({ isVisible: true, x, y });
+        this.setState({ visible: true, x, y, selected: -1 });
         this.registerHandlers();
         callIfExists(this.props.onShow, e);
     }
 
     handleHide = (e) => {
-        if (this.state.isVisible && (!e.detail || !e.detail.id || e.detail.id === this.props.id)) {
+        if (this.state.visible && (!e.detail || !e.detail.id || e.detail.id === this.props.id)) {
             this.unregisterHandlers();
-            this.setState({ isVisible: false });
+            this.setState({ visible: false, selected: -1 });
             callIfExists(this.props.onHide, e);
         }
     }
@@ -127,10 +119,8 @@ export default class ContextMenu extends Component {
             case 27: // escape
                 hideMenu();
                 break;
-            case 37: // left
-                break;
             case 38: // up
-                if (this.state.isVisible && !this.lock) {
+                if (this.state.visible && !this.lock) {
                     this.setState(state => ({
                         selected: typeof state.selected !== 'number'
                                     ? this.childrenCount - 1
@@ -140,10 +130,8 @@ export default class ContextMenu extends Component {
                     }));
                 }
                 break;
-            case 39: // right
-                break;
             case 40: // down
-                if (this.state.isVisible && !this.lock) {
+                if (this.state.visible && !this.lock) {
                     this.setState(state => ({
                         selected: typeof state.selected !== 'number'
                                     ? 0
@@ -210,11 +198,12 @@ export default class ContextMenu extends Component {
 
     render() {
         const { children, className } = this.props;
-        const { isVisible } = this.state;
+        const { visible } = this.state;
         const style = { position: 'fixed', opacity: 0, pointerEvents: 'none' };
         const menuClassnames = cx(cssClasses.menu, className, {
-            [cssClasses.menuVisible]: isVisible
+            [cssClasses.menuVisible]: visible
         });
+        let dividerCount = 0;
 
         return (
             <nav
@@ -222,13 +211,17 @@ export default class ContextMenu extends Component {
                 onContextMenu={this.handleHide} onMouseLeave={this.handleMouseLeave}>
                 {React.Children.map(
                     children,
-                    (ChildNode, index) => React.cloneElement(
-                        ChildNode,
-                        {
-                            active: index === this.state.selected,
-                            handleLock: this.handleLock
-                        }
-                    )
+                    (ChildNode, index) => {
+                        if (ChildNode.props.divider) dividerCount++;
+
+                        return React.cloneElement(
+                            ChildNode,
+                            {
+                                active: !ChildNode.props.divider && index === this.state.selected + dividerCount,
+                                handleLock: this.handleLock
+                            }
+                        );
+                    }
                 )}
             </nav>
         );

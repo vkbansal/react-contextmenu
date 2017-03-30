@@ -33,8 +33,7 @@ const config = {
                                 targets: {
                                     browsers: 'IE >= 11, Edge >= 12, FireFox >= 38, Chrome >= 47, Opera >= 34, Safari >= 8'
                                 }
-                            }],
-                            'babili'
+                            }]
                         ],
                         plugins: [
                             'transform-class-properties'
@@ -52,6 +51,8 @@ const config = {
 };
 
 !PROD && (config.devtool = "source-map");
+
+PROD && (config.module.rules[0].use[0].options.presets.push('babili'));
 
 PROD && config.plugins.push(
      new webpack.optimize.UglifyJsPlugin({

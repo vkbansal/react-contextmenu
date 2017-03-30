@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 
-import { cssClasses, hasOwnProp, callIfExists } from './helpers';
+import { cssClasses, hasOwnProp, callIfExists, getChildrenCount } from './helpers';
 
 export default class SubMenu extends Component {
     static propTypes = {
         children: PropTypes.node.isRequired,
         title: PropTypes.node.isRequired,
+        handleLock: PropTypes.func.isRequired,
         className: PropTypes.string,
         disabled: PropTypes.bool,
         active: PropTypes.bool,
@@ -16,6 +17,7 @@ export default class SubMenu extends Component {
 
     static defaultProps = {
         active: false,
+        handleLock: () => null,
         disabled: false,
         hoverDelay: 500,
         className: '',
@@ -27,24 +29,27 @@ export default class SubMenu extends Component {
 
         this.state = {
             visible: false,
-            selected: null,
-            lock: false
+            selected: -1
         };
+
+        this.childrenCount = getChildrenCount(this.props.children);
+        this.handlersRegistered = false;
     }
 
     componentWillReceiveProps(nextProps, nextState) {
-        this.childrenCount = React.Children.count(nextProps.children);
+        this.childrenCount = getChildrenCount(nextProps.children);
 
-        // if (!nextState.isVisible) {
-        //     this.setState({
-        //         selected: null,
-        //         lock: false
-        //     });
-        // }
+        if (!nextState.visible) {
+            this.setState({
+                selected: -1
+            });
+        }
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return this.state.isVisible !== nextState.visible;
+        return this.state.visible !== nextState.visible
+            || this.state.selected !== nextState.selected
+            || this.props.active !== nextProps.active;
     }
 
 
@@ -75,7 +80,6 @@ export default class SubMenu extends Component {
                 this.subMenu.classList.add(cssClasses.menuVisible);
             });
         } else {
-            this.unregisterHandlers();
             this.subMenu.classList.remove(cssClasses.menuVisible);
             this.subMenu.style.removeProperty('bottom');
             this.subMenu.style.removeProperty('right');
@@ -88,17 +92,25 @@ export default class SubMenu extends Component {
         if (this.opentimer) clearTimeout(this.opentimer);
 
         if (this.closetimer) clearTimeout(this.closetimer);
+
+        this.unregisterHandlers();
     }
 
     registerHandlers = () => { // eslint-disable-line react/sort-comp
-        callIfExists(this.props.handleLock, true);
+        if (this.handlersRegistered) return;
+        console.log('reg');
         document.addEventListener('keyup', this.handleKeyUp);
+        this.handlersRegistered = true;
     }
 
     unregisterHandlers = () => {
-        callIfExists(this.props.handleLock, false);
+        if (!this.handlersRegistered) return;
+        console.log('unreg');
         document.removeEventListener('keyup', this.handleKeyUp);
+        this.handlersRegistered = false;
     }
+
+    handleLock = lock => this.lock = lock;
 
     getMenuPosition = () => {
         const { innerWidth, innerHeight } = window;
@@ -160,10 +172,13 @@ export default class SubMenu extends Component {
         this.closetimer = setTimeout(() => this.setState({ visible: false }), this.props.hoverDelay);
     }
 
-    handleKeyUp(e) {
+    handleKeyUp = (e) => {
         switch (e.keyCode) {
             case 37: // left
-                if (this.state.visible) this.setState({ visible: false });
+                if (this.state.visible && !this.lock) {
+                    this.setState({ visible: false, selected: -1 });
+                    callIfExists(this.props.handleLock, false);
+                }
                 break;
             case 38: // up
                 if (this.state.visible && !this.lock) {
@@ -177,7 +192,10 @@ export default class SubMenu extends Component {
                 }
                 break;
             case 39: // right
-                if (!this.state.visible) this.setState({ visible: true });
+                if (!this.state.visible && !this.lock) {
+                    callIfExists(this.props.handleLock, true);
+                    this.setState({ visible: true });
+                }
                 break;
             case 40: // down
                 if (this.state.visible && !this.lock) {
@@ -189,6 +207,10 @@ export default class SubMenu extends Component {
                                         : state.selected + 1
                     }));
                 }
+                break;
+            case 27: // escape
+                this.setState({ visible: false, selected: -1 });
+                callIfExists(this.props.handleLock, false);
                 break;
             default:
                 console.log(e.keyCode);
@@ -231,6 +253,7 @@ export default class SubMenu extends Component {
             },
             className: cx(cssClasses.menu, this.props.className)
         };
+        let dividerCount = 0;
 
         return (
             <nav {...menuProps} role='menuitem' tabIndex='-1' aria-haspopup='true'>
@@ -240,13 +263,17 @@ export default class SubMenu extends Component {
                 <nav {...subMenuProps} role='menu' tabIndex='-1'>
                     {React.Children.map(
                         children,
-                        (ChildNode, index) => React.cloneElement(
-                            ChildNode,
-                            {
-                                active: index === this.state.selected,
-                                handleLock: this.handleLock
-                            }
-                        )
+                        (ChildNode, index) => {
+                            if (ChildNode.props.divider) dividerCount++;
+
+                            return React.cloneElement(
+                                ChildNode,
+                                {
+                                    active: !ChildNode.props.divider && index === this.state.selected + dividerCount,
+                                    handleLock: this.handleLock
+                                }
+                            );
+                        }
                     )}
                 </nav>
             </nav>
