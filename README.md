@@ -15,7 +15,6 @@ ContextMenu in React with accessibility support. Live Examples can be found [her
  - [Installation](#installation)
  - [Browser Support](#browser-support)
  - [Usage](#usage)
- - [Styling](#styling)
  - [API](#api)
  - [FAQs](#faqs)
  - [Contributors](#contributors)
