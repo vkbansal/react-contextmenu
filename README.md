@@ -45,9 +45,7 @@ yarn add react-contextmenu
 
 ## Usage
 
-You need to setup two things:
-1. The `ContextMenu`
-2. The `ContextMenuTrigger`
+Simple example
 
 ```jsx
 import React from "react";
@@ -86,117 +84,15 @@ function MyApp() {
 ReactDOM.render(<MyApp myProp={12}/>, document.getElementById("main"));
 ```
 
-As you can see that the `ContextMenu` to be showed on any component is dependent on a **unique id**.
-
-See [examples](./examples) for more in detail usage.
-
-## Styling
-
-The styling can be apllied to using following classes.
-
-- `react-contextmenu` : applied to menu root element.
-- `react-contextmenu--visible` : applied to menu root element when visible.
-- `react-contextmenu-item` : applied to menu items.
-- `react-contextmenu-item--active` : applied to menu items and title in submenu when submenu is open.
-- `react-contextmenu-item--disabled` : applied to menu items and title in submenu when they are disabled.
-- `react-contextmenu-item--divider` : applied to menu items with the `divider` prop.
-- `react-contextmenu-wrapper` : applied to wrapper around elements in `ContextMenuTrigger`.
-- `react-contextmenu-submenu` : applied to items that are submenus.
-
-> Note: This package does note include any styling by default. You can use [react-contextmenu.css](./examples/react-contextmenu.css) from examples for quick setup.
+see [usage docs](./docs/usage.md) / [examples](./examples) for more details.
 
 ## API
 
-The module exports the following:
-
-- `ContextMenu`
-- `ContextMenuTrigger`
-- `MenuItem`
-- `SubMenu`
-
-### `<ContextMenu />`
-Base Contextmenu Component.
-
-#### PropTypes
-
-| Property     | Type     | Required? | Description                                                      |
-|--------------|----------|-----------|------------------------------------------------------------------|
-| id           | String   | ✓         | A unique identifier for a menu.                                  |
-| hideOnLeave  | Boolean  |           | Hides the context menu on mouse leave.                           |
-| onMouseLeave | Function |           | Callback called when the mouse leaves the menu or submenu areas. |
-| onHide       | Function |           | Callback called when the menu is hidden.                         |
-| onShow       | Function |           | Callback called when the menu is shown.                          |
-| className    | String   |           | Custom `className` applied to root element of the context-menu.  |
-
-### `<ContextMenuTrigger />`
-
-Contextmenu Trigger Component
-
-#### PropTypes
-
-| Property      | Type                    | Required? | Default | Description                                                                                                                                                                                                                                     |
-|---------------|-------------------------|-----------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id            | String                  | ✓         |         | The unique identifier of the menu to be called.                                                                                                                                                                                                 |
-| attributes    | Object                  |           |         | The attributes will be passed directly passed to the root element of component. Use this to customize it like adding custom classes, adding `colspan` etc.                                                                                      |
-| collect       | Function                |           |         | A simple function which takes `props` as input and returns the data to be passed to contextmenu.                                                                                                                                                  |
-| disable       | Boolean                 |           | `false` | Prop to ignore right clicks and display the default browser context menu.                                                                                                                                                                       |
-| holdToDisplay | Number                  |           | `1000`  | This is applicable only for touch screens. The time (in ms) for which, user has to hold down his/her finger before the menu is shown.  Note: To disable the long press trigger on left-click just set a negative holdToDisplay value such as `-1` |
-| renderTag     | String or React Element |           |         | The element inside which the Component must be wrapped. By default `div` is used. But this prop can used to customize it.                                                                                                                         |
-
-### `<MenuItem />`
-
-A Simple Component for menu items.
-
-#### PropTypes
-
-| Property     | Type     | Required? | Default | Description                                                                                                                                                                                                                                                                |
-|--------------|----------|-----------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| onClick      | Function | ✓         |         | The function to be called on click of item. The function will receive three parameters. The first is `event` object. The second is the merged data passed using `props.data` and collect from `ContextMenuTrigger`. The third is the element on which right-click occured. |
-| data         | Object   |           | `{}`    | The extra data (if required) to be passed to `onClick` event.                                                                                                                                                                                                              |
-| disabled     | Boolean  |           | `false` | If `true`, disables the click event and adds `.disabled` class.                                                                                                                                                                                                            |
-| preventClose | Boolean  |           | false   | By default, the context menu is closed as soon as an item is clicked. Set this prop to control this behavior.                                                                                                                                                              |
-| attributes   | Object   |           |         | The attributes will be passed directly passed to the root element of `MenuItem`. Use this to customize it like adding custom classes, etc.                                                                                                                                 |
-
-### `<SubMenu />`
-
-A component for using submenus within the contextmenu.
-
-#### PropTypes
-
-| Property   | Type    | Required? | Default | Description                                                                 |
-|------------|---------|-----------|---------|-----------------------------------------------------------------------------|
-| title      | String  | ✓         |         | The content to be displayed in parent menu.                                 |
-| disabled   | Boolean |           | `false` | If `true`, disables the menu from opening and adds `.disabled` class.       |
-| hoverDelay | Number  |           | `500`   | The time (in ms) after which the menu is to be displayed when hovered upon. |
-| classNames | String  |           |         | Custom `className` applied to root element of the context-menu.             |
+[API docs](./docs/api.md)
 
 ## FAQs
 
-**Manually opening the context menu**
-
-If you want a [menu button](http://i.imgur.com/5Qsu2yW.png) that toggles the context menu manually with a regular left click, create a reference to the `ContextMenuTrigger` and pass the click event to `handleContextClick`.
-
-```jsx
-let contextTrigger = null;
-
-const toggleMenu = e => {
-    if(contextTrigger) {
-        contextTrigger.handleContextClick(e);
-    }
-};
-
-return (
-    // Handles right clicking the trigger
-    <ContextMenuTrigger ref={c => contextTrigger = c}>
-        <img src="artwork.jpg" />
-        // The trigger has a menu icon on top of it, allowing for left click
-        <button onClick={toggleMenu}>☰</button>
-    </ContextMenuTrigger>
-    <ContextMenu>
-        ...
-    </ContextMenu>
-);
-```
+[ALL FAQs](./docs/faq.md)
 
 ## Contributors
 
