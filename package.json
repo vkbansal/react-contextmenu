@@ -40,12 +40,12 @@
   "homepage": "https://github.com/vkbansal/react-contextmenu",
   "dependencies": {
     "classnames": "^2.2.5",
-    "object-assign": "^4.1.0",
-    "prop-types": "^15.5.8"
+    "object-assign": "^4.1.0"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.0",
-    "react-dom": "^0.14.0 || ^15.0.0"
+    "react-dom": "^0.14.0 || ^15.0.0",
+    "prop-types": "^15.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",
@@ -77,6 +77,7 @@
     "react-addons-test-utils": "^15.5.1",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",
+    "prop-types": "^15.5.8",
     "rimraf": "^2.6.1",
     "webpack": "^2.3.2"
   },
