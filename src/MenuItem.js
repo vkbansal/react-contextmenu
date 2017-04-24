@@ -55,7 +55,7 @@ export default class MenuItem extends Component {
             <div
                 {...attributes} className={menuItemClassNames}
                 role='menuitem' tabIndex='-1' aria-disabled={disabled ? 'true' : 'false'}
-                aria-orientation={divider ? 'horizontal' : 'undefined'}
+                aria-orientation={divider ? 'horizontal' : null}
                 onTouchEnd={this.handleClick} onClick={this.handleClick}>
                 {divider ? null : children}
             </div>
