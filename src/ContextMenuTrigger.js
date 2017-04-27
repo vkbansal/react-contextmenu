@@ -61,10 +61,9 @@ export default class ContextMenuTrigger extends Component {
     }
 
     handleTouchEnd = (event) => {
-        // if (this.touchHandled) {
-        //     event.preventDefault();
-        // }
-
+        if (this.touchHandled) {
+            event.preventDefault();
+        }
         clearTimeout(this.touchstartTimeoutId);
     }
 
