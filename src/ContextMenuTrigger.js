@@ -52,9 +52,11 @@ export default class ContextMenuTrigger extends Component {
             event.persist();
 
             this.touchstartTimeoutId = setTimeout(
-                () => this.handleContextClick(event),
-                this.props.holdToDisplay,
-                this.touchHandled = true
+                () => {
+                    this.handleContextClick(event),
+                    this.props.holdToDisplay,
+                    this.touchHandled = true
+                }
             );
         }
     }
