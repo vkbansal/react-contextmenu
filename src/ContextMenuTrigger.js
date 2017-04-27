@@ -49,7 +49,7 @@ export default class ContextMenuTrigger extends Component {
 
     handleTouchstart = (event) => {
         this.touchHandled = false;
-        
+
         if (this.props.holdToDisplay >= 0) {
             event.persist();
 
