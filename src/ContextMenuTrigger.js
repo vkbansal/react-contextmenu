@@ -39,12 +39,21 @@ export default class ContextMenuTrigger extends Component {
                 this.props.holdToDisplay
             );
         }
+        callIfExists(this.props.attributes.onMouseDown, event);
     }
 
     handleMouseUp = (event) => {
         if (event.button === 0) {
             clearTimeout(this.mouseDownTimeoutId);
         }
+        callIfExists(this.props.attributes.onMouseUp, event);
+    }
+
+    handleMouseOut = (event) => {
+        if (event.button === 0) {
+            clearTimeout(this.mouseDownTimeoutId);
+        }
+        callIfExists(this.props.attributes.onMouseOut, event);
     }
 
     handleTouchstart = (event) => {
@@ -61,6 +70,7 @@ export default class ContextMenuTrigger extends Component {
                 this.props.holdToDisplay
             );
         }
+        callIfExists(this.props.attributes.onTouchStart, event);
     }
 
     handleTouchEnd = (event) => {
@@ -68,6 +78,12 @@ export default class ContextMenuTrigger extends Component {
             event.preventDefault();
         }
         clearTimeout(this.touchstartTimeoutId);
+        callIfExists(this.props.attributes.onTouchEnd, event);
+    }
+
+    handleContextMenu = (event) => {
+        this.handleContextClick(event);
+        callIfExists(this.props.attributes.onContextMenu, event);
     }
 
     handleContextClick = (event) => {
@@ -97,12 +113,12 @@ export default class ContextMenuTrigger extends Component {
         const { renderTag, attributes, children } = this.props;
         const newAttrs = assign({}, attributes, {
             className: cx(cssClasses.menuWrapper, attributes.className),
-            onContextMenu: this.handleContextClick,
+            onContextMenu: this.handleContextMenu,
             onMouseDown: this.handleMouseDown,
             onMouseUp: this.handleMouseUp,
             onTouchStart: this.handleTouchstart,
             onTouchEnd: this.handleTouchEnd,
-            onMouseOut: this.handleMouseUp,
+            onMouseOut: this.handleMouseOut,
             ref: this.elemRef
         });
 
