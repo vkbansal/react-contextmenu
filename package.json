@@ -64,7 +64,7 @@
     "enzyme": "^2.8.0",
     "enzyme-to-json": "^1.5.0",
     "eslint": "^3.18.0",
-    "eslint-config-vkbansal": "^5.0.0",
+    "eslint-config-vkbansal": "5.0.0",
     "eslint-import-resolver-webpack": "^0.8.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-react": "^6.10.3",
