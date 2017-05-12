@@ -1,3 +1,5 @@
+import React from 'react';
+
 export function callIfExists(func, ...args) {
     return (typeof func === 'function') && func(...args);
 }
@@ -26,3 +28,7 @@ export const store = {};
 export const canUseDOM = Boolean(
   typeof window !== 'undefined' && window.document && window.document.createElement
 );
+
+export function getChildrenCount(children) {
+    return React.Children.toArray(children).filter(ChildNode => !ChildNode.props.divider).length;
+}

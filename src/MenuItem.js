@@ -12,12 +12,14 @@ export default class MenuItem extends Component {
         attributes: PropTypes.object,
         data: PropTypes.object,
         disabled: PropTypes.bool,
+        active: PropTypes.bool,
         divider: PropTypes.bool,
         preventClose: PropTypes.bool,
         onClick: PropTypes.func
     };
 
     static defaultProps = {
+        active: false,
         disabled: false,
         data: {},
         divider: false,
@@ -45,10 +47,11 @@ export default class MenuItem extends Component {
     }
 
     render() {
-        const { disabled, divider, children, attributes } = this.props;
+        const { disabled, divider, children, attributes, active } = this.props;
         const menuItemClassNames = cx(cssClasses.menuItem, attributes && attributes.className, {
             [cssClasses.menuItemDisabled]: disabled,
-            [cssClasses.menuItemDivider]: divider
+            [cssClasses.menuItemDivider]: divider,
+            [cssClasses.menuItemActive]: active
         });
 
         return (
