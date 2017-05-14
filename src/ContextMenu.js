@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import assign from 'object-assign';
 
 import listener from './globalEventListener';
+import AbstractMenu from './AbstractMenu';
+import SubMenu from './SubMenu';
 import { hideMenu } from './actions';
 import { cssClasses, callIfExists, store } from './helpers';
 
-export default class ContextMenu extends Component {
+export default class ContextMenu extends AbstractMenu {
     static propTypes = {
         id: PropTypes.string.isRequired,
         children: PropTypes.node.isRequired,
@@ -31,11 +33,15 @@ export default class ContextMenu extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
+        this.state = Object.assign({}, this.state, {
             x: 0,
             y: 0,
             isVisible: false
-        };
+        });
+    }
+
+    getSubMenuType() { // eslint-disable-line class-methods-use-this
+        return SubMenu;
     }
 
     componentDidMount() {
@@ -72,12 +78,12 @@ export default class ContextMenu extends Component {
         this.unregisterHandlers();
     }
 
-    registerHandlers = () => { // eslint-disable-line react/sort-comp
+    registerHandlers = () => {
         document.addEventListener('mousedown', this.handleOutsideClick);
         document.addEventListener('ontouchstart', this.handleOutsideClick);
         document.addEventListener('scroll', this.handleHide);
         document.addEventListener('contextmenu', this.handleHide);
-        document.addEventListener('keyup', this.handleEscape);
+        document.addEventListener('keydown', this.handleKeyNavigation);
         window.addEventListener('resize', this.handleHide);
     }
 
@@ -86,7 +92,7 @@ export default class ContextMenu extends Component {
         document.removeEventListener('ontouchstart', this.handleOutsideClick);
         document.removeEventListener('scroll', this.handleHide);
         document.removeEventListener('contextmenu', this.handleHide);
-        document.removeEventListener('keyup', this.handleEscape);
+        document.removeEventListener('keydown', this.handleKeyNavigation);
         window.removeEventListener('resize', this.handleHide);
     }
 
@@ -103,14 +109,8 @@ export default class ContextMenu extends Component {
     handleHide = (e) => {
         if (this.state.isVisible && (!e.detail || !e.detail.id || e.detail.id === this.props.id)) {
             this.unregisterHandlers();
-            this.setState({ isVisible: false });
+            this.setState({ isVisible: false, selectedItem: null, forceSubMenuOpen: false });
             callIfExists(this.props.onHide, e);
-        }
-    }
-
-    handleEscape = (e) => {
-        if (e.keyCode === 27) {
-            hideMenu();
         }
     }
 
@@ -129,6 +129,12 @@ export default class ContextMenu extends Component {
         );
 
         if (this.props.hideOnLeave) hideMenu();
+    }
+
+    hideMenu = (e) => {
+        if (e.keyCode === 27) { // enter
+            hideMenu();
+        }
     }
 
     getMenuPosition = (x = 0, y = 0) => {
@@ -174,7 +180,7 @@ export default class ContextMenu extends Component {
             <nav
                 role='menu' tabIndex='-1' ref={this.menuRef} style={style} className={menuClassnames}
                 onContextMenu={this.handleHide} onMouseLeave={this.handleMouseLeave}>
-                {children}
+                {this.renderChildren(children)}
             </nav>
         );
     }
