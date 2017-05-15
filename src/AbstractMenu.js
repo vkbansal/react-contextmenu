@@ -96,6 +96,7 @@ export default class AbstractMenu extends Component {
 
     renderChildren = children => React.Children.map(children, (child) => {
         const props = {};
+        if (!React.isValidElement(child)) return null;
         if (child.type === this.getSubMenuType()) {
             props.forceOpen = this.state.forceSubMenuOpen && (this.state.selectedItem === child);
             props.forceClose = this.handleForceClose;
