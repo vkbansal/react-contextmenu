@@ -4,6 +4,7 @@
   "description": "Context Menu implemented in React",
   "main": "modules/index.js",
   "module": "es6/index.js",
+  "typings": "src/index.d.ts",
   "keywords": [
     "react",
     "reactjs",
