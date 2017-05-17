@@ -1,42 +1,58 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
+import AbstractMenu from './AbstractMenu';
 import { cssClasses, hasOwnProp } from './helpers';
 
-export default class SubMenu extends Component {
+export default class SubMenu extends AbstractMenu {
     static propTypes = {
         children: PropTypes.node.isRequired,
         title: PropTypes.node.isRequired,
         className: PropTypes.string,
         disabled: PropTypes.bool,
         hoverDelay: PropTypes.number,
-        rtl: PropTypes.bool
+        rtl: PropTypes.bool,
+        selected: PropTypes.bool,
+        onMouseMove: PropTypes.func.isRequired,
+        onMouseOut: PropTypes.func.isRequired,
+        forceOpen: PropTypes.bool.isRequired,
+        forceClose: PropTypes.func.isRequired,
+        parentKeyNavigationHandler: PropTypes.func.isRequired
     };
 
     static defaultProps = {
         disabled: false,
         hoverDelay: 500,
         className: '',
-        rtl: false
+        rtl: false,
+        selected: false
     };
 
     constructor(props) {
         super(props);
 
-        this.state = {
+        this.state = Object.assign({}, this.state, {
             visible: false
-        };
+        });
+    }
+
+    getSubMenuType() { // eslint-disable-line class-methods-use-this
+        return SubMenu;
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return this.state.isVisible !== nextState.visible;
+        this.isVisibilityChange = (this.state.visible !== nextState.visible ||
+                                  this.props.forceOpen !== nextProps.forceOpen) &&
+                                  !(this.state.visible && nextProps.forceOpen) &&
+                                  !(this.props.forceOpen && nextState.visible);
+        return true;
     }
 
     componentDidUpdate() {
-        if (this.state.visible) {
+        if (!this.isVisibilityChange) return;
+        if (this.props.forceOpen || this.state.visible) {
             const wrapper = window.requestAnimationFrame || setTimeout;
-
             wrapper(() => {
                 const styles = this.props.rtl
                                 ? this.getRTLMenuPosition()
@@ -52,6 +68,9 @@ export default class SubMenu extends Component {
                 if (hasOwnProp(styles, 'bottom')) this.subMenu.style.bottom = styles.bottom;
                 if (hasOwnProp(styles, 'right')) this.subMenu.style.right = styles.right;
                 this.subMenu.classList.add(cssClasses.menuVisible);
+
+                this.registerHandlers();
+                this.setState({ selectedItem: null });
             });
         } else {
             this.subMenu.classList.remove(cssClasses.menuVisible);
@@ -59,6 +78,7 @@ export default class SubMenu extends Component {
             this.subMenu.style.removeProperty('right');
             this.subMenu.style.top = 0;
             this.subMenu.style.left = '100%';
+            this.unregisterHandlers();
         }
     }
 
@@ -66,6 +86,8 @@ export default class SubMenu extends Component {
         if (this.opentimer) clearTimeout(this.opentimer);
 
         if (this.closetimer) clearTimeout(this.closetimer);
+
+        this.unregisterHandlers();
     }
 
     getMenuPosition = () => {
@@ -108,6 +130,13 @@ export default class SubMenu extends Component {
         return position;
     }
 
+    hideMenu = () => {
+        if (this.props.forceOpen) {
+            this.props.forceClose();
+        }
+        this.setState({ visible: false, selectedItem: null });
+    }
+
     handleClick = (e) => {
         e.preventDefault();
     }
@@ -117,7 +146,10 @@ export default class SubMenu extends Component {
 
         if (this.props.disabled || this.state.visible) return;
 
-        this.opentimer = setTimeout(() => this.setState({ visible: true }), this.props.hoverDelay);
+        this.opentimer = setTimeout(() => this.setState({
+            visible: true,
+            selectedItem: null
+        }), this.props.hoverDelay);
     }
 
     handleMouseLeave = () => {
@@ -125,7 +157,10 @@ export default class SubMenu extends Component {
 
         if (!this.state.visible) return;
 
-        this.closetimer = setTimeout(() => this.setState({ visible: false }), this.props.hoverDelay);
+        this.closetimer = setTimeout(() => this.setState({
+            visible: false,
+            selectedItem: null
+        }), this.props.hoverDelay);
     }
 
     menuRef = (c) => {
@@ -136,8 +171,18 @@ export default class SubMenu extends Component {
         this.subMenu = c;
     }
 
+    registerHandlers = () => {
+        document.removeEventListener('keydown', this.props.parentKeyNavigationHandler);
+        document.addEventListener('keydown', this.handleKeyNavigation);
+    }
+
+    unregisterHandlers = () => {
+        document.removeEventListener('keydown', this.handleKeyNavigation);
+        document.addEventListener('keydown', this.props.parentKeyNavigationHandler);
+    }
+
     render() {
-        const { children, disabled, title } = this.props;
+        const { children, disabled, title, selected } = this.props;
         const { visible } = this.state;
         const menuProps = {
             ref: this.menuRef,
@@ -151,8 +196,11 @@ export default class SubMenu extends Component {
         const menuItemProps = {
             className: cx(cssClasses.menuItem, {
                 [cssClasses.menuItemDisabled]: disabled,
-                [cssClasses.menuItemActive]: visible
+                [cssClasses.menuItemActive]: visible,
+                [cssClasses.menuItemSelected]: selected
             }),
+            onMouseMove: this.props.onMouseMove,
+            onMouseOut: this.props.onMouseOut,
             onClick: this.handleClick
         };
         const subMenuProps = {
@@ -171,7 +219,7 @@ export default class SubMenu extends Component {
                     {title}
                 </div>
                 <nav {...subMenuProps} role='menu' tabIndex='-1'>
-                    {children}
+                    {this.renderChildren(children)}
                 </nav>
             </nav>
         );

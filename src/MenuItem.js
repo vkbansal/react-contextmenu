@@ -14,7 +14,10 @@ export default class MenuItem extends Component {
         disabled: PropTypes.bool,
         divider: PropTypes.bool,
         preventClose: PropTypes.bool,
-        onClick: PropTypes.func
+        onClick: PropTypes.func,
+        selected: PropTypes.bool,
+        onMouseMove: PropTypes.func.isRequired,
+        onMouseLeave: PropTypes.func.isRequired
     };
 
     static defaultProps = {
@@ -24,7 +27,8 @@ export default class MenuItem extends Component {
         attributes: {},
         preventClose: false,
         onClick() { return null; },
-        children: null
+        children: null,
+        selected: false
     };
 
     handleClick = (event) => {
@@ -45,10 +49,11 @@ export default class MenuItem extends Component {
     }
 
     render() {
-        const { disabled, divider, children, attributes } = this.props;
+        const { disabled, divider, children, attributes, selected } = this.props;
         const menuItemClassNames = cx(cssClasses.menuItem, attributes && attributes.className, {
             [cssClasses.menuItemDisabled]: disabled,
-            [cssClasses.menuItemDivider]: divider
+            [cssClasses.menuItemDivider]: divider,
+            [cssClasses.menuItemSelected]: selected
         });
 
         return (
@@ -56,6 +61,8 @@ export default class MenuItem extends Component {
                 {...attributes} className={menuItemClassNames}
                 role='menuitem' tabIndex='-1' aria-disabled={disabled ? 'true' : 'false'}
                 aria-orientation={divider ? 'horizontal' : null}
+                ref={(ref) => { this.ref = ref; }}
+                onMouseMove={this.props.onMouseMove} onMouseLeave={this.props.onMouseLeave}
                 onTouchEnd={this.handleClick} onClick={this.handleClick}>
                 {divider ? null : children}
             </div>
