@@ -39,7 +39,9 @@ export default class AbstractMenu extends Component {
             case 13: // enter
                 e.preventDefault();
                 this.tryToOpenSubMenu(e);
-                if (this.seletedItemRef && this.seletedItemRef.ref) this.seletedItemRef.ref.click();
+                if (this.seletedItemRef && this.seletedItemRef.ref instanceof HTMLElement) {
+                    this.seletedItemRef.ref.click();
+                }
                 break;
             default:
                 // do nothing

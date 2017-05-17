@@ -86,6 +86,8 @@ export default class SubMenu extends AbstractMenu {
         if (this.opentimer) clearTimeout(this.opentimer);
 
         if (this.closetimer) clearTimeout(this.closetimer);
+
+        this.unregisterHandlers();
     }
 
     getMenuPosition = () => {
