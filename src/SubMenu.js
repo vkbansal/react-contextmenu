@@ -14,11 +14,11 @@ export default class SubMenu extends AbstractMenu {
         hoverDelay: PropTypes.number,
         rtl: PropTypes.bool,
         selected: PropTypes.bool,
-        onMouseMove: PropTypes.func.isRequired,
-        onMouseOut: PropTypes.func.isRequired,
-        forceOpen: PropTypes.bool.isRequired,
-        forceClose: PropTypes.func.isRequired,
-        parentKeyNavigationHandler: PropTypes.func.isRequired
+        onMouseMove: PropTypes.func,
+        onMouseOut: PropTypes.func,
+        forceOpen: PropTypes.bool,
+        forceClose: PropTypes.func,
+        parentKeyNavigationHandler: PropTypes.func
     };
 
     static defaultProps = {
@@ -26,7 +26,12 @@ export default class SubMenu extends AbstractMenu {
         hoverDelay: 500,
         className: '',
         rtl: false,
-        selected: false
+        selected: false,
+        onMouseMove: () => null,
+        onMouseOut: () => null,
+        forceOpen: false,
+        forceClose: () => null,
+        parentKeyNavigationHandler: () => null
     };
 
     constructor(props) {
