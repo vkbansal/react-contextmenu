@@ -135,7 +135,7 @@ export default class ContextMenu extends AbstractMenu {
         if (process.env.NODE_ENV === 'production') {
             e.preventDefault();
         }
-        this.hideMenu(e);
+        this.handleHide(e);
     }
 
     hideMenu = (e) => {
