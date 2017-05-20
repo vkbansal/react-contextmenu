@@ -16,8 +16,8 @@ export default class MenuItem extends Component {
         preventClose: PropTypes.bool,
         onClick: PropTypes.func,
         selected: PropTypes.bool,
-        onMouseMove: PropTypes.func.isRequired,
-        onMouseLeave: PropTypes.func.isRequired
+        onMouseMove: PropTypes.func,
+        onMouseLeave: PropTypes.func
     };
 
     static defaultProps = {
@@ -28,7 +28,9 @@ export default class MenuItem extends Component {
         preventClose: false,
         onClick() { return null; },
         children: null,
-        selected: false
+        selected: false,
+        onMouseMove: () => null,
+        onMouseLeave: () => null
     };
 
     handleClick = (event) => {
