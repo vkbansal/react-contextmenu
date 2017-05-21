@@ -62,11 +62,15 @@ export default class AbstractMenu extends Component {
     selectChildren = (forward) => {
         const { selectedItem } = this.state;
         const children = [];
-        React.Children.forEach(this.props.children, (child) => {
-            if ([MenuItem, this.getSubMenuType()].indexOf(child.type) > -1 && !child.props.divider) {
+        const childCollector = (child) => {
+            if ([MenuItem, this.getSubMenuType()].indexOf(child.type) < 0) {
+                // Maybe the MenuItem or SubMenu is capsuled in a wrapper div or something else
+                childCollector(child.props.children);
+            } else if (!child.props.divider) {
                 children.push(child);
             }
-        });
+        };
+        React.Children.forEach(this.props.children, childCollector);
         const currentIndex = children.indexOf(selectedItem);
         if (currentIndex < 0) {
             this.setState({
@@ -99,21 +103,26 @@ export default class AbstractMenu extends Component {
     renderChildren = children => React.Children.map(children, (child) => {
         const props = {};
         if (!React.isValidElement(child)) return null;
+        if ([MenuItem, this.getSubMenuType()].indexOf(child.type) < 0) {
+            // Maybe the MenuItem or SubMenu is capsuled in a wrapper div or something else
+            props.children = this.renderChildren(child.props.children);
+            return React.cloneElement(child, props);
+        }
+        props.onMouseLeave = this.onChildMouseLeave.bind(this);
         if (child.type === this.getSubMenuType()) {
+            // special props for SubMenu only
             props.forceOpen = this.state.forceSubMenuOpen && (this.state.selectedItem === child);
             props.forceClose = this.handleForceClose;
             props.parentKeyNavigationHandler = this.handleKeyNavigation;
         }
-        if ([MenuItem, this.getSubMenuType()].indexOf(child.type) > -1 && !child.props.divider) {
-            if (this.state.selectedItem === child) {
-                props.selected = true;
-                props.onMouseLeave = this.onChildMouseLeave.bind(this);
-                props.ref = (ref) => { this.seletedItemRef = ref; };
-                return React.cloneElement(child, props);
-            }
+        if (!child.props.divider && this.state.selectedItem === child) {
+            // special props for selected item only
+            props.selected = true;
+            props.ref = (ref) => { this.seletedItemRef = ref; };
+            return React.cloneElement(child, props);
         }
+        // onMouseMove is only needed for non selected items
         props.onMouseMove = () => this.onChildMouseMove(child);
-        props.onMouseLeave = this.onChildMouseLeave.bind(this);
         return React.cloneElement(child, props);
     });
 }
