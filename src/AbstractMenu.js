@@ -65,7 +65,7 @@ export default class AbstractMenu extends Component {
         const childCollector = (child) => {
             if ([MenuItem, this.getSubMenuType()].indexOf(child.type) < 0) {
                 // Maybe the MenuItem or SubMenu is capsuled in a wrapper div or something else
-                childCollector(child.props.children);
+                React.Children.forEach(child.props.children, childCollector);
             } else if (!child.props.divider) {
                 children.push(child);
             }
