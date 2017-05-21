@@ -131,6 +131,13 @@ export default class ContextMenu extends AbstractMenu {
         if (this.props.hideOnLeave) hideMenu();
     }
 
+    handleContextMenu = (e) => {
+        if (process.env.NODE_ENV === 'production') {
+            e.preventDefault();
+        }
+        this.handleHide(e);
+    }
+
     hideMenu = (e) => {
         if (e.keyCode === 27) { // enter
             hideMenu();
@@ -179,7 +186,7 @@ export default class ContextMenu extends AbstractMenu {
         return (
             <nav
                 role='menu' tabIndex='-1' ref={this.menuRef} style={style} className={menuClassnames}
-                onContextMenu={this.handleHide} onMouseLeave={this.handleMouseLeave}>
+                onContextMenu={this.handleContextMenu} onMouseLeave={this.handleMouseLeave}>
                 {this.renderChildren(children)}
             </nav>
         );
