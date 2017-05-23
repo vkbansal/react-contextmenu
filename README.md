@@ -93,6 +93,10 @@ see [usage docs](./docs/usage.md) / [examples](./examples) for more details.
 
 [ALL FAQs](./docs/faq.md)
 
+## Who's using react-contextmenu?
+- [react-data-grid](https://github.com/adazzle/react-data-grid)
+- [teamup.com](https://teamup.com)
+
 ## Contributors
 
 [All Contributors](https://github.com/vkbansal/react-contextmenu/graphs/contributors)
