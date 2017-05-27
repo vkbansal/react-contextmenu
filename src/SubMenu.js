@@ -78,13 +78,15 @@ export default class SubMenu extends AbstractMenu {
                 this.setState({ selectedItem: null });
             });
         } else {
-            this.subMenu.addEventListener('transitionend', () => {
+            const cleanup = () => {
+                this.subMenu.removeEventListener('transitionend', cleanup);
                 this.subMenu.style.removeProperty('bottom');
                 this.subMenu.style.removeProperty('right');
                 this.subMenu.style.top = 0;
                 this.subMenu.style.left = '100%';
                 this.unregisterHandlers();
-            }, { once: true });
+            };
+            this.subMenu.addEventListener('transitionend', cleanup);
             this.subMenu.classList.remove(cssClasses.menuVisible);
         }
     }
