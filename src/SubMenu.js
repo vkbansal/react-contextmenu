@@ -78,12 +78,14 @@ export default class SubMenu extends AbstractMenu {
                 this.setState({ selectedItem: null });
             });
         } else {
+            this.subMenu.addEventListener('transitionend', () => {
+                this.subMenu.style.removeProperty('bottom');
+                this.subMenu.style.removeProperty('right');
+                this.subMenu.style.top = 0;
+                this.subMenu.style.left = '100%';
+                this.unregisterHandlers();
+            }, { once: true });
             this.subMenu.classList.remove(cssClasses.menuVisible);
-            this.subMenu.style.removeProperty('bottom');
-            this.subMenu.style.removeProperty('right');
-            this.subMenu.style.top = 0;
-            this.subMenu.style.left = '100%';
-            this.unregisterHandlers();
         }
     }
 
@@ -212,6 +214,7 @@ export default class SubMenu extends AbstractMenu {
             ref: this.subMenuRef,
             style: {
                 position: 'absolute',
+                transition: 'opacity 1ms', // trigger transitionend event
                 top: 0,
                 left: '100%'
             },

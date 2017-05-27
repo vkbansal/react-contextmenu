@@ -12,6 +12,7 @@
     outline: none;
     opacity: 0;
     pointer-events: none;
+    transition: opacity 250ms ease !important;
 }
 
 .react-contextmenu.react-contextmenu--visible {
