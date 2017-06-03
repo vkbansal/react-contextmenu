@@ -102,7 +102,7 @@ export default class AbstractMenu extends Component {
 
     renderChildren = children => React.Children.map(children, (child) => {
         const props = {};
-        if (!React.isValidElement(child)) return null;
+        if (!React.isValidElement(child)) return child;
         if ([MenuItem, this.getSubMenuType()].indexOf(child.type) < 0) {
             // Maybe the MenuItem or SubMenu is capsuled in a wrapper div or something else
             props.children = this.renderChildren(child.props.children);
