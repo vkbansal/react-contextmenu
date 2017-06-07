@@ -97,12 +97,22 @@ export default class ContextMenuTrigger extends Component {
 
         hideMenu();
 
-        showMenu({
+        let data = callIfExists(this.props.collect, this.props);
+        let showMenuConfig = {
             position: { x, y },
             target: this.elem,
             id: this.props.id,
-            data: callIfExists(this.props.collect, this.props)
-        });
+            data
+        };
+        if (data && (typeof data.then === 'function')) {
+            // it's promise
+            data.then((resp) => {
+                showMenuConfig.data = resp;
+                showMenu(showMenuConfig);
+            });
+        } else {
+            showMenu(showMenuConfig);
+        }
     }
 
     elemRef = (c) => {
