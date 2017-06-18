@@ -58,6 +58,7 @@ export default class ContextMenu extends AbstractMenu {
                 const { top, left } = this.getMenuPosition(x, y);
 
                 wrapper(() => {
+                    if (!this.menu) return;
                     this.menu.style.top = `${top}px`;
                     this.menu.style.left = `${left}px`;
                     this.menu.style.opacity = 1;
@@ -65,6 +66,7 @@ export default class ContextMenu extends AbstractMenu {
                 });
             });
         } else {
+            if (!this.menu) return;
             this.menu.style.opacity = 0;
             this.menu.style.pointerEvents = 'none';
         }
@@ -145,12 +147,15 @@ export default class ContextMenu extends AbstractMenu {
     }
 
     getMenuPosition = (x = 0, y = 0) => {
-        const { innerWidth, innerHeight } = window;
-        const rect = this.menu.getBoundingClientRect();
-        const menuStyles = {
+        let menuStyles = {
             top: y,
             left: x
         };
+
+        if (!this.menu) return menuStyles;
+
+        const { innerWidth, innerHeight } = window;
+        const rect = this.menu.getBoundingClientRect();
 
         if (y + rect.height > innerHeight) {
             menuStyles.top -= rect.height;
