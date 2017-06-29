@@ -67,8 +67,9 @@ export default class AbstractMenu extends Component {
         const { selectedItem } = this.state;
         const children = [];
         const childCollector = (child) => {
-            // child can be empty in case you do conditional rendering of components, in which case it should not be accounted for as a real child
-            if (child === null || child === false || child === undefined || child === '') {
+            // child can be empty in case you do conditional rendering of components, in which 
+            // case it should not be accounted for as a real child
+            if (!child) {
                 return;
             }
             
