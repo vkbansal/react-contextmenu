@@ -19,6 +19,10 @@ export default class AbstractMenu extends Component {
     }
 
     handleKeyNavigation = (e) => {
+        if (!this.state.isVisible) {
+            return;
+        }
+
         switch (e.keyCode) {
             case 37: // left arrow
             case 27: // escape
@@ -63,6 +67,12 @@ export default class AbstractMenu extends Component {
         const { selectedItem } = this.state;
         const children = [];
         const childCollector = (child) => {
+            // child can be empty in case you do conditional rendering of components, in which
+            // case it should not be accounted for as a real child
+            if (!child) {
+                return;
+            }
+
             if ([MenuItem, this.getSubMenuType()].indexOf(child.type) < 0) {
                 // Maybe the MenuItem or SubMenu is capsuled in a wrapper div or something else
                 React.Children.forEach(child.props.children, childCollector);
