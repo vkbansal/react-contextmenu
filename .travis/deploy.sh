@@ -11,13 +11,9 @@ set -o errexit
 
 # reset public dir
 rm -rf public
-mkdir public
 
 # copy required files
-cp ./examples/index.html ./public/index.html
-cp ./examples/react-contextmenu.css ./public/react-contextmenu.css
-npm run build:examples && cp ./examples/bundle.js ./public/bundle.js
-
+npm run build:examples
 
 cd public
 git init

@@ -5,6 +5,5 @@ modules/
 es6/
 coverage/
 .vscode
-bundle.js
 *.log
 *.js.map

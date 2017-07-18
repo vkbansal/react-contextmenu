@@ -11,6 +11,8 @@ import Customization from './Customization';
 import RTLSubMenu from './RTLSubMenu';
 import Nested from './Nested';
 
+import './react-contextmenu.css';
+
 const commonProps = {
     className: 'pure-menu-link',
     activeClassName: 'link-active'

@@ -2,15 +2,19 @@
 
 const webpack = require('webpack');
 const path  = require('path');
+const Extract = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const PROD = process.env.NODE_ENV === 'production';
+const DEV = !PROD;
 
 const config = {
     entry: ["./examples/index.js"],
     output: {
-        filename: "bundle.js",
-        path: path.resolve(__dirname, "./examples"),
+        filename: DEV ? "bundle.js" : "bundle.[hash].js",
+        path: path.resolve(__dirname, "./public"),
         publicPath: "/",
+        hashDigestLength: 6,
         sourceMapFilename: "bundle.js.map"
     },
     resolve: {
@@ -45,10 +49,29 @@ const config = {
                     path.resolve(__dirname, './src'),
                     path.resolve(__dirname, './examples')
                 ]
+            },
+            {
+                test: /\.css$/,
+                use: Extract.extract({
+                    fallback: 'style-loader',
+                    use: [{
+                        loader: 'css-loader'
+                    }]
+                }),
             }
         ]
     },
-    plugins: []
+    plugins: [
+        new Extract({
+            filename: DEV ? 'styles.css' : 'styles.[contenthash:6].css',
+            allChunks: true
+        }),
+        new HtmlWebpackPlugin({
+            template: 'examples/index.html',
+            inject: true,
+            filename: 'index.html'
+        })
+    ]
 };
 
 !PROD && (config.devtool = "source-map");
