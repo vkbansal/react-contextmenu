@@ -9,6 +9,7 @@ import SubMenus from './SubMenus';
 import DynamicMenu from './DynamicMenu';
 import Customization from './Customization';
 import RTLSubMenu from './RTLSubMenu';
+import Nested from './Nested';
 
 const commonProps = {
     className: 'pure-menu-link',
@@ -55,6 +56,11 @@ function App() {
                             Right-to-Left
                         </Link>
                     </li>
+                    <li className='pure-menu-item'>
+                        <Link {...commonProps} to='/nested'>
+                            Nested
+                        </Link>
+                    </li>
                 </ul>
             </div>
             <Switch>
@@ -65,6 +71,7 @@ function App() {
                 <Route path='/dynamic-menu' component={DynamicMenu} />
                 <Route path='/customization' component={Customization} />
                 <Route path='/rtl-submenus' component={RTLSubMenu} />
+                <Route path='/nested' component={Nested} />
             </Switch>
         </div>
     );
