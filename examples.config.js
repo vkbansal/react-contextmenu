@@ -13,7 +13,7 @@ const config = {
     output: {
         filename: DEV ? "bundle.js" : "bundle.[hash].js",
         path: path.resolve(__dirname, "./public"),
-        publicPath: "/",
+        publicPath: DEV ? "/" : '/react-contextmenu/',
         hashDigestLength: 6,
         sourceMapFilename: "bundle.js.map"
     },
