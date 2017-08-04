@@ -10,6 +10,7 @@ engines:
     enabled: true
 exclude_paths:
   - examples/**/*
+  - tests/**/*
   - examples.config.js
   - webpack.config.js
 ratings:
