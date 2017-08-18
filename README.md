@@ -51,6 +51,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 
+import 'react-contextmenu/public/styles.5bb557.css';
+
 function handleClick(e, data) {
   console.log(data);
 }
