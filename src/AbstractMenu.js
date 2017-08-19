@@ -19,7 +19,9 @@ export default class AbstractMenu extends Component {
     }
 
     handleKeyNavigation = (e) => {
-        if (!this.state.isVisible) {
+        // check for isVisible strictly here as it might be undefined when this code executes in the context of SubMenu
+        // but we only need to check when it runs in the ContextMenu context
+        if (this.state.isVisible === false) {
             return;
         }
 
