@@ -1,6 +1,6 @@
 settings:
     import/resolver:
         webpack:
-           config: examples.config.js
+           config: examples/webpack.config.js
 rules:
     import/no-extraneous-dependencies: off

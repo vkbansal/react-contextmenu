@@ -9,17 +9,17 @@ const PROD = process.env.NODE_ENV === 'production';
 const DEV = !PROD;
 
 const config = {
-    entry: ["./examples/index.js"],
+    entry: ['./examples/index.js'],
     output: {
-        filename: DEV ? "bundle.js" : "bundle.[hash].js",
-        path: path.resolve(__dirname, "./public"),
-        publicPath: DEV ? "/" : '/react-contextmenu/',
+        filename: DEV ? 'bundle.js' : 'bundle.[hash].js',
+        path: path.resolve(__dirname, '../public'),
+        publicPath: DEV ? '/' : '/react-contextmenu/',
         hashDigestLength: 6,
-        sourceMapFilename: "bundle.js.map"
+        sourceMapFilename: 'bundle.js.map'
     },
     resolve: {
         modules: [
-            path.resolve(__dirname),
+            path.resolve(__dirname, '../'),
             'node_modules'
         ]
     },
@@ -46,8 +46,8 @@ const config = {
                     }
                 }],
                 include: [
-                    path.resolve(__dirname, './src'),
-                    path.resolve(__dirname, './examples')
+                    path.resolve(__dirname, '../src'),
+                    path.resolve(__dirname)
                 ]
             },
             {
@@ -74,7 +74,7 @@ const config = {
     ]
 };
 
-!PROD && (config.devtool = "source-map");
+!PROD && (config.devtool = 'source-map');
 
 PROD && config.plugins.push(
      new webpack.optimize.UglifyJsPlugin({
@@ -86,8 +86,8 @@ PROD && config.plugins.push(
 
 PROD && config.plugins.push(
     new webpack.DefinePlugin({
-        "process.env": {
-            "NODE_ENV": JSON.stringify("production")
+        'process.env': {
+            'NODE_ENV': JSON.stringify('production')
         }
     })
 );
