@@ -13,7 +13,7 @@ set -o errexit
 rm -rf public
 
 # copy required files
-npm run build:examples
+NODE_ENV=production npm run build:examples
 
 cd public
 git init
