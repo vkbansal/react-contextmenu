@@ -13,6 +13,7 @@ export default class ContextMenuTrigger extends Component {
         attributes: PropTypes.object,
         collect: PropTypes.func,
         disable: PropTypes.bool,
+        showOnClick: PropTypes.bool,
         holdToDisplay: PropTypes.number,
         renderTag: PropTypes.oneOfType([
             PropTypes.node,
@@ -24,6 +25,7 @@ export default class ContextMenuTrigger extends Component {
         attributes: {},
         collect() { return null; },
         disable: false,
+        showOnClick: false,
         holdToDisplay: 1000,
         renderTag: 'div'
     };
@@ -92,11 +94,20 @@ export default class ContextMenuTrigger extends Component {
         event.preventDefault();
         event.stopPropagation();
 
+        hideMenu();
+        this.showMenu(event);
+    }
+
+    handleClick = (event) => {
+      if (this.props.showOnClick) {
+        this.showMenu(event);
+      }
+      callIfExists(this.props.attributes.onClick, event);
+    }
+
+    showMenu = (event) => {
         const x = event.clientX || (event.touches && event.touches[0].pageX);
         const y = event.clientY || (event.touches && event.touches[0].pageY);
-
-        hideMenu();
-
         let data = callIfExists(this.props.collect, this.props);
         let showMenuConfig = {
             position: { x, y },
@@ -124,6 +135,7 @@ export default class ContextMenuTrigger extends Component {
         const newAttrs = assign({}, attributes, {
             className: cx(cssClasses.menuWrapper, attributes.className),
             onContextMenu: this.handleContextMenu,
+            onClick: this.handleClick,
             onMouseDown: this.handleMouseDown,
             onMouseUp: this.handleMouseUp,
             onTouchStart: this.handleTouchstart,
