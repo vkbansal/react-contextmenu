@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import listener from './globalEventListener';
 
 import AbstractMenu from './AbstractMenu';
 import { cssClasses, hasOwnProp } from './helpers';
@@ -40,6 +41,10 @@ export default class SubMenu extends AbstractMenu {
         this.state = Object.assign({}, this.state, {
             visible: false
         });
+    }
+
+    componentDidMount() {
+      this.listenId = listener.register(() => {}, this.hideMenu);
     }
 
     getSubMenuType() { // eslint-disable-line class-methods-use-this
@@ -92,6 +97,10 @@ export default class SubMenu extends AbstractMenu {
     }
 
     componentWillUnmount() {
+        if (this.listenId) {
+            listener.unregister(this.listenId);
+        }
+
         if (this.opentimer) clearTimeout(this.opentimer);
 
         if (this.closetimer) clearTimeout(this.closetimer);
