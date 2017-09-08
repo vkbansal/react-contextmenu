@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import assign from 'object-assign';
 
 import AbstractMenu from './AbstractMenu';
 import { cssClasses, hasOwnProp } from './helpers';
@@ -38,7 +39,7 @@ export default class SubMenu extends AbstractMenu {
     constructor(props) {
         super(props);
 
-        this.state = Object.assign({}, this.state, {
+        this.state = assign({}, this.state, {
             visible: false
         });
     }

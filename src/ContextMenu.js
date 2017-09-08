@@ -33,7 +33,7 @@ export default class ContextMenu extends AbstractMenu {
     constructor(props) {
         super(props);
 
-        this.state = Object.assign({}, this.state, {
+        this.state = assign({}, this.state, {
             x: 0,
             y: 0,
             isVisible: false
