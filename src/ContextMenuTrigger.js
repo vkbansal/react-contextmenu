@@ -9,7 +9,7 @@ import { callIfExists, cssClasses } from './helpers';
 export default class ContextMenuTrigger extends Component {
     static propTypes = {
         id: PropTypes.string.isRequired,
-        children: PropTypes.node.isRequired,
+        children: PropTypes.node,
         attributes: PropTypes.object,
         collect: PropTypes.func,
         disable: PropTypes.bool,
@@ -27,7 +27,8 @@ export default class ContextMenuTrigger extends Component {
         disable: false,
         holdToDisplay: 1000,
         renderTag: 'div',
-        supportClick: false
+        supportClick: false,
+        children: undefined
     };
 
     touchHandled = false;
