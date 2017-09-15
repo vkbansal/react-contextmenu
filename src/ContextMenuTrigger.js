@@ -17,7 +17,8 @@ export default class ContextMenuTrigger extends Component {
         renderTag: PropTypes.oneOfType([
             PropTypes.node,
             PropTypes.func
-        ])
+        ]),
+        supportClick: PropTypes.bool
     };
 
     static defaultProps = {
@@ -25,7 +26,8 @@ export default class ContextMenuTrigger extends Component {
         collect() { return null; },
         disable: false,
         holdToDisplay: 1000,
-        renderTag: 'div'
+        renderTag: 'div',
+        supportClick: false
     };
 
     touchHandled = false;
@@ -120,7 +122,7 @@ export default class ContextMenuTrigger extends Component {
     }
 
     render() {
-        const { renderTag, attributes, children } = this.props;
+        let { renderTag, attributes, children, supportClick} = this.props;
         const newAttrs = assign({}, attributes, {
             className: cx(cssClasses.menuWrapper, attributes.className),
             onContextMenu: this.handleContextMenu,
@@ -131,6 +133,9 @@ export default class ContextMenuTrigger extends Component {
             onMouseOut: this.handleMouseOut,
             ref: this.elemRef
         });
+        if (supportClick) {
+            newAttrs.onClick = this.handleContextMenu;
+        }
 
         return React.createElement(renderTag, newAttrs, children);
     }
