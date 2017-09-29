@@ -19,7 +19,8 @@ export const cssClasses = {
     menuItemDisabled: 'react-contextmenu-item--disabled',
     menuItemDivider: 'react-contextmenu-item--divider',
     menuItemSelected: 'react-contextmenu-item--selected',
-    subMenu: 'react-contextmenu-submenu'
+    subMenu: 'react-contextmenu-submenu',
+    trackedItem: 'react-contextmenu-item--tracked'
 };
 
 export const store = {};

@@ -14,9 +14,9 @@ describe('ContextMenu tests', () => {
         );
 
         expect(component).toMatchSnapshot();
-        expect(component.state()).toEqual({isVisible: false, x: 0, y: 0, forceSubMenuOpen: false, selectedItem: null});
+        expect(component.state()).toEqual({activeItem: null, isVisible: false, x: 0, y: 0, forceSubMenuOpen: false, selectedItem: null});
         showMenu({position: {x, y}, id: ID});
-        expect(component.state()).toEqual({isVisible: true, x, y, forceSubMenuOpen: false, selectedItem: null});
+        expect(component.state()).toEqual({activeItem: null, isVisible: true, x, y, forceSubMenuOpen: false, selectedItem: null});
         expect(component).toMatchSnapshot();
         component.unmount();
     });
@@ -30,9 +30,9 @@ describe('ContextMenu tests', () => {
         );
 
         expect(component).toMatchSnapshot();
-        expect(component.state()).toEqual({isVisible: false, x: 0, y: 0, forceSubMenuOpen: false, selectedItem: null});
+        expect(component.state()).toEqual({activeItem: null, isVisible: false, x: 0, y: 0, forceSubMenuOpen: false, selectedItem: null});
         showMenu({position: {x, y}, id: 'ID'});
-        expect(component.state()).toEqual({isVisible: false, x: 0, y: 0, forceSubMenuOpen: false, selectedItem: null});
+        expect(component.state()).toEqual({activeItem: null, isVisible: false, x: 0, y: 0, forceSubMenuOpen: false, selectedItem: null});
         expect(component).toMatchSnapshot();
         component.unmount();
     });
@@ -47,13 +47,13 @@ describe('ContextMenu tests', () => {
 
         hideMenu();
         showMenu(data);
-        expect(component.state()).toEqual(Object.assign({isVisible: true, forceSubMenuOpen: false, selectedItem: null}, data.position));
+        expect(component.state()).toEqual(Object.assign({activeItem: null, isVisible: true, forceSubMenuOpen: false, selectedItem: null}, data.position));
         expect(onShow).toHaveBeenCalled();
         showMenu(data);
         expect(onShow).toHaveBeenCalledTimes(1);
         expect(onHide).not.toHaveBeenCalled();
         hideMenu();
-        expect(component.state()).toEqual(Object.assign({isVisible: false, forceSubMenuOpen: false, selectedItem: null}, data.position));
+        expect(component.state()).toEqual(Object.assign({activeItem: null, isVisible: false, forceSubMenuOpen: false, selectedItem: null}, data.position));
         expect(onShow).toHaveBeenCalledTimes(1);
         expect(onHide).toHaveBeenCalledTimes(1);
         component.unmount();
@@ -68,9 +68,9 @@ describe('ContextMenu tests', () => {
         const escape = new window.KeyboardEvent('keydown', {keyCode: 27});
 
         showMenu(data);
-        expect(component.state()).toEqual(Object.assign({isVisible: true, forceSubMenuOpen: false, selectedItem: null}, data.position));
+        expect(component.state()).toEqual(Object.assign({activeItem: null, isVisible: true, forceSubMenuOpen: false, selectedItem: null}, data.position));
         document.dispatchEvent(escape);
-        expect(component.state()).toEqual(Object.assign({isVisible: false, forceSubMenuOpen: false, selectedItem: null}, data.position));
+        expect(component.state()).toEqual(Object.assign({activeItem: null, isVisible: false, forceSubMenuOpen: false, selectedItem: null}, data.position));
         expect(onHide).toHaveBeenCalled();
         component.unmount();
     });
@@ -84,11 +84,11 @@ describe('ContextMenu tests', () => {
         const outsideClick = new window.MouseEvent('mousedown', {target: document});
 
         showMenu(data);
-        expect(component.state()).toEqual(Object.assign({isVisible: true, forceSubMenuOpen: false, selectedItem: null}, data.position));
+        expect(component.state()).toEqual(Object.assign({activeItem: null, isVisible: true, forceSubMenuOpen: false, selectedItem: null}, data.position));
         component.simulate('mousedown');
-        expect(component.state()).toEqual(Object.assign({isVisible: true, forceSubMenuOpen: false, selectedItem: null}, data.position));
+        expect(component.state()).toEqual(Object.assign({activeItem: null, isVisible: true, forceSubMenuOpen: false, selectedItem: null}, data.position));
         document.dispatchEvent(outsideClick);
-        expect(component.state()).toEqual(Object.assign({isVisible: false, forceSubMenuOpen: false, selectedItem: null}, data.position));
+        expect(component.state()).toEqual(Object.assign({activeItem: null, isVisible: false, forceSubMenuOpen: false, selectedItem: null}, data.position));
         expect(onHide).toHaveBeenCalled();
         component.unmount();
     });
@@ -101,9 +101,9 @@ describe('ContextMenu tests', () => {
         );
 
         showMenu(data);
-        expect(component.state()).toEqual(Object.assign({isVisible: true, forceSubMenuOpen: false, selectedItem: null}, data.position));
+        expect(component.state()).toEqual(Object.assign({activeItem: null, isVisible: true, forceSubMenuOpen: false, selectedItem: null}, data.position));
         component.simulate('mouseleave');
-        expect(component.state()).toEqual(Object.assign({isVisible: false, forceSubMenuOpen: false, selectedItem: null}, data.position));
+        expect(component.state()).toEqual(Object.assign({activeItem: null, isVisible: false, forceSubMenuOpen: false, selectedItem: null}, data.position));
         expect(onMouseLeave).toHaveBeenCalled();
         component.unmount();
     });
