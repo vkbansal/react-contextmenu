@@ -76,3 +76,10 @@
     content: attr(data-count);
     display: block;
 }
+
+.react-contextmenu-item--tracked{
+    position: absolute;
+    font-size: 2em;
+    margin-top: -12px;
+    padding-left: 15px;
+}
