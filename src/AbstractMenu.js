@@ -14,9 +14,29 @@ export default class AbstractMenu extends Component {
         this.seletedItemRef = null;
         this.state = {
             selectedItem: null,
-            forceSubMenuOpen: false
+            forceSubMenuOpen: false,
+            activeItem: null
         };
     }
+
+    setActiveItem = (activeItem) => {
+        this.setState({ activeItem });
+    }
+
+    getIndex = (children, child) => children.indexOf(child);
+
+    isActive = (child, index) => {
+        if (child === null) return null;
+        if (child.props.defaultSelection) {
+            if (this.state.activeItem === null) {
+                return true;
+            }
+            return this.checkActive(index);
+        }
+        return this.checkActive(index);
+    }
+
+    checkActive = index => this.state.activeItem === index;
 
     handleKeyNavigation = (e) => {
         // check for isVisible strictly here as it might be undefined when this code executes in the context of SubMenu
@@ -114,6 +134,12 @@ export default class AbstractMenu extends Component {
 
     renderChildren = children => React.Children.map(children, (child) => {
         const props = {};
+        const index = this.getIndex(children, child);
+
+        props.setActiveItem = this.setActiveItem;
+        props.index = index;
+        props.isActive = this.isActive(child, index);
+
         if (!React.isValidElement(child)) return child;
         if ([MenuItem, this.getSubMenuType()].indexOf(child.type) < 0) {
             // Maybe the MenuItem or SubMenu is capsuled in a wrapper div or something else
@@ -130,9 +156,11 @@ export default class AbstractMenu extends Component {
         if (!child.props.divider && this.state.selectedItem === child) {
             // special props for selected item only
             props.selected = true;
+
             props.ref = (ref) => { this.seletedItemRef = ref; };
             return React.cloneElement(child, props);
         }
+
         // onMouseMove is only needed for non selected items
         props.onMouseMove = () => this.onChildMouseMove(child);
         return React.cloneElement(child, props);

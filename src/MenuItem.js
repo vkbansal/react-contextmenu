@@ -17,7 +17,11 @@ export default class MenuItem extends Component {
         onClick: PropTypes.func,
         selected: PropTypes.bool,
         onMouseMove: PropTypes.func,
-        onMouseLeave: PropTypes.func
+        onMouseLeave: PropTypes.func,
+        isActive: PropTypes.bool,
+        setActiveItem: PropTypes.func,
+        index: PropTypes.number,
+        track: PropTypes.bool
     };
 
     static defaultProps = {
@@ -28,30 +32,51 @@ export default class MenuItem extends Component {
         preventClose: false,
         onClick() { return null; },
         children: null,
+        isActive: false,
         selected: false,
         onMouseMove: () => null,
-        onMouseLeave: () => null
+        onMouseLeave: () => null,
+        setActiveItem: () => null,
+        index: 0,
+        track: false
     };
+
+    setItem = () => {
+        const { index, setActiveItem } = this.props;
+        setActiveItem(index);
+    }
 
     handleClick = (event) => {
         event.preventDefault();
 
-        if (this.props.disabled || this.props.divider) return;
+        const { disabled, divider, onClick, data, preventClose, track } = this.props;
+
+        if (disabled || divider) return;
+
+        if (track) this.setItem();
 
         callIfExists(
-            this.props.onClick,
+            onClick,
             event,
-            assign({}, this.props.data, store.data),
+            assign({}, data, store.data),
             store.target
         );
 
-        if (this.props.preventClose) return;
+        if (preventClose) return;
 
         hideMenu();
     }
 
+    renderSelectedDot = () => {
+        const trackedItemClass = cx(cssClasses.trackedItem);
+        return (
+            <span className={trackedItemClass} />
+        );
+    }
+
     render() {
-        const { disabled, divider, children, attributes, selected } = this.props;
+        const { disabled, divider, children, attributes, selected, isActive } = this.props;
+
         const menuItemClassNames = cx(cssClasses.menuItem, attributes && attributes.className, {
             [cssClasses.menuItemDisabled]: disabled,
             [cssClasses.menuItemDivider]: divider,
@@ -66,6 +91,7 @@ export default class MenuItem extends Component {
                 ref={(ref) => { this.ref = ref; }}
                 onMouseMove={this.props.onMouseMove} onMouseLeave={this.props.onMouseLeave}
                 onTouchEnd={this.handleClick} onClick={this.handleClick}>
+                {isActive ? this.renderSelectedDot() : null}
                 {divider ? null : children}
             </div>
         );

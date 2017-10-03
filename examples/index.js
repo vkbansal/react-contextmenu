@@ -5,6 +5,7 @@ import { HashRouter as Router, Route, NavLink as Link, Switch } from 'react-rout
 import SimpleMenu from './SimpleMenu';
 import MultipleTargets from './MultipleTargets';
 import MultipleMenus from './MultipleMenus';
+import TrackedMenu from './TrackedMenu';
 import SubMenus from './SubMenus';
 import DynamicMenu from './DynamicMenu';
 import Customization from './Customization';
@@ -26,6 +27,11 @@ function App() {
                     <li className='pure-menu-item'>
                         <Link {...commonProps} to='/simple-menu'>
                             Simple Menu
+                        </Link>
+                    </li>
+                    <li className='pure-menu-item'>
+                        <Link {...commonProps} to='/tracked-menu'>
+                            Tracked Menu
                         </Link>
                     </li>
                     <li className='pure-menu-item'>
@@ -67,6 +73,7 @@ function App() {
             </div>
             <Switch>
                 <Route path='/simple-menu' component={SimpleMenu} />
+                <Route path='/tracked-menu' component={TrackedMenu} />
                 <Route path='/multiple-targets' component={MultipleTargets} />
                 <Route path='/multiple-menus' component={MultipleMenus} />
                 <Route path='/submenus' component={SubMenus} />

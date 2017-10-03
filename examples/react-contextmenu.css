@@ -76,3 +76,11 @@
     content: attr(data-count);
     display: block;
 }
+
+.react-contextmenu-item--tracked:after{
+    position: absolute;
+    content: "\2022";
+    font-size: 2em;
+    margin-top: -12px;
+    margin-left: -15px;
+}
