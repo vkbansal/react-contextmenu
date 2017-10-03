@@ -17,7 +17,8 @@ export default class ContextMenuTrigger extends Component {
         renderTag: PropTypes.oneOfType([
             PropTypes.node,
             PropTypes.func
-        ])
+        ]),
+        onShow: PropTypes.func
     };
 
     static defaultProps = {
@@ -25,7 +26,8 @@ export default class ContextMenuTrigger extends Component {
         collect() { return null; },
         disable: false,
         holdToDisplay: 1000,
-        renderTag: 'div'
+        renderTag: 'div',
+        onShow() { return null; }
     };
 
     touchHandled = false;
@@ -111,9 +113,17 @@ export default class ContextMenuTrigger extends Component {
             data.then((resp) => {
                 showMenuConfig.data = resp;
                 showMenu(showMenuConfig);
+                callIfExists(
+                    this.props.onShow,
+                    showMenuConfig
+                );
             });
         } else {
             showMenu(showMenuConfig);
+            callIfExists(
+                this.props.onShow,
+                showMenuConfig
+            );
         }
     }
 
