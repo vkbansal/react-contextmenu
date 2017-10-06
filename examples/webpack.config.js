@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const path  = require('path');
 const Extract = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MinifyPlugin = require("babel-minify-webpack-plugin");
 
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = !PROD;
@@ -37,8 +38,7 @@ const config = {
                                 targets: {
                                     browsers: 'IE >= 11, Edge >= 12, FireFox >= 38, Chrome >= 47, Opera >= 34, Safari >= 8'
                                 }
-                            }],
-                            'babili'
+                            }]
                         ],
                         plugins: [
                             'transform-class-properties'
@@ -89,7 +89,8 @@ PROD && config.plugins.push(
         'process.env': {
             'NODE_ENV': JSON.stringify('production')
         }
-    })
+    }),
+    new MinifyPlugin()
 );
 
 module.exports = config;

@@ -54,7 +54,7 @@
     "babel-eslint": "~7.2.1",
     "babel-jest": "~21.2.0",
     "babel-loader": "~7.1.1",
-    "babel-preset-babili": "~0.1.4",
+    "babel-minify-webpack-plugin": "~0.2.0",
     "babel-preset-env": "~1.6.0",
     "babel-preset-es2015": "~6.24.0",
     "babel-preset-react": "~6.24.1",
