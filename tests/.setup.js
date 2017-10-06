@@ -10,3 +10,8 @@ global.window.resizeTo = (width, height) => {
     global.window.dispatchEvent(new Event('resize'));
 };
 global.window.requestAnimationFrame = jest.fn();
+
+const Enzyme = require('enzyme');
+const Adapter = require('enzyme-adapter-react-16');
+
+Enzyme.configure({ adapter: new Adapter() });
