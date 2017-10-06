@@ -1,12 +1,24 @@
 language: node_js
 node_js:
-- 6
+  - 8
 after_success:
-- npm run coveralls
+  - npm run coveralls
 script:
-- npm test
-- bash ./.travis/deploy.sh
+  - npm test
+before_deploy:
+  - NODE_ENV=production npm run build:examples
 env:
   global:
-  - GITHUB_REPO: vkbansal/react-contextmenu
-  - secure: 2VdcEEo4la14Mv8ydJHZGlh+ySICMBgUL4j/wbhVOnsQpxOX/l8UxLFSNKbrLz+l+vZ0C0gCaG3DeJDR9ceno/op83iH4faYxw+qB0TEpYUjMMJsHxLtE4VH9QozEHFcHEpFVmydqk6w4PVLfyb/aHDSHitQ9m1Gs+KSqcu7hG2CqFLcYN3iaSQhkHiBUrWW5vYvjqIe0jq66sBulkbTHzbn4P9FwvtSNROJVdz+5N5pb3pyDI9NpHaN2U91oDarmiy4DjGd8uWJGKLpFw5HECh7BR7vRfu7s7zam7S5dJ0jZ1bvqHgOhp/0G/c7xL1OLgR25aiFvFbUCAsOX1DXzJdttJTvs3hmAqHpYbCc+KBTOvVKYo1m9Ex9BnltHxw8CdRVd31ZarXX8CANLRfSOp7h2XPKDnNQClnfthPWpP63s7LMbP8QKM6hxJNN/jkdyFZss3tqAZwOeeZKzGq68Gk92xOw9IYiX/owT6m4sPUDdjFcE47yUnRanvnLKMdciQZnd3s9RO0zt87bsuQ4uKk6M/G4W/PJhZysx5iV+yiSHLUpxYz8YTL+ixWr5NrGLW8vNztFfcGQfNVtKoJaCl2EifL/67ninPNrvEIYwN8E1CsG6Iz+u3fRnAMRvNMAsgyFzm7lLpRggib9Vv7294epBqKwfBRUJOaJoPYLImc=
+    - GITHUB_REPO: vkbansal/react-contextmenu
+deploy:
+  provider: s3
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  bucket: aws-website-my-website-mr5h4
+  local-dir: public
+  upload-dir: react-contextmenu
+  skip_cleanup: true
+  default_text_charset: 'utf-8'
+  on:
+    branch: master
+    repo: vkbansal/react-contextmenu
