@@ -34,33 +34,18 @@ export default class ContextMenuTrigger extends Component {
         disableIfShiftIsPressed: false
     };
 
+    componentWillUnmount = () => {
+        this.abortTimer();
+    }
+
     touchHandled = false;
+    touchstartTimeoutId = null;
 
-    handleMouseDown = (event) => {
-        if (this.props.holdToDisplay >= 0 && event.button === 0) {
-            event.persist();
-            event.stopPropagation();
-
-            this.mouseDownTimeoutId = setTimeout(
-                () => this.handleContextClick(event),
-                this.props.holdToDisplay
-            );
+    abortTimer = () => {
+        if (this.touchstartTimeoutId !== null) {
+            clearTimeout(this.touchstartTimeoutId);
+            this.touchstartTimeoutId = null;
         }
-        callIfExists(this.props.attributes.onMouseDown, event);
-    }
-
-    handleMouseUp = (event) => {
-        if (event.button === 0) {
-            clearTimeout(this.mouseDownTimeoutId);
-        }
-        callIfExists(this.props.attributes.onMouseUp, event);
-    }
-
-    handleMouseOut = (event) => {
-        if (event.button === 0) {
-            clearTimeout(this.mouseDownTimeoutId);
-        }
-        callIfExists(this.props.attributes.onMouseOut, event);
     }
 
     handleTouchstart = (event) => {
@@ -74,6 +59,7 @@ export default class ContextMenuTrigger extends Component {
                 () => {
                     this.handleContextClick(event);
                     this.touchHandled = true;
+                    this.touchstartTimeoutId = null;
                 },
                 this.props.holdToDisplay
             );
@@ -81,11 +67,28 @@ export default class ContextMenuTrigger extends Component {
         callIfExists(this.props.attributes.onTouchStart, event);
     }
 
-    handleTouchEnd = (event) => {
+    handleTouchMove = (event) => {
         if (this.touchHandled) {
-            event.preventDefault();
+            hideMenu();
+        } else {
+            this.abortTimer();
         }
-        clearTimeout(this.touchstartTimeoutId);
+        callIfExists(this.props.attributes.onTouchMove, event);
+    }
+
+    handleTouchCancel = (event) => {
+        if (this.touchHandled) {
+            hideMenu();
+        } else {
+            this.abortTimer();
+        }
+        callIfExists(this.props.attributes.onTouchCancel, event);
+    }
+
+    handleTouchEnd = (event) => {
+        if (!this.touchHandled) {
+            this.abortTimer();
+        }
         callIfExists(this.props.attributes.onTouchEnd, event);
     }
 
@@ -144,11 +147,10 @@ export default class ContextMenuTrigger extends Component {
         const newAttrs = assign({}, attributes, {
             className: cx(cssClasses.menuWrapper, attributes.className),
             onContextMenu: this.handleContextMenu,
-            onMouseDown: this.handleMouseDown,
-            onMouseUp: this.handleMouseUp,
             onTouchStart: this.handleTouchstart,
+            onTouchMove: this.handleTouchMove,
+            onTouchCancel: this.handleTouchCancel,
             onTouchEnd: this.handleTouchEnd,
-            onMouseOut: this.handleMouseOut,
             ref: this.elemRef
         });
 
