@@ -92,7 +92,7 @@ exports[`ContextMenu tests shows when event with correct "id" is triggered 2`] =
   onShow={[Function]}
 >
   <nav
-    className="react-contextmenu"
+    className="react-contextmenu react-contextmenu--visible"
     onContextMenu={[Function]}
     onMouseLeave={[Function]}
     role="menu"

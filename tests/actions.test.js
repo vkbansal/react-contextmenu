@@ -1,5 +1,4 @@
-import { showMenu , hideMenu, MENU_SHOW, MENU_HIDE } from '../src/actions';
-
+import { showMenu, hideMenu, MENU_SHOW, MENU_HIDE } from '../src/actions';
 
 let showCallback = null;
 let hideCallback = null;
@@ -7,15 +6,13 @@ let eventObj = {};
 
 describe('actions test', () => {
     beforeAll(() => {
-        showCallback = jest.fn((e) => {
+        showCallback = jest.fn(e => {
             eventObj = e;
-            console.log('I\'ll be called on show')
         });
         window.addEventListener(MENU_SHOW, showCallback);
 
-        hideCallback = jest.fn((e) => {
+        hideCallback = jest.fn(e => {
             eventObj = e;
-            console.log('I\'ll be called on hide')
         });
         window.addEventListener(MENU_HIDE, hideCallback);
     });
