@@ -36,7 +36,8 @@ export default class ContextMenu extends AbstractMenu {
         this.state = assign({}, this.state, {
             x: 0,
             y: 0,
-            isVisible: false
+            isVisible: false,
+            isLeft: false,
         });
     }
 
@@ -54,7 +55,6 @@ export default class ContextMenu extends AbstractMenu {
 
             wrapper(() => {
                 const { x, y } = this.state;
-
                 const { top, left } = this.getMenuPosition(x, y);
 
                 wrapper(() => {
@@ -147,30 +147,55 @@ export default class ContextMenu extends AbstractMenu {
     }
 
     getMenuPosition = (x = 0, y = 0) => {
-        let menuStyles = {
-            top: y,
-            left: x
-        };
+        let menuStyles = {};
 
         if (!this.menu) return menuStyles;
-
         const { innerWidth, innerHeight } = window;
         const rect = this.menu.getBoundingClientRect();
 
-        if (y + rect.height > innerHeight) {
-            menuStyles.top -= rect.height;
-        }
 
-        if (x + rect.width > innerWidth) {
-            menuStyles.left -= rect.width;
-        }
+        if (this.state.isLeft === true){
+            menuStyles = {
+                top: y,
+                left: x
+            };
 
-        if (menuStyles.top < 0) {
-            menuStyles.top = rect.height < innerHeight ? (innerHeight - rect.height) / 2 : 0;
-        }
+            if (y + rect.height > innerHeight) {
+                menuStyles.top -= rect.height;
+            }
 
-        if (menuStyles.left < 0) {
-            menuStyles.left = rect.width < innerWidth ? (innerWidth - rect.width) / 2 : 0;
+            if (x + rect.width > innerWidth) {
+                menuStyles.left -= rect.width;
+            }
+
+            if (menuStyles.top < 0) {
+                menuStyles.top = rect.height < innerHeight ? (innerHeight - rect.height) / 2 : 0;
+            }
+
+            if (menuStyles.left < 0) {
+                menuStyles.left = rect.width < innerWidth ? (innerWidth - rect.width) / 2 : 0;
+            }
+        } else {
+            menuStyles = {
+                top: y,
+                right: x
+            };
+
+            if (y + rect.height > innerHeight) {
+                menuStyles.top -= rect.height;
+            }
+
+            if (x + rect.width > innerWidth) {
+                menuStyles.right -= rect.width;
+            }
+
+            if (menuStyles.top < 0) {
+                menuStyles.top = rect.height < innerHeight ? (innerHeight - rect.height) / 2 : 0;
+            }
+
+            if (menuStyles.right < 0) {
+                menuStyles.right = rect.width < innerWidth ? (innerWidth - rect.width) / 2 : 0;
+            }
         }
 
         return menuStyles;
@@ -187,7 +212,8 @@ export default class ContextMenu extends AbstractMenu {
         const menuClassnames = cx(cssClasses.menu, className, {
             [cssClasses.menuVisible]: isVisible
         });
-
+        console.log('state in render', this.state);
+        console.log('props in render', this.props);
         return (
             <nav
                 role='menu' tabIndex='-1' ref={this.menuRef} style={style} className={menuClassnames}
