@@ -50,10 +50,12 @@ export default class ContextMenu extends AbstractMenu {
     }
 
     componentDidUpdate() {
+
+        console.log ('component did update', this.state)
         if (this.state.isVisible) {
             const wrapper = window.requestAnimationFrame || setTimeout;
-
-            wrapper(() => {
+            if (this.state.isLeft) {
+                wrapper(() => {
                 const { x, y } = this.state;
                 const { top, left } = this.getMenuPosition(x, y);
 
@@ -63,8 +65,23 @@ export default class ContextMenu extends AbstractMenu {
                     this.menu.style.left = `${left}px`;
                     this.menu.style.opacity = 1;
                     this.menu.style.pointerEvents = 'auto';
+                    });
                 });
-            });
+            } else {
+                wrapper(() => {
+                const { x, y } = this.state;
+                const { top, right } = this.getMenuPosition(x, y);
+
+                wrapper(() => {
+                    if (!this.menu) return;
+                    this.menu.style.top = `${top}px`;
+                    this.menu.style.right = `${right}px`;
+                    this.menu.style.opacity = 1;
+                    this.menu.style.pointerEvents = 'auto';
+                    });
+                });
+            }
+
         } else {
             if (!this.menu) return;
             this.menu.style.opacity = 0;
