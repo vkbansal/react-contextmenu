@@ -191,13 +191,13 @@ export default class SubMenu extends AbstractMenu {
     }
 
     registerHandlers = () => {
-        document.removeEventListener('keydown', this.props.parentKeyNavigationHandler);
-        document.addEventListener('keydown', this.handleKeyNavigation);
+        // document.removeEventListener('keydown', this.props.parentKeyNavigationHandler);
+        // document.addEventListener('keydown', this.handleKeyNavigation);
     }
 
     unregisterHandlers = () => {
-        document.removeEventListener('keydown', this.handleKeyNavigation);
-        document.addEventListener('keydown', this.props.parentKeyNavigationHandler);
+        // document.removeEventListener('keydown', this.handleKeyNavigation);
+        // document.addEventListener('keydown', this.props.parentKeyNavigationHandler);
     }
 
     render() {

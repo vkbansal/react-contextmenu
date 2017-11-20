@@ -1,6 +1,6 @@
 {
   "name": "react-contextmenu-yanxi",
-  "version": "2.7.1",
+  "version": "2.7.2",
   "description": "Context Menu implemented in React",
   "main": "modules/index.js",
   "module": "es6/index.js",
