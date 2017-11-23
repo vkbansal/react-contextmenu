@@ -9,6 +9,7 @@ exports[`ContextMenu tests does not shows when event with incorrect "id" is trig
   onHide={[Function]}
   onMouseLeave={[Function]}
   onShow={[Function]}
+  style={Object {}}
 >
   <nav
     className="react-contextmenu"
@@ -36,6 +37,7 @@ exports[`ContextMenu tests does not shows when event with incorrect "id" is trig
   onHide={[Function]}
   onMouseLeave={[Function]}
   onShow={[Function]}
+  style={Object {}}
 >
   <nav
     className="react-contextmenu"
@@ -63,6 +65,7 @@ exports[`ContextMenu tests shows when event with correct "id" is triggered 1`] =
   onHide={[Function]}
   onMouseLeave={[Function]}
   onShow={[Function]}
+  style={Object {}}
 >
   <nav
     className="react-contextmenu"
@@ -90,6 +93,7 @@ exports[`ContextMenu tests shows when event with correct "id" is triggered 2`] =
   onHide={[Function]}
   onMouseLeave={[Function]}
   onShow={[Function]}
+  style={Object {}}
 >
   <nav
     className="react-contextmenu react-contextmenu--visible"
