@@ -18,7 +18,8 @@ export default class ContextMenu extends AbstractMenu {
         hideOnLeave: PropTypes.bool,
         onHide: PropTypes.func,
         onMouseLeave: PropTypes.func,
-        onShow: PropTypes.func
+        onShow: PropTypes.func,
+        style: PropTypes.object
     };
 
     static defaultProps = {
@@ -27,7 +28,8 @@ export default class ContextMenu extends AbstractMenu {
         hideOnLeave: false,
         onHide() { return null; },
         onMouseLeave() { return null; },
-        onShow() { return null; }
+        onShow() { return null; },
+        style: {}
     };
 
     constructor(props) {
@@ -181,16 +183,20 @@ export default class ContextMenu extends AbstractMenu {
     }
 
     render() {
-        const { children, className } = this.props;
+        const { children, className, style } = this.props;
         const { isVisible } = this.state;
-        const style = { position: 'fixed', opacity: 0, pointerEvents: 'none' };
+        const inlineStyle = assign(
+          {},
+          style,
+          { position: 'fixed', opacity: 0, pointerEvents: 'none' }
+        );
         const menuClassnames = cx(cssClasses.menu, className, {
             [cssClasses.menuVisible]: isVisible
         });
 
         return (
             <nav
-                role='menu' tabIndex='-1' ref={this.menuRef} style={style} className={menuClassnames}
+                role='menu' tabIndex='-1' ref={this.menuRef} style={inlineStyle} className={menuClassnames}
                 onContextMenu={this.handleContextMenu} onMouseLeave={this.handleMouseLeave}>
                 {this.renderChildren(children)}
             </nav>
