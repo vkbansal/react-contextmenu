@@ -143,7 +143,7 @@ export default class ContextMenu extends AbstractMenu {
     }
 
     hideMenu = (e) => {
-        if (e.keyCode === 27) { // enter
+        if (e.keyCode === 27 || e.keyCode === 13) { // ECS or enter
             hideMenu();
         }
     }

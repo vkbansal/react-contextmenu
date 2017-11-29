@@ -115,6 +115,30 @@ describe('ContextMenu tests', () => {
         component.unmount();
     });
 
+    test('menu should close on "Enter" when selectedItem is null', () => {
+        const data = { position: { x: 50, y: 50 }, id: 'CORRECT_ID' };
+        const onHide = jest.fn();
+        const component = mount(<ContextMenu id={data.id} onHide={onHide} />);
+        const enter = new window.KeyboardEvent('keydown', { keyCode: 13 });
+
+        showMenu(data);
+        expect(component.state()).toEqual(
+            Object.assign(
+                { isVisible: true, forceSubMenuOpen: false, selectedItem: null },
+                data.position
+            )
+        );
+        document.dispatchEvent(enter);
+        expect(component.state()).toEqual(
+            Object.assign(
+                { isVisible: false, forceSubMenuOpen: false, selectedItem: null },
+                data.position
+            )
+        );
+        expect(onHide).toHaveBeenCalled();
+        component.unmount();
+    });
+
     test('menu should close on "outside" click', () => {
         const data = { position: { x: 50, y: 50 }, id: 'CORRECT_ID' };
         const onHide = jest.fn();
