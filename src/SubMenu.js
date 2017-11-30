@@ -4,7 +4,8 @@ import cx from 'classnames';
 import assign from 'object-assign';
 
 import AbstractMenu from './AbstractMenu';
-import { cssClasses, hasOwnProp } from './helpers';
+import { hideMenu } from './actions';
+import { callIfExists, cssClasses, hasOwnProp, store } from './helpers';
 import listener from './globalEventListener';
 
 export default class SubMenu extends AbstractMenu {
@@ -156,8 +157,21 @@ export default class SubMenu extends AbstractMenu {
         this.setState({ visible: false, selectedItem: null });
     }
 
-    handleClick = (e) => {
-        e.preventDefault();
+    handleClick = (event) => {
+        event.preventDefault();
+
+        if (this.props.disabled) return;
+
+        callIfExists(
+            this.props.onClick,
+            event,
+            assign({}, this.props.data, store.data),
+            store.target
+        );
+
+        if (this.props.preventClose) return;
+
+        hideMenu();
     }
 
     handleMouseEnter = () => {
