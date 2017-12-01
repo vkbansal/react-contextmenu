@@ -45,12 +45,22 @@ export default class AbstractMenu extends Component {
             case 13: // enter
                 e.preventDefault();
                 this.tryToOpenSubMenu(e);
-                if (this.seletedItemRef &&
-                    this.seletedItemRef.ref instanceof HTMLElement &&
-                    !this.seletedItemRef.ref.props.disabled) {
-                    this.seletedItemRef.ref.click();
-                } else {
-                    this.hideMenu(e);
+                {
+                    // determine the selected item is disabled or not
+                    let disabled = false;
+                    if (this.seletedItemRef &&
+                        this.seletedItemRef.props &&
+                        this.seletedItemRef.props.disabled) {
+                        disabled = true;
+                    }
+
+                    if (this.seletedItemRef &&
+                        this.seletedItemRef.ref instanceof HTMLElement &&
+                        !disabled) {
+                        this.seletedItemRef.ref.click();
+                    } else {
+                        this.hideMenu(e);
+                    }
                 }
                 break;
             default:
