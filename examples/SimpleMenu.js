@@ -24,13 +24,13 @@ export default class SimpleMenu extends Component {
             <div>
                 <h3>Simple Menu</h3>
                 <p>This demo simple usage of a context menu.</p>
-                <ContextMenuTrigger id={MENU_TYPE} holdToDisplay={1000} direction="left">
+                <ContextMenuTrigger id={MENU_TYPE} holdToDisplay={1000}>
                     <div className='well'>right click to see the menu!!</div>
                 </ContextMenuTrigger>
                 <div>
                     {this.state.logs.map((log, i) => <p key={i}>{log}</p>)}
                 </div>
-                <ContextMenu id={MENU_TYPE}>
+                <ContextMenu id={MENU_TYPE} direction="left">
                     <MenuItem onClick={this.handleClick} data={{ item: 'item 1' }}>Menu Item 1</MenuItem>
                     <MenuItem onClick={this.handleClick} data={{ item: 'item 2' }}>Menu Item 2</MenuItem>
                     <MenuItem divider />

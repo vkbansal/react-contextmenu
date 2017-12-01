@@ -37,7 +37,6 @@ export default class ContextMenu extends AbstractMenu {
             x: 0,
             y: 0,
             isVisible: false,
-            isLeft: false,
         });
     }
 
@@ -50,13 +49,12 @@ export default class ContextMenu extends AbstractMenu {
     }
 
     componentDidUpdate() {
-
-        console.log ('component did update', this.state)
         if (this.state.isVisible) {
             const wrapper = window.requestAnimationFrame || setTimeout;
-            if (this.state.isLeft) {
+            const { x, y } = this.state;
+
+            if (this.props.direction === 'left') {
                 wrapper(() => {
-                const { x, y } = this.state;
                 const { top, left } = this.getMenuPosition(x, y);
 
                 wrapper(() => {
@@ -67,9 +65,8 @@ export default class ContextMenu extends AbstractMenu {
                     this.menu.style.pointerEvents = 'auto';
                     });
                 });
-            } else {
+            } else if (this.props.direction === 'right') {
                 wrapper(() => {
-                const { x, y } = this.state;
                 const { top, right } = this.getMenuPosition(x, y);
 
                 wrapper(() => {
@@ -81,7 +78,6 @@ export default class ContextMenu extends AbstractMenu {
                     });
                 });
             }
-
         } else {
             if (!this.menu) return;
             this.menu.style.opacity = 0;
@@ -171,7 +167,7 @@ export default class ContextMenu extends AbstractMenu {
         const rect = this.menu.getBoundingClientRect();
 
 
-        if (this.state.isLeft === true){
+        if (this.props.direction === 'left'){
             menuStyles = {
                 top: y,
                 left: x
@@ -214,7 +210,7 @@ export default class ContextMenu extends AbstractMenu {
                 menuStyles.right = rect.width < innerWidth ? (innerWidth - rect.width) / 2 : 0;
             }
         }
-
+        console.log('menu styles', menuStyles);
         return menuStyles;
     }
 
@@ -229,8 +225,8 @@ export default class ContextMenu extends AbstractMenu {
         const menuClassnames = cx(cssClasses.menu, className, {
             [cssClasses.menuVisible]: isVisible
         });
-        console.log('state in render', this.state);
-        console.log('props in render', this.props);
+        console.log('state', this.state);
+        console.log('props', this.props)
         return (
             <nav
                 role='menu' tabIndex='-1' ref={this.menuRef} style={style} className={menuClassnames}
