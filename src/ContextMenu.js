@@ -166,51 +166,42 @@ export default class ContextMenu extends AbstractMenu {
         const { innerWidth, innerHeight } = window;
         const rect = this.menu.getBoundingClientRect();
 
-
         if (this.props.direction === 'left'){
             menuStyles = {
                 top: y,
                 left: x
             };
 
-            if (y + rect.height > innerHeight) {
-                menuStyles.top -= rect.height;
-            }
-
             if (x + rect.width > innerWidth) {
                 menuStyles.left -= rect.width;
-            }
-
-            if (menuStyles.top < 0) {
-                menuStyles.top = rect.height < innerHeight ? (innerHeight - rect.height) / 2 : 0;
             }
 
             if (menuStyles.left < 0) {
                 menuStyles.left = rect.width < innerWidth ? (innerWidth - rect.width) / 2 : 0;
             }
-        } else {
+        } else if (this.props.direction === 'right') {
             menuStyles = {
                 top: y,
                 right: x
             };
 
-            if (y + rect.height > innerHeight) {
-                menuStyles.top -= rect.height;
-            }
-
             if (x + rect.width > innerWidth) {
                 menuStyles.right -= rect.width;
-            }
-
-            if (menuStyles.top < 0) {
-                menuStyles.top = rect.height < innerHeight ? (innerHeight - rect.height) / 2 : 0;
             }
 
             if (menuStyles.right < 0) {
                 menuStyles.right = rect.width < innerWidth ? (innerWidth - rect.width) / 2 : 0;
             }
         }
-        console.log('menu styles', menuStyles);
+
+        if (y + rect.height > innerHeight) {
+            menuStyles.top -= rect.height;
+        }
+
+        if (menuStyles.top < 0) {
+            menuStyles.top = rect.height < innerHeight ? (innerHeight - rect.height) / 2 : 0;
+        }
+
         return menuStyles;
     }
 
@@ -225,8 +216,6 @@ export default class ContextMenu extends AbstractMenu {
         const menuClassnames = cx(cssClasses.menu, className, {
             [cssClasses.menuVisible]: isVisible
         });
-        console.log('state', this.state);
-        console.log('props', this.props)
         return (
             <nav
                 role='menu' tabIndex='-1' ref={this.menuRef} style={style} className={menuClassnames}

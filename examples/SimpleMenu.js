@@ -30,7 +30,7 @@ export default class SimpleMenu extends Component {
                 <div>
                     {this.state.logs.map((log, i) => <p key={i}>{log}</p>)}
                 </div>
-                <ContextMenu id={MENU_TYPE} direction="left">
+                <ContextMenu id={MENU_TYPE} direction="right">
                     <MenuItem onClick={this.handleClick} data={{ item: 'item 1' }}>Menu Item 1</MenuItem>
                     <MenuItem onClick={this.handleClick} data={{ item: 'item 2' }}>Menu Item 2</MenuItem>
                     <MenuItem divider />
