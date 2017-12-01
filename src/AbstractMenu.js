@@ -47,12 +47,9 @@ export default class AbstractMenu extends Component {
                 this.tryToOpenSubMenu(e);
                 {
                     // determine the selected item is disabled or not
-                    let disabled = false;
-                    if (this.seletedItemRef &&
+                    const disabled = this.seletedItemRef &&
                         this.seletedItemRef.props &&
-                        this.seletedItemRef.props.disabled) {
-                        disabled = true;
-                    }
+                        this.seletedItemRef.props.disabled;
 
                     if (this.seletedItemRef &&
                         this.seletedItemRef.ref instanceof HTMLElement &&
