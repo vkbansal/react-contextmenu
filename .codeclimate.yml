@@ -13,7 +13,10 @@ exclude_paths:
   - tests/**/*
   - examples.config.js
   - webpack.config.js
-  - "**.md"
+  - CONTRIBUTING.md
+  - ISSUE_TEMPLATE.md
+  - LICENSE.md
+  - README.md
 ratings:
   paths:
   - src/**/*
