@@ -13,7 +13,7 @@ exclude_paths:
   - tests/**/*
   - examples.config.js
   - webpack.config.js
-  - *.md
+  - "**.md"
 ratings:
   paths:
   - src/**/*
