@@ -4,10 +4,10 @@ Thank you for contributing!
 
 <!-- BUG TEMPLATE -->
 ## Version
-1.2.0
+1.9.1
 
 ## Test Case
-http://jsbin.com/sacerobuxi/edit?html,js,output
+https://jsfiddle.net/Luktwrdm/54/
 
 ## Steps to reproduce
 
