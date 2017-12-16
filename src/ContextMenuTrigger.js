@@ -17,7 +17,7 @@ export default class ContextMenuTrigger extends Component {
         renderTag: PropTypes.oneOfType([
             PropTypes.node,
             PropTypes.func
-        ])
+        ]),
     };
 
     static defaultProps = {
@@ -25,7 +25,7 @@ export default class ContextMenuTrigger extends Component {
         collect() { return null; },
         disable: false,
         holdToDisplay: 1000,
-        renderTag: 'div'
+        renderTag: 'div',
     };
 
     touchHandled = false;
@@ -117,6 +117,14 @@ export default class ContextMenuTrigger extends Component {
         }
     }
 
+    getPosition = props => {
+        if(this.props.direction !== 'left') {
+            this.setState({ isLeft: false });
+        }
+
+        return null;
+    }
+
     elemRef = (c) => {
         this.elem = c;
     }
@@ -131,8 +139,11 @@ export default class ContextMenuTrigger extends Component {
             onTouchStart: this.handleTouchstart,
             onTouchEnd: this.handleTouchEnd,
             onMouseOut: this.handleMouseOut,
-            ref: this.elemRef
+            ref: this.elemRef,
+            position: this.getPosition,
         });
+
+        console.log(this.props);
 
         return React.createElement(renderTag, newAttrs, children);
     }

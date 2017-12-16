@@ -38,13 +38,13 @@ export default class SimpleMenu extends Component {
                 <div>
                     {this.state.logs.map((log, i) => <p key={i}>{log}</p>)}
                 </div>
-                <ContextMenu id={MENU_TYPE}>
+                <ContextMenu id={MENU_TYPE} direction="right">
                     <MenuItem onClick={this.handleClick} data={{ item: 'item 1' }}>Menu Item 1</MenuItem>
                     <MenuItem onClick={this.handleClick} data={{ item: 'item 2' }}>Menu Item 2</MenuItem>
                     <MenuItem divider />
                     <MenuItem onClick={this.handleClick} data={{ item: 'item 3' }}>Menu Item 3</MenuItem>
                 </ContextMenu>
-                <ContextMenu id={MENU_TYPE2}>
+                <ContextMenu id={MENU_TYPE2} direction="left">
                     <MenuItem onClick={this.handleClick} data={{ item: 'nested item 1' }}>Nested Menu Item 1</MenuItem>
                     <MenuItem onClick={this.handleClick} data={{ item: 'nested item 2' }}>Nested Menu Item 2</MenuItem>
                     <MenuItem divider />
