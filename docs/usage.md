@@ -43,7 +43,7 @@ ReactDOM.render(<MyApp myProp={12}/>, document.getElementById("main"));
 
 As you can see that the `ContextMenu` to be showed on any component is dependent on a **unique id**.
 
-See [examples](./examples) for more in detail usage.
+See [examples](../examples) for more in detail usage.
 
 ## Styling
 
