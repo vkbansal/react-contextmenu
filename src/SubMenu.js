@@ -155,7 +155,8 @@ export default class SubMenu extends AbstractMenu {
             this.props.forceClose();
         }
         this.setState({ visible: false, selectedItem: null });
-    }
+        this.unregisterHandlers();
+    };
 
     handleClick = (event) => {
         event.preventDefault();
