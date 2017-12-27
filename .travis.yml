@@ -19,6 +19,7 @@ deploy:
   upload-dir: react-contextmenu
   skip_cleanup: true
   default_text_charset: 'utf-8'
+  detect_encoding: true
   on:
     branch: master
     repo: vkbansal/react-contextmenu
