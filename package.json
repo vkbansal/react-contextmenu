@@ -12,6 +12,11 @@
     "contextmenu",
     "rightclick"
   ],
+  "files": [
+    "es6",
+    "modules",
+    "dist"
+  ],
   "scripts": {
     "lint": "eslint ./src ./examples",
     "test": "npm run lint && npm run test:only",
