@@ -21,5 +21,6 @@ deploy:
   default_text_charset: 'utf-8'
   detect_encoding: true
   on:
+    tag: true
     branch: master
     repo: vkbansal/react-contextmenu
