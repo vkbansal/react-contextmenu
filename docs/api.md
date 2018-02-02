@@ -64,7 +64,7 @@ A component for using submenus within the contextmenu.
 | title       | String   | ✓         |         | The content to be displayed in parent menu.                                 |
 | disabled    | Boolean  |           | `false` | If `true`, disables the menu from opening and adds `.disabled` class.       |
 | hoverDelay  | Number   |           | `500`   | The time (in ms) after which the menu is to be displayed when hovered upon. |
-| classNames  | String   |           |         | Custom `className` applied to root element of the context-menu.             |
+| className  | String   |           |         | Custom `className` applied to root element of the context-menu.             |
 | selected    | boolean  |           | `false` | **Internal Prop**: will be set from the surrounded context `ContextMenu` or `SubMenu`. If set to `true` the css class `react-contextmenu-item--selected` will be added to associated element.           |
 | onMouseMove | Function |           |         | **Internal Prop**: will be directly passed to associated element, so the surrounded context `ContextMenu` or `SubMenu` can handle the interactions to pass the correct `selected` state. Also the surrounded context can store the current selected `SubMenu` entry.    |
 | onMouseOut  | Function |           |         | **Internal Prop**: will be directly passed to associated element, so the surrounded context `ContextMenu` or `SubMenu` can handle the interactions to pass the correct `selected` state. Also the surrounded context can store the current selected `SubMenu` entry.    |
