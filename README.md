@@ -1,3 +1,5 @@
+# !!! Looking for maintainers !!!
+
 [![NPM version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 [![Dependency Status][deps-image]][deps-url]
