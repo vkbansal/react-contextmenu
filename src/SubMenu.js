@@ -4,7 +4,6 @@ import cx from 'classnames';
 import assign from 'object-assign';
 
 import AbstractMenu from './AbstractMenu';
-import { hideMenu } from './actions';
 import { callIfExists, cssClasses, hasOwnProp, store } from './helpers';
 import listener from './globalEventListener';
 
@@ -169,10 +168,6 @@ export default class SubMenu extends AbstractMenu {
             assign({}, this.props.data, store.data),
             store.target
         );
-
-        if (this.props.preventClose) return;
-
-        hideMenu();
     }
 
     handleMouseEnter = () => {
