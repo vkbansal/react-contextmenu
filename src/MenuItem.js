@@ -52,10 +52,10 @@ export default class MenuItem extends Component {
 
     render() {
         const { disabled, divider, children, attributes, selected } = this.props;
-        const menuItemClassNames = cx(cssClasses.menuItem, attributes && attributes.className, {
-            [cssClasses.menuItemDisabled]: disabled,
-            [cssClasses.menuItemDivider]: divider,
-            [cssClasses.menuItemSelected]: selected
+        const menuItemClassNames = cx(cssClasses.menuItem, attributes.className, {
+            [cx(cssClasses.menuItemDisabled, attributes.disabledClassName)]: disabled,
+            [cx(cssClasses.menuItemDivider, attributes.dividerClassName)]: divider,
+            [cx(cssClasses.menuItemSelected, attributes.selectedClassName)]: selected
         });
 
         return (
