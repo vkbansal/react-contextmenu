@@ -10,6 +10,7 @@ import listener from './globalEventListener';
 export default class SubMenu extends AbstractMenu {
     static propTypes = {
         children: PropTypes.node.isRequired,
+        attributes: PropTypes.object,
         title: PropTypes.node.isRequired,
         className: PropTypes.string,
         disabled: PropTypes.bool,
@@ -26,6 +27,7 @@ export default class SubMenu extends AbstractMenu {
     static defaultProps = {
         disabled: false,
         hoverDelay: 500,
+        attributes: {},
         className: '',
         rtl: false,
         selected: false,
@@ -211,22 +213,22 @@ export default class SubMenu extends AbstractMenu {
     }
 
     render() {
-        const { children, disabled, title, selected } = this.props;
+        const { children, attributes, disabled, title, selected } = this.props;
         const { visible } = this.state;
         const menuProps = {
             ref: this.menuRef,
             onMouseEnter: this.handleMouseEnter,
             onMouseLeave: this.handleMouseLeave,
-            className: cx(cssClasses.menuItem, cssClasses.subMenu),
+            className: cx(cssClasses.menuItem, cssClasses.subMenu, attributes.listClassName),
             style: {
                 position: 'relative'
             }
         };
         const menuItemProps = {
-            className: cx(cssClasses.menuItem, {
-                [cssClasses.menuItemDisabled]: disabled,
-                [cssClasses.menuItemActive]: visible,
-                [cssClasses.menuItemSelected]: selected
+            className: cx(cssClasses.menuItem, attributes.className, {
+                [cx(cssClasses.menuItemDisabled, attributes.disabledClassName)]: disabled,
+                [cx(cssClasses.menuItemActive, attributes.visibleClassName)]: visible,
+                [cx(cssClasses.menuItemSelected, attributes.selectedClassName)]: selected
             }),
             onMouseMove: this.props.onMouseMove,
             onMouseOut: this.props.onMouseOut,
@@ -245,7 +247,7 @@ export default class SubMenu extends AbstractMenu {
 
         return (
             <nav {...menuProps} role='menuitem' tabIndex='-1' aria-haspopup='true'>
-                <div {...menuItemProps}>
+                <div {...attributes} {...menuItemProps}>
                     {title}
                 </div>
                 <nav {...subMenuProps} role='menu' tabIndex='-1'>
