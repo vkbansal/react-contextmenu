@@ -5,22 +5,4 @@ after_success:
   - npm run coveralls
 script:
   - npm test
-before_deploy:
-  - NODE_ENV=production npm run build:examples
-env:
-  global:
-    - GITHUB_REPO: vkbansal/react-contextmenu
-deploy:
-  provider: s3
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  bucket: aws-website-my-website-mr5h4
-  local-dir: public
-  upload-dir: react-contextmenu
-  skip_cleanup: true
-  default_text_charset: 'utf-8'
-  detect_encoding: true
-  on:
-    tag: true
-    branch: master
-    repo: vkbansal/react-contextmenu
+  - bash ./deploy.sh
