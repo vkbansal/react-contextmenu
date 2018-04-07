@@ -5,7 +5,6 @@ const path  = require('path');
 const Extract = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MinifyPlugin = require("babel-minify-webpack-plugin");
-const CompressionPlugin = require('compression-webpack-plugin');
 
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = !PROD;
@@ -91,11 +90,7 @@ PROD && config.plugins.push(
             'NODE_ENV': JSON.stringify('production')
         }
     }),
-    new MinifyPlugin(),
-    new CompressionPlugin({
-        asset: '[path][query]',
-        test: /\.(js|css)$/
-    })
+    new MinifyPlugin()
 );
 
 module.exports = config;
