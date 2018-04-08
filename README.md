@@ -54,7 +54,7 @@ import ReactDOM from "react-dom";
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 
 function handleClick(e, data) {
-  console.log(data);
+  console.log(data.foo);
 }
 
 function MyApp() {
@@ -66,14 +66,14 @@ function MyApp() {
       </ContextMenuTrigger>
 
       <ContextMenu id="some_unique_identifier">
-        <MenuItem data={"some_data"} onClick={this.handleClick}>
+          <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
           ContextMenu Item 1
         </MenuItem>
-        <MenuItem data={"some_data"} onClick={this.handleClick}>
+        <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
           ContextMenu Item 2
         </MenuItem>
         <MenuItem divider />
-        <MenuItem data={"some_data"} onClick={this.handleClick}>
+        <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
    	      ContextMenu Item 3
         </MenuItem>
       </ContextMenu>
