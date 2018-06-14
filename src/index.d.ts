@@ -43,6 +43,8 @@ declare module "react-contextmenu" {
         export const MenuItem: React.ComponentClass<MenuItemProps>;
         export const SubMenu: React.ComponentClass<SubMenuProps>;
         export function connectMenu(menuId: string): (menu: any) => any;
+        export function showMenu(opts?: any, target?: HTMLElement): void;
+        export function hideMenu(opts?: any, target?: HTMLElement): void;
     }
 
     export = ReactContextmenu;
