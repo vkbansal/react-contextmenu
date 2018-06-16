@@ -151,7 +151,12 @@ export default class SubMenu extends AbstractMenu {
         return position;
     }
 
-    hideMenu = () => {
+    hideMenu = (e) => {
+        // avoid closing submenus of a different menu tree
+        if (e.detail && e.detail.id && this.menu && e.detail.id !== this.menu.id) {
+            return;
+        }
+
         if (this.props.forceOpen) {
             this.props.forceClose();
         }
