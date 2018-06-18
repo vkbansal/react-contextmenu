@@ -8,7 +8,10 @@ import { callIfExists, cssClasses } from './helpers';
 
 export default class ContextMenuTrigger extends Component {
     static propTypes = {
-        id: PropTypes.string.isRequired,
+        id: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.func
+        ]).isRequired,
         children: PropTypes.node.isRequired,
         attributes: PropTypes.object,
         collect: PropTypes.func,
@@ -99,11 +102,12 @@ export default class ContextMenuTrigger extends Component {
 
         hideMenu();
 
+        let id = typeof this.props.id === 'function' ? this.props.id(event) : this.props.id;
         let data = callIfExists(this.props.collect, this.props);
         let showMenuConfig = {
             position: { x, y },
             target: this.elem,
-            id: this.props.id,
+            id,
             data
         };
         if (data && (typeof data.then === 'function')) {
