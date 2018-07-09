@@ -108,7 +108,7 @@ export default class SubMenu extends AbstractMenu {
 
         if (this.closetimer) clearTimeout(this.closetimer);
 
-        this.unregisterHandlers();
+        this.unregisterHandlers(true);
     }
 
     getMenuPosition = () => {
@@ -212,9 +212,11 @@ export default class SubMenu extends AbstractMenu {
         document.addEventListener('keydown', this.handleKeyNavigation);
     }
 
-    unregisterHandlers = () => {
+    unregisterHandlers = (dismounting) => {
         document.removeEventListener('keydown', this.handleKeyNavigation);
-        document.addEventListener('keydown', this.props.parentKeyNavigationHandler);
+        if (!dismounting) {
+            document.addEventListener('keydown', this.props.parentKeyNavigationHandler);
+        }
     }
 
     render() {
