@@ -115,7 +115,12 @@ export default class SubMenu extends AbstractMenu {
         const position = {};
 
         if (rect.bottom > innerHeight) {
-            position.bottom = 0;
+            let bottom = 0;
+            if (rect.height > rect.top) {
+                let offset = this.menu.getBoundingClientRect().height;
+                bottom = (rect.height - rect.top - offset) + 3;
+            }
+            position.bottom = `${-bottom}px`;
         } else {
             position.top = 0;
         }
@@ -135,7 +140,12 @@ export default class SubMenu extends AbstractMenu {
         const position = {};
 
         if (rect.bottom > innerHeight) {
-            position.bottom = 0;
+            let bottom = 0;
+            if (rect.height > rect.top) {
+                let offset = this.menu.getBoundingClientRect().height;
+                bottom = (rect.height - rect.top - offset) + 3;
+            }
+            position.bottom = `${-bottom}px`;
         } else {
             position.top = 0;
         }
