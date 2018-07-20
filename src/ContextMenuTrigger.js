@@ -89,6 +89,7 @@ export default class ContextMenuTrigger extends Component {
     }
 
     handleContextClick = (event) => {
+        console.log(this.props);
         if (this.props.disable) return;
 
         event.preventDefault();
