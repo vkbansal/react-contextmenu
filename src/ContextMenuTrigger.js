@@ -15,6 +15,7 @@ export default class ContextMenuTrigger extends Component {
         disable: PropTypes.bool,
         holdToDisplay: PropTypes.number,
         posX: PropTypes.number,
+        posY: PropTypes.number,
         renderTag: PropTypes.oneOfType([
             PropTypes.node,
             PropTypes.func
@@ -27,7 +28,8 @@ export default class ContextMenuTrigger extends Component {
         disable: false,
         holdToDisplay: 1000,
         renderTag: 'div',
-        posX: 0
+        posX: 0,
+        posY: 0
     };
 
     touchHandled = false;
@@ -97,10 +99,13 @@ export default class ContextMenuTrigger extends Component {
         event.stopPropagation();
 
         let x = event.clientX || (event.touches && event.touches[0].pageX);
-        const y = event.clientY || (event.touches && event.touches[0].pageY);
+        let y = event.clientY || (event.touches && event.touches[0].pageY);
 
         if (this.props.posX) {
             x -= this.props.posX;
+        }
+        if (this.props.posY) {
+            y -= this.props.posY;
         }
 
         hideMenu();

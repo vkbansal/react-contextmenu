@@ -82,6 +82,9 @@ var ContextMenuTrigger = function (_Component) {
             if (_this.props.posX) {
                 x -= _this.props.posX;
             }
+            if (_this.props.posY) {
+                y -= _this.props.posY;
+            }
 
             hideMenu();
 
@@ -140,6 +143,7 @@ ContextMenuTrigger.propTypes = {
     disable: PropTypes.bool,
     holdToDisplay: PropTypes.number,
     posX: PropTypes.number,
+    posY: PropTypes.number,
     renderTag: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 };
 ContextMenuTrigger.defaultProps = {
@@ -151,6 +155,7 @@ ContextMenuTrigger.defaultProps = {
     disable: false,
     holdToDisplay: 1000,
     renderTag: 'div',
-    posX: 0
+    posX: 0,
+    posY: 0
 };
 export default ContextMenuTrigger;
