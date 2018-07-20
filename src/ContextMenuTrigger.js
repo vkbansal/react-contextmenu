@@ -14,6 +14,7 @@ export default class ContextMenuTrigger extends Component {
         collect: PropTypes.func,
         disable: PropTypes.bool,
         holdToDisplay: PropTypes.number,
+        posX: PropTypes.number,
         renderTag: PropTypes.oneOfType([
             PropTypes.node,
             PropTypes.func
@@ -25,7 +26,8 @@ export default class ContextMenuTrigger extends Component {
         collect() { return null; },
         disable: false,
         holdToDisplay: 1000,
-        renderTag: 'div'
+        renderTag: 'div',
+        posX: 0
     };
 
     touchHandled = false;
@@ -89,14 +91,17 @@ export default class ContextMenuTrigger extends Component {
     }
 
     handleContextClick = (event) => {
-        console.log(this.props);
         if (this.props.disable) return;
 
         event.preventDefault();
         event.stopPropagation();
 
-        const x = event.clientX || (event.touches && event.touches[0].pageX);
+        let x = event.clientX || (event.touches && event.touches[0].pageX);
         const y = event.clientY || (event.touches && event.touches[0].pageY);
+
+        if (this.props.posX) {
+            x -= this.props.posX;
+        }
 
         hideMenu();
 

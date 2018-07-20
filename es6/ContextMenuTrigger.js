@@ -71,7 +71,6 @@ var ContextMenuTrigger = function (_Component) {
             _this.handleContextClick(event);
             callIfExists(_this.props.attributes.onContextMenu, event);
         }, _this.handleContextClick = function (event) {
-            console.log(_this.props);
             if (_this.props.disable) return;
 
             event.preventDefault();
@@ -79,6 +78,10 @@ var ContextMenuTrigger = function (_Component) {
 
             var x = event.clientX || event.touches && event.touches[0].pageX;
             var y = event.clientY || event.touches && event.touches[0].pageY;
+
+            if (_this.props.posX) {
+                x -= _this.props.posX;
+            }
 
             hideMenu();
 
@@ -136,6 +139,7 @@ ContextMenuTrigger.propTypes = {
     collect: PropTypes.func,
     disable: PropTypes.bool,
     holdToDisplay: PropTypes.number,
+    posX: PropTypes.number,
     renderTag: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 };
 ContextMenuTrigger.defaultProps = {
@@ -146,6 +150,7 @@ ContextMenuTrigger.defaultProps = {
 
     disable: false,
     holdToDisplay: 1000,
-    renderTag: 'div'
+    renderTag: 'div',
+    posX: 0
 };
 export default ContextMenuTrigger;
