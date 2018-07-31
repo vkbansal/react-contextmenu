@@ -18,6 +18,7 @@ export default class ContextMenu extends AbstractMenu {
         hideOnLeave: PropTypes.bool,
         onHide: PropTypes.func,
         onMouseLeave: PropTypes.func,
+        onOutsideClick: PropTypes.func,
         onShow: PropTypes.func,
         style: PropTypes.object
     };
@@ -28,6 +29,7 @@ export default class ContextMenu extends AbstractMenu {
         hideOnLeave: false,
         onHide() { return null; },
         onMouseLeave() { return null; },
+        onOutsideClick() { return null; },
         onShow() { return null; },
         style: {}
     };
@@ -120,6 +122,7 @@ export default class ContextMenu extends AbstractMenu {
 
     handleOutsideClick = (e) => {
         if (!this.menu.contains(e.target)) hideMenu();
+        callIfExists(this.props.onOutsideClick, e);
     }
 
     handleMouseLeave = (event) => {
