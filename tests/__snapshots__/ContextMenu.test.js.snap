@@ -8,6 +8,7 @@ exports[`ContextMenu tests does not shows when event with incorrect "id" is trig
   id="CORRECT_ID"
   onHide={[Function]}
   onMouseLeave={[Function]}
+  onOutsideClick={[Function]}
   onShow={[Function]}
   style={Object {}}
 >
@@ -36,6 +37,7 @@ exports[`ContextMenu tests does not shows when event with incorrect "id" is trig
   id="CORRECT_ID"
   onHide={[Function]}
   onMouseLeave={[Function]}
+  onOutsideClick={[Function]}
   onShow={[Function]}
   style={Object {}}
 >
@@ -64,6 +66,7 @@ exports[`ContextMenu tests shows when event with correct "id" is triggered 1`] =
   id="CORRECT_ID"
   onHide={[Function]}
   onMouseLeave={[Function]}
+  onOutsideClick={[Function]}
   onShow={[Function]}
   style={Object {}}
 >
@@ -92,6 +95,7 @@ exports[`ContextMenu tests shows when event with correct "id" is triggered 2`] =
   id="CORRECT_ID"
   onHide={[Function]}
   onMouseLeave={[Function]}
+  onOutsideClick={[Function]}
   onShow={[Function]}
   style={Object {}}
 >
