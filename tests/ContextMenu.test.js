@@ -139,10 +139,11 @@ describe('ContextMenu tests', () => {
         component.unmount();
     });
 
-    test('menu should close on "outside" click', () => {
+    test('menu should close on "outside" click and onOutsideClick is triggered correctly', () => {
         const data = { position: { x: 50, y: 50 }, id: 'CORRECT_ID' };
         const onHide = jest.fn();
-        const component = mount(<ContextMenu id={data.id} onHide={onHide} />);
+        const onOutsideClick = jest.fn();
+        const component = mount(<ContextMenu id={data.id} onHide={onHide} onOutsideClick={onOutsideClick} />);
         const outsideClick = new window.MouseEvent('mousedown', { target: document });
 
         showMenu(data);
@@ -167,6 +168,7 @@ describe('ContextMenu tests', () => {
             )
         );
         expect(onHide).toHaveBeenCalled();
+        expect(onOutsideClick).toHaveBeenCalled();
         component.unmount();
     });
 
