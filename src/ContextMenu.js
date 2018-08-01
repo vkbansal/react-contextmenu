@@ -121,8 +121,10 @@ export default class ContextMenu extends AbstractMenu {
     }
 
     handleOutsideClick = (e) => {
-        if (!this.menu.contains(e.target)) hideMenu();
-        callIfExists(this.props.onOutsideClick, e);
+        if (!this.menu.contains(e.target)) {
+            hideMenu();
+            callIfExists(this.props.onOutsideClick, e);
+        }
     }
 
     handleMouseLeave = (event) => {
