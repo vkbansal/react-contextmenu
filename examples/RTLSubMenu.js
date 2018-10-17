@@ -23,7 +23,7 @@ export default class RTLSubMenu extends Component {
     render() {
         return (
             <div>
-                <h3>Right-to-Left Submenu Menu</h3>
+                <h3>Right-to-Left ContextMenu and Submenu Menu</h3>
                 <p>This demos usage of Right-to-Left submenus.</p>
                 <ContextMenuTrigger id={MENU_TYPE} holdToDisplay={1000}>
                     <div className='well'>right click to see the menu</div>
@@ -31,7 +31,7 @@ export default class RTLSubMenu extends Component {
                 <div>
                     {this.state.logs.map((log, i) => <p key={i}>{log}</p>)}
                 </div>
-                <ContextMenu id={MENU_TYPE}>
+                <ContextMenu id={MENU_TYPE} rtl>
                     <MenuItem onClick={this.handleClick} data={{ item: 'item 1' }}>Menu Item 1</MenuItem>
                     <MenuItem onClick={this.handleClick} data={{ item: 'item 2' }}>Menu Item 2</MenuItem>
                     <SubMenu title='A SubMenu' rtl>
