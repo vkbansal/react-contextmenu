@@ -20,7 +20,7 @@ export default class ContextMenuTrigger extends Component {
             PropTypes.node,
             PropTypes.func
         ]),
-        disableOnShiftPressed: PropTypes.bool
+        disableIfShiftIsPressed: PropTypes.bool
     };
 
     static defaultProps = {
@@ -31,7 +31,7 @@ export default class ContextMenuTrigger extends Component {
         renderTag: 'div',
         posX: 0,
         posY: 0,
-        disableOnShiftPressed: false
+        disableIfShiftIsPressed: false
     };
 
     touchHandled = false;
@@ -96,7 +96,7 @@ export default class ContextMenuTrigger extends Component {
 
     handleContextClick = (event) => {
         if (this.props.disable) return;
-        if (this.props.disableOnShiftPressed && event.shiftKey) return;
+        if (this.props.disableIfShiftIsPressed && event.shiftKey) return;
 
         event.preventDefault();
         event.stopPropagation();
