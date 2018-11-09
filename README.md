@@ -98,6 +98,7 @@ see [usage docs](./docs/usage.md) / [examples](./examples) for more details.
 ## Who's using react-contextmenu?
 - [react-data-grid](https://github.com/adazzle/react-data-grid)
 - [teamup.com](https://teamup.com)
+- [Spotify Web Player](https://open.spotify.com)
 
 ## Contributors
 
