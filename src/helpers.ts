@@ -1,16 +1,18 @@
-export function callIfExists(func, ...args) {
-    return (typeof func === 'function') && func(...args);
+export function callIfExists<T extends any[], U>(func: (..._1: T) => U, ...args: T): U | undefined {
+    if (typeof func === 'function') {
+        return func(...args)
+    };
 }
 
-export function hasOwnProp(obj, prop) {
+export function hasOwnProp<T>(obj: T, prop: string): boolean {
     return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-export function uniqueId() {
+export function uniqueId(): string {
     return Math.random().toString(36).substring(7);
 }
 
-export const cssClasses = {
+export const cssClasses: Record<string, string> = {
     menu: 'react-contextmenu',
     menuVisible: 'react-contextmenu--visible',
     menuWrapper: 'react-contextmenu-wrapper',
@@ -22,7 +24,7 @@ export const cssClasses = {
     subMenu: 'react-contextmenu-submenu'
 };
 
-export const store = {};
+export const store: Record<string, any> = {};
 
 export const canUseDOM = Boolean(
   typeof window !== 'undefined' && window.document && window.document.createElement
