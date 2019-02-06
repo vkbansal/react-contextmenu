@@ -66,7 +66,7 @@ function MyApp() {
       </ContextMenuTrigger>
 
       <ContextMenu id="some_unique_identifier">
-          <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
+        <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
           ContextMenu Item 1
         </MenuItem>
         <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
@@ -74,7 +74,7 @@ function MyApp() {
         </MenuItem>
         <MenuItem divider />
         <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
-   	      ContextMenu Item 3
+          ContextMenu Item 3
         </MenuItem>
       </ContextMenu>
 
