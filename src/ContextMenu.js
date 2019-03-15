@@ -16,6 +16,7 @@ export default class ContextMenu extends AbstractMenu {
         data: PropTypes.object,
         className: PropTypes.string,
         hideOnLeave: PropTypes.bool,
+        rtl: PropTypes.bool,
         onHide: PropTypes.func,
         onMouseLeave: PropTypes.func,
         onShow: PropTypes.func,
@@ -26,6 +27,7 @@ export default class ContextMenu extends AbstractMenu {
         className: '',
         data: {},
         hideOnLeave: false,
+        rtl: false,
         onHide() { return null; },
         onMouseLeave() { return null; },
         onShow() { return null; },
@@ -57,7 +59,9 @@ export default class ContextMenu extends AbstractMenu {
             wrapper(() => {
                 const { x, y } = this.state;
 
-                const { top, left } = this.getMenuPosition(x, y);
+                const { top, left } = this.props.rtl
+                                    ? this.getRTLMenuPosition(x, y)
+                                    : this.getMenuPosition(x, y);
 
                 wrapper(() => {
                     if (!this.menu) return;
@@ -172,6 +176,39 @@ export default class ContextMenu extends AbstractMenu {
         }
 
         if (menuStyles.left < 0) {
+            menuStyles.left = rect.width < innerWidth ? (innerWidth - rect.width) / 2 : 0;
+        }
+
+        return menuStyles;
+    }
+
+    getRTLMenuPosition = (x = 0, y = 0) => {
+        let menuStyles = {
+            top: y,
+            left: x
+        };
+
+        if (!this.menu) return menuStyles;
+
+        const { innerWidth, innerHeight } = window;
+        const rect = this.menu.getBoundingClientRect();
+
+        // Try to position the menu on the left side of the cursor
+        menuStyles.left = x - rect.width;
+
+        if (y + rect.height > innerHeight) {
+            menuStyles.top -= rect.height;
+        }
+
+        if (menuStyles.left < 0) {
+            menuStyles.left += rect.width;
+        }
+
+        if (menuStyles.top < 0) {
+            menuStyles.top = rect.height < innerHeight ? (innerHeight - rect.height) / 2 : 0;
+        }
+
+        if (menuStyles.left + rect.width > innerWidth) {
             menuStyles.left = rect.width < innerWidth ? (innerWidth - rect.width) / 2 : 0;
         }
 

@@ -66,7 +66,7 @@ function MyApp() {
       </ContextMenuTrigger>
 
       <ContextMenu id="some_unique_identifier">
-          <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
+        <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
           ContextMenu Item 1
         </MenuItem>
         <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
@@ -74,7 +74,7 @@ function MyApp() {
         </MenuItem>
         <MenuItem divider />
         <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
-   	      ContextMenu Item 3
+          ContextMenu Item 3
         </MenuItem>
       </ContextMenu>
 
@@ -98,6 +98,7 @@ see [usage docs](./docs/usage.md) / [examples](./examples) for more details.
 ## Who's using react-contextmenu?
 - [react-data-grid](https://github.com/adazzle/react-data-grid)
 - [teamup.com](https://teamup.com)
+- [Spotify Web Player](https://open.spotify.com)
 
 ## Contributors
 
