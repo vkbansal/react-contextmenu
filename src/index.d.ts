@@ -6,6 +6,7 @@ declare module "react-contextmenu" {
         data?: any,
         className?: string,
         hideOnLeave?: boolean,
+        rtl?: boolean,
         onHide?: {(event: any): void},
         onMouseLeave?: {(event: React.MouseEvent<HTMLElement>, data: Object, target: HTMLElement): void} | Function,
         onShow?: {(event: any): void},

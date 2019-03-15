@@ -79,7 +79,10 @@ export default class AbstractMenu extends Component {
     selectChildren = (forward) => {
         const { selectedItem } = this.state;
         const children = [];
-        const childCollector = (child) => {
+        let disabledChildrenCount = 0;
+        let disabledChildIndexes = {};
+
+        const childCollector = (child, index) => {
             // child can be empty in case you do conditional rendering of components, in which
             // case it should not be accounted for as a real child
             if (!child) {
@@ -90,24 +93,50 @@ export default class AbstractMenu extends Component {
                 // Maybe the MenuItem or SubMenu is capsuled in a wrapper div or something else
                 React.Children.forEach(child.props.children, childCollector);
             } else if (!child.props.divider) {
+                if (child.props.disabled) {
+                    ++disabledChildrenCount;
+                    disabledChildIndexes[index] = true;
+                }
+
                 children.push(child);
             }
         };
+
         React.Children.forEach(this.props.children, childCollector);
+        if (disabledChildrenCount === children.length) {
+            // All menu items are disabled, so none can be selected, don't do anything
+            return;
+        }
+
+        function findNextEnabledChildIndex(currentIndex) {
+            let i = currentIndex;
+            let incrementCounter = () => {
+                if (forward) {
+                    --i;
+                } else {
+                    ++i;
+                }
+
+                if (i < 0) {
+                    i = children.length - 1;
+                } else if (i >= children.length) {
+                    i = 0;
+                }
+            };
+
+            do {
+                incrementCounter();
+            } while (i !== currentIndex && disabledChildIndexes[i]);
+
+            return i === currentIndex ? null : i;
+        }
+
         const currentIndex = children.indexOf(selectedItem);
-        if (currentIndex < 0) {
+        const nextEnabledChildIndex = findNextEnabledChildIndex(currentIndex);
+
+        if (nextEnabledChildIndex !== null) {
             this.setState({
-                selectedItem: forward ? children[children.length - 1] : children[0],
-                forceSubMenuOpen: false
-            });
-        } else if (forward) {
-            this.setState({
-                selectedItem: children[currentIndex - 1 < 0 ? children.length - 1 : currentIndex - 1],
-                forceSubMenuOpen: false
-            });
-        } else {
-            this.setState({
-                selectedItem: children[currentIndex + 1 < children.length ? currentIndex + 1 : 0],
+                selectedItem: children[nextEnabledChildIndex],
                 forceSubMenuOpen: false
             });
         }

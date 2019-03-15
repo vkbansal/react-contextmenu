@@ -34,7 +34,9 @@ export default class MenuItem extends Component {
     };
 
     handleClick = (event) => {
-        event.preventDefault();
+        if (event.button !== 0 && event.button !== 1) {
+            event.preventDefault();
+        }
 
         if (this.props.disabled || this.props.divider) return;
 
