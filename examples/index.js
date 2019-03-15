@@ -5,6 +5,7 @@ import { HashRouter as Router, Route, NavLink as Link, Switch } from 'react-rout
 import SimpleMenu from './SimpleMenu';
 import MultipleTargets from './MultipleTargets';
 import MultipleMenus from './MultipleMenus';
+import MultipleMenusSameTrigger from './MultipleMenusSameTrigger';
 import SubMenus from './SubMenus';
 import DynamicMenu from './DynamicMenu';
 import Customization from './Customization';
@@ -39,6 +40,11 @@ function App() {
                         </Link>
                     </li>
                     <li className='pure-menu-item'>
+                        <Link {...commonProps} to='/multiple-menus-same-trigger'>
+                            Multiple Menus with same Trigger
+                        </Link>
+                    </li>
+                    <li className='pure-menu-item'>
                         <Link {...commonProps} to='/submenus'>
                             Sub Menus
                         </Link>
@@ -69,6 +75,7 @@ function App() {
                 <Route path='/simple-menu' component={SimpleMenu} />
                 <Route path='/multiple-targets' component={MultipleTargets} />
                 <Route path='/multiple-menus' component={MultipleMenus} />
+                <Route path='/multiple-menus-same-trigger' component={MultipleMenusSameTrigger} />
                 <Route path='/submenus' component={SubMenus} />
                 <Route path='/dynamic-menu' component={DynamicMenu} />
                 <Route path='/customization' component={Customization} />
