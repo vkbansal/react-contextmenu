@@ -121,7 +121,7 @@ export default class ContextMenuTrigger extends Component {
         let showMenuConfig = {
             position: { x, y },
             target: this.elem,
-            id,
+            id
         };
         if (data && (typeof data.then === 'function')) {
             // it's promise
