@@ -31,7 +31,7 @@ declare module "react-contextmenu" {
     }
 
     interface SubMenuProps {
-        title: React.ReactElement<any>,
+        title: React.ReactElement<any> | React.ReactText,
         className?: string,
         disabled?: boolean,
         hoverDelay?: number,
