@@ -27,3 +27,26 @@ export const store = {};
 export const canUseDOM = Boolean(
   typeof window !== 'undefined' && window.document && window.document.createElement
 );
+
+// Locate the document element that contains a specified element
+//
+// This function looks to see if the element is contained within a shadow DOM and returns the
+// appropriate document (or fragment) element that applies.  The returned node will be one of the
+// following:
+//
+//  - `null`: when node is `null`, not browser or invalid environment
+//  - `document`: if the node is NOT contained within a shadow DOM
+//  - instance of `DocumentFragment`: when the node IS contained within a shadow DOM
+export function getDocumentNode(node) {
+    while (node != null) {
+        switch (node.nodeType) {
+            case Node.DOCUMENT_NODE: // master document node
+            case Node.DOCUMENT_FRAGMENT_NODE: // used by shadow DOM
+            return node;
+        }
+
+        node = node.parentNode;
+    }
+
+    return null;
+}
