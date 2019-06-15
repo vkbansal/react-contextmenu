@@ -36,6 +36,8 @@ declare module "react-contextmenu" {
         disabled?: boolean,
         hoverDelay?: number,
         rtl?: boolean,
+        preventCloseOnClick?: boolean,
+        onClick?: {(event: React.TouchEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>, data: Object, target: HTMLElement): void} | Function,
     }
 
     module ReactContextmenu {
