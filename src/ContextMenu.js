@@ -78,7 +78,7 @@ export default class ContextMenu extends AbstractMenu {
                 });
             });
         } else {
-            if (!this.menu) return;
+            if (!this.menu || !this.state.isVisible) return;
             this.menu.style.opacity = 0;
             this.menu.style.pointerEvents = 'none';
         }
