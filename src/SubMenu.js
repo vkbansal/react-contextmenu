@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import assign from 'object-assign';
 
+import { hideMenu } from './actions';
 import AbstractMenu from './AbstractMenu';
 import { callIfExists, cssClasses, hasOwnProp, store } from './helpers';
 import listener from './globalEventListener';
@@ -47,7 +48,7 @@ export default class SubMenu extends AbstractMenu {
     }
 
     componentDidMount() {
-        this.listenId = listener.register(() => {}, this.hideMenu);
+        this.listenId = listener.register(() => {}, this.hideSubMenu);
     }
 
     getSubMenuType() { // eslint-disable-line class-methods-use-this
@@ -151,7 +152,7 @@ export default class SubMenu extends AbstractMenu {
         return position;
     }
 
-    hideMenu = (e) => {
+    hideSubMenu = (e) => {
         // avoid closing submenus of a different menu tree
         if (e.detail && e.detail.id && this.menu && e.detail.id !== this.menu.id) {
             return;
@@ -175,6 +176,10 @@ export default class SubMenu extends AbstractMenu {
             assign({}, this.props.data, store.data),
             store.target
         );
+
+        if (!this.props.onClick || this.props.preventCloseOnClick) return;
+
+        hideMenu();
     }
 
     handleMouseEnter = () => {
