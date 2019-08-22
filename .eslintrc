@@ -1,0 +1,18 @@
+{
+    "parser": "babel-eslint",
+    "plugins": [
+        "import",
+        "react"
+    ],
+    "extends": [
+        "vkbansal",
+        "vkbansal/react",
+    ],
+    "env": {
+        "browser": true
+    },
+    "rules": {
+        "react/no-array-index-key": 0,
+        "react/jsx-closing-bracket-location": 0
+    }
+}
