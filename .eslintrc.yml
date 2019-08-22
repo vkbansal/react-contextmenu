@@ -6,3 +6,4 @@ env:
     browser: true
 rules:
     react/no-array-index-key: 0
+    react/closing-bracket-location: 0

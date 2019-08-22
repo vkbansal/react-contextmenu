@@ -72,7 +72,8 @@ export default class MenuItem extends Component {
                 onMouseMove={this.props.onMouseMove}
                 onMouseLeave={this.props.onMouseLeave}
                 onTouchEnd={this.handleClick}
-                onClick={this.handleClick}>
+                onClick={this.handleClick}
+            >
                 {divider ? null : children}
             </div>
         );
