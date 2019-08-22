@@ -70,8 +70,8 @@ export default class SubMenu extends AbstractMenu {
             const wrapper = window.requestAnimationFrame || setTimeout;
             wrapper(() => {
                 const styles = this.props.rtl
-                                ? this.getRTLMenuPosition()
-                                : this.getMenuPosition();
+                    ? this.getRTLMenuPosition()
+                    : this.getMenuPosition();
 
                 this.subMenu.style.removeProperty('top');
                 this.subMenu.style.removeProperty('bottom');
