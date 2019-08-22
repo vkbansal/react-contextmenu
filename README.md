@@ -82,7 +82,7 @@ function MyApp() {
   );
 }
 
-ReactDOM.render(<MyApp myProp={12}/>, document.getElementById("main"));
+ReactDOM.render(<MyApp myProp={12} />, document.getElementById("main"));
 ```
 
 see [usage docs](./docs/usage.md) / [examples](./examples) for more details.
