@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import assign from 'object-assign';
+import { document } from 'global';
 
 import { hideMenu } from './actions';
 import AbstractMenu from './AbstractMenu';

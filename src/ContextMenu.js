@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import assign from 'object-assign';
+import { window, document } from 'global';
 
 import listener from './globalEventListener';
 import AbstractMenu from './AbstractMenu';
@@ -153,7 +154,8 @@ export default class ContextMenu extends AbstractMenu {
     }
 
     hideMenu = (e) => {
-        if (e.keyCode === 27 || e.keyCode === 13) { // ECS or enter
+        // ECS or enter
+        if (e.keyCode === 27 || e.keyCode === 13) {
             hideMenu();
         }
     }

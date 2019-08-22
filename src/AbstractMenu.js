@@ -26,23 +26,29 @@ export default class AbstractMenu extends Component {
         }
 
         switch (e.keyCode) {
-            case 37: // left arrow
-            case 27: // escape
+            // left arrow
+            case 37:
+            // escape
+            case 27:
                 e.preventDefault();
                 this.hideMenu(e);
                 break;
-            case 38: // up arrow
+            // up arrow
+            case 38:
                 e.preventDefault();
                 this.selectChildren(true);
                 break;
-            case 40: // down arrow
+            // down arrow
+            case 40:
                 e.preventDefault();
                 this.selectChildren(false);
                 break;
-            case 39: // right arrow
+            // right arrow
+            case 39:
                 this.tryToOpenSubMenu(e);
                 break;
-            case 13: // enter
+            // enter
+            case 13:
                 e.preventDefault();
                 this.tryToOpenSubMenu(e);
                 {
@@ -62,6 +68,7 @@ export default class AbstractMenu extends Component {
                 break;
             default:
                 // do nothing
+                break;
         }
     }
 

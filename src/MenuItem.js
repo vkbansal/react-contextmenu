@@ -62,12 +62,18 @@ export default class MenuItem extends Component {
 
         return (
             <div
-                {...attributes} className={menuItemClassNames}
-                role='menuitem' tabIndex='-1' aria-disabled={disabled ? 'true' : 'false'}
+                {...attributes}
+                className={menuItemClassNames}
+                role='menuitem'
+                tabIndex='-1'
+                aria-disabled={disabled ? 'true' : 'false'}
                 aria-orientation={divider ? 'horizontal' : null}
                 ref={(ref) => { this.ref = ref; }}
-                onMouseMove={this.props.onMouseMove} onMouseLeave={this.props.onMouseLeave}
-                onTouchEnd={this.handleClick} onClick={this.handleClick}>
+                onMouseMove={this.props.onMouseMove}
+                onMouseLeave={this.props.onMouseLeave}
+                onTouchEnd={this.handleClick}
+                onClick={this.handleClick}
+            >
                 {divider ? null : children}
             </div>
         );
