@@ -67,8 +67,8 @@ export default class ContextMenu extends AbstractMenu {
                 const { x, y } = this.state;
 
                 const { top, left } = this.props.rtl
-                                    ? this.getRTLMenuPosition(x, y)
-                                    : this.getMenuPosition(x, y);
+                    ? this.getRTLMenuPosition(x, y)
+                    : this.getMenuPosition(x, y);
 
                 wrapper(() => {
                     if (!this.menu) return;
@@ -94,12 +94,23 @@ export default class ContextMenu extends AbstractMenu {
     }
 
     registerHandlers = () => {
+        const { preventHideOnScroll, preventHideOnContextMenu, preventHideOnResize } = this.props;
+
         document.addEventListener('mousedown', this.handleOutsideClick);
         document.addEventListener('touchstart', this.handleOutsideClick);
-        if (!this.props.preventHideOnScroll) document.addEventListener('scroll', this.handleHide);
-        if (!this.props.preventHideOnContextMenu) document.addEventListener('contextmenu', this.handleHide);
+
+        if (!preventHideOnScroll) {
+            document.addEventListener('scroll', this.handleHide);
+        }
+        if (!preventHideOnContextMenu) {
+            document.addEventListener('contextmenu', this.handleHide);
+        }
+
         document.addEventListener('keydown', this.handleKeyNavigation);
-        if (!this.props.preventHideOnResize) window.addEventListener('resize', this.handleHide);
+
+        if (!preventHideOnResize) {
+            window.addEventListener('resize', this.handleHide);
+        }
     }
 
     unregisterHandlers = () => {
@@ -230,19 +241,24 @@ export default class ContextMenu extends AbstractMenu {
     render() {
         const { children, className, style } = this.props;
         const { isVisible } = this.state;
-        const inlineStyle = assign(
-          {},
-          style,
-          { position: 'fixed', opacity: 0, pointerEvents: 'none' }
-        );
+        const inlineStyle = assign({}, style, {
+            position: 'fixed',
+            opacity: 0,
+            pointerEvents: 'none'
+        });
         const menuClassnames = cx(cssClasses.menu, className, {
             [cssClasses.menuVisible]: isVisible
         });
 
         return (
             <nav
-                role='menu' tabIndex='-1' ref={this.menuRef} style={inlineStyle} className={menuClassnames}
-                onContextMenu={this.handleContextMenu} onMouseLeave={this.handleMouseLeave}>
+                role='menu'
+                tabIndex='-1'
+                ref={this.menuRef}
+                style={inlineStyle}
+                className={menuClassnames}
+                onContextMenu={this.handleContextMenu}
+                onMouseLeave={this.handleMouseLeave}>
                 {this.renderChildren(children)}
             </nav>
         );
