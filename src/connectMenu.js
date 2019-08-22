@@ -7,10 +7,10 @@ import listener from './globalEventListener';
 const ignoredTriggerProps = [...Object.keys(ContextMenuTrigger.propTypes), 'children'];
 
 // expect the id of the menu to be responsible for as outer parameter
-export default function (menuId) {
+export default function connectMenu(menuId) {
     // expect menu component to connect as inner parameter
     // <Child/> is presumably a wrapper of <ContextMenu/>
-    return function (Child) {
+    return function connectMenuComponent(Child) {
         // return wrapper for <Child/> that forwards the ContextMenuTrigger's additional props
         return class ConnectMenu extends Component {
             constructor(props) {
