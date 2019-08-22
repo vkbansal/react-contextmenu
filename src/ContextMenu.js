@@ -258,8 +258,7 @@ export default class ContextMenu extends AbstractMenu {
                 style={inlineStyle}
                 className={menuClassnames}
                 onContextMenu={this.handleContextMenu}
-                onMouseLeave={this.handleMouseLeave}
-            >
+                onMouseLeave={this.handleMouseLeave}>
                 {this.renderChildren(children)}
             </nav>
         );
