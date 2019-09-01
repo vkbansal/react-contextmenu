@@ -25,5 +25,5 @@ export const cssClasses = {
 export const store = {};
 
 export const canUseDOM = Boolean(
-  typeof window !== 'undefined' && window.document && window.document.createElement
+    typeof window !== 'undefined' && window.document && window.document.createElement
 );
