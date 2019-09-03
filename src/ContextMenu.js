@@ -66,8 +66,8 @@ export default class ContextMenu extends AbstractMenu {
                 const { x, y } = this.state;
 
                 const { top, left } = this.props.rtl
-                                    ? this.getRTLMenuPosition(x, y)
-                                    : this.getMenuPosition(x, y);
+                    ? this.getRTLMenuPosition(x, y)
+                    : this.getMenuPosition(x, y);
 
                 wrapper(() => {
                     if (!this.menu) return;
@@ -229,9 +229,9 @@ export default class ContextMenu extends AbstractMenu {
         const { children, className, style } = this.props;
         const { isVisible } = this.state;
         const inlineStyle = assign(
-          {},
-          style,
-          { position: 'fixed', opacity: 0, pointerEvents: 'none' }
+            {},
+            style,
+            { position: 'fixed', opacity: 0, pointerEvents: 'none' }
         );
         const menuClassnames = cx(cssClasses.menu, className, {
             [cssClasses.menuVisible]: isVisible

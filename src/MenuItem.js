@@ -8,29 +8,31 @@ import { callIfExists, cssClasses, store } from './helpers';
 
 export default class MenuItem extends Component {
     static propTypes = {
-        children: PropTypes.node,
         attributes: PropTypes.object,
+        children: PropTypes.node,
+        className: PropTypes.string,
         data: PropTypes.object,
         disabled: PropTypes.bool,
         divider: PropTypes.bool,
-        preventClose: PropTypes.bool,
         onClick: PropTypes.func,
-        selected: PropTypes.bool,
+        onMouseLeave: PropTypes.func,
         onMouseMove: PropTypes.func,
-        onMouseLeave: PropTypes.func
+        preventClose: PropTypes.bool,
+        selected: PropTypes.bool
     };
 
     static defaultProps = {
-        disabled: false,
-        data: {},
-        divider: false,
         attributes: {},
-        preventClose: false,
-        onClick() { return null; },
         children: null,
-        selected: false,
+        className: '',
+        data: {},
+        disabled: false,
+        divider: false,
+        onClick() { return null; },
         onMouseMove: () => null,
-        onMouseLeave: () => null
+        onMouseLeave: () => null,
+        preventClose: false,
+        selected: false
     };
 
     handleClick = (event) => {
@@ -53,12 +55,25 @@ export default class MenuItem extends Component {
     }
 
     render() {
-        const { disabled, divider, children, attributes, selected } = this.props;
-        const menuItemClassNames = cx(cssClasses.menuItem, attributes.className, {
-            [cx(cssClasses.menuItemDisabled, attributes.disabledClassName)]: disabled,
-            [cx(cssClasses.menuItemDivider, attributes.dividerClassName)]: divider,
-            [cx(cssClasses.menuItemSelected, attributes.selectedClassName)]: selected
-        });
+        const {
+            attributes,
+            children,
+            className,
+            disabled,
+            divider,
+            selected
+        } = this.props;
+
+        const menuItemClassNames = cx(
+            className,
+            cssClasses.menuItem,
+            attributes.className,
+            {
+                [cx(cssClasses.menuItemDisabled, attributes.disabledClassName)]: disabled,
+                [cx(cssClasses.menuItemDivider, attributes.dividerClassName)]: divider,
+                [cx(cssClasses.menuItemSelected, attributes.selectedClassName)]: selected
+            }
+        );
 
         return (
             <div

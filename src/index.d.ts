@@ -23,6 +23,7 @@ declare module "react-contextmenu" {
 
     interface MenuItemProps {
         attributes?: React.HTMLAttributes<HTMLDivElement>,
+        className?: string;
         data?: Object,
         disabled?: boolean,
         divider?: boolean,
