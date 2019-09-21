@@ -16,6 +16,7 @@ export default class SubMenu extends AbstractMenu {
         className: PropTypes.string,
         disabled: PropTypes.bool,
         hoverDelay: PropTypes.number,
+        hideDelay: PropTypes.number,
         rtl: PropTypes.bool,
         selected: PropTypes.bool,
         onMouseMove: PropTypes.func,
@@ -28,6 +29,7 @@ export default class SubMenu extends AbstractMenu {
     static defaultProps = {
         disabled: false,
         hoverDelay: 500,
+        hideDelay : 0,
         attributes: {},
         className: '',
         rtl: false,
