@@ -89,10 +89,7 @@ var ContextMenu = function (_AbstractMenu) {
 
         _this.handleHide = function (e) {
             if (_this.state.isVisible && (!e.detail || !e.detail.id || e.detail.id === _this.props.id)) {
-                if (_this.hideTimeout) {
-                    clearTimeout(_this.hideTimeout);
-                    _this.hideTimeout = null;
-                }
+                _this.clearHideTimeout();
                 _this.unregisterHandlers();
                 _this.setState({ isVisible: false, selectedItem: null, forceSubMenuOpen: false });
                 (0, _helpers.callIfExists)(_this.props.onHide, e);
@@ -108,10 +105,7 @@ var ContextMenu = function (_AbstractMenu) {
 
             (0, _helpers.callIfExists)(_this.props.onMouseEnter, event, (0, _objectAssign2.default)({}, _this.props.data, _helpers.store.data), _helpers.store.target);
 
-            if (_this.hideTimeout) {
-                clearTimeout(_this.hideTimeout);
-                _this.hideTimeout = null;
-            }
+            _this.clearHideTimeout();
         };
 
         _this.handleMouseLeave = function (event) {
@@ -121,11 +115,7 @@ var ContextMenu = function (_AbstractMenu) {
 
             if (_this.props.hideOnLeave) {
                 if (_this.props.hideOnLeaveDelay > 0) {
-                    if (_this.hideTimeout) {
-                        clearTimeout(_this.hideTimeout);
-                        _this.hideTimeout = null;
-                    }
-
+                    _this.clearHideTimeout();
                     _this.hideTimeout = setTimeout(function () {
                         return (0, _actions.hideMenu)();
                     }, _this.props.hideOnLeaveDelay);
@@ -146,6 +136,13 @@ var ContextMenu = function (_AbstractMenu) {
             if (e.keyCode === 27 || e.keyCode === 13) {
                 // ECS or enter
                 (0, _actions.hideMenu)();
+            }
+        };
+
+        _this.clearHideTimeout = function () {
+            if (_this.hideTimeout) {
+                clearTimeout(_this.hideTimeout);
+                _this.hideTimeout = null;
             }
         };
 
@@ -281,9 +278,7 @@ var ContextMenu = function (_AbstractMenu) {
     }, {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
-            if (this.hideTimeout) {
-                clearTimeout(this.hideTimeout);
-            }
+            this.clearHideTimeout();
 
             if (this.listenId) {
                 _globalEventListener2.default.unregister(this.listenId);

@@ -89,9 +89,7 @@ export default class ContextMenu extends AbstractMenu {
     }
 
     componentWillUnmount() {
-        if (this.hideTimeout) {
-            clearTimeout(this.hideTimeout);
-        }
+        this.clearHideTimeout();
 
         if (this.listenId) {
             listener.unregister(this.listenId);
@@ -130,10 +128,7 @@ export default class ContextMenu extends AbstractMenu {
 
     handleHide = (e) => {
         if (this.state.isVisible && (!e.detail || !e.detail.id || e.detail.id === this.props.id)) {
-            if (this.hideTimeout) {
-                clearTimeout(this.hideTimeout);
-                this.hideTimeout = null;
-            }
+            this.clearHideTimeout();
             this.unregisterHandlers();
             this.setState({ isVisible: false, selectedItem: null, forceSubMenuOpen: false });
             callIfExists(this.props.onHide, e);
@@ -154,10 +149,7 @@ export default class ContextMenu extends AbstractMenu {
             store.target
         );
 
-        if (this.hideTimeout) {
-            clearTimeout(this.hideTimeout);
-            this.hideTimeout = null;
-        }
+        this.clearHideTimeout();
     }
 
     handleMouseLeave = (event) => {
@@ -172,11 +164,7 @@ export default class ContextMenu extends AbstractMenu {
 
         if (this.props.hideOnLeave) {
             if (this.props.hideOnLeaveDelay > 0) {
-                if (this.hideTimeout) {
-                    clearTimeout(this.hideTimeout);
-                    this.hideTimeout = null;
-                }
-
+                this.clearHideTimeout();
                 this.hideTimeout = setTimeout(() => hideMenu(), this.props.hideOnLeaveDelay);
             } else {
                 hideMenu();
@@ -194,6 +182,13 @@ export default class ContextMenu extends AbstractMenu {
     hideMenu = (e) => {
         if (e.keyCode === 27 || e.keyCode === 13) { // ECS or enter
             hideMenu();
+        }
+    }
+
+    clearHideTimeout = () => {
+        if (this.hideTimeout) {
+            clearTimeout(this.hideTimeout);
+            this.hideTimeout = null;
         }
     }
 
