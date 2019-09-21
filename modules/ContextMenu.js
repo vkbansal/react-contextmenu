@@ -99,15 +99,31 @@ var ContextMenu = function (_AbstractMenu) {
             if (!_this.menu.contains(e.target)) (0, _actions.hideMenu)();
         };
 
+        _this.handleMouseEnter = function (event) {
+            event.preventDefault();
+
+            (0, _helpers.callIfExists)(_this.props.onMouseEnter, event, (0, _objectAssign2.default)({}, _this.props.data, _helpers.store.data), _helpers.store.target);
+
+            if (_this.hideTimeout) {
+                clearTimeout(_this.hideTimeout);
+                _this.hideTimeout = null;
+            }
+        };
+
         _this.handleMouseLeave = function (event) {
             event.preventDefault();
 
             (0, _helpers.callIfExists)(_this.props.onMouseLeave, event, (0, _objectAssign2.default)({}, _this.props.data, _helpers.store.data), _helpers.store.target);
 
             if (_this.props.hideOnLeave) {
-                var delay = isNaN(_this.props.hideOnLeave) ? 0 : parseInt(_this.props.hideOnLeave, 10);
-                if (delay > 0) {
-                    setTimeout(_actions.hideMenu, delay);
+                if (_this.props.hideOnLeaveDelay > 0) {
+                    if (_this.hideTimeout) {
+                        clearTimeout(_this.hideTimeout);
+                    }
+
+                    _this.hideTimeout = setTimeout(function () {
+                        return (0, _actions.hideMenu)();
+                    }, _this.props.hideOnLeaveDelay);
                 } else {
                     (0, _actions.hideMenu)();
                 }
@@ -260,6 +276,10 @@ var ContextMenu = function (_AbstractMenu) {
     }, {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
+            if (this.hideTimeout) {
+                clearTimeout(this.hideTimeout);
+            }
+
             if (this.listenId) {
                 _globalEventListener2.default.unregister(this.listenId);
             }
@@ -282,7 +302,9 @@ var ContextMenu = function (_AbstractMenu) {
                 'nav',
                 {
                     role: 'menu', tabIndex: '-1', ref: this.menuRef, style: inlineStyle, className: menuClassnames,
-                    onContextMenu: this.handleContextMenu, onMouseLeave: this.handleMouseLeave },
+                    onContextMenu: this.handleContextMenu,
+                    onMouseEnter: this.handleMouseEnter,
+                    onMouseLeave: this.handleMouseLeave },
                 this.renderChildren(children)
             );
         }
@@ -296,9 +318,11 @@ ContextMenu.propTypes = {
     children: _propTypes2.default.node.isRequired,
     data: _propTypes2.default.object,
     className: _propTypes2.default.string,
-    hideOnLeave: _propTypes2.default.oneOfType([_propTypes2.default.bool, _propTypes2.default.number]),
+    hideOnLeave: _propTypes2.default.bool,
+    hideOnLeaveDelay: _propTypes2.default.number,
     rtl: _propTypes2.default.bool,
     onHide: _propTypes2.default.func,
+    onMouseEnter: _propTypes2.default.func,
     onMouseLeave: _propTypes2.default.func,
     onShow: _propTypes2.default.func,
     preventHideOnContextMenu: _propTypes2.default.bool,
@@ -310,8 +334,12 @@ ContextMenu.defaultProps = {
     className: '',
     data: {},
     hideOnLeave: false,
+    hideOnLeaveDelay: 0,
     rtl: false,
     onHide: function onHide() {
+        return null;
+    },
+    onMouseEnter: function onMouseEnter() {
         return null;
     },
     onMouseLeave: function onMouseLeave() {

@@ -184,6 +184,10 @@ var _initialiseProps = function _initialiseProps() {
         }
     };
 
+    this.onChildMouseEnter = function () {
+        _this2.setState({ selectedItem: null, forceSubMenuOpen: false });
+    };
+
     this.onChildMouseLeave = function () {
         _this2.setState({ selectedItem: null, forceSubMenuOpen: false });
     };
@@ -197,6 +201,7 @@ var _initialiseProps = function _initialiseProps() {
                 props.children = _this2.renderChildren(child.props.children);
                 return _react2.default.cloneElement(child, props);
             }
+            props.onMouseEnter = _this2.onChildMouseEnter.bind(_this2);
             props.onMouseLeave = _this2.onChildMouseLeave.bind(_this2);
             if (child.type === _this2.getSubMenuType()) {
                 // special props for SubMenu only
