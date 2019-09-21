@@ -148,6 +148,10 @@ export default class AbstractMenu extends Component {
         }
     }
 
+    onChildMouseEnter = () => {
+        this.setState({ selectedItem: null, forceSubMenuOpen: false });
+    }
+
     onChildMouseLeave = () => {
         this.setState({ selectedItem: null, forceSubMenuOpen: false });
     }
@@ -160,6 +164,7 @@ export default class AbstractMenu extends Component {
             props.children = this.renderChildren(child.props.children);
             return React.cloneElement(child, props);
         }
+        props.onMouseEnter = this.onChildMouseEnter.bind(this);
         props.onMouseLeave = this.onChildMouseLeave.bind(this);
         if (child.type === this.getSubMenuType()) {
             // special props for SubMenu only
