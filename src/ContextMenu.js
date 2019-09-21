@@ -15,10 +15,10 @@ export default class ContextMenu extends AbstractMenu {
         children: PropTypes.node.isRequired,
         data: PropTypes.object,
         className: PropTypes.string,
-        hideOnLeave: PropTypes.oneOf(
+        hideOnLeave: PropTypes.oneOfType([
             PropTypes.bool,
             PropTypes.number
-        ),
+        ]),
         rtl: PropTypes.bool,
         onHide: PropTypes.func,
         onMouseLeave: PropTypes.func,
@@ -145,17 +145,11 @@ export default class ContextMenu extends AbstractMenu {
             store.target
         );
 
-        // check if menu should hide on mouse leave
         if (this.props.hideOnLeave) {
-            // is hide delay delayed
-            let isHideDelayed = !isNaN(this.props.hideOnLeave) && this.props.hideOnLeave !== -1;
-
-            // delay hide if necessary
-            if (isHideDelayed) {
-                // timeout
-                setTimeout(hideMenu, this.props.hideOnLeave);
+            let delay = isNaN(this.props.hideOnLeave) ? 0 : parseInt(this.props.hideOnLeave, 10);
+            if (delay > 0) {
+                setTimeout(hideMenu, delay);
             } else {
-                // hide it immediately
                 hideMenu();
             }
         }
