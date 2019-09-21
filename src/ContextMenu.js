@@ -21,6 +21,7 @@ export default class ContextMenu extends AbstractMenu {
         ]),
         rtl: PropTypes.bool,
         onHide: PropTypes.func,
+        onMouseEnter: PropTypes.func,
         onMouseLeave: PropTypes.func,
         onShow: PropTypes.func,
         preventHideOnContextMenu: PropTypes.bool,
@@ -35,6 +36,7 @@ export default class ContextMenu extends AbstractMenu {
         hideOnLeave: false,
         rtl: false,
         onHide() { return null; },
+        onMouseEnter() { return null; },
         onMouseLeave() { return null; },
         onShow() { return null; },
         preventHideOnContextMenu: false,
@@ -88,6 +90,10 @@ export default class ContextMenu extends AbstractMenu {
     }
 
     componentWillUnmount() {
+        if (this.hideTimeout) {
+            clearTimeout(this.hideTimeout);
+        }
+
         if (this.listenId) {
             listener.unregister(this.listenId);
         }
@@ -135,6 +141,22 @@ export default class ContextMenu extends AbstractMenu {
         if (!this.menu.contains(e.target)) hideMenu();
     }
 
+    handleMouseEnter = (event) => {
+        event.preventDefault();
+
+        callIfExists(
+            this.props.onMouseEnter,
+            event,
+            assign({}, this.props.data, store.data),
+            store.target
+        );
+
+        if (this.hideTimeout) {
+            clearTimeout(this.hideTimeout);
+            this.hideTimeout = null;
+        }
+    }
+
     handleMouseLeave = (event) => {
         event.preventDefault();
 
@@ -148,7 +170,7 @@ export default class ContextMenu extends AbstractMenu {
         if (this.props.hideOnLeave) {
             let delay = isNaN(this.props.hideOnLeave) ? 0 : parseInt(this.props.hideOnLeave, 10);
             if (delay > 0) {
-                setTimeout(hideMenu, delay);
+                this.hideTimeout = setTimeout(hideMenu, delay);
             } else {
                 hideMenu();
             }
@@ -250,7 +272,9 @@ export default class ContextMenu extends AbstractMenu {
         return (
             <nav
                 role='menu' tabIndex='-1' ref={this.menuRef} style={inlineStyle} className={menuClassnames}
-                onContextMenu={this.handleContextMenu} onMouseLeave={this.handleMouseLeave}>
+                onContextMenu={this.handleContextMenu}
+                onMouseEnter={this.handleMouseEnter}
+                onMouseLeave={this.handleMouseLeave}>
                 {this.renderChildren(children)}
             </nav>
         );

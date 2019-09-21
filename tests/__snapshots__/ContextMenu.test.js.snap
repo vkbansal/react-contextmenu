@@ -7,6 +7,7 @@ exports[`ContextMenu tests does not shows when event with incorrect "id" is trig
   hideOnLeave={false}
   id="CORRECT_ID"
   onHide={[Function]}
+  onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   onShow={[Function]}
   preventHideOnContextMenu={false}
@@ -18,6 +19,7 @@ exports[`ContextMenu tests does not shows when event with incorrect "id" is trig
   <nav
     className="react-contextmenu"
     onContextMenu={[Function]}
+    onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     role="menu"
     style={
@@ -39,6 +41,7 @@ exports[`ContextMenu tests does not shows when event with incorrect "id" is trig
   hideOnLeave={false}
   id="CORRECT_ID"
   onHide={[Function]}
+  onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   onShow={[Function]}
   preventHideOnContextMenu={false}
@@ -50,6 +53,7 @@ exports[`ContextMenu tests does not shows when event with incorrect "id" is trig
   <nav
     className="react-contextmenu"
     onContextMenu={[Function]}
+    onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     role="menu"
     style={
@@ -71,6 +75,7 @@ exports[`ContextMenu tests shows when event with correct "id" is triggered 1`] =
   hideOnLeave={false}
   id="CORRECT_ID"
   onHide={[Function]}
+  onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   onShow={[Function]}
   preventHideOnContextMenu={false}
@@ -82,6 +87,7 @@ exports[`ContextMenu tests shows when event with correct "id" is triggered 1`] =
   <nav
     className="react-contextmenu"
     onContextMenu={[Function]}
+    onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     role="menu"
     style={
@@ -103,6 +109,7 @@ exports[`ContextMenu tests shows when event with correct "id" is triggered 2`] =
   hideOnLeave={false}
   id="CORRECT_ID"
   onHide={[Function]}
+  onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   onShow={[Function]}
   preventHideOnContextMenu={false}
@@ -114,6 +121,7 @@ exports[`ContextMenu tests shows when event with correct "id" is triggered 2`] =
   <nav
     className="react-contextmenu react-contextmenu--visible"
     onContextMenu={[Function]}
+    onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     role="menu"
     style={
