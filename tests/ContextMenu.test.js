@@ -194,4 +194,43 @@ describe('ContextMenu tests', () => {
         expect(onMouseLeave).toHaveBeenCalled();
         component.unmount();
     });
+
+    test('hideOnLeave delay and onMouseLeave options', async () => {
+        const data = { position: { x: 50, y: 50 }, id: 'CORRECT_ID' };
+        const onMouseLeave = jest.fn();
+        const component = mount(
+            <ContextMenu id={data.id} hideOnLeave={500} onMouseLeave={onMouseLeave} />
+        );
+
+        showMenu(data);
+        expect(component.state()).toEqual(
+            Object.assign(
+                { isVisible: true, forceSubMenuOpen: false, selectedItem: null },
+                data.position
+            )
+        );
+        component.simulate('mouseleave');
+
+        await new Promise(resolve => setTimeout(resolve, 300));
+
+        expect(onMouseLeave).toHaveBeenCalled();
+        expect(component.state()).toEqual(
+            Object.assign(
+                { isVisible: true, forceSubMenuOpen: false, selectedItem: null },
+                data.position
+            )
+        );
+
+        await new Promise(resolve => setTimeout(resolve, 300));
+
+        expect(onMouseLeave).toHaveBeenCalled();
+        expect(component.state()).toEqual(
+            Object.assign(
+                { isVisible: false, forceSubMenuOpen: false, selectedItem: null },
+                data.position
+            )
+        );
+
+        component.unmount();
+    });
 });
