@@ -15,10 +15,8 @@ export default class ContextMenu extends AbstractMenu {
         children: PropTypes.node.isRequired,
         data: PropTypes.object,
         className: PropTypes.string,
-        hideOnLeave: PropTypes.oneOfType([
-            PropTypes.bool,
-            PropTypes.number
-        ]),
+        hideOnLeave: PropTypes.bool,
+        hideOnLeaveDelay: PropTypes.number,
         rtl: PropTypes.bool,
         onHide: PropTypes.func,
         onMouseEnter: PropTypes.func,
@@ -34,6 +32,7 @@ export default class ContextMenu extends AbstractMenu {
         className: '',
         data: {},
         hideOnLeave: false,
+        hideOnLeaveDelay: 0,
         rtl: false,
         onHide() { return null; },
         onMouseEnter() { return null; },
@@ -168,9 +167,12 @@ export default class ContextMenu extends AbstractMenu {
         );
 
         if (this.props.hideOnLeave) {
-            let delay = isNaN(this.props.hideOnLeave) ? 0 : parseInt(this.props.hideOnLeave, 10);
-            if (delay > 0) {
-                this.hideTimeout = setTimeout(hideMenu, delay);
+            if (this.props.hideOnLeaveDelay > 0) {
+                if (this.hideTimeout) {
+                    clearTimeout(this.hideTimeout);
+                }
+
+                this.hideTimeout = setTimeout(hideMenu, this.props.hideOnLeaveDelay);
             } else {
                 hideMenu();
             }
