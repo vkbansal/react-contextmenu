@@ -172,7 +172,7 @@ export default class ContextMenu extends AbstractMenu {
                     clearTimeout(this.hideTimeout);
                 }
 
-                this.hideTimeout = setTimeout(hideMenu, this.props.hideOnLeaveDelay);
+                this.hideTimeout = setTimeout(() => hideMenu(), this.props.hideOnLeaveDelay);
             } else {
                 hideMenu();
             }
