@@ -130,6 +130,10 @@ export default class ContextMenu extends AbstractMenu {
 
     handleHide = (e) => {
         if (this.state.isVisible && (!e.detail || !e.detail.id || e.detail.id === this.props.id)) {
+            if (this.hideTimeout) {
+                clearTimeout(this.hideTimeout);
+                this.hideTimeout = null;
+            }
             this.unregisterHandlers();
             this.setState({ isVisible: false, selectedItem: null, forceSubMenuOpen: false });
             callIfExists(this.props.onHide, e);
@@ -170,6 +174,7 @@ export default class ContextMenu extends AbstractMenu {
             if (this.props.hideOnLeaveDelay > 0) {
                 if (this.hideTimeout) {
                     clearTimeout(this.hideTimeout);
+                    this.hideTimeout = null;
                 }
 
                 this.hideTimeout = setTimeout(() => hideMenu(), this.props.hideOnLeaveDelay);

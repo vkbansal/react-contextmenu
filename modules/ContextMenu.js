@@ -89,6 +89,10 @@ var ContextMenu = function (_AbstractMenu) {
 
         _this.handleHide = function (e) {
             if (_this.state.isVisible && (!e.detail || !e.detail.id || e.detail.id === _this.props.id)) {
+                if (_this.hideTimeout) {
+                    clearTimeout(_this.hideTimeout);
+                    _this.hideTimeout = null;
+                }
                 _this.unregisterHandlers();
                 _this.setState({ isVisible: false, selectedItem: null, forceSubMenuOpen: false });
                 (0, _helpers.callIfExists)(_this.props.onHide, e);
@@ -119,6 +123,7 @@ var ContextMenu = function (_AbstractMenu) {
                 if (_this.props.hideOnLeaveDelay > 0) {
                     if (_this.hideTimeout) {
                         clearTimeout(_this.hideTimeout);
+                        _this.hideTimeout = null;
                     }
 
                     _this.hideTimeout = setTimeout(function () {
