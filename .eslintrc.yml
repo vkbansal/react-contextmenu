@@ -1,8 +1,11 @@
 parser: babel-eslint
 extends:
-    - vkbansal
-    - vkbansal/react
+  - vkbansal
+  - vkbansal/react
 env:
-    browser: true
+  browser: true
+settings:
+  react:
+    version: detect
 rules:
-    react/no-array-index-key: 0
+  react/no-array-index-key: 0
