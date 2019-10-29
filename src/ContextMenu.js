@@ -59,9 +59,8 @@ export default class ContextMenu extends AbstractMenu {
     }
 
     componentDidUpdate() {
+        const wrapper = window.requestAnimationFrame || setTimeout;
         if (this.state.isVisible) {
-            const wrapper = window.requestAnimationFrame || setTimeout;
-
             wrapper(() => {
                 const { x, y } = this.state;
 
@@ -78,9 +77,11 @@ export default class ContextMenu extends AbstractMenu {
                 });
             });
         } else {
-            if (!this.menu || !this.state.isVisible) return;
-            this.menu.style.opacity = 0;
-            this.menu.style.pointerEvents = 'none';
+            wrapper(() => {
+                if (!this.menu) return;
+                this.menu.style.opacity = 0;
+                this.menu.style.pointerEvents = 'none';
+            });
         }
     }
 
