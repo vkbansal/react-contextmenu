@@ -19,6 +19,8 @@ declare module "react-contextmenu" {
         disable?: boolean,
         holdToDisplay?: number,
         renderTag?: React.ReactType,
+        mouseButton?: number,
+        disableIfShiftIsPressed?: boolean,
     }
 
     interface MenuItemProps {
