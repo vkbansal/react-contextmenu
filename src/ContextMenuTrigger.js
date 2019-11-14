@@ -16,10 +16,7 @@ export default class ContextMenuTrigger extends Component {
         holdToDisplay: PropTypes.number,
         posX: PropTypes.number,
         posY: PropTypes.number,
-        renderTag: PropTypes.oneOfType([
-            PropTypes.node,
-            PropTypes.func
-        ]),
+        renderTag: PropTypes.elementType,
         mouseButton: PropTypes.number,
         disableIfShiftIsPressed: PropTypes.bool
     };
