@@ -61,7 +61,7 @@ function MyApp() {
   return (
     <div>
 
-      <ContextMenuTrigger id="some_unique_identifier">
+      <ContextMenuTrigger id="some_unique_identifier"> {/* NOTICE: id must be unique for EVERY instance */
         <div className="well">Right click to see the menu</div>
       </ContextMenuTrigger>
 
