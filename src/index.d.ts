@@ -1,7 +1,7 @@
 declare module "react-contextmenu" {
     import * as React from "react";
 
-    export interface ContextMenuProps {
+    interface ContextMenuProps {
         id: string,
         data?: any,
         className?: string,
@@ -12,7 +12,7 @@ declare module "react-contextmenu" {
         onShow?: {(event: any): void},
     }
 
-    export interface ContextMenuTriggerProps {
+    interface ContextMenuTriggerProps {
         id: string,
         attributes?: React.HTMLAttributes<any>,
         collect?: {(data: any): any},
@@ -23,7 +23,7 @@ declare module "react-contextmenu" {
         disableIfShiftIsPressed?: boolean,
     }
 
-    export interface MenuItemProps {
+    interface MenuItemProps {
         attributes?: React.HTMLAttributes<HTMLDivElement>,
         className?: string;
         data?: Object,
@@ -33,7 +33,7 @@ declare module "react-contextmenu" {
         onClick?: {(event: React.TouchEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>, data: Object, target: HTMLElement): void} | Function,
     }
 
-    export interface SubMenuProps {
+    interface SubMenuProps {
         title: React.ReactElement<any> | React.ReactText,
         className?: string,
         disabled?: boolean,
@@ -43,15 +43,21 @@ declare module "react-contextmenu" {
         onClick?: {(event: React.TouchEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>, data: Object, target: HTMLElement): void} | Function,
     }
 
-    export module ReactContextmenu {
+    module ReactContextmenu {
         export const ContextMenu: React.ComponentClass<ContextMenuProps>;
         export const ContextMenuTrigger: React.ComponentClass<ContextMenuTriggerProps>;
         export const MenuItem: React.ComponentClass<MenuItemProps>;
         export const SubMenu: React.ComponentClass<SubMenuProps>;
+        export const ContextMenuProps: ContextMenuProps;
+        export const ContextMenuTriggerProps: ContextMenuTriggerProps;
+        export const MenuItemProps: MenuItemProps;
+        export const SubMenuProps: SubMenuProps;
         export function connectMenu(menuId: string): (menu: any) => any;
         export function showMenu(opts?: any, target?: HTMLElement): void;
         export function hideMenu(opts?: any, target?: HTMLElement): void;
     }
+
+    export = ReactContextmenu;
 }
 
 declare module "react-contextmenu/modules/actions" {
