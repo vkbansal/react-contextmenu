@@ -16,13 +16,13 @@ module.exports = {
                 loader: "babel-loader",
                 options: {
                     presets: [
-                        'react',
-                        ['es2015', {
+                        '@babel/preset-react',
+                        ['@babel/preset-env', {
                             modules: false
                         }]
                     ],
                     plugins: [
-                        'transform-class-properties'
+                        '@babel/plugin-proposal-class-properties'
                     ]
                 },
                 include: [

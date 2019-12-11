@@ -1,33 +1,33 @@
 {
     "presets": [
-        "react"
+        "@babel/preset-react"
     ],
     "env": {
         "es6": {
             "presets": [
                 [
-                    "es2015",
+                    "@babel/preset-env",
                     {
                         "modules": false
                     }
                 ]
             ],
             "plugins": [
-                "transform-class-properties"
+                "@babel/plugin-proposal-class-properties"
             ]
         },
         "es5": {
             "presets": [
-                "es2015"
+                "@babel/preset-env"
             ],
             "plugins": [
-                "transform-class-properties"
+                "@babel/plugin-proposal-class-properties"
             ]
         },
         "test": {
             "presets": [
                 [
-                    "env",
+                    "@babel/preset-env",
                     {
                         "targets": {
                             "node": 6
@@ -36,7 +36,7 @@
                 ]
             ],
             "plugins": [
-                "transform-class-properties"
+                "@babel/plugin-proposal-class-properties"
             ]
         }
     }

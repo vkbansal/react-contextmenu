@@ -41,7 +41,7 @@ const config = {
                             }]
                         ],
                         plugins: [
-                            'transform-class-properties'
+                            '@babel/plugin-proposal-class-properties'
                         ]
                     }
                 }],
