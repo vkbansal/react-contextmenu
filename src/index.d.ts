@@ -10,6 +10,10 @@ declare module "react-contextmenu" {
         onHide?: {(event: any): void},
         onMouseLeave?: {(event: React.MouseEvent<HTMLElement>, data: Object, target: HTMLElement): void} | Function,
         onShow?: {(event: any): void},
+        preventHideOnContextMenu?: boolean,
+        preventHideOnResize?: boolean,
+        preventHideOnScroll?: boolean,
+        style?: React.CSSProperties,
     }
 
     export interface ContextMenuTriggerProps {
