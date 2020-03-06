@@ -47,7 +47,7 @@ declare module "react-contextmenu" {
         onClick?: {(event: React.TouchEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>, data: Object, target: HTMLElement): void} | Function,
     }
 
-    interface ConnectMenuProps {
+    export interface ConnectMenuProps {
         id: string;
         trigger: any;
     }
