@@ -22,7 +22,7 @@ declare module "react-contextmenu" {
         collect?: {(data: any): any},
         disable?: boolean,
         holdToDisplay?: number,
-        renderTag?: React.ReactType,
+        renderTag?: React.ElementType,
         mouseButton?: number,
         disableIfShiftIsPressed?: boolean,
     }
@@ -47,11 +47,20 @@ declare module "react-contextmenu" {
         onClick?: {(event: React.TouchEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>, data: Object, target: HTMLElement): void} | Function,
     }
 
+    export interface ConnectMenuProps {
+        id: string;
+        trigger: any;
+    }
+
     export const ContextMenu: React.ComponentClass<ContextMenuProps>;
     export const ContextMenuTrigger: React.ComponentClass<ContextMenuTriggerProps>;
     export const MenuItem: React.ComponentClass<MenuItemProps>;
     export const SubMenu: React.ComponentClass<SubMenuProps>;
-    export function connectMenu(menuId: string): (menu: any) => any;
+    export function connectMenu<P>(
+      menuId: string
+    ): (
+      Child: React.ComponentType<P & ConnectMenuProps>
+    ) => React.ComponentType<P>;
     export function showMenu(opts?: any, target?: HTMLElement): void;
     export function hideMenu(opts?: any, target?: HTMLElement): void;
 }
