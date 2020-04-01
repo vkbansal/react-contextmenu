@@ -60,12 +60,14 @@ function handleClick(e, data) {
 function MyApp() {
   return (
     <div>
+      {/* NOTICE: id must be unique between EVERY <ContextMenuTrigger> and <ContextMenu> pair */}
+      {/* NOTICE: inside the pair, <ContextMenuTrigger> and <ContextMenu> must have the same id */}
 
-      <ContextMenuTrigger id="some_unique_identifier"> {/* NOTICE: id must be unique for EVERY instance */}
+      <ContextMenuTrigger id="same_unique_identifier">
         <div className="well">Right click to see the menu</div>
       </ContextMenuTrigger>
 
-      <ContextMenu id="some_unique_identifier">
+      <ContextMenu id="same_unique_identifier">
         <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
           ContextMenu Item 1
         </MenuItem>
