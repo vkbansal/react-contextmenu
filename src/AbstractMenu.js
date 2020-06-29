@@ -65,11 +65,6 @@ export default class AbstractMenu extends Component {
         }
     }
 
-    hideMenu = (e) => {
-        e.preventDefault();
-        this.hideSubMenu(e);
-    }
-
     handleForceClose = () => {
         this.setState({ forceSubMenuOpen: false });
     }
