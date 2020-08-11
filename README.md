@@ -1,4 +1,4 @@
-# !!! Looking for maintainers !!!
+# Project is no longer maintained
 
 [![NPM version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
